@@ -1,4 +1,3 @@
-// Función para actualizar la previsualización
 function updatePreview() {
     const titleInput = document.getElementById('title');
     const nameInput = document.getElementById('name');
@@ -6,6 +5,13 @@ function updatePreview() {
     const phoneInput = document.getElementById('phone');
     const dateInput = document.getElementById('date');
     const jobTypeButtons = document.querySelectorAll('.job-type-btn');
+    jobTypeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            jobTypeButtons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            updatePreview();
+        });
+    });
     const totalCostInput = document.getElementById('total-cost');
     const descriptionInput = document.getElementById('description');
     const fileInput = document.getElementById('file');
@@ -36,26 +42,16 @@ function updatePreview() {
         };
         reader.readAsDataURL(fileInput.files[0]);
     } else {
-        previewImage.src = '../static/img/editor.jpg'; // Reemplaza con la imagen predeterminada
+        previewImage.src = 'images/editor.jpg'; // Reemplaza con la imagen predeterminada
     }
 }
 
-// Inicializar la previsualización al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    updatePreview();
-
-    const formInputs = document.querySelectorAll('.add-form input, .add-form textarea, .add-form .job-type-btn, #file');
-    formInputs.forEach((input) => {
-        input.addEventListener('input', updatePreview);
-    });
+// Agregar evento de entrada para actualizar la previsualización
+const formInputs = document.querySelectorAll('.add-form input, .add-form textarea, .add-form .job-type-btn, #file');
+formInputs.forEach((input) => {
+    input.addEventListener('input', updatePreview);
 });
 
-const body = document.querySelector('body'),
-    sidebar = body.querySelector('nav'),
-    toggle = body.querySelector(".toggle"),
-    searchBtn = body.querySelector(".search-box"),
-    modeSwitch = body.querySelector(".toggle-switch"),
-    modeText = body.querySelector(".mode-text"),
     searchInput = document.getElementById("searchInput"),
     cardList = document.getElementById("cardList"),
     cardItems = cardList.getElementsByClassName("card-item"),
@@ -71,9 +67,7 @@ let previouslySelectedJobTypeBtn = null; // Store previously selected button
 jobTypeButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
         if (previouslySelectedJobTypeBtn !== btn) { // Check if selection changed
-            if (previouslySelectedJobTypeBtn) {
-                previouslySelectedJobTypeBtn.classList.remove('active'); // Remove active class from previous
-            }
+            previouslySelectedJobTypeBtn.classList.remove('active'); // Remove active class from previous
             btn.classList.add('active'); // Add active class to current
             updatePreview(); // Update preview
             previouslySelectedJobTypeBtn = btn; // Update previously selected button
@@ -82,7 +76,7 @@ jobTypeButtons.forEach((btn) => {
 });
 
 // Add event listener for the form submission
-addForm.addEventListener('submit', (event) => {
+addForm.addEventListener('submit-btn', (event) => {
     event.preventDefault();
 
     const name = addForm.elements.name.value;
@@ -103,31 +97,10 @@ addForm.addEventListener('submit', (event) => {
     console.log('Remaining:', remaining);
     console.log('Description:', description);
 
-    addModal.classList.add('hidden');
-    addModal.classList.remove('visible');
-    modalBackdrop.classList.add('hidden');
-    modalBackdrop.classList.remove('visible');
-    document.body.style.overflow = 'auto'; // Restaura el scroll
 });
 
-toggle.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
-});
 
-searchBtn.addEventListener("click", () => {
-    sidebar.classList.remove("close");
-});
-
-modeSwitch.addEventListener("click", () => {
-    body.classList.toggle("dark");
-
-    if (body.classList.contains("dark")) {
-        modeText.innerText = "Modo claro";
-    } else {
-        modeText.innerText = "Modo oscuro";
-    }
-});
-
+// Funcion de buscar en el input
 searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase();
     for (let i = 0; i < cardItems.length; i++) {

@@ -50,21 +50,24 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <form action="{{ url_for('logout') }}">
                     <a href="{{ url_for('logout') }}">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Salir</span>
                     </a>
-                    </form>
                 </li>
 
+                <li class="">
+                    <a href="../templates/settings.html">
+                        <i class='bx bx-cog icon'></i>
+                        <span class="text nav-text">Ajustes</span>
+                    </a>
+                </li>
                 <li class="mode">
                     <div class="sun-moon">
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>
                     </div>
                     <span class="mode-text text">Modo oscuro</span>
-
                     <div class="toggle-switch">
                         <span class="switch"></span>
                     </div>
@@ -219,7 +222,8 @@
             {% endfor %}
         </div>
     </section>
-    <script src="../static/js/script.js"></script>
+    <script src="../static/js/home.js"></script>
+    <script src="../static/js/sidebar.js"></script>
 </body>
 
 </html>

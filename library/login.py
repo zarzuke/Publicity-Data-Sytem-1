@@ -9,7 +9,7 @@ def try_signup():
         password=request.form["password"]
         cursor.execute("INSERT INTO users (userName,userPassword) VALUES (?, ?)", (username, password))
         bd.commit()
-        flash("te has registrado de forma exitosa")
+        flash("Se ha registrado de forma exitosa")
         bd.close()
         return redirect(url_for("login"))
     return render_template("signup.html")
@@ -26,7 +26,7 @@ def try_login():
             session["username"]= username
             return redirect("/home")
         else:
-                flash("credenciales invalidas verifique por favor")
+                flash("Credenciales inválidas, intente de nuevo")
     return render_template("index.html")
 
 def try_home():
@@ -55,12 +55,12 @@ def try_home():
        
         return render_template("home.html",user=g.user,filas=filas)
     
-    flash("Debes iniciar sesion Primero.")
+    flash("Debe de iniciar sesión primero.")
     return render_template("index.html")
 
 def try_logout():
     session.pop("username", None)
-    flash("Cierre de Sesion")
+    flash("Sesión cerrada correctamente.")
     return redirect(url_for('login'))
 
 def try_form():
