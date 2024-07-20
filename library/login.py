@@ -44,6 +44,14 @@ def try_home():
                     JOIN clientProject on projectClientId = projectClient
                     """)
         filas = cursor.fetchall()
+        cursor.execute("""
+                    SELECT projects.projectId, typeProject.projectTypeName
+                    FROM projects
+                    INNER JOIN differentTypeProject on projects.projectId = differentTypeProject.keyProjectId 
+                    INNER JOIN typeProject on differentTypeProject.keyProjectTypeId = typeProject.projectTypeId
+                    """)
+        folas = cursor.fetchall()
+        
        
         return render_template("home.html",user=g.user,filas=filas)
     
@@ -69,4 +77,25 @@ def try_form():
         remaining = request.form["remaining"]
         details = request.form["description"]
 
-    return f"<p>{title} {name} {lastname} {phone} {date} {job_type} {type} {total} {mid} {remaining} {details}</p>"
+        client_name=name+" "+lastname
+
+        conn = sqlite3.connect('library/database.db')
+        cursor = conn.cursor()
+
+        cursor.execute("INSERT INTO clientProject (projectClientName, projectClientNumber) VALUES (?, ?)",
+                   (client_name, phone))
+        
+        cursor.execute("INSERT INTO chargeProject (projectChargeInstallment, "
+                   "projectChargeBalance, projectChargeTotalPayment) VALUES (?, ?, ?)",
+                   (remaining, mid, total))
+
+        cursor.execute("INSERT INTO dateProject (projectDateStart) VALUES (?)",
+                   (date,))
+        cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (type,))
+
+        cursor.execute("INSERT INTO projects (projectName) "
+                    "VALUES (?)", (title))
+        conn.commit()
+
+
+    return redirect("/home")

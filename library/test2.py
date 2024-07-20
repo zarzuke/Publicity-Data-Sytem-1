@@ -9,7 +9,7 @@ def index():
 
 @app.route("/muestras")
 def conexion():
-    conn = sqlite3.connect('data.db')
+    conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     print("Conexión exitosa a la base de datos")
     cursor.execute("""
