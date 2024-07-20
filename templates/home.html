@@ -132,12 +132,8 @@
                                 <span class="job-type-btn" name="job-type" data-job-type="neoflex">Neoflex</span>
                                 <span class="job-type-btn" name="job-type" data-job-type="corte-v">Corte V</span>
                                 <span class="job-type-btn" name="job-type" data-job-type="acrilico">Acrílico</span>
-                                
-                                <div class="btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active">
-                                        <input type="checkbox" autocomplete="off" checked> Mi botón
-                                    </label>
-                                </div>
+                                <input type="checkbox" name="job-type" autocomplete="off" checked value="pendon"> Mi botón
+
                             </div>
                         </div>
                         <div class="form-row">
@@ -202,18 +198,17 @@
         </div>
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
-            {% for item in range(1,9) %}
+            {% for item in filas %}
             <div class="card-item" data-job-type="designer">
                 <img src="../static/img/editor.jpg" alt="Card Image">
-                <p class="card-title">DESING WORK</p>
+                <p class="card-title">{{item[0]}}</p>
                 <p class="card-name-container">
-                    <span class="card-name">John</span>
-                    <span class="card-lastname">Doe</span>
+                    <span class="card-name">{{item[1]}}</span>
+                    <span class="card-lastname">{{item[2]}}</span>
                 </p>
                 <p class="card-info">
                     <span class="job-title">Designer</span> <span class="date">13/02/04</span> <span class="phone"><i
-                            class="fas fa-phone"></i> (555)
-                        555-5555</span>
+                            class="fas fa-phone"></i>{{item[3]}}</span>
                 </p>
                 <p class="card-description">A "designer" is a design expert. This description can be expanded upon to
                     highlight their skills and experience.</p>
