@@ -94,7 +94,7 @@ def try_form():
         cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (type,))
 
         cursor.execute("INSERT INTO projects (projectName) "
-                    "VALUES (?)", (title))
+                    "VALUES (?)", (title,))
         conn.commit()
 
 
