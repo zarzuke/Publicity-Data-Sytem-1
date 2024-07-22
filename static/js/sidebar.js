@@ -12,25 +12,44 @@ function toggleSidebar() {
  
 // Function to toggle dark mode
 function toggleTheme() {
-    body.classList.toggle("dark");
-    const isDark = body.classList.contains("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    modeText.innerText = isDark ? "Modo claro" : "Modo oscuro";
-  }
+  body.classList.toggle("dark");
+  const isDark = body.classList.contains("dark");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+  modeText.innerText = isDark ? "Modo claro" : "Modo oscuro";
 
-  function loadThemePreference() {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      body.classList.add("dark");
-    } else if (storedTheme === "light") {
-      body.classList.remove("dark");
-    }
-    if (body.classList.contains("dark")) {
-      modeText.innerText = "Modo claro";
-    } else {
-      modeText.innerText = "Modo oscuro";
-    }
+  // Aplicar estilos del modo claro y oscuro al scroll
+  if (isDark) {
+    document.documentElement.style.setProperty("--scrollbar-track-color", "#333");
+    document.documentElement.style.setProperty("--scrollbar-thumb-color", "#555");
+    document.documentElement.style.setProperty("--scrollbar-thumb-hover-color", "#777");
+  } else {
+    document.documentElement.style.setProperty("--scrollbar-track-color", "#f1f1f1");
+    document.documentElement.style.setProperty("--scrollbar-thumb-color", "#888");
+    document.documentElement.style.setProperty("--scrollbar-thumb-hover-color", "#555");
   }
+}
+
+function loadThemePreference() {
+  const storedTheme = localStorage.getItem("theme");
+  if (storedTheme === "dark") {
+    body.classList.add("dark");
+    document.documentElement.style.setProperty("--scrollbar-track-color", "#333");
+    document.documentElement.style.setProperty("--scrollbar-thumb-color", "#555");
+    document.documentElement.style.setProperty("--scrollbar-thumb-hover-color", "#777");
+  } else if (storedTheme === "light") {
+    body.classList.remove("dark");
+    document.documentElement.style.setProperty("--scrollbar-track-color", "#f1f1f1");
+    document.documentElement.style.setProperty("--scrollbar-thumb-color", "#888");
+    document.documentElement.style.setProperty("--scrollbar-thumb-hover-color", "#555");
+  }
+  if (body.classList.contains("dark")) {
+    modeText.innerText = "Modo claro";
+  } else {
+    modeText.innerText = "Modo oscuro";
+  }
+}
+
+
 
 // Event listeners for sidebar interactions
 toggle.addEventListener("click", toggleSidebar);
