@@ -76,7 +76,7 @@ def try_form():
         mid = request.form["down-payment"]
         remaining = request.form["remaining"]
         details = request.form["description"]
-
+        #cesar valnaskl
         client_name=name+" "+lastname
 
         conn = sqlite3.connect('library/database.db')

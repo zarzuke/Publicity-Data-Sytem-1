@@ -11,7 +11,6 @@ def index():
 def conexion():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    print("Conexión exitosa a la base de datos")
     cursor.execute("""
                     SELECT projects.projectName, dateProject.projectDateStart, 
                     chargeProject.projectChargeTotalPayment,
