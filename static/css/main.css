@@ -1,3 +1,5 @@
+/* ======================================================== BASE ================================================== */
+
 /* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -24,7 +26,8 @@
     --tran-05: all 0.3s ease;
 }
 
-.home-header { /*encabezado*/
+.home-header {
+    /*encabezado*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,7 +59,7 @@ body.dark {
     --toggle-color: #fff;
     --text-color: #ccc;
 }
-  
+
 /* ===== Sidebar ===== */
 .sidebar {
     position: fixed;
@@ -76,7 +79,7 @@ body.dark {
 
 .sidebar.close .logo-text .name,
 .sidebar.close .logo-text .profession {
-  display: none;
+    display: none;
 }
 
 /* ===== Reusable code - Here ===== */
@@ -343,6 +346,8 @@ body.dark .home .text {
     color: var(--text-color);
 }
 
+/* =============================================== BASE ================================================== */
+
 /* Card List Styles */
 .card-list {
     display: grid;
@@ -511,19 +516,21 @@ body.dark .card-list .card-item:hover .arrow {
     background-color: var(--bg-color);
     border-radius: 10px;
     overflow: hidden;
-  }
+}
 
-.add-btn, .button__icon, .button__text {
+.add-btn,
+.button__icon,
+.button__text {
     transition: all 0.3s;
-  }
+}
 
-  .add-btn .button__text {
+.add-btn .button__text {
     transform: translateX(33px);
     color: var(--font-color);
     font-weight: 600;
-  }
+}
 
-  .add-btn .button__icon {
+.add-btn .button__icon {
     position: absolute;
     transform: translateX(109px);
     height: 100%;
@@ -532,35 +539,36 @@ body.dark .card-list .card-item:hover .arrow {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #E4E9F7;;
-  }
+    color: #E4E9F7;
+    ;
+}
 
-  .add-btn .svg {
+.add-btn .svg {
     width: 20px;
     fill: var(--main-color);
-  }
+}
 
-  .add-btn:hover {
+.add-btn:hover {
     background: var(--bg-color);
-  }
+}
 
-  .add-btn:hover .button__text {
+.add-btn:hover .button__text {
     color: transparent;
-  }
+}
 
-  body.dark .home-header .add-btn .button__text {
+body.dark .home-header .add-btn .button__text {
     color: var(--text-color);
 }
 
-  .add-btn:hover .button__icon {
+.add-btn:hover .button__icon {
     width: 148px;
     transform: translateX(0);
-  }
+}
 
-  .add-btn:active {
+.add-btn:active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
-  }
+}
 
 .add-modal {
     position: fixed;
@@ -580,7 +588,7 @@ body.dark .card-list .card-item:hover .arrow {
     visibility: hidden;
     transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
 }
-  
+
 .add-modal.visible {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
@@ -603,8 +611,10 @@ body.dark .card-list .card-item:hover .arrow {
     text-decoration: none;
     border: 2px solid transparent;
     transition: border 0.5s ease;
-    width: 350px; /* Ajusta el ancho aquí */
-    height: auto; /* Altura ajustada automáticamente */
+    width: 350px;
+    /* Ajusta el ancho aquí */
+    height: auto;
+    /* Altura ajustada automáticamente */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -653,6 +663,7 @@ body.dark .card-list .card-item:hover .arrow {
     border-radius: 50px;
     font-weight: 600;
 }
+
 .preview-card-item .preview-phone {
     background-color: #c3d3fd;
     color: #2e2e2e;
@@ -689,7 +700,7 @@ body.dark .card-list .card-item:hover .arrow {
 
 .custum-file-upload input {
     display: none;
-  }
+}
 
 
 .modal-backdrop {
@@ -701,17 +712,17 @@ body.dark .card-list .card-item:hover .arrow {
     backdrop-filter: blur(10px);
     background-color: rgba(0, 0, 0, 0.651);
     z-index: 100;
-  }
-  
-  .modal-backdrop.hidden {
-    display: none;
-  }
-  
-  .modal-backdrop.visible {
-    display: block;
-  }
+}
 
-  .close-button {
+.modal-backdrop.hidden {
+    display: none;
+}
+
+.modal-backdrop.visible {
+    display: block;
+}
+
+.close-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -734,7 +745,8 @@ body.dark .card-list .card-item:hover .arrow {
     color: #fff;
     font-size: 16px;
     position: relative;
-    top: 1px; /* Ajusta la posición vertical del icono */
+    top: 1px;
+    /* Ajusta la posición vertical del icono */
 }
 
 .add-form {
@@ -805,25 +817,25 @@ body.dark .card-list .card-item:hover .arrow {
 }
 
 .form-group textarea {
-  width: 100%;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
 }
 
 .form-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 55%;
-    height: 5000px;
+    width: 60%;
+    height: 5500px;
     background-color: #f1f1f1;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    max-height: 90vh; /* Limita la altura máxima de la sección del formulario */
-    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede la altura máxima */
+    max-height: 90vh;
+    /* Limita la altura máxima de la sección del formulario */
 }
 
 .form-group.upload-box {
@@ -837,29 +849,29 @@ body.dark .card-list .card-item:hover .arrow {
     align-items: center;
     cursor: pointer;
     transition: border-color 0.3s;
-  }
-  
-  .form-group.upload-box:hover {
+}
+
+.form-group.upload-box:hover {
     border-color: #7E73F5;
-  }
-  
-  .upload-icon-container {
+}
+
+.upload-icon-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #707070;
-  }
-  
-  .upload-icon-container i {
+}
+
+.upload-icon-container i {
     font-size: 32px;
     margin-bottom: 8px;
-  }
-  
-  .upload-icon-container span {
-    font-size: 14px;
-  }
+}
 
-  .add-modal .submit-btn {
+.upload-icon-container span {
+    font-size: 14px;
+}
+
+.add-modal .submit-btn {
     position: absolute;
     bottom: 30px;
     right: 30px;
@@ -908,4 +920,3 @@ body.dark .card-list .card-item:hover .arrow {
     transition: border 0.5s ease;
     width: 300px;
 }
-

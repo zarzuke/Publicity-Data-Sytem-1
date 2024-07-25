@@ -121,12 +121,12 @@ addBtn.addEventListener('click', () => {
     modalBackdrop.classList.add('visible');
     document.body.style.overflow = 'hidden'; // Bloquea el scroll
     addModal.focus(); // Enfoca la ventana modal
-});
-
-closeButton.addEventListener('click', () => {
+  });
+  
+  closeButton.addEventListener('click', () => {
     addModal.classList.add('hidden');
     addModal.classList.remove('visible');
     modalBackdrop.classList.add('hidden');
     modalBackdrop.classList.remove('visible');
     document.body.style.overflow = 'auto'; // Restaura el scroll
-});
+  });

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - CopyNato</title>
+    <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
+    <link rel="stylesheet" href="../static/css/clients.css">
+    <link rel="stylesheet" href="../static/css/scrollbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../static/img/icon.ico" alt="iconcopy">
+                </span>
+                <div class="text logo-text">
+                    <span class="name">{{user}}</span>
+                    <span class="profession">@cargo</span>
+                </div>
+            </div>
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Buscar..." id="searchInput">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">Estadísticas</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="{{ url_for('logout') }}">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Salir</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="../templates/settings.html">
+                        <i class='bx bx-cog icon'></i>
+                        <span class="text nav-text">Ajustes</span>
+                    </a>
+                </li>
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Modo oscuro</span>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home">
+        <div class="home-header">
+            <div class="text">Clientes</div>
+            <button class="add-btn" type="button" id="openModal">
+                <span class="button__text">Añadir</span>
+                <span class="button__icon">
+                    <svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <line x1="12" x2="12" y1="5" y2="19"></line>
+                        <line x1="5" x2="19" y1="12" y2="12"></line>
+                    </svg>
+                </span>
+            </button>
+        </div>
+        <!-- Add Modal -->
+        <div class="add-modal hidden" id="addModal">
+            <div class="add-modal-content">
+                <div class="form-section">
+                    <div class="close-button" id="closeModal">
+                        <div class="close-icon">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <form class="add-form" action="---" method="post" id="addForm">
+                        <div class="form-group">
+                            <label for="name">Cliente:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Compañía (opcional):</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <button type="submit" class="submit-btn">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="preview-section">
+                    <h3 class="preview-title">Previsualización</h3>
+                    <p> <span id="previewName"></span></p>
+                    <p> <span id="previewCompany"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop hidden"></div>
+        <div class="card-list-client">
+            <div class="card-client">
+                <img src="../static/img/user-default.png" alt="User Image">
+                <p class="default-client-name">Lionel Pepsi</p>
+                <p class="client-company">Narcotrafico</p>
+            </div>
+            <div class="card-client">
+                <img src="../static/img/user-default.png" alt="User Image">
+                <p class="default-client-name">Vegetta777</p>
+                <p class="client-company">Youtuber</p>
+            </div>
+            <div class="card-client">
+                <img src="../static/img/user-default.png" alt="User Image">
+                <p class="default-client-name">Capriles</p>
+                <p class="client-company">Alcaldia</p>
+            </div>
+            <div class="card-client">
+                <img src="../static/img/user-default.png" alt="User Image">
+                <p class="default-client-name">Edmundo</p>
+                <p class="client-company">Presidente</p>
+            </div>
+            <div class="card-client">
+                <img src="../static/img/user-default.png" alt="User Image">
+                <p class="default-client-name">Kawasaki</p>
+                <p class="client-company">Prostituta</p>
+            </div>
+
+    </section>
+
+    <script src="../static/js/home.js"></script>
+    <script src="../static/js/sidebar.js"></script>
+
+    <script>
+// Selecciona el campo de búsqueda y los elementos de tarjetas
+const searchInput = document.getElementById('searchInput');
+const cardItems = document.querySelectorAll('.card-client'); // Asegúrate que esta clase es la correcta
+
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  cardItems.forEach(cardItem => {
+      const cardContent = cardItem.textContent.toLowerCase();
+      if (cardContent.includes(searchTerm)) {
+          cardItem.style.display = "block";
+      } else {
+          cardItem.style.display = "none";
+      }
+  });
+});
+        // Open the modal
+        document.getElementById('openModal').addEventListener('click', function () {
+            document.getElementById('addModal').classList.remove('hidden');
+            document.querySelector('.modal-backdrop').classList.remove('hidden');
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('addModal').classList.add('hidden');
+            document.querySelector('.modal-backdrop').classList.add('hidden');
+        });
+
+
+        // Previsualización en tiempo real
+        const nameInput = document.getElementById('name');
+        const companyInput = document.getElementById('company');
+        const previewName = document.getElementById('previewName');
+        const previewCompany = document.getElementById('previewCompany');
+
+        nameInput.addEventListener('input', function () {
+            previewName.textContent = nameInput.value;
+        });
+
+        companyInput.addEventListener('input', function () {
+            previewCompany.textContent = companyInput.value || 'N/A'; // Si no hay compañía, se muestra 'N/A'
+        });
+    </script>
+</body>
+
+</html>

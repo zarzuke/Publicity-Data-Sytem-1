@@ -49,8 +49,6 @@ function loadThemePreference() {
   }
 }
 
-
-
 // Event listeners for sidebar interactions
 toggle.addEventListener("click", toggleSidebar);
 modeSwitch.addEventListener("click", toggleTheme);
@@ -60,3 +58,20 @@ modeSwitch.addEventListener("click", toggleTheme);
 
 // Load theme preference on initial page load
 loadThemePreference();
+
+addBtn.addEventListener('click', () => {
+  addModal.classList.remove('hidden');
+  addModal.classList.add('visible');
+  modalBackdrop.classList.remove('hidden');
+  modalBackdrop.classList.add('visible');
+  document.body.style.overflow = 'hidden'; // Bloquea el scroll
+  addModal.focus(); // Enfoca la ventana modal
+});
+
+closeButton.addEventListener('click', () => {
+  addModal.classList.add('hidden');
+  addModal.classList.remove('visible');
+  modalBackdrop.classList.add('hidden');
+  modalBackdrop.classList.remove('visible');
+  document.body.style.overflow = 'auto'; // Restaura el scroll
+});
