@@ -1,3 +1,16 @@
+function formatPhoneNumber(phoneNumber) {
+    // Asegúrate de que el número sea solo dígitos
+    const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  
+    // Expresión regular más flexible
+    const match = cleaned.match(/^(\d{4})(\d{3})(\d{4})$/);
+  
+    if (match) {
+      return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+    return phoneNumber; // Devuelve el teléfono sin cambios si no coincide con el formato
+  }
+  
 // Función para actualizar la previsualización
 function updatePreview() {
     const titleInput = document.getElementById('title');
@@ -18,27 +31,39 @@ function updatePreview() {
     const previewPhone = document.querySelector('.preview-phone');
     const previewDescription = document.querySelector('.preview-card-description');
 
+// Establecer los valores de la previsualización
     previewTitle.textContent = titleInput.value;
     previewName.textContent = nameInput.value;
     previewLastname.textContent = surnameInput.value;
 
+
 // Obtener todos los checkboxes que están seleccionados (checked)
     const selectedJobTypes = Array.from(document.querySelectorAll('input[name="job-type"]:checked')).map(checkbox => checkbox.value);
-    previewJobTitle.textContent = selectedJobTypes.length > 0 ? selectedJobTypes.join(', ') : 'Selecciona un tipo de trabajo';
+    previewJobTitle.textContent = selectedJobTypes.length > 0 ? selectedJobTypes.join(', ') : '';
+
+    let jobTitleText = selectedJobTypes.join(', ');
+    previewJobTitle.textContent = jobTitleText;
+
 
     previewDate.textContent = dateInput.value;
     previewPhone.textContent = `(${phoneInput.value.slice(0, 3)}) ${phoneInput.value.slice(3)}`;
+    previewDescription.textContent = descriptionInput.value;
+
+    // Formatear el número de teléfono
+    const formattedPhone = formatPhoneNumber(phoneInput.value);
+    previewPhone.textContent = formattedPhone;
+    
     previewDescription.textContent = descriptionInput.value;
 
 // Previsualizar la imagen cargada
     if (fileInput.files && fileInput.files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            previewImage.src = e.target.result;
+            previewImage.src = e.target.result; // Imagen cargada seleccionada
         };
         reader.readAsDataURL(fileInput.files[0]);
     } else {
-        previewImage.src = 'images/editor.jpg'; // Imagen predeterminada
+        previewImage.src = '../static/img/default-image.jpg'; // Imagen predeterminada. Asegúrate de que la ruta sea correcta
     }
 }
 
@@ -119,6 +144,8 @@ addBtn.addEventListener('click', () => {
     modalBackdrop.classList.add('visible');
     document.body.style.overflow = 'hidden'; // Bloquea el scroll
     addModal.focus(); // Enfoca la ventana modal
+
+    updatePreview();
 });
 
 closeButton.addEventListener('click', () => {
@@ -129,26 +156,39 @@ closeButton.addEventListener('click', () => {
     document.body.style.overflow = 'auto'; // Restaura el scroll
 });
 
-// CALCULAR RESTANTE
 
-document.addEventListener("DOMContentLoaded", function() {
-    const totalCostInput = document.getElementById('total-cost');
-    const downPaymentInput = document.getElementById('down-payment');
-    const remainingInput = document.getElementById('remaining');
-  
-    function calculateRemaining() {
-      const totalCost = parseFloat(totalCostInput.value) || 0;
-      const downPayment = parseFloat(downPaymentInput.value) || 0;
-      const remaining = totalCost - downPayment;
-  
-      // Format the remaining amount with dots as thousands separators
-      const formattedRemaining = remaining.toLocaleString('es-ES'); // Adjust the locale if needed
-  
-      remainingInput.value = remaining < 0 ? '0' : formattedRemaining;
+// Agregar evento de confirmación para eliminar
+document.getElementById('confirmDelete').addEventListener('click', function() {
+    if (currentDeleteItem) {
+        currentDeleteItem.remove(); // Eliminar el elemento del DOM
     }
-  
-    totalCostInput.oninput = calculateRemaining;
-    downPaymentInput.oninput = calculateRemaining;
-  });
-  
+    document.getElementById('confirmationModal').classList.add('hidden'); // Ocultar el modal
+
+    currentDeleteItem = null; // Restablecer la variable
+    document.body.style.overflow = 'auto'; // Restaura el scroll
+    modalBackdrop.classList.add('hidden');
+    modalBackdrop.classList.remove('visible');
+});
+
+// Agregar evento de cancelación para eliminar
+document.getElementById('cancelDelete').addEventListener('click', function() {
+    document.getElementById('confirmationModal').classList.add('hidden'); // Ocultar el modal
+    currentDeleteItem = null; // Restablecer la variable
+    document.body.style.overflow = 'auto'; // Restaura el scroll
+    modalBackdrop.classList.add('hidden');
+    modalBackdrop.classList.remove('visible');
+});
+
+// Mostrar modal de confirmación al hacer clic en el botón de eliminar
+document.querySelectorAll('.delete').forEach(button => {
+    button.addEventListener('click', function() {
+        document.body.style.overflow = 'hidden'; // Bloquea el scroll
+        document.getElementById('confirmationModal').classList.remove('hidden'); // Mostrar el modal
+        document.body.style.overflow = 'hidden'; // Bloquea el scroll 
+        currentDeleteItem = this.closest('.card-item'); // Guardar el elemento a eliminar
+        modalBackdrop.classList.remove('hidden');
+        modalBackdrop.classList.add('visible');
+    });
+});
+
 
