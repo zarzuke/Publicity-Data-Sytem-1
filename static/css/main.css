@@ -659,7 +659,7 @@ body.dark .home-header .add-btn .button__text {
     display: inline-block;
     background: #F7DFF5;
     padding: 8px 15px;
-    font-size: 11px;
+    font-size: 10px;
     border-radius: 50px;
     font-weight: 600;
 }
@@ -777,22 +777,54 @@ body.dark .home-header .add-btn .button__text {
 .job-type-buttons {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-}
+    gap: 10px;
+    justify-content: center; /* Esta línea centra los botones horizontalmente */
+  }
 
 .job-type-btn {
-    margin: 3px;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    background-color: #f1f1f1;
+    display: flex; /* Flex para mejor alineación */
+    align-items: center;
+    padding: 10px 15px;
+    background-color: rgba(221, 221, 221, 0); /* Fondo transparente */
+    color: rgb(61, 61, 61); /* Texto transparente */
+    font-size: 13px;
+    border-radius: 5px; /* Bordes redondeados */
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    position: relative; /* Para posicionar el checkbox */
 }
 
-.job-type-btn.active {
-    background-color: #ffa7a7;
-    color: rgb(43, 43, 43)
+.job-type-btn:hover {
+    transform: translateY(-2px); /* Efecto de elevación al hover */
 }
+
+.job-type-btn input {
+    display: none; /* Ocultar el checkbox original */
+}
+
+.custom-checkbox {
+    display: inline-block;
+    width: 24px; /* Ancho de la caja */
+    height: 24px; /* Alto de la caja */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #e0e0e0; /* Color de fondo de la checkbox */
+    margin-right: 10px; /* Espacio a la derecha */
+    position: relative; /*Para el checkmark */
+}
+
+.job-type-btn input:checked + .custom-checkbox {
+    background-color: #7d75f4; /* Color de fondo al seleccionar */
+}
+
+
+/* Mostrar el texto al seleccionar */
+.job-type-btn:hover span,
+.job-type-btn input:checked + span {
+    color: white; /* Texto visible */
+    opacity: 1; /* Asegurar que el texto sea visible */
+}
+
 
 .submit-btn {
     padding: 0.5rem 1rem;

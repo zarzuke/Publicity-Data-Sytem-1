@@ -1,17 +1,10 @@
+// Función para actualizar la previsualización
 function updatePreview() {
     const titleInput = document.getElementById('title');
     const nameInput = document.getElementById('name');
     const surnameInput = document.getElementById('surname');
     const phoneInput = document.getElementById('phone');
     const dateInput = document.getElementById('date');
-    const jobTypeButtons = document.querySelectorAll('.job-type-btn');
-    jobTypeButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            jobTypeButtons.forEach((b) => b.classList.remove('active'));
-            btn.classList.add('active');
-            updatePreview();
-        });
-    });
     const totalCostInput = document.getElementById('total-cost');
     const descriptionInput = document.getElementById('description');
     const fileInput = document.getElementById('file');
@@ -29,12 +22,15 @@ function updatePreview() {
     previewName.textContent = nameInput.value;
     previewLastname.textContent = surnameInput.value;
 
-    const activeJobTypeBtn = Array.from(jobTypeButtons).find((btn) => btn.classList.contains('active'));
-    previewJobTitle.textContent = activeJobTypeBtn ? activeJobTypeBtn.textContent : 'Designer';
+// Obtener todos los checkboxes que están seleccionados (checked)
+    const selectedJobTypes = Array.from(document.querySelectorAll('input[name="job-type"]:checked')).map(checkbox => checkbox.value);
+    previewJobTitle.textContent = selectedJobTypes.length > 0 ? selectedJobTypes.join(', ') : 'Selecciona un tipo de trabajo';
+
     previewDate.textContent = dateInput.value;
     previewPhone.textContent = `(${phoneInput.value.slice(0, 3)}) ${phoneInput.value.slice(3)}`;
     previewDescription.textContent = descriptionInput.value;
 
+// Previsualizar la imagen cargada
     if (fileInput.files && fileInput.files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -42,17 +38,17 @@ function updatePreview() {
         };
         reader.readAsDataURL(fileInput.files[0]);
     } else {
-        previewImage.src = 'images/editor.jpg'; // Reemplaza con la imagen predeterminada
+        previewImage.src = 'images/editor.jpg'; // Imagen predeterminada
     }
 }
 
 // Agregar evento de entrada para actualizar la previsualización
-const formInputs = document.querySelectorAll('.add-form input, .add-form textarea, .add-form .job-type-btn, #file');
+const formInputs = document.querySelectorAll('.add-form input, .add-form textarea, #file');
 formInputs.forEach((input) => {
     input.addEventListener('input', updatePreview);
 });
 
-    searchInput = document.getElementById("searchInput"),
+searchInput = document.getElementById("searchInput"),
     cardList = document.getElementById("cardList"),
     cardItems = cardList.getElementsByClassName("card-item"),
     addBtn = document.querySelector('.add-btn'),
@@ -75,14 +71,17 @@ jobTypeButtons.forEach((btn) => {
     });
 });
 
-// Add event listener for the form submission
-addForm.addEventListener('submit-btn', (event) => {
+// Agregar evento para el envío del formulario
+addForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const name = addForm.elements.name.value;
     const surname = addForm.elements.surname.value;
     const phone = addForm.elements.phone.value;
-    const jobType = Array.from(jobTypeButtons).find((btn) => btn.classList.contains('active')).dataset.jobType;
+
+    // Obtener todos los tipos de trabajo seleccionados
+    const jobTypes = Array.from(document.querySelectorAll('input[name="job-type"]:checked')).map(checkbox => checkbox.value);
+    
     const totalCost = addForm.elements['total-cost'].value;
     const downPayment = addForm.elements['down-payment'].value;
     const remaining = addForm.elements.remaining.value;
@@ -91,12 +90,11 @@ addForm.addEventListener('submit-btn', (event) => {
     console.log('Name:', name);
     console.log('Surname:', surname);
     console.log('Phone:', phone);
-    console.log('Job Type:', jobType);
+    console.log('Job Types:', jobTypes.join(', ')); // Mostrar todos los tipos de trabajo seleccionados
     console.log('Total Cost:', totalCost);
     console.log('Down Payment:', downPayment);
     console.log('Remaining:', remaining);
     console.log('Description:', description);
-
 });
 
 
@@ -121,12 +119,12 @@ addBtn.addEventListener('click', () => {
     modalBackdrop.classList.add('visible');
     document.body.style.overflow = 'hidden'; // Bloquea el scroll
     addModal.focus(); // Enfoca la ventana modal
-  });
-  
-  closeButton.addEventListener('click', () => {
+});
+
+closeButton.addEventListener('click', () => {
     addModal.classList.add('hidden');
     addModal.classList.remove('visible');
     modalBackdrop.classList.add('hidden');
     modalBackdrop.classList.remove('visible');
     document.body.style.overflow = 'auto'; // Restaura el scroll
-  });
+});
