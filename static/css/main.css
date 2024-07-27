@@ -793,6 +793,7 @@ body.dark .home-header .add-btn .button__text {
     transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Sombra */
     position: relative; /* Para posicionar el checkbox */
+    user-select: none;
 }
 
 .job-type-btn:hover {
