@@ -135,15 +135,20 @@ document.addEventListener("DOMContentLoaded", function() {
     const totalCostInput = document.getElementById('total-cost');
     const downPaymentInput = document.getElementById('down-payment');
     const remainingInput = document.getElementById('remaining');
-
+  
     function calculateRemaining() {
-        const totalCost = parseFloat(totalCostInput.value) || 0;
-        const downPayment = parseFloat(downPaymentInput.value) || 0;
-        const remaining = totalCost - downPayment;
-        remainingInput.value = remaining < 0 ? 0 : remaining; // Asegúrate de no mostrar un valor negativo
+      const totalCost = parseFloat(totalCostInput.value) || 0;
+      const downPayment = parseFloat(downPaymentInput.value) || 0;
+      const remaining = totalCost - downPayment;
+  
+      // Format the remaining amount with dots as thousands separators
+      const formattedRemaining = remaining.toLocaleString('es-ES'); // Adjust the locale if needed
+  
+      remainingInput.value = remaining < 0 ? '0' : formattedRemaining;
     }
-
-    totalCostInput.oninput = calculateRemaining; // Calcula al cambiar el costo total
-    downPaymentInput.oninput = calculateRemaining; // Calcula al cambiar el abono
-});
+  
+    totalCostInput.oninput = calculateRemaining;
+    downPaymentInput.oninput = calculateRemaining;
+  });
+  
 

@@ -953,3 +953,12 @@ body.dark .home-header .add-btn .button__text {
     transition: border 0.5s ease;
     width: 300px;
 }
+
+.form-group input[id="remaining"] {
+    background-color: #f5f5f5;
+    color: #666;
+    border: 2px solid #ddd;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+  
