@@ -20,7 +20,7 @@ def try_login():
     if g.user:
         home=try_home()
         return home
-    
+
     bd = sqlite3.connect("library/database.db")
     cursor = bd.cursor()
     if request.method=="POST":
