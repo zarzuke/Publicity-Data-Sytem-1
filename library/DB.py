@@ -44,7 +44,5 @@ def get_clients():
     filas = cursor.fetchall()
     return filas
 
-def get_sesion():
-    pass 
 
 
