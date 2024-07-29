@@ -2,6 +2,7 @@ import sqlite3
 from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
 from library.DB import *
 
+
 def try_signup():
     bd = sqlite3.connect("library/database.db")
     cursor = bd.cursor()
@@ -26,7 +27,7 @@ def try_login():
         if pw and pw[0]== password:
             cursor.execute("SELECT userRol FROM users WHERE userName = ?" , (username,))
             rol=cursor.fetchone()
-            session["username"]= (username,rol)
+            session["username"]= [username,rol[0]]
             return redirect("/home")
         else:
                 flash("Credenciales inválidas, intente de nuevo")
