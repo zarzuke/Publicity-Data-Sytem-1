@@ -24,7 +24,9 @@ def try_login():
         cursor.execute("SELECT userPassword FROM users WHERE userName = ?" , (username,))
         pw=cursor.fetchone()
         if pw and pw[0]== password:
-            session["username"]= username
+            cursor.execute("SELECT userRol FROM users WHERE userName = ?" , (username,))
+            rol=cursor.fetchone()
+            session["username"]= (username,rol)
             return redirect("/home")
         else:
                 flash("Credenciales inválidas, intente de nuevo")
