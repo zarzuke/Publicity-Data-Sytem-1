@@ -4,7 +4,7 @@ from library.Test import *
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from markupsafe import escape
-from library.login import *
+from library.URLs import *
 
 app= Flask(__name__)
 
@@ -43,6 +43,10 @@ def form():
     function = try_form()
     return function
 
+@app.route("/Clients")
+def clients():
+    clients=try_clients()
+    return  clients
 
 app.secret_key="12345"
 if __name__== "__main__":

@@ -97,5 +97,8 @@ def try_form():
                     "VALUES (?)", (title,))
         conn.commit()
 
-
     return redirect("/home")
+
+
+def try_clients():
+    return render_template("clients.html")
