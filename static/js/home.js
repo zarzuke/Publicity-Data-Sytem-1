@@ -192,3 +192,27 @@ document.querySelectorAll('.delete').forEach(button => {
 });
 
 
+// Función para formatear números con separadores de miles
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+// CALCULAR RESTANTE
+document.addEventListener("DOMContentLoaded", function() {
+    const totalCostInput = document.getElementById('total-cost');
+    const downPaymentInput = document.getElementById('down-payment');
+    const remainingInput = document.getElementById('remaining');
+
+    function calculateRemaining() {
+        const totalCost = parseFloat(totalCostInput.value) || 0;
+        const downPayment = parseFloat(downPaymentInput.value) || 0;
+        const remaining = totalCost - downPayment;
+
+        // Asegúrate de no mostrar un valor negativo y formatear el número
+        remainingInput.value = remaining < 0 ? '0' : formatNumber(remaining);
+    }
+
+    totalCostInput.oninput = calculateRemaining; // Calcula al cambiar el costo total
+    downPaymentInput.oninput = calculateRemaining; // Calcula al cambiar el abono
+});
+
