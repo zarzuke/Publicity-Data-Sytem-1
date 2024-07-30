@@ -26,7 +26,8 @@
     --tran-05: all 0.3s ease;
 }
 
-.home-header { /*encabezado*/
+.home-header {
+    /*encabezado*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,7 +59,7 @@ body.dark {
     --toggle-color: #fff;
     --text-color: #ccc;
 }
-  
+
 /* ===== Sidebar ===== */
 .sidebar {
     position: fixed;
@@ -78,7 +79,7 @@ body.dark {
 
 .sidebar.close .logo-text .name,
 .sidebar.close .logo-text .profession {
-  display: none;
+    display: none;
 }
 
 /* ===== Reusable code - Here ===== */
@@ -365,53 +366,69 @@ body.dark .home .text {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
     list-style: none;
     cursor: pointer;
-    text-decoration: none;
     border: 2px solid transparent;
     transition: border 0.5s ease;
     display: flex;
     flex-direction: column;
-    position: relative; /* Añadir esta propiedad */
-    z-index: 1; /* Asegurar que esté por encima */
+    justify-content: space-between;
 }
-
 
 /* Card hover effect (optional) */
 .card-client:hover {
     transform: scale(1.03);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 8px 100px #786efd48;
-    z-index: 2; /* Aumentar el índice Z al ser hover */
+    z-index: 2;
+    /* Aumentar el índice Z al ser hover */
 }
 
 .card-client img {
-    width: 100px;               /* Cambia este valor según sea necesario */
-    height: auto;               /* Mantiene la proporción de la imagen */
-    object-fit: cover;          /* Asegura que la imagen no se distorsione */
-    display: block;             /* Elimina el espacio en línea */
-    margin: 0 auto;            /* Centra la imagen */
+    width: 100px;
+    /* Cambia este valor según sea necesario */
+    height: auto;
+    /* Mantiene la proporción de la imagen */
+    object-fit: cover;
+    /* Asegura que la imagen no se distorsione */
+    display: block;
+    /* Elimina el espacio en línea */
+    margin: 0 auto;
+    /* Centra la imagen */
 }
 
 /* Image */
 .default-client-image {
-  width: 100%;
-  height: auto; /* Adjust height for aspect ratio */
-  border-radius: 4px;
+    width: 100%;
+    height: auto;
+    /* Adjust height for aspect ratio */
+    border-radius: 4px;
 }
 
 /* Client name */
 .default-client-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1d1d1d;
-  line-height: 1.3;
-  margin-top: 10px; /* Add spacing after image */
+    font-size: 14px;
+    font-weight: 600;
+    color: #1d1d1d;
+    line-height: 1.3;
+    margin-top: 10px;
+    text-decoration: none;
 }
 
 /* Client company */
 .client-company {
-  margin: 0;
-  color: #777;
-  font-size: 0.8em;
+    margin: 0;
+    color: #777;
+    font-size: 0.7em;
+    text-decoration: none;
+}
+
+.default-client-name,
+.client-company {
+    white-space: nowrap;
+    /* Prevent wrapping */
+    overflow: hidden;
+    /* Hide excess content */
+    text-overflow: ellipsis;
+    /* Add ellipsis for overflow */
 }
 
 body.dark .card-client {
@@ -419,14 +436,15 @@ body.dark .card-client {
 }
 
 body.dark .card-list-client .default-client-name {
-  color: #a5a5a5;
+    color: #a5a5a5;
 }
 
 body.dark .card-list-client .client-company {
- color: white;
+    color: white;
 }
+
 body.dark .card-list-client:hover .card-client {
-  color: #fff;
+    color: #fff;
 }
 
 .add-modal {
@@ -435,7 +453,8 @@ body.dark .card-list-client:hover .card-client {
     left: 50%;
     transform: translate(-50%, -50%) scale(0.8);
     padding: 20px;
-    width: 60%;
+    width: 80%;
+    height: 70%;
     background-color: #E4E9F7;
     border-radius: 10px;
     display: flex;
@@ -444,9 +463,39 @@ body.dark .card-list-client:hover .card-client {
     z-index: 999;
     opacity: 1;
     visibility: visible;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
     transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
 }
-  
+
+.add-modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -40%;
+    width: 50%;
+    height: 800px;
+    background-color: #f1f1f1;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-height: 90vh;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.preview-title {
+    position: absolute;
+    top: 30%;
+    /* Position at the top */
+    left: 71%;
+    /* Align to the left */
+    width: 100%;
+    /* Span the entire width */
+    margin-bottom: 1rem;
+    /* Add some margin for spacing */
+}
+
+
 .add-modal.visible {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
@@ -503,30 +552,112 @@ body.dark .card-list-client:hover .card-client {
 }
 
 .form-section {
+    flex: 2;
+    /* Toma más espacio que la sección de previsualización */
+    margin-right: 20px;
+    /* Espacio entre el formulario y la previsualización */
+}
+
+.form-group {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 40px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"] {
     width: 100%;
-    height: 300px;
-    background-color: #f1f1f1;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    max-height: 90vh; /* Limita la altura máxima de la sección del formulario */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.5rem;
+}
+
+.submit-btn {
+    padding: 0.6rem 1rem;
+    background-color: #7E73F5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.add-modal .submit-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.submit-btn:hover {
+    background-color: #5c4ef8;
+    /* Color más oscuro al pasar el ratón */
+}
+
+.add-modal .reset-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 180px;
+}
+
+.reset-btn {
+    padding: 0.6rem 1rem;
+    background-color: #f86363;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    background-color: #e64341;
+    /* Color más oscuro al pasar el ratón */
+}
+
+
+
+.preview-title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgb(193, 208, 212)
 }
 
 .preview-section {
-    background-color: #ffffff;
-    /* Color de fondo de la tarjeta, que se alinea con el modo oscuro */
-    border-radius: 8px;
-    width: 150px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    /* Ancho de la tarjeta */
-    margin: 30px auto;
+    position: absolute;
+    background: #fff;
     padding: 10px;
-    text-align: center;
+    border-radius: 8px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
-    transition: transform 0.2s, background-color 0.3s;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: border 0.5s ease;
+    left: 73%;
+    /* Ajus
+    ta el ancho aquí */
+}
+
+
+
+
+.preview-card img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.preview-card .client-name {
+    font-size: 14px;
+    font-weight: 600
 }
 
 .home-header .add-btn {
@@ -545,19 +676,21 @@ body.dark .card-list-client:hover .card-client {
     background-color: var(--bg-color);
     border-radius: 10px;
     overflow: hidden;
-  }
+}
 
-.add-btn, .button__icon, .button__text {
+.add-btn,
+.button__icon,
+.button__text {
     transition: all 0.3s;
-  }
+}
 
-  .add-btn .button__text {
+.add-btn .button__text {
     transform: translateX(33px);
     color: var(--font-color);
     font-weight: 600;
-  }
+}
 
-  .add-btn .button__icon {
+.add-btn .button__icon {
     position: absolute;
     transform: translateX(109px);
     height: 100%;
@@ -566,32 +699,66 @@ body.dark .card-list-client:hover .card-client {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #E4E9F7;;
-  }
+    color: #E4E9F7;
+    ;
+}
 
-  .add-btn .svg {
+.add-btn .svg {
     width: 20px;
     fill: var(--main-color);
-  }
+}
 
-  .add-btn:hover {
+.add-btn:hover {
     background: var(--bg-color);
-  }
+}
 
-  .add-btn:hover .button__text {
+.add-btn:hover .button__text {
     color: transparent;
-  }
+}
 
-  body.dark .home-header .add-btn .button__text {
+body.dark .home-header .add-btn .button__text {
     color: var(--text-color);
 }
 
-  .add-btn:hover .button__icon {
+.add-btn:hover .button__icon {
     width: 148px;
     transform: translateX(0);
-  }
+}
 
-  .add-btn:active {
+.add-btn:active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
-  }
+}
+
+.form-group.upload-box {
+    margin-top: 7px;
+    width: 400px;
+    height: 110px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.form-group.upload-box:hover {
+    border-color: #7E73F5;
+}
+
+.upload-icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #707070;
+}
+
+.upload-icon-container i {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.upload-icon-container span {
+    font-size: 14px;
+}

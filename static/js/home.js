@@ -216,3 +216,19 @@ document.addEventListener("DOMContentLoaded", function() {
     downPaymentInput.oninput = calculateRemaining; // Calcula al cambiar el abono
 });
 
+document.addEventListener('click', function (event) {
+    const sidebar = document.querySelector('.sidebar');
+    const toggle = document.querySelector('.toggle');
+    const searchInput = document.getElementById("searchInput");
+    const cardList = document.getElementById("cardList");
+
+    const clickedElement = event.target;
+    const isClickOutside = !sidebar.contains(clickedElement) &&
+                            !toggle.contains(clickedElement) &&
+                            !clickedElement.closest('.card-item') &&
+                            !searchInput.contains(clickedElement); // Evitar cerrarlo al hacer clic dentro del input de búsqueda
+
+    if (isClickOutside) {
+      sidebar.classList.add('close');
+    }
+});

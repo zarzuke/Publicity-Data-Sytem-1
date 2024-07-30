@@ -1,15 +1,26 @@
+
 const body = document.querySelector('body');
 const sidebar = body.querySelector('nav');
-const toggle = body.querySelector(".toggle");
-const searchBtn = body.querySelector(".search-box");
-const modeSwitch = body.querySelector(".toggle-switch");
-const modeText = body.querySelector(".mode-text");
+const toggle = body.querySelector('.toggle');
+const searchBtn = body.querySelector('.search-box');
+const modeSwitch = body.querySelector('.toggle-switch');
+const modeText = body.querySelector('.mode-text');
+const searchInput = body.querySelector('#searchInput'); // Asegúrate de tener el ID
 
 // Function to toggle sidebar visibility
 function toggleSidebar() {
   sidebar.classList.toggle("close");
 }
- 
+
+// Function to toggle search and focus on input
+function toggleSearch() {
+  // Cierra la barra lateral lentamente primero
+  sidebar.classList.remove("close"); // Abre la barra lateral
+  setTimeout(() => {
+    searchInput.focus(); // Establece el foco en el campo de búsqueda
+  }, 300); // Asegúrate de que coincide con el tiempo de transición
+}
+
 // Function to toggle dark mode
 function toggleTheme() {
   body.classList.toggle("dark");
@@ -42,23 +53,18 @@ function loadThemePreference() {
     document.documentElement.style.setProperty("--scrollbar-thumb-color", "#888");
     document.documentElement.style.setProperty("--scrollbar-thumb-hover-color", "#555");
   }
-  if (body.classList.contains("dark")) {
-    modeText.innerText = "Modo claro";
-  } else {
-    modeText.innerText = "Modo oscuro";
-  }
+  modeText.innerText = body.classList.contains("dark") ? "Modo claro" : "Modo oscuro";
 }
 
 // Event listeners for sidebar interactions
 toggle.addEventListener("click", toggleSidebar);
 modeSwitch.addEventListener("click", toggleTheme);
-
-// Event listener for theme switch, applying preference
-modeSwitch.addEventListener("click", toggleTheme);
+searchBtn.addEventListener("click", toggleSearch); // Evento para el botón de búsqueda
 
 // Load theme preference on initial page load
 loadThemePreference();
 
+// Código para abrir/cerrar el modal
 addBtn.addEventListener('click', () => {
   addModal.classList.remove('hidden');
   addModal.classList.add('visible');
@@ -75,3 +81,10 @@ closeButton.addEventListener('click', () => {
   modalBackdrop.classList.remove('visible');
   document.body.style.overflow = 'auto'; // Restaura el scroll
 });
+
+
+// ...
+
+
+
+

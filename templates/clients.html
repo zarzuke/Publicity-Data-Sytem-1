@@ -96,96 +96,127 @@
                 </span>
             </button>
         </div>
-        <!-- Add Modal -->
-        <div class="add-modal hidden" id="addModal">
-            <div class="add-modal-content">
-                <div class="form-section">
-                    <div class="close-button" id="closeModal">
-                        <div class="close-icon">
-                            <i class="fas fa-times"></i>
+<!-- Add Modal -->
+<div class="add-modal hidden" id="addModal">
+    <div class="add-modal-content">
+        <div class="form-section">
+            <div class="close-button" id="closeModal">
+                <div class="close-icon">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <form class="add-form" action="---" method="post" id="addForm">
+                <div class="form-group">
+                    <label for="name">Cliente:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Compañía (opcional):</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                <div class="form-group">
+                    <label class="custum-file-upload" for="file">Imagen</label>
+                    <div class="form-group upload-box">
+                        <div class="upload-icon-container">
+                            <i class="fas fa-upload"></i>
+                            <span>Subir archivo</span>
+                            <input type="file" id="file" onchange="previewImage(this)">
                         </div>
                     </div>
-                    <form class="add-form" action="---" method="post" id="addForm">
-                        <div class="form-group">
-                            <label for="name">Cliente:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Compañía (opcional):</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <button type="submit" class="submit-btn">Guardar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="preview-section">
-                    <h3 class="preview-title">Previsualización</h3>
-                    <p> <span id="previewName"></span></p>
-                    <p> <span id="previewCompany"></span></p>
                 </div>
             </div>
-        </div>
-        <div class="modal-backdrop hidden"></div>
+            <div class="form-row">
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Guardar</button>
+                    <button type="reset" class="reset-btn">Restablecer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <h3 class="preview-title">Previsualización</h3>
+    <div class="preview-section">
+        <div class="preview-card-item"></div>
+            <img id="preview-image" src="" alt="Miniatura">
+            <p> <span id="previewName"></span></p>
+            <p> <span id="previewCompany"></span></p>
+    </div>
+</div>
+<div class="modal-backdrop hidden"></div>
         <div class="card-list-client">
             {% for item in cliente %}
-            <a href="https://www.google.com">
-            <div class="card-client">
-                <img src="../static/img/user-default.png" alt="User Image">
-                <p class="default-client-name">{{item[0]}}</p>
-                <p class="client-company">{{item[1]}}</p>
-            </div>
-            </a>    
+            <a href="https://www.google.com" style="text-decoration: none;" class="client-link">
+                <div class="card-client">
+                    <img src="../static/img/user-default.png" alt="User Image">
+                    <p class="default-client-name">{{item[0]}}</p>
+                    <p class="client-company">{{item[1]}}</p>
+                </div>
+            </a>
             {% endfor %}
     </section>
 
-    <script src="../static/js/home.js"></script>
+
     <script src="../static/js/sidebar.js"></script>
-
+   
     <script>
-// Selecciona el campo de búsqueda y los elementos de tarjetas
-const searchInput = document.getElementById('searchInput');
-const cardItems = document.querySelectorAll('.card-client'); // Asegúrate que esta clase es la correcta
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const cardList = document.querySelector('.card-list-client');
+    const cardItems = cardList.querySelectorAll('.client-link');
+    const sidebar = document.querySelector('.sidebar');
 
-searchInput.addEventListener("input", () => {
-  const searchTerm = searchInput.value.toLowerCase();
-  cardItems.forEach(cardItem => {
-      const cardContent = cardItem.textContent.toLowerCase();
-      if (cardContent.includes(searchTerm)) {
-          cardItem.style.display = "block";
-      } else {
-          cardItem.style.display = "none";
-      }
-  });
+    // Control de búsqueda
+    if (searchInput) {
+        searchInput.addEventListener("input", () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            cardItems.forEach(cardItem => {
+                const cardContent = cardItem.textContent.toLowerCase();
+                if (cardContent.includes(searchTerm)) {
+                    cardItem.style.display = "block";
+                } else {
+                    cardItem.style.display = "none";
+                }
+            });
+        });
+    } else {
+        console.warn("El campo de búsqueda no se encontró.");
+    }
+
+    // Abrir el modal
+    document.getElementById('openModal').addEventListener('click', function () {
+        document.getElementById('addModal').classList.remove('hidden');
+        document.querySelector('.modal-backdrop').classList.remove('hidden');
+    });
+
+    // Cerrar el modal
+    document.getElementById('closeModal').addEventListener('click', function () {
+        document.getElementById('addModal').classList.add('hidden');
+        document.querySelector('.modal-backdrop').classList.add('hidden');
+    });
+
+    // Cerrar el menú al hacer clic fuera de él, pero no si se hace clic en las tarjetas
+    document.addEventListener('click', function (event) {
+        if (!sidebar.contains(event.target) && !cardList.contains(event.target)) {
+            sidebar.classList.add('close'); // Cierra el menú
+        }
+    });
+
+    
+    // Previsualización en tiempo real
+    const nameInput = document.getElementById('name');
+    const companyInput = document.getElementById('company');
+    const previewName = document.getElementById('previewName');
+    const previewCompany = document.getElementById('previewCompany');
+
+    nameInput.addEventListener('input', function () {
+        previewName.textContent = nameInput.value;
+    });
+
+    companyInput.addEventListener('input', function () {
+        previewCompany.textContent = companyInput.value || 'N/A';
+    });
 });
-        // Open the modal
-        document.getElementById('openModal').addEventListener('click', function () {
-            document.getElementById('addModal').classList.remove('hidden');
-            document.querySelector('.modal-backdrop').classList.remove('hidden');
-        });
 
-        document.getElementById('closeModal').addEventListener('click', function () {
-            document.getElementById('addModal').classList.add('hidden');
-            document.querySelector('.modal-backdrop').classList.add('hidden');
-        });
-
-
-        // Previsualización en tiempo real
-        const nameInput = document.getElementById('name');
-        const companyInput = document.getElementById('company');
-        const previewName = document.getElementById('previewName');
-        const previewCompany = document.getElementById('previewCompany');
-
-        nameInput.addEventListener('input', function () {
-            previewName.textContent = nameInput.value;
-        });
-
-        companyInput.addEventListener('input', function () {
-            previewCompany.textContent = companyInput.value || 'N/A'; // Si no hay compañía, se muestra 'N/A'
-        });
-    </script>
-</body>
+      </script>
+  </body>
 
 </html>

@@ -61,16 +61,17 @@ body.dark {
 }
 
 /* ===== Sidebar ===== */
+/* Sidebar */
 .sidebar {
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
+    top: 0; /* Mantén la barra al principio */
+    left: 0; 
+    height: 100vh; /* Altura total */
+    width: 260px; /* Ancho de la barra lateral */
+    padding: 10px 14px; /* Espaciado interno */
     background: var(--sidebar-color);
     transition: var(--tran-05);
-    z-index: 100;
+    z-index: 100; 
 }
 
 .sidebar.close {
@@ -488,7 +489,7 @@ body.dark .home .text {
     color: #fff; /* Color del icono de delete al hover */
 }
 
-.card-list .card-item .arrow:hover {
+.card-list .card-item:hover .arrow {
     background: #756fd6; /* Aquí el color de hover específico para .arrow */
     color: #fff; /* Color del icono de arrow al hover */
 }
@@ -511,14 +512,13 @@ body.dark .card-item .card-title {
 }
 
 body.dark .card-item .arrow {
-    color: #fff;
+    color: #c7c7c7;
 }
 
 body.dark .card-list .card-item:hover .arrow {
     background: #756fd6;
     color: #242526;
 }
-
 
 
 @media (max-width: 1200px) {
