@@ -1,11 +1,9 @@
-from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
+from flask import Flask,session,g
 import sqlite3
 from library.Test import *
-from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from markupsafe import escape
 from library.URLs import *
-from library.DB import *
 
 app= Flask(__name__)
 

@@ -1,20 +1,18 @@
 import sqlite3 
 from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
 
-def try_form():
+def project_inc():
     if request.method == "POST":
         title = request.form["title"]
         name = request.form["name"]
         lastname = request.form["surname"]
         phone = request.form["phone"]
         date = request.form["date"]
-        job_type = request.form.get('value')  # Cambio de nombre aquí
-        type = request.form.get('job-type')  # Cambio de nombre aquí
+        job_type = request.form.get('value')  # Cambio de nombre aquí 
         total = request.form["total-cost"]
         mid = request.form["down-payment"]
         remaining = request.form["remaining"]
         details = request.form["description"]
-        #cesar valnaskl
         client_name=name+" "+lastname
 
         conn = sqlite3.connect('library/database.db')
@@ -29,7 +27,7 @@ def try_form():
 
         cursor.execute("INSERT INTO dateProject (projectDateStart) VALUES (?)",
                    (date,))
-        cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (type,))
+        cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (job_type,))
 
         cursor.execute("INSERT INTO projects (projectName) "
                     "VALUES (?)", (title,))

@@ -97,7 +97,7 @@ jobTypeButtons.forEach((btn) => {
 });
 
 // Agregar evento para el envío del formulario
-addForm.addEventListener('submit', (event) => {
+addForm.addEventListener('submit-btn', (event) => {
     event.preventDefault();
 
     const name = addForm.elements.name.value;

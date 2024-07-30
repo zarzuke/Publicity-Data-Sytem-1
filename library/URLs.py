@@ -77,3 +77,7 @@ def try_clients():
     
     flash("Debe de iniciar sesión primero.")
     return render_template("index.html")
+
+def try_form():
+    form=project_inc()
+    return form
