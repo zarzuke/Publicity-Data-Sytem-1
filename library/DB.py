@@ -8,13 +8,14 @@ def project_inc():
         lastname = request.form["surname"]
         phone = request.form["phone"]
         date = request.form["date"]
-        job_type = request.form.get('value')  # Cambio de nombre aquí 
+        job_type = request.form.getlist('job-type')  # Cambio de nombre aquí 
         total = request.form["total-cost"]
         mid = request.form["down-payment"]
         remaining = request.form["remaining"]
         details = request.form["description"]
         client_name=name+" "+lastname
-
+        joblist=','.join(job_type)
+        print(job_type)
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
 
@@ -27,7 +28,7 @@ def project_inc():
 
         cursor.execute("INSERT INTO dateProject (projectDateStart) VALUES (?)",
                    (date,))
-        cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (job_type,))
+        cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (joblist,))
 
         cursor.execute("INSERT INTO projects (projectName, projectDescript) "
                     "VALUES (?,?)", (title, details,))
