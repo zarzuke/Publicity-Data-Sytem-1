@@ -29,8 +29,9 @@ def project_inc():
                    (date,))
         cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (job_type,))
 
-        cursor.execute("INSERT INTO projects (projectName) "
-                    "VALUES (?)", (title,))
+        cursor.execute("INSERT INTO projects (projectName, projectDescript) "
+                    "VALUES (?,?)", (title, details,))
+        
         conn.commit()
 
     return redirect("/home")
@@ -42,5 +43,19 @@ def get_clients():
     filas = cursor.fetchall()
     return filas
 
-
-
+def get_project():
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+                SELECT projects.projectName, dateProject.projectDateStart, 
+                chargeProject.projectChargeTotalPayment,
+                clientProject.projectClientName, clientProject.projectClientNumber,
+                projectDescript,projectWorker
+                FROM projects 
+                JOIN dateProject on projectDateId = projectDate
+                JOIN chargeProject on projectChargeId = projectCharge
+                JOIN clientProject on projectClientId = projectClient
+                """)
+    filas = cursor.fetchall()
+    conn.close()
+    return filas

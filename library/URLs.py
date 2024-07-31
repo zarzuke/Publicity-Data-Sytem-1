@@ -39,27 +39,7 @@ def try_login():
 
 def try_home():
     if g.user:
-        conn = sqlite3.connect('library/database.db')
-        cursor = conn.cursor()
-        cursor.execute("""
-                    SELECT projects.projectName, dateProject.projectDateStart, 
-                    chargeProject.projectChargeTotalPayment,
-                    clientProject.projectClientName, clientProject.projectClientNumber
-                    FROM projects 
-                    JOIN dateProject on projectDateId = projectDate
-                    JOIN chargeProject on projectChargeId = projectCharge
-                    JOIN clientProject on projectClientId = projectClient
-                    """)
-        filas = cursor.fetchall()
-        cursor.execute("""
-                    SELECT projects.projectId, typeProject.projectTypeName
-                    FROM projects
-                    INNER JOIN differentTypeProject on projects.projectId = differentTypeProject.keyProjectId 
-                    INNER JOIN typeProject on differentTypeProject.keyProjectTypeId = typeProject.projectTypeId
-                    """)
-        folas = cursor.fetchall()
-        
-       
+        filas=get_project()
         return render_template("home.html",user=g.user,filas=filas)
     
     flash("Debe de iniciar sesión primero.")
