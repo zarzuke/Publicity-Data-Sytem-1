@@ -232,3 +232,35 @@ document.addEventListener('click', function (event) {
       sidebar.classList.add('close');
     }
 });
+
+function resetPreview() {
+    // Restablecer los valores de la previsualización a los valores iniciales
+    const initialTitle = "";
+    const initialName = "";
+    const initialLastname = "";
+    const initialJobTitle = "";
+    const initialDate = "";
+    const initialPhone = "";
+    const initialDescription = "";
+
+    // Actualizar los elementos de la previsualización con los valores iniciales
+    const previewTitle = document.querySelector('.preview-card-title');
+    const previewName = document.querySelector('.preview-card-name');
+    const previewLastname = document.querySelector('.preview-card-lastname');
+    const previewJobTitle = document.querySelector('.preview-job-title');
+    const previewDate = document.querySelector('.preview-date');
+    const previewPhone = document.querySelector('.preview-phone');
+    const previewDescription = document.querySelector('.preview-card-description');
+
+    previewTitle.textContent = initialTitle;
+    previewName.textContent = initialName;
+    previewLastname.textContent = initialLastname;
+    previewJobTitle.textContent = initialJobTitle;
+    previewDate.textContent = initialDate;
+    previewPhone.textContent = initialPhone;
+    previewDescription.textContent = initialDescription;
+}
+
+// Asignar la función al botón de restablecimiento
+const resetButton = document.querySelector('.reset-btn');
+resetButton.addEventListener('click', resetPreview);
