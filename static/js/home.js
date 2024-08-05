@@ -264,3 +264,9 @@ function resetPreview() {
 // Asignar la función al botón de restablecimiento
 const resetButton = document.querySelector('.reset-btn');
 resetButton.addEventListener('click', resetPreview);
+
+function openDetails(title, date, name, phone, description) {
+    const url = `details.html?title=${encodeURIComponent(title)}&date=${encodeURIComponent(date)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&description=${encodeURIComponent(description)}`;
+    window.open(url, '_blank'); // Abre en una nueva pestaña
+}
+
