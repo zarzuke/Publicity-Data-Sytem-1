@@ -48,11 +48,11 @@ def get_project():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("""
-                SELECT projects.projectName, dateProject.projectDateStart, 
+                SELECT p.projectName, dateProject.projectDateStart, 
                 chargeProject.projectChargeTotalPayment,
                 clientProject.projectClientName, clientProject.projectClientNumber,
-                projectDescript,projectWorker
-                FROM projects 
+                p.projectDescript,p.projectWorker, p.projectId
+                FROM projects p
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
