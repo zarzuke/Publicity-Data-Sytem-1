@@ -61,3 +61,8 @@ def try_clients():
 def try_form():
     form=project_inc()
     return form
+
+def try_work(id):
+    work=get_details(id)
+    return render_template("work.html",user=g.user,details=work)
+    

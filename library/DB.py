@@ -62,7 +62,7 @@ def get_project():
     return filas
 
 def get_details(id):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("""
                 SELECT projectName, 
@@ -75,7 +75,7 @@ def get_details(id):
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
                 WHERE projectId == ?
-                """,id)
+                """,(id,))
     filas = cursor.fetchall()
     conn.close()
     return filas

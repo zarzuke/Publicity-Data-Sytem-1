@@ -53,7 +53,8 @@ def settings():
 
 @app.route("/work/<string:user>")
 def work(user):
-    return user
+    id=try_work(user)
+    return id
 
 app.secret_key="12345"
 if __name__== "__main__":
