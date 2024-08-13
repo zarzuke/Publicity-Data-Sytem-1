@@ -60,3 +60,22 @@ def get_project():
     filas = cursor.fetchall()
     conn.close()
     return filas
+
+def get_details(id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+                SELECT projectName, 
+                projectDateStart, projectDateFinished,
+                projectChargeCurrency, projectChargeInstallment, projectChargeBalance, projectChargeTotalPayment,
+                projectClientName, projectClientNumber,
+                projectDescript,projectWorker
+                FROM projects 
+                JOIN dateProject on projectDateId = projectDate
+                JOIN chargeProject on projectChargeId = projectCharge
+                JOIN clientProject on projectClientId = projectClient
+                WHERE projectId == ?
+                """,id)
+    filas = cursor.fetchall()
+    conn.close()
+    return filas
