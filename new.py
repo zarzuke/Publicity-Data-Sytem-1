@@ -56,6 +56,10 @@ def work(user):
     id=try_work(user)
     return id
 
+@app.route("/Clients/<string:client>")
+def client(client):
+    return client
+
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)
