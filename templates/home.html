@@ -128,57 +128,57 @@
                             <label>Tipo de trabajo:</label>
                             <div class="job-type-buttons">
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Pendon" onchange="updatePreview()"> 
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="1" onchange="updatePreview()"> 
                                     <span class="custom-checkbox"></span>
                                     Pendón
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Vinilo" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="2" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Vinilo
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Estructura" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="3" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Estructura
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Valla-publicitaria" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="4" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Valla Publicitaria
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Presentacion" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="5" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Presentación
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Volantes" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="6" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Volantes
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Banderin" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="7" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Banderín
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Camisa" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="8" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Camisa
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Neoflex" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="9" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     NeoFlex
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Corte-v" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="10" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Corte V
                                 </label>
                                 <label class="job-type-btn">
-                                    <input type="checkbox" name="job-type" autocomplete="off" value="Acrilico" onchange="updatePreview()">
+                                    <input type="checkbox" name="job-type" autocomplete="off" value="11" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
                                     Acrílico
                                 </label>
@@ -247,26 +247,28 @@
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
             {% for item in filas %}
-            <div class="card-item" data-job-type="designer" onclick="openDetails('{{ item[0] }}', '{{ item[1] }}', '{{ item[3] }}', '{{ item[4] }}', '{{ item[5] }}')">
-                <img src="../static/img/editor.jpg" alt="Card Image">
-                <p class="card-title">{{ item[0] }}</p>
-                <p class="card-name-container">
-                    <span class="card-name">{{ item[3] }}</span>
-                </p>
-                <p class="card-info">
-                    <span class="job-title">Designer</span>
-                    <span class="date">{{ item[1] }}</span>
-                    <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
-                </p>
-                <p class="card-description">{{ item[5] }}</p>
-                <div class="actions">
-                    <div class="arrow">
-                        <i class="fas fa-arrow-right card-icon"></i>
+            <div class="card-item" data-job-type="designer" style="cursor: pointer;">
+                <a href="{{ url_for('work', user=item[7] )}}" style="text-decoration: none;color: black">
+                    <img src="../static/img/editor.jpg" alt="Card Image">
+                    <p class="card-title">{{ item[0] }}</p>
+                    <p class="card-name-container">
+                        <span class="card-name">{{ item[3] }}</span>
+                    </p>
+                    <p class="card-info">
+                        <span class="job-title">Designer</span>
+                        <span class="date">{{ item[1] }}</span>
+                        <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
+                    </p>
+                    <p class="card-description">{{ item[5] }}</p>
+                    <div class="actions">
+                        <div class="arrow">
+                            <i class="fas fa-arrow-right card-icon"></i>
+                        </div>
+                        <div class="delete" style="cursor: pointer;" onclick="event.stopPropagation();">
+                            <i class="fas fa-trash-alt" title="Borrar"></i>
+                        </div>
                     </div>
-                    <div class="delete" style="cursor: pointer;" onclick="event.stopPropagation();">
-                        <i class="fas fa-trash-alt" title="Borrar"></i>
-                    </div>
-                </div>
+                </a>
             </div>
             {% endfor %}
         </div>

@@ -51,6 +51,11 @@ def clients():
 def settings():
     return render_template("settings.html")
 
+@app.route("/work/<string:user>")
+def work(user):
+    id=try_work(user)
+    return id
+
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)
