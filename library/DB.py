@@ -28,7 +28,11 @@ def project_inc():
 
         cursor.execute("INSERT INTO dateProject (projectDateStart) VALUES (?)",
                    (date,))
-        cursor.execute("INSERT INTO typeProject (projectTypeName) VALUES (?)", (joblist,))
+        
+        cursor.execute("SELECT projectId FROM projects ORDER BY projectId DESC LIMIT 1")
+        id = cursor.fetchone()
+        for job in job_type:  
+            cursor.execute("INSERT INTO ManyTypes (projectId,projectTypeId) VALUES (?,?)", (id+1,job))
 
         cursor.execute("INSERT INTO projects (projectName, projectDescript) "
                     "VALUES (?,?)", (title, details,))
