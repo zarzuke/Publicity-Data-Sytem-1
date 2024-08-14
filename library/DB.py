@@ -101,12 +101,11 @@ def get_works_client(client):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("""
-                SELECT projectName, 
-                projectDateStart, projectDateFinished,
-                projectChargeCurrency, projectChargeInstallment, projectChargeBalance, projectChargeTotalPayment,
-                projectClientName, projectClientNumber,
-                projectDescript,projectWorker
-                FROM projects 
+                SELECT p.projectName, dateProject.projectDateStart, 
+                chargeProject.projectChargeTotalPayment,
+                clientProject.projectClientName, clientProject.projectClientNumber,
+                p.projectDescript,p.projectWorker, p.projectId
+                FROM projects p
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
