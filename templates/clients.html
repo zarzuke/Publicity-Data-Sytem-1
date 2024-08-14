@@ -144,7 +144,7 @@
 <div class="modal-backdrop hidden"></div>
         <div class="card-list-client">
             {% for item in cliente %}
-            <a href="https://www.google.com" style="text-decoration: none;" class="client-link">
+            <a href="{{ url_for('client', client=item[0] )}}" style="text-decoration: none;" class="client-link">
                 <div class="card-client">
                     <img src="../static/img/user-default.png" alt="User Image">
                     <p class="default-client-name">{{item[0]}}</p>

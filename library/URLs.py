@@ -68,4 +68,4 @@ def try_work(id):
 
 def try_client(client):
     data=get_works_client(client)
-    return render_template("clients.html",user=g.user,filas=data)
+    return render_template("Client.html",user=g.user,filas=data)

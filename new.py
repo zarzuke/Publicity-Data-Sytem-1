@@ -58,7 +58,8 @@ def work(user):
 
 @app.route("/Clients/<string:client>")
 def client(client):
-    return client
+    list=try_client(client)
+    return list
 
 app.secret_key="12345"
 if __name__== "__main__":
