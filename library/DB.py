@@ -32,7 +32,7 @@ def project_inc():
         cursor.execute("SELECT projectId FROM projects ORDER BY projectId DESC LIMIT 1")
         id = cursor.fetchone()
         for job in job_type:  
-            cursor.execute("INSERT INTO ManyTypes (projectId,projectTypeId) VALUES (?,?)", (id+1,job))
+            cursor.execute("INSERT INTO ManyTypes (projectId,projectTypeId) VALUES (?,?)", (id[0]+1,job))
 
         cursor.execute("INSERT INTO projects (projectName, projectDescript) "
                     "VALUES (?,?)", (title, details,))
@@ -80,6 +80,19 @@ def get_details(id):
                 JOIN clientProject on projectClientId = projectClient
                 WHERE projectId == ?
                 """,(id,))
+    filas = cursor.fetchall()
+    conn.close()
+    return filas
+
+def get_types(type):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+                SELECT projectTypeName
+                FROM ManyTypes m
+                INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                WHERE projectId == ?
+                """,(type,))
     filas = cursor.fetchall()
     conn.close()
     return filas
