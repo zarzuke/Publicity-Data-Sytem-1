@@ -65,4 +65,7 @@ def try_form():
 def try_work(id):
     work=get_details(id)
     return render_template("work.html",user=g.user,details=work)
-    
+
+def try_client(client):
+    data=get_works_client(client)
+    return render_template("clients.html",user=g.user,filas=data)
