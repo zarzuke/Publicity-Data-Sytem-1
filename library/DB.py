@@ -84,7 +84,7 @@ def get_details(id):
     conn.close()
     return filas
 
-def get_types(type):
+def get_types(id):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("""
@@ -92,7 +92,7 @@ def get_types(type):
                 FROM ManyTypes m
                 INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
                 WHERE projectId == ?
-                """,(type,))
+                """,(id,))
     filas = cursor.fetchall()
     conn.close()
     return filas
