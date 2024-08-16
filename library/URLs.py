@@ -39,9 +39,8 @@ def try_login():
 def try_home():
     if g.user:
         filas,tipos=get_project()
-        print(filas)
-        print(tipos)
-        return render_template("home.html",user=g.user,filas=filas,tipos=tipos)
+        combine=zip(filas,tipos)
+        return render_template("home.html",user=g.user,filas=combine)
     
     flash("Debe de iniciar sesión primero.")
     return render_template("index.html")
