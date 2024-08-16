@@ -102,9 +102,11 @@ def get_details(id):
                 WHERE projectId == ?
                 """,(id,))
     types = cursor.fetchall()
-    
+    tipos=[]
+    for t in types:
+        tipos.append(t[0])
     conn.close()
-    return filas,types
+    return filas,tipos
 
 def get_works_client(client):
     conn = sqlite3.connect('library/database.db')
