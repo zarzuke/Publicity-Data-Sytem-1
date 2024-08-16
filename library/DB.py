@@ -52,18 +52,32 @@ def get_project():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("""
-                SELECT p.projectName, dateProject.projectDateStart, 
-                chargeProject.projectChargeTotalPayment,
-                clientProject.projectClientName, clientProject.projectClientNumber,
-                p.projectDescript,p.projectWorker, p.projectId
-                FROM projects p
+                SELECT projectName, projectDateStart, 
+                projectChargeTotalPayment,
+                projectClientName, projectClientNumber,
+                projectDescript,projectId
+                FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
                 """)
     filas = cursor.fetchall()
+    cursor.execute("""
+                SELECT projectTypeName, projectId
+                FROM ManyTypes m
+                INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                   """)
+    types=cursor.fetchall()
+    tipos=[]
+    for f in filas:
+        lista = [] 
+        for t in types:
+            if f[6] == t[1]:
+                lista.append(t[0])
+        tipos.append(lista)
+
     conn.close()
-    return filas
+    return filas,tipos
 
 def get_details(id):
     conn = sqlite3.connect('library/database.db')
@@ -81,21 +95,16 @@ def get_details(id):
                 WHERE projectId == ?
                 """,(id,))
     filas = cursor.fetchall()
-    conn.close()
-    return filas
-
-def get_types(id):
-    conn = sqlite3.connect('library/database.db')
-    cursor = conn.cursor()
     cursor.execute("""
                 SELECT projectTypeName
                 FROM ManyTypes m
                 INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
                 WHERE projectId == ?
                 """,(id,))
-    filas = cursor.fetchall()
+    types = cursor.fetchall()
+    
     conn.close()
-    return filas
+    return filas,types
 
 def get_works_client(client):
     conn = sqlite3.connect('library/database.db')

@@ -2,7 +2,6 @@ import sqlite3
 from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
 from library.DB import *
 
-
 def try_signup():
     bd = sqlite3.connect("library/database.db")
     cursor = bd.cursor()
@@ -39,8 +38,10 @@ def try_login():
 
 def try_home():
     if g.user:
-        filas=get_project()
-        return render_template("home.html",user=g.user,filas=filas)
+        filas,tipos=get_project()
+        print(filas)
+        print(tipos)
+        return render_template("home.html",user=g.user,filas=filas,tipos=tipos)
     
     flash("Debe de iniciar sesión primero.")
     return render_template("index.html")

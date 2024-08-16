@@ -4,8 +4,12 @@ from library.Test import *
 import os
 from markupsafe import escape
 from library.URLs import *
+from jinja2 import Environment
 
-app= Flask(__name__)
+app = Flask(__name__)
+
+env = Environment()
+env.globals.update(zip=zip)
 
 @app.route("/menu")
 def index():

@@ -246,7 +246,7 @@
         </div>
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
-            {% for item in filas %}
+        {% for item, item2 in zip(filas, tipos) %}
             <div class="card-item" data-job-type="designer" style="cursor: pointer;">
                 <a href="{{ url_for('work', user=item[7] )}}" style="text-decoration: none;color: black">
                     <img src="../static/img/editor.jpg" alt="Card Image">
@@ -259,7 +259,7 @@
                         <span class="date">{{ item[1] }}</span>
                         <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
                     </p>
-                    <p class="card-description">{{ item[5] }}</p>
+                    <p class="card-description">{{ item2 }}</p>
                     <div class="actions">
                         <div class="arrow">
                             <i class="fas fa-arrow-right card-icon"></i>
@@ -270,7 +270,8 @@
                     </div>
                 </a>
             </div>
-            {% endfor %}
+        {% endfor %}
+
         </div>
                 
 <div class="confirmation-modal hidden" id="confirmationModal">
