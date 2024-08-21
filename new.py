@@ -1,8 +1,4 @@
 from flask import Flask,session,g
-import sqlite3
-from library.Test import *
-import os
-from markupsafe import escape
 from library.URLs import *
 
 app = Flask(__name__)
