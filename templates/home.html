@@ -20,7 +20,7 @@
                 </span>
                 <div class="text logo-text">
                     <span class="name">{{user[0]}}</span>
-                    <span class="profession">{{user[1]}}</span>
+                    <span class="profession" id="role">{{user[1]}}</span>
                 </div>
             </div>
             <i class='bx bx-chevron-right toggle'></i>
@@ -38,31 +38,31 @@
                             <span class="text nav-text">Inicio</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="client">
                         <a href="{{ url_for('clients') }}"> <!-- Cambia esta línea, para que apunte a tu HTML -->
                             <i class='bx bx-user icon'></i> <!-- Puedes cambiar el ícono si lo deseas -->
                             <span class="text nav-text">Clientes</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="diseño">
                         <a href="#">
                             <i class='bx bx-bar-chart-alt-2 icon'></i>
                             <span class="text nav-text">Diseño</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="aprobacion">
                         <a href="#">
                             <i class='bx bx-bar-chart-alt-2 icon'></i>
                             <span class="text nav-text">Aprobacion</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="elaboracion">
                         <a href="#">
                             <i class='bx bx-bar-chart-alt-2 icon'></i>
                             <span class="text nav-text">Elaboracion</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="entrega">
                         <a href="#">
                             <i class='bx bx-bar-chart-alt-2 icon'></i>
                             <span class="text nav-text">Entrega</span>
@@ -265,6 +265,7 @@
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
         {% for item, item2 in filas %}
+<<<<<<< Updated upstream
 <div class="card-item" data-job-type="designer" style="cursor: pointer;">
     <a href="{{ url_for('work', user=item[6] )}}" style="text-decoration: none;color: black">
         <img src="../static/img/editor.jpg" alt="Card Image">
@@ -281,6 +282,30 @@
         <div class="actions">
             <div class="arrow">
                 <i class="fas fa-arrow-right card-icon" title="Abrir"></i>
+=======
+            <div class="card-item" data-job-type="designer" style="cursor: pointer;">
+                <a href="{{ url_for('work', user=item[6] )}}" style="text-decoration: none;color: black">
+                    <img src="../static/img/editor.jpg" alt="Card Image">
+                    <p class="card-title">{{ item[0] }}</p>
+                    <p class="card-name-container">
+                        <span class="card-name">{{ item[3] }}</span>
+                    </p>
+                    <p class="card-info">
+                        <span class="job-title">{{item2}}</span>
+                        <span class="date">{{ item[1] }}</span>
+                        <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
+                    </p>
+                    <p class="card-description">{{ item2 }}</p>
+                    <div class="actions">
+                        <div class="arrow">
+                            <i class="fas fa-arrow-right card-icon"></i>
+                        </div>
+                        <div class="delete" style="cursor: pointer;" onclick="event.stopPropagation();">
+                            <i class="fas fa-trash-alt" title="Borrar"></i>
+                        </div>
+                    </div>
+                </a>
+>>>>>>> Stashed changes
             </div>
             <div class="delete" style="cursor: pointer;" onclick="handleDelete(event)">
                 <i class="fas fa-trash-alt" title="Borrar"></i>
