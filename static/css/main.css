@@ -383,6 +383,12 @@ body.dark .home .text {
     white-space: nowrap;
 }
 
+.card-list .card-item .card-name {
+    color: #444444;
+    font-weight: 500;
+}
+
+
 .preview-card-item .preview-card-title,
 .preview-card-item .preview-card-name-container,
 .preview-card-item .preview-card-info {
@@ -463,10 +469,7 @@ body.dark .home .text {
     margin-top: auto;
     transition: 0.2s ease;
 }
-.card-list .card-item:hover .arrow {
-    background: transparent; /* Cambia a transparente o la propiedad que desees */
-    /* Color solo se aplicará cuando se haga hover sobre el arrow directamente */
-}
+
 
 .card-list .card-item .delete {
     display: flex;
@@ -503,12 +506,16 @@ body.dark .home .text {
 
 /* Dark Mode Styles */
 body.dark .card-list .card-item {
-    background: #242526;
+    background: #242424;
     color: #fff;
 }
 
 body.dark .card-item .card-title {
-    color: #a5a5a5;
+    color: #d4d4d4;
+}
+
+body.dark .card-item .card-name {
+    color: #d4d4d4;
 }
 
 body.dark .card-item .arrow {

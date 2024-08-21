@@ -156,6 +156,14 @@ closeButton.addEventListener('click', () => {
     document.body.style.overflow = 'auto'; // Restaura el scroll
 });
 
+function handleDelete(event) {
+    // Previene la propagación del evento y la acción por defecto (navegación)
+    event.stopPropagation();
+    event.preventDefault();
+    
+    // Aquí puedes agregar la lógica para borrar
+    console.log("Elemento borrado (lógica a implementar)");
+}
 
 // Agregar evento de confirmación para eliminar
 document.getElementById('confirmDelete').addEventListener('click', function() {
