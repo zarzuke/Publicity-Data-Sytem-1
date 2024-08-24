@@ -87,7 +87,7 @@ def get_details(id):
                 projectDateStart, projectDateFinished,
                 projectChargeCurrency, projectChargeInstallment, projectChargeBalance, projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript,projectWorker
+                projectDescript
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
