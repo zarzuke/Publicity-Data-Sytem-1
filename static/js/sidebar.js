@@ -82,6 +82,7 @@ closeButton.addEventListener('click', () => {
   document.body.style.overflow = 'auto'; // Restaura el scroll
 });
 
+
 document.addEventListener('DOMContentLoaded', function() {
   const role = document.getElementById('role').textContent.trim();
   const clientLink = document.getElementById('client');
@@ -89,8 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const aprobacion = document.getElementById('aprobacion');
   const elaboracion = document.getElementById('elaboracion');
   const entrega = document.getElementById('entrega');
+  const client = document.getElementById('client')
 
   if (role === 'Designer') {
+      client.style.display = 'none';
       diseño.style.display = 'block';
       aprobacion.style.display = 'none';
       elaboracion.style.display = 'none';

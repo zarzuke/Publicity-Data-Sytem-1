@@ -1,0 +1,22 @@
+/* styles.css */
+h2
+
+.card {
+    background-color: #ffffff; /* Color de fondo blanco */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    padding: 20px; /* Espacio interno */
+    margin: 20px; /* Espacio externo */
+    max-width: 600px; /* Ancho máximo */
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
+}
+
+.info-box {
+    background-color: #f5f5f5; /* Color de fondo de cada cuadro */
+    border-radius: 10px; /* Bordes redondeados de los cuadros */
+    padding: 10px; /* Espaciado interno */
+    margin: 10px 0; /* Margen superior e inferior */
+    text-align: center; /* Alineación del texto */
+}
+

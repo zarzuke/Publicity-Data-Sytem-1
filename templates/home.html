@@ -39,48 +39,51 @@
                         </a>
                     </li>
                     <li class="nav-link" id="client">
-                        <a href="{{ url_for('clients') }}"> <!-- Cambia esta línea, para que apunte a tu HTML -->
-                            <i class='bx bx-user icon'></i> <!-- Puedes cambiar el ícono si lo deseas -->
+                        <a href="{{ url_for('clients') }}">
+                            <i class='bx bx-user icon'></i>
                             <span class="text nav-text">Clientes</span>
                         </a>
                     </li>
+                </ul>
+                <!-- Agrupación de Diseño, Aprobación, Elaboración y Entrega -->
+                <hr class="separator"> <!-- Este div agrega espacio y parece separado -->
+                <ul class="menu-links">
                     <li class="nav-link" id="diseño">
                         <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <i class='bx bx-image-alt icon'></i>
                             <span class="text nav-text">Diseño</span>
                         </a>
                     </li>
                     <li class="nav-link" id="aprobacion">
                         <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon'></i>
-                            <span class="text nav-text">Aprobacion</span>
+                            <i class='bx bx-check-circle icon'></i>
+                            <span class="text nav-text">Aprobación</span>
                         </a>
                     </li>
                     <li class="nav-link" id="elaboracion">
                         <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon'></i>
-                            <span class="text nav-text">Elaboracion</span>
+                            <i class='bx bx-edit icon'></i>
+                            <span class="text nav-text">Elaboración</span>
                         </a>
                     </li>
                     <li class="nav-link" id="entrega">
                         <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <i class='bx bx-send icon'></i>
                             <span class="text nav-text">Entrega</span>
                         </a>
                     </li>
-                </ul>
+                </ul>                
             </div>
             <div class="bottom-content">
-                <li class="">
-                    <a href="{{ url_for('logout') }}">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Salir</span>
-                    </a>
-                </li>
                 <li class="">
                     <a href="{{ url_for('settings') }}">
                         <i class='bx bx-cog icon'></i>
                         <span class="text nav-text">Ajustes</span>
+                    </a>
+                <li class="">
+                    <a href="{{ url_for('logout') }}">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Salir</span>
                     </a>
                 </li>
                 <li class="mode">
@@ -98,7 +101,7 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="text">Recientes</div>
+            <div class="text">Inicio</div>
             <button class="add-btn" type="button">
                 <span class="button__text">Añadir</span>
                 <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor"
@@ -265,7 +268,6 @@
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
         {% for item, item2 in filas %}
-<<<<<<< Updated upstream
 <div class="card-item" data-job-type="designer" style="cursor: pointer;">
     <a href="{{ url_for('work', user=item[6] )}}" style="text-decoration: none;color: black">
         <img src="../static/img/editor.jpg" alt="Card Image">
@@ -282,30 +284,6 @@
         <div class="actions">
             <div class="arrow">
                 <i class="fas fa-arrow-right card-icon" title="Abrir"></i>
-=======
-            <div class="card-item" data-job-type="designer" style="cursor: pointer;">
-                <a href="{{ url_for('work', user=item[6] )}}" style="text-decoration: none;color: black">
-                    <img src="../static/img/editor.jpg" alt="Card Image">
-                    <p class="card-title">{{ item[0] }}</p>
-                    <p class="card-name-container">
-                        <span class="card-name">{{ item[3] }}</span>
-                    </p>
-                    <p class="card-info">
-                        <span class="job-title">{{item2}}</span>
-                        <span class="date">{{ item[1] }}</span>
-                        <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
-                    </p>
-                    <p class="card-description">{{ item2 }}</p>
-                    <div class="actions">
-                        <div class="arrow">
-                            <i class="fas fa-arrow-right card-icon"></i>
-                        </div>
-                        <div class="delete" style="cursor: pointer;" onclick="event.stopPropagation();">
-                            <i class="fas fa-trash-alt" title="Borrar"></i>
-                        </div>
-                    </div>
-                </a>
->>>>>>> Stashed changes
             </div>
             <div class="delete" style="cursor: pointer;" onclick="handleDelete(event)">
                 <i class="fas fa-trash-alt" title="Borrar"></i>

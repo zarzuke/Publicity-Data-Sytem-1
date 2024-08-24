@@ -121,6 +121,15 @@ body.dark {
     opacity: 1;
 }
 
+.separator {
+    border: none; /* Eliminar el estilo por defecto */
+    height: 1px; /* Alto de la línea */
+    background-color: var(--text-color);
+    margin: 10px 0; /* Margen alrededor de la línea */
+}
+
+
+
 .sidebar.close .text {
     opacity: 0;
 }
