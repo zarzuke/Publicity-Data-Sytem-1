@@ -139,6 +139,38 @@ def return_phase(id):
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchall()
     cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0],id))
+
+def get_project_phase(phase):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+                SELECT projectName, projectDateStart, 
+                projectChargeTotalPayment,
+                projectClientName, projectClientNumber,
+                projectDescript,projectId
+                FROM projects 
+                JOIN dateProject on projectDateId = projectDate
+                JOIN chargeProject on projectChargeId = projectCharge
+                JOIN clientProject on projectClientId = projectClient
+                WHERE projectPhase == ?
+                """,(phase,))
+    filas = cursor.fetchall()
+    cursor.execute("""
+                SELECT projectTypeName, projectId
+                FROM ManyTypes m
+                INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                   """)
+    types=cursor.fetchall()
+    tipos=[]
+    for f in filas:
+        lista = [] 
+        for t in types:
+            if f[6] == t[1]:
+                lista.append(t[0])
+        tipos.append(lista)
+
+    conn.close()
+    return filas,tipos
     
 def get_project_worker(worker):
     conn = sqlite3.connect('library/database.db')

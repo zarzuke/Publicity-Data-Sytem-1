@@ -63,7 +63,7 @@ def design():
 
 @app.route("/design/<string:designer>")
 def designer(designer):
-    function = try_by_worker()
+    function = try_design()
     return function
     
 app.secret_key="12345"
