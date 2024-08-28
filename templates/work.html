@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
     <nav class="sidebar close">
         <header>
@@ -28,10 +30,6 @@
         </header>
         <div class="menu-bar">
             <div class="menu">
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Buscar..." id="searchInput">
-                </li>
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="{{ url_for('home') }}">
@@ -46,8 +44,7 @@
                         </a>
                     </li>
                 </ul>
-                <!-- Agrupación de Diseño, Aprobación, Elaboración y Entrega -->
-                <hr class="separator"> <!-- Este div agrega espacio y parece separado -->
+                <hr class="separator">
                 <ul class="menu-links">
                     <li class="nav-link" id="diseño">
                         <a href="{{ url_for('design') }}">
@@ -73,7 +70,7 @@
                             <span class="text nav-text">Entrega</span>
                         </a>
                     </li>
-                </ul>                
+                </ul>
             </div>
             <div class="bottom-content">
                 <li class="">
@@ -81,6 +78,7 @@
                         <i class='bx bx-cog icon'></i>
                         <span class="text nav-text">Ajustes</span>
                     </a>
+                </li>
                 <li class="">
                     <a href="{{ url_for('logout') }}">
                         <i class='bx bx-log-out icon'></i>
@@ -100,38 +98,78 @@
             </div>
         </div>
     </nav>
-
-    <div class="card">
-        <h2>Detalles</h2>  <!-- Puedes agregar un título a la tarjeta -->
-        <div class="info-box">{{details[0][1]}}</div>
-        <div class="info-box">{{details[0][0]}}</div>
-        <div class="info-box">{{details[0][2]}}</div>
-        <div class="info-box">{{details[0][3]}}</div>
-        <div class="info-box">{{details[0][4]}}</div>
-        <div class="info-box">{{details[0][5]}}</div>
-        <div class="info-box">{{details[0][6]}}</div>
-        <div class="info-box">{{details[0][7]}}</div>
-        <div class="info-box">{{details[0][8]}}</div>
-        <div class="info-box">{{details[0][9]}}</div>
-        <div class="info-box">{{details[0][10]}}</div>
-        <div class="info-box">{{details[0][11]}}</div>
-        <div class="info-box">{{details[0][12]}}</div>
-        <div class="info-box">{{types}}</div>
-    </div>
-
-                
-<div class="confirmation-modal hidden" id="confirmationModal">
-    <div class="modal-content">
-        <h3>¿Estás seguro de que deseas eliminar?</h3>
-        <p>Esta acción no se puede deshacer.</p>
-        <div class="modal-actions">
-            <button id="confirmDelete" class="confirm-btn">Sí, eliminar</button>
-            <button id="cancelDelete" class="cancel-btn">Cancelar</button>
+    <section class="home">
+        <div class="home-header">
+            <div class="text">Detalles</div>
         </div>
-    </div>
-    </section>
-    <script src="../static/js/home.js"></script>
-    <script src="../static/js/sidebar.js"></script>
-</body>
-</html>
+            <div class="card">
+                <h2>{{details[0][0]}}</h2>
+                <div class="info-container">
+                    <div class="info-item">
+                        <div class="info-title">Título:</div>
+                        <div class="info-box">{{details[0][0]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Fecha de registro:</div>
+                        <div class="info-box">{{details[0][1]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Fecha de entrega:</div>
+                        <div class="info-box">{{details[0][2]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Tipo de moneda:</div>
+                        <div class="info-box">{{details[0][3]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Abonado:</div>
+                        <div class="info-box">{{details[0][4]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Restante de abono:</div>
+                        <div class="info-box">{{details[0][5]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Total:</div>
+                        <div class="info-box">{{details[0][6]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Cliente titular:</div>
+                        <div class="info-box">{{details[0][7]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Teléfono:</div>
+                        <div class="info-box">{{details[0][8]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Descripción:</div>
+                        <div class="info-box">{{details[0][9]}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-title">Tipo de trabajo:</div>
+                        <div class="info-box">{{types}}</div>
+                    </div>
+                    <div class="comment-section">
+                        <div class="input-container">
+                            <textarea class="comment-input" rows="4" placeholder="Escribe tu comentario..."></textarea>
+                            <button class="submit-button">Enviar</button>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="confirmation-modal hidden" id="confirmationModal">
+                    <div class="modal-content">
+                        <h3>¿Estás seguro de que deseas eliminar?</h3>
+                        <p>Esta acción no se puede deshacer.</p>
+                        <div class="modal-actions">
+                            <button id="confirmDelete" class="confirm-btn">Sí, eliminar</button>
+                            <button id="cancelDelete" class="cancel-btn">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                <script src="../static/js/home.js"></script>
+                <script src="../static/js/sidebar.js"></script>
+            </section>
+</body>
+
+</html>

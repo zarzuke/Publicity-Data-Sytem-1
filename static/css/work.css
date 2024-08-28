@@ -1,22 +1,136 @@
-/* styles.css */
-h2
+body {
+    margin: 0;
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    height: 100vh; /* Altura del viewport completo */
+}
 
+.home-header {
+    /*encabezado*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e7e7e7;
+    background-color: transparent;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0;
+}
+
+/* Estilo general de la tarjeta */
 .card {
-    background-color: #ffffff; /* Color de fondo blanco */
-    border-radius: 15px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
-    padding: 20px; /* Espacio interno */
-    margin: 20px; /* Espacio externo */
-    max-width: 600px; /* Ancho máximo */
-    margin-left: auto; /* Centrar horizontalmente */
-    margin-right: auto; /* Centrar horizontalmente */
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra */
+    padding: 15px; /* Espaciado interno reducido */
+    margin: auto; /* Margen superior e inferior */
+    max-width: 1000px; /* Ancho máximo para centrar */
+    text-align: left; /* Alinear texto a la izquierda */
 }
 
+/* Título de la tarjeta */
+.card h2 {
+    font-size: 1.6em; /* Tamaño del título más pequeño */
+    margin-bottom: 15px; /* Espaciado debajo del título reducido */
+    color: #333; /* Color del texto */
+}
+
+/* Contenedor de información */
+.info-container {
+    display: flex; 
+    flex-wrap: wrap; /* Permitir que los elementos se ajusten */
+    width: 100%;
+}
+
+/* Estilo de cada elemento de información */
+.info-item {
+    flex: 1; /* Permitir que los elementos crezcan y se reduzcan */
+    min-width: 300px; /* Ancho mínimo reducido */
+    margin: 7px; /* Margen entre elementos reducido */
+    padding: 5px; /* Espaciado interno reducido */
+    background-color: #f9f9f9; /* Fondo gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    display: flex; /* Flexbox para alineación */
+    flex-direction: column; /* Apilar elementos verticalmente */
+}
+
+/* Estilo del título de cada información */
+.info-title {
+    font-weight: 600; /* Negrita */
+    color: #6b6b6b; /* Color gris para el título */
+    margin-bottom: 3px; /* Espacio debajo del título */
+    font-size: 0.8em; /* Tamaño de fuente más pequeño para el título */
+}
+
+/* Estilo del valor de la información */
 .info-box {
-    background-color: #f5f5f5; /* Color de fondo de cada cuadro */
-    border-radius: 10px; /* Bordes redondeados de los cuadros */
-    padding: 10px; /* Espaciado interno */
-    margin: 10px 0; /* Margen superior e inferior */
-    text-align: center; /* Alineación del texto */
+    font-size: 1em; /* Tamaño de la fuente más pequeño */
+    color: #333; /* Color del texto */
+    background-color: #fff; /* Fondo blanco */
+    padding: 3px; /* Espaciado interno reducido */
+    border-radius: 3px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde ligero */
 }
 
+/* Ajuste de modo oscuro (ejemplo) */
+body.dark-mode .card {
+    background-color: #2c2c2c; /* Fondo oscuro */
+    color: #f0f0f0; /* Texto claro */
+}
+
+body.dark-mode .info-item {
+    background-color: #3c3c3c; /* Fondo gris oscuro */
+}
+
+body.dark-mode .info-title {
+    color: #f0f0f0; /* Color claro para título */
+}
+
+.input-container {
+    margin: 0px 0; /* Espacio antes y después del input */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Alineamos al centro y que ocupe todo el ancho */
+}
+
+.comment-section {
+    margin-top: 20px; /* Espacio encima del área de comentarios */
+    padding: 15px; /* Espaciado interno para el área de comentarios */
+    background-color: #f9f9f9; /* Color de fondo */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra similar a la tarjeta */
+    width: 100%; /* Ancho completo */
+    display: flex;
+    flex-direction: column; /* Alinear elementos verticalmente */
+}
+
+.comment-input {
+    width: 100%; /* Hacer el input del ancho completo */
+    padding: 20px; /* Espaciado interno */
+    border: 2px solid #adadad; /* Borde azul */
+    border-radius: 10px; /* Esquinas redondeadas */
+    outline: none; /* Sin borde de foco predeterminado */
+    font-size: 18px; /* Tamaño de fuente más grande */
+    resize: none; /* Deshabilitar el redimensionamiento */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    margin-top: 0px; /* Margen superior para mayor espacio */
+}
+.comment-input:focus {
+    border-color: #5f5cfe; /* Color de borde cuando está enfocado */
+}
+.submit-button {
+    margin-top: 10px; /* Espacio entre el textarea y el botón */
+    padding: 12px 24px; /* Tamaño del botón */
+    background-color: #5f5cfe; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background 0.3s; /* Transición suave para efectos */
+    font-size: 16px; /* Tamaño de fuente */
+}
+.submit-button:hover {
+    background-color: #5c67fe; /* Color al pasar el mouse */
+}
