@@ -49,14 +49,34 @@ def try_home():
             return render_template("index.html")
 
 def try_design():
+    estado = 'Diseño'
     if g.user[1] == 'Administrator':
         filas,tipos=get_project_phase(1)
         combine=zip(filas,tipos)
-        return render_template("design.html",user=g.user,filas=combine)
+        return render_template("design.html",user=g.user,filas=combine,estado=estado)
     else:
         filas,tipos=get_project_worker(g.user[0])
         combine=zip(filas,tipos)
-        return render_template("design.html",user=g.user,filas=combine)
+        return render_template("design.html",user=g.user,filas=combine,estado=estado)
+    
+def try_approval():
+    estado = 'Aprobación'
+    filas,tipos=get_project_phase(2)
+    combine=zip(filas,tipos)
+    return render_template("design.html",user=g.user,filas=combine,estado=estado)
+
+def try_crafting():
+    estado = 'Creación'
+    filas,tipos=get_project_phase(3)
+    combine=zip(filas,tipos)
+    return render_template("design.html",user=g.user,filas=combine,estado=estado)
+
+def try_ending():
+    estado = 'Entrega'
+    filas,tipos=get_project_phase(4)
+    combine=zip(filas,tipos)
+    return render_template("design.html",user=g.user,filas=combine,estado=estado)
+    
 
 def try_logout():
     session.pop("username", None)

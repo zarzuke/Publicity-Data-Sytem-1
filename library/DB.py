@@ -132,6 +132,8 @@ def change_phase(id):
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchall()
     cursor.execute("""UPDATE projects SET projectPhase == ?+1 WHERE projectId == ?""",(phase[0],id))
+    conn.commit()
+    conn.close()
     
 def return_phase(id):
     conn = sqlite3.connect('library/database.db')
@@ -139,6 +141,8 @@ def return_phase(id):
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchall()
     cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0],id))
+    conn.commit()
+    conn.close()
 
 def get_project_phase(phase):
     conn = sqlite3.connect('library/database.db')
@@ -204,4 +208,11 @@ def get_project_worker(worker):
     conn.close()
     return filas,tipos
 
+def delete_projects(id):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM projects WHERE projectId == ?",(id,))
+    conn.commit()
+    conn.close()
+    
 
