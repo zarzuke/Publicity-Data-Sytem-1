@@ -65,6 +65,21 @@ def design():
 def designer(designer):
     function = try_design()
     return function
+
+@app.route("/approval")
+def approval():
+    function = try_approval()
+    return function
+
+@app.route("/crafting")
+def crafting():
+    function = try_crafting()
+    return function
+
+@app.route("/ending")
+def ending():
+    function = try_ending()
+    return function
     
 app.secret_key="12345"
 if __name__== "__main__":
