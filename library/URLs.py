@@ -37,13 +37,16 @@ def try_login():
     return render_template("index.html")
 
 def try_home():
-    if g.user:
-        filas,tipos=get_project()
-        combine=zip(filas,tipos)
-        return render_template("home.html",user=g.user,filas=combine)
-    
-    flash("Debe de iniciar sesión primero.")
-    return render_template("index.html")
+    match g.user[1]:
+        case 'Administrator':
+            filas,tipos=get_project()
+            combine=zip(filas,tipos)
+            return render_template("home.html",user=g.user,filas=combine)
+        case 'Designer':
+            return redirect(url_for("designer", designer=g.user[0]))
+        case _:
+            flash("Debe de iniciar sesión primero.")
+            return render_template("index.html")
 
 def try_logout():
     session.pop("username", None)
