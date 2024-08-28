@@ -48,6 +48,11 @@ def try_home():
             flash("Debe de iniciar sesión primero.")
             return render_template("index.html")
 
+def try_by_worker():
+    filas,tipos=get_project_worker(g.user[0])
+    combine=zip(filas,tipos)
+    return render_template("design.html",user=g.user,filas=combine)
+
 def try_logout():
     session.pop("username", None)
     flash("Sesión cerrada correctamente.")

@@ -140,7 +140,7 @@ def return_phase(id):
     phase = cursor.fetchall()
     cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0],id))
     
-def get_project_phase(phase):
+def get_project_worker(worker):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("""
@@ -152,8 +152,8 @@ def get_project_phase(phase):
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
-                WHERE projectPhase == ?
-                """(phase,))
+                WHERE projectWorker == ?
+                """,(worker,))
     filas = cursor.fetchall()
     cursor.execute("""
                 SELECT projectTypeName, projectId

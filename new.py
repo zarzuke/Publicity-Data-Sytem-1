@@ -63,9 +63,9 @@ def design():
 
 @app.route("/design/<string:designer>")
 def designer(designer):
-    return render_template("design.html", user=g.user)
+    function = try_by_worker()
+    return function
     
-
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)
