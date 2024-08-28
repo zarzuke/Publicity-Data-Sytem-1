@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const elaboracion = document.getElementById('elaboracion');
   const entrega = document.getElementById('entrega');
   const client = document.getElementById('client')
+  const home = document.getElementById('home')
 
   if (role === 'Designer') {
       client.style.display = 'none';
@@ -98,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
       aprobacion.style.display = 'none';
       elaboracion.style.display = 'none';
       entrega.style.display = 'none';
+      home.style.display = 'none';
   } else if (role === 'Administrator') {
       cdiseño.style.display = 'block';
       aprobacion.style.display = 'block';
