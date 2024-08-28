@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
     <nav class="sidebar close">
         <header>
@@ -72,7 +74,7 @@
                             <span class="text nav-text">Entrega</span>
                         </a>
                     </li>
-                </ul>                
+                </ul>
             </div>
             <div class="bottom-content">
                 <li class="" id="setting">
@@ -104,7 +106,7 @@
             <div class="text">Diseños</div>
         </div>
         <div class="card-list" id="cardList">
-        {% for item, item2 in filas %}
+            {% for item, item2 in filas %}
             <div class="card-item" data-job-type="designer" style="cursor: pointer;">
                 <a href="{{ url_for('work', user=item[6] )}}" style="text-decoration: none;color: black">
                     <img src="../static/img/editor.jpg" alt="Card Image">
@@ -128,22 +130,98 @@
                     </div>
                 </a>
             </div>
-        {% endfor %}
+            {% endfor %}
 
-    </div>          
-    <div class="confirmation-modal hidden" id="confirmationModal">
-    <div class="modal-content">
-        <h3>¿Estás seguro de que deseas eliminar?</h3>
-        <p>Esta acción no se puede deshacer.</p>
-        <div class="modal-actions">
-            <button id="confirmDelete" class="confirm-btn">Sí, eliminar</button>
-            <button id="cancelDelete" class="cancel-btn">Cancelar</button>
         </div>
-    </div>
+        <div class="confirmation-modal hidden" id="confirmationModal">
+            <div class="modal-content">
+                <h3>¿Estás seguro de que deseas eliminar?</h3>
+                <p>Esta acción no se puede deshacer.</p>
+                <div class="modal-actions">
+                    <button id="confirmDelete" class="confirm-btn">Sí, eliminar</button>
+                    <button id="cancelDelete" class="cancel-btn">Cancelar</button>
+                </div>
+            </div>
     </section>
     <script src="../static/js/roles.js"></script>
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/home.js"></script>
-</body>
-</html>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const cardList = document.querySelector('.card-list');
+    const cardItems = cardList.querySelectorAll('.card-item');
+    const sidebar = document.querySelector('.sidebar');
+    
+    // Control de búsqueda
+    if (searchInput) {
+        searchInput.addEventListener("input", () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            cardItems.forEach(cardItem => {
+                const cardContent = cardItem.textContent.toLowerCase();
+                if (cardContent.includes(searchTerm)) {
+                    cardItem.style.display = "block";
+                } else {
+                    cardItem.style.display = "none";
+                }
+            });
+        });
+    } else {
+        console.warn("El campo de búsqueda no se encontró.");
+    }
+
+    // Abrir el modal
+    const openModalButton = document.getElementById('openModal');
+    if (openModalButton) {
+        openModalButton.addEventListener('click', function () {
+            document.getElementById('addModal').classList.remove('hidden');
+            document.querySelector('.modal-backdrop').classList.remove('hidden');
+        });
+    }
+
+    // Cerrar el modal
+    const closeModalButton = document.getElementById('closeModal');
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', function () {
+            document.getElementById('addModal').classList.add('hidden');
+            document.querySelector('.modal-backdrop').classList.add('hidden');
+        });
+    }
+
+    // Cerrar el menú al hacer clic fuera de él
+    document.addEventListener('click', function (event) {
+        const isClickInsideSidebar = sidebar.contains(event.target);
+        const isClickInsideCardList = cardList.contains(event.target);
+        
+        if (!isClickInsideSidebar && !isClickInsideCardList) {
+            console.log("Cerrando el menú"); // Mensaje de depuración
+            sidebar.classList.add('close'); // Cierra el menú
+        }
+    });
+
+    // Previsualización en tiempo real
+    const nameInput = document.getElementById('name');
+    const companyInput = document.getElementById('company');
+    const previewName = document.getElementById('previewName');
+    const previewCompany = document.getElementById('previewCompany');
+
+    if (nameInput) {
+        nameInput.addEventListener('input', function () {
+            previewName.textContent = nameInput.value;
+        });
+    }
+
+    if (companyInput) {
+        companyInput.addEventListener('input', function () {
+            previewCompany.textContent = companyInput.value || 'N/A';
+        });
+    }
+});
+
+
+</script>
+
+          </body>
+        
+        </html>
