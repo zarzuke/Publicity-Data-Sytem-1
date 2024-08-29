@@ -81,6 +81,10 @@ def ending():
     function = try_ending()
     return function
     
+@app.route("/delete/<string:id>")
+def delete(id):
+    return f"hola mundo {id}"
+
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)

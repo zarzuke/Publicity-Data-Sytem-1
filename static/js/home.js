@@ -156,13 +156,20 @@ closeButton.addEventListener('click', () => {
     document.body.style.overflow = 'auto'; // Restaura el scroll
 });
 
-function handleDelete(event) {
-    // Previene la propagación del evento y la acción por defecto (navegación)
+let currentDeleteItem = null;
+let currentDeleteId = null;
+
+function handleDelete(event, itemId) {
     event.stopPropagation();
     event.preventDefault();
     
-    // Aquí puedes agregar la lógica para borrar
-    console.log("Elemento borrado (lógica a implementar)");
+    currentDeleteItem = this.closest('.card-item'); // Guardar el elemento a eliminar
+    currentDeleteId = itemId; // Guardar el id del elemento a eliminar
+
+    document.body.style.overflow = 'hidden'; // Bloquea el scroll
+    document.getElementById('confirmationModal').classList.remove('hidden'); // Mostrar el modal
+    modalBackdrop.classList.remove('hidden');
+    modalBackdrop.classList.add('visible');
 }
 
 // Agregar evento de confirmación para eliminar
@@ -176,24 +183,32 @@ document.getElementById('confirmDelete').addEventListener('click', function() {
     document.body.style.overflow = 'auto'; // Restaura el scroll
     modalBackdrop.classList.add('hidden');
     modalBackdrop.classList.remove('visible');
+
+    // Redirección directa a la URL de Flask usando el id guardado
+    const url = `/delete/${currentDeleteId}`;
+    window.location.href = url;
 });
+
+
 
 // Agregar evento de cancelación para eliminar
 document.getElementById('cancelDelete').addEventListener('click', function() {
     document.getElementById('confirmationModal').classList.add('hidden'); // Ocultar el modal
     currentDeleteItem = null; // Restablecer la variable
+    currentDeleteId = null; // Restablecer el id
     document.body.style.overflow = 'auto'; // Restaura el scroll
     modalBackdrop.classList.add('hidden');
     modalBackdrop.classList.remove('visible');
 });
+
 
 // Mostrar modal de confirmación al hacer clic en el botón de eliminar
 document.querySelectorAll('.delete').forEach(button => {
     button.addEventListener('click', function() {
         document.body.style.overflow = 'hidden'; // Bloquea el scroll
         document.getElementById('confirmationModal').classList.remove('hidden'); // Mostrar el modal
-        document.body.style.overflow = 'hidden'; // Bloquea el scroll 
         currentDeleteItem = this.closest('.card-item'); // Guardar el elemento a eliminar
+        currentDeleteId = this.querySelector('#nfo').getAttribute('value'); // Guardar el id del elemento a eliminar
         modalBackdrop.classList.remove('hidden');
         modalBackdrop.classList.add('visible');
     });
