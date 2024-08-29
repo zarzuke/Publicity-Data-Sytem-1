@@ -102,3 +102,6 @@ def try_work(id):
 def try_client(client):
     data=get_works_client(client)
     return render_template("Client.html",user=g.user,filas=data)
+
+def save_files():
+    pass

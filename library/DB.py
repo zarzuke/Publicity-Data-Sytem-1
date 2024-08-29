@@ -1,5 +1,6 @@
 import sqlite3 
 from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
+import os
 
 def project_inc():
     if request.method == "POST":
@@ -14,8 +15,10 @@ def project_inc():
         remaining = request.form["remaining"]
         details = request.form["description"]
         client_name=name+" "+lastname
-        joblist=','.join(job_type)
-        print(job_type)
+        
+        direction = os.path.join(os.getcwd(), "trabajos", title)
+        os.makedirs(direction)
+  
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
 
@@ -212,6 +215,10 @@ def delete_projects(id):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("DELETE FROM projects WHERE projectId == ?",(id,))
+    cursor.execute("DELETE FROM chargeProject WHERE projectChargeId == ?",(id,))
+    cursor.execute("DELETE FROM clientProject WHERE projectClientId == ?",(id,))
+    cursor.execute("DELETE FROM dateProject WHERE projectDateId == ?",(id,))
+    cursor.execute("DELETE FROM ManyTypes WHERE projectId == ?",(id,))
     conn.commit()
     conn.close()
     
