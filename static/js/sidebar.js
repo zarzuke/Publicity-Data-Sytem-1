@@ -1,11 +1,12 @@
-
 const body = document.querySelector('body');
 const sidebar = body.querySelector('nav');
 const toggle = body.querySelector('.toggle');
-const searchBtn = body.querySelector('.search-box');
 const modeSwitch = body.querySelector('.toggle-switch');
 const modeText = body.querySelector('.mode-text');
-const searchInput = body.querySelector('#searchInput'); // Asegúrate de tener el ID
+
+// Verificamos si search-box y el input existen antes de intentar usarlos
+const searchBtn = body.querySelector('.search-box');
+const searchInput = body.querySelector('#searchInput'); 
 
 // Function to toggle sidebar visibility
 function toggleSidebar() {
@@ -14,11 +15,12 @@ function toggleSidebar() {
 
 // Function to toggle search and focus on input
 function toggleSearch() {
-  // Cierra la barra lateral lentamente primero
-  sidebar.classList.remove("close"); // Abre la barra lateral
-  setTimeout(() => {
-    searchInput.focus(); // Establece el foco en el campo de búsqueda
-  }, 300); // Asegúrate de que coincide con el tiempo de transición
+  if (searchInput) { // Solo ejecuta si searchInput existe
+    sidebar.classList.remove("close");
+    setTimeout(() => {
+      searchInput.focus();
+    }, 300);
+  }
 }
 
 // Function to toggle dark mode
@@ -47,7 +49,7 @@ function loadThemePreference() {
     document.documentElement.style.setProperty("--scrollbar-track-color", "#333");
     document.documentElement.style.setProperty("--scrollbar-thumb-color", "#555");
     document.documentElement.style.setProperty("--scrollbar-thumb-hover-color", "#777");
-  } else if (storedTheme === "light") {
+  } else {
     body.classList.remove("dark");
     document.documentElement.style.setProperty("--scrollbar-track-color", "#f1f1f1");
     document.documentElement.style.setProperty("--scrollbar-thumb-color", "#888");
@@ -59,7 +61,11 @@ function loadThemePreference() {
 // Event listeners for sidebar interactions
 toggle.addEventListener("click", toggleSidebar);
 modeSwitch.addEventListener("click", toggleTheme);
-searchBtn.addEventListener("click", toggleSearch); // Evento para el botón de búsqueda
+
+// Solo agrega el evento de búsqueda si el botón existe
+if (searchBtn) {
+  searchBtn.addEventListener("click", toggleSearch);
+}
 
 // Load theme preference on initial page load
 loadThemePreference();
@@ -81,6 +87,3 @@ closeButton.addEventListener('click', () => {
   modalBackdrop.classList.remove('visible');
   document.body.style.overflow = 'auto'; // Restaura el scroll
 });
-
-
-

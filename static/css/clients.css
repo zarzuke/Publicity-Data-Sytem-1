@@ -52,8 +52,8 @@ body {
 }
 
 body.dark {
-    --body-color: #2f2e31;
-    --sidebar-color: #242526;
+    --body-color: #121212;
+    --sidebar-color: #282828;
     --primary-color: #3a3b3c;
     --primary-color-light: #3a3b3c;
     --toggle-color: #fff;
@@ -384,9 +384,13 @@ body.dark .home .text {
 .card-client:hover {
     transform: scale(1.03);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 100px #786efd48;
-    z-index: 2;
-    /* Aumentar el índice Z al ser hover */
+    box-shadow: 0 8px 100px #0000002f;
+} 
+
+body.dark .card-client:hover{
+    transform: scale(1.03);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 100px #dadcff25;
 }
 
 .card-client img {

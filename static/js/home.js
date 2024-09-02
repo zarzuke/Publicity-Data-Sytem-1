@@ -67,6 +67,12 @@ function updatePreview() {
     }
 }
 
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && addModal.classList.contains('visible')) {
+      closeButton.click(); // Simulate click on close button
+    }
+  });
+
 // Agregar evento de entrada para actualizar la previsualización
 const formInputs = document.querySelectorAll('.add-form input, .add-form textarea, #file');
 formInputs.forEach((input) => {
@@ -292,4 +298,3 @@ function openDetails(title, date, name, phone, description) {
     const url = `details.html?title=${encodeURIComponent(title)}&date=${encodeURIComponent(date)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&description=${encodeURIComponent(description)}`;
     window.open(url, '_blank'); // Abre en una nueva pestaña
 }
-
