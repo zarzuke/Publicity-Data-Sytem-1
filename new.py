@@ -1,6 +1,6 @@
 from flask import Flask,session,g
 from library.URLs import *
-
+from library.DB import delete_projects
 app = Flask(__name__)
 
 @app.route("/menu")
@@ -83,7 +83,8 @@ def ending():
     
 @app.route("/delete/<string:id>")
 def delete(id):
-    return f"hola mundo {id}"
+    delete_projects(id)
+    return redirect(url_for("login"))
 
 app.secret_key="12345"
 if __name__== "__main__":

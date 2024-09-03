@@ -105,3 +105,6 @@ def try_client(client):
 
 def save_files():
     pass
+
+def try_delete(id):
+    delete_projects(id)
