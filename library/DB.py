@@ -17,7 +17,8 @@ def project_inc():
         client_name=name+" "+lastname
         
         direction = os.path.join(os.getcwd(), "trabajos", title)
-        os.makedirs(direction)
+        if not os.path.exists(direction):
+            os.makedirs(direction)
   
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
@@ -32,10 +33,9 @@ def project_inc():
         cursor.execute("INSERT INTO dateProject (projectDateStart) VALUES (?)",
                    (date,))
         
-        cursor.execute("SELECT projectId FROM projects ORDER BY projectId DESC LIMIT 1")
-        id = cursor.fetchone()
+        id = cursor.lastrowid
         for job in job_type:  
-            cursor.execute("INSERT INTO ManyTypes (projectId,projectTypeId) VALUES (?,?)", (id[0]+1,job))
+            cursor.execute("INSERT INTO ManyTypes (projectId,projectTypeId) VALUES (?,?)", (id,job))
 
         cursor.execute("INSERT INTO projects (projectName, projectDescript) "
                     "VALUES (?,?)", (title, details,))
