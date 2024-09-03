@@ -298,3 +298,33 @@ function openDetails(title, date, name, phone, description) {
     const url = `details.html?title=${encodeURIComponent(title)}&date=${encodeURIComponent(date)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&description=${encodeURIComponent(description)}`;
     window.open(url, '_blank'); // Abre en una nueva pestaña
 }
+
+// Asegúrate de que el script se ejecuta después de que el DOM esté completamente cargado
+window.onload = function() {
+    const cardItems = document.querySelectorAll('.card-item');
+    
+    // Conjunto de imágenes aleatorias
+    const randomImages = [
+        '../static/img/background-1.png',
+        '../static/img/background-2.png',
+        '../static/img/background-3.png',
+        '../static/img/background-4.png',
+        '../static/img/background-5.png',
+    ];
+
+    cardItems.forEach(card => {
+        // Selecciona una imagen aleatoria
+        const randomIndex = Math.floor(Math.random() * randomImages.length);
+        // Asigna la imagen aleatoria a la etiqueta `img` dentro del card
+        const imgElement = card.querySelector('.card-image');
+        imgElement.src = randomImages[randomIndex];
+    });
+
+    // También se puede seleccionar aleatoriamente una imagen para previsualización
+    const previewImage = document.getElementById('preview-image');
+    const randomPreviewIndex = Math.floor(Math.random() * randomImages.length);
+    previewImage.src = randomImages[randomPreviewIndex]; // Asignar imagen aleatoria para la previsualización
+}
+
+
+

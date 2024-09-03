@@ -35,6 +35,30 @@
     padding-top: 0;
 }
 
+/*BOTON DE REGRESAR*/
+.text {
+    margin-right: auto; /* Para empujar el botón hacia la derecha */
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Sin subrayado */
+    color: inherit;  /* Para heredar el color del texto */
+    margin-left: 15px; /* Espacio entre el texto y el botón */
+    color: var(--text-color);
+}
+
+.back-btn i {
+    font-size: 2em; /* Tamaño del ícono */
+}
+
+/*BOTON DE REGRESAR*/
 
 body {
     min-height: 100vh;
@@ -171,7 +195,7 @@ header .image-text .profession {
 
 .sidebar header .toggle {
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: -25px;
     transform: translateY(-50%) rotate(180deg);
     height: 25px;
