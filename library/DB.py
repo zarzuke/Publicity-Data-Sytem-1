@@ -49,7 +49,11 @@ def get_clients():
     cursor = conn.cursor()
     cursor.execute("SELECT projectClientName,ProjectClientNumber FROM clientProject")
     filas = cursor.fetchall()
-    return filas
+    clientes= []
+    for elemento in filas:
+        if elemento not in clientes:
+            clientes.append(elemento)
+    return clientes
 
 def get_project():
     conn = sqlite3.connect('library/database.db')
@@ -221,5 +225,7 @@ def delete_projects(id):
     cursor.execute("DELETE FROM ManyTypes WHERE projectId == ?",(id,))
     conn.commit()
     conn.close()
+    
+    
     
 
