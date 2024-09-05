@@ -265,9 +265,9 @@
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
             {% for item in filas %}
-            <div class="card-item" data-job-type="designer" style="cursor: pointer;">
+            <div class="card-item" data-job-type="designer" style="cursor: pointer;" data-image="{{ loop.index }}">
                 <a href="{{ url_for('work', user=item[7] )}}" style="text-decoration: none;color: black">
-                    <img src="../static/img/editor.jpg" alt="Card Image">
+                    <img src="../static/img/Editor.png" alt="Card Image" class="card-image">
                     <p class="card-title">{{ item[0] }}</p>
                     <p class="card-name-container">
                         <span class="card-name">{{ item[3] }}</span>
@@ -301,6 +301,7 @@
         </div>
     </div>
     </section>
+    <script src="../static/js/card-color.js"></script>
     <script src="../static/js/home.js"></script>
     <script src="../static/js/sidebar.js"></script>
 </body>
