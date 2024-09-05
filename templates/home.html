@@ -295,7 +295,11 @@
                         <span class="date">{{ item[1] }}</span>
                         <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
                     </p>
-                    <p class="card-description">{{ item2 }}</p>
+                    <p class="card-info">
+                        {% for t in item2 %}
+                        <span class="types">{{ t }}</span> <!-- Cambié la clase aquí -->
+                        {% endfor %}
+                    </p>              
                     <div class="actions">
                         <div class="arrow">
                             <i class="fas fa-arrow-right card-icon" title="Abrir"></i>

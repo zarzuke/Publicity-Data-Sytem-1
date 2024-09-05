@@ -461,7 +461,8 @@ body.dark .card-list .card-item:hover {
 
 .card-list .card-item .job-title,
 .card-list .card-item .phone,
-.card-list .card-item .date {
+.card-list .card-item .date,
+.card-list .card-item .types{
     display: inline-block;
     background: #ffa7a7;
     padding: 8px 15px;
@@ -478,6 +479,11 @@ body.dark .card-list .card-item:hover {
 
 .card-list .card-item .date {
     background-color: #d1d1d1;
+    color: #2e2e2e;
+}
+
+.card-list .card-item .types {
+    background-color: #38d538;
     color: #2e2e2e;
 }
 
