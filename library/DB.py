@@ -16,31 +16,40 @@ def project_inc():
         details = request.form["description"]
         client_name=name+" "+lastname
         
-        direction = os.path.join(os.getcwd(), "trabajos", title)
-        if not os.path.exists(direction):
-            os.makedirs(direction)
-  
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO clientProject (projectClientName, projectClientNumber) VALUES (?, ?)",
-                   (client_name, phone))
-        
-        cursor.execute("INSERT INTO chargeProject (projectChargeInstallment, "
-                   "projectChargeBalance, projectChargeTotalPayment) VALUES (?, ?, ?)",
-                   (remaining, mid, total))
-
-        cursor.execute("INSERT INTO dateProject (projectDateStart) VALUES (?)",
-                   (date,))
-        
-        id = cursor.lastrowid
-        for job in job_type:  
-            cursor.execute("INSERT INTO ManyTypes (projectId,projectTypeId) VALUES (?,?)", (id,job))
-
         cursor.execute("INSERT INTO projects (projectName, projectDescript) "
                     "VALUES (?,?)", (title, details,))
+
+        id = cursor.lastrowid
+        cursor.execute("SELECT projectClientName FROM clientProject")
+        clientes = cursor.fetchall()
+
+        cursor.execute("SELECT COUNT(1) FROM clientProject WHERE projectClientName ==?",(client_name,))
+        if cursor.fetchone()[0] == 0:
+            cursor.execute("INSERT INTO clientProject (projectClientName, projectClientNumber) VALUES (?, ?)",
+                    (client_name, phone))
         
+        cursor.execute("""UPDATE projects SET projectClient = 
+                       (SELECT projectClientId FROM clientProject WHERE projectClientName == ?) 
+                       WHERE projectId == ?""",(client_name, id))
+
+        cursor.execute("INSERT INTO chargeProject (projectChargeId,projectChargeInstallment, "
+                   "projectChargeBalance, projectChargeTotalPayment) VALUES (?, ?, ?, ?)",
+                   (id, remaining, mid, total))
+
+        cursor.execute("INSERT INTO dateProject (projectDateId,projectDateStart) VALUES (?, ?)",
+                   (id, date))
+        
+        for job in job_type:  
+            cursor.execute("INSERT INTO ManyTypes (projectId,projectTypeId) VALUES (?, ?)", (id,job))
+
         conn.commit()
+    
+        direction = os.path.join(os.getcwd(), "trabajos", str(id)+"."+title)
+        if not os.path.exists(direction):
+            os.makedirs(direction)
 
     return redirect("/home")
 
@@ -218,14 +227,25 @@ def get_project_worker(worker):
 def delete_projects(id):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM projects WHERE projectId == ?",(id,))
-    cursor.execute("DELETE FROM chargeProject WHERE projectChargeId == ?",(id,))
-    cursor.execute("DELETE FROM clientProject WHERE projectClientId == ?",(id,))
-    cursor.execute("DELETE FROM dateProject WHERE projectDateId == ?",(id,))
-    cursor.execute("DELETE FROM ManyTypes WHERE projectId == ?",(id,))
+    cursor.execute("SELECT projectName FROM projects WHERE projectId == ?",(id,))
+    title = cursor.fetchone()
+    print(title)
+    tables = [
+    ("projects", "projectId"),
+    ("chargeProject", "projectChargeId"),
+    ("dateProject", "projectDateId"),
+    ("ManyTypes", "projectId")
+    ]
+
+    for table, column in tables:
+        cursor.execute(f"DELETE FROM {table} WHERE {column} == ?", (id,))
+
     conn.commit()
     conn.close()
     
+    direction = os.path.join(os.getcwd(), "trabajos", str(id)+"."+title[0])
+    if os.path.exists(direction):
+        os.rename(direction,direction+"[Finished]")
     
     
 
