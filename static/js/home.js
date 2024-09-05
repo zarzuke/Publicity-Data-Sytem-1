@@ -38,7 +38,7 @@ function updatePreview() {
 
 
 // Obtener todos los checkboxes que están seleccionados (checked)
-    const selectedJobTypes = Array.from(document.querySelectorAll('input[name="job-type"]:checked')).map(checkbox => checkbox.value);
+    const selectedJobTypes = Array.from(document.querySelectorAll('input[name="job-type"]:checked')).map(checkbox => checkbox.id);
     previewJobTitle.textContent = selectedJobTypes.length > 0 ? selectedJobTypes.join(', ') : '';
 
     let jobTitleText = selectedJobTypes.join(', ');
