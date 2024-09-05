@@ -1,7 +1,4 @@
-/* =============================================== BASE ================================================== */
-
-/* Import font (optional) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* ======================================================== BASE ================================================== */
 
 * {
     margin: 0;
@@ -12,7 +9,7 @@
 
 :root {
     /* ===== Colors ===== */
-    --body-color: #E4E9F7;
+    --body-color: #dce0ee;
     --sidebar-color: #FFF;
     --primary-color: #695CFE;
     --primary-color-light: #F6F5FF;
@@ -38,6 +35,30 @@
     padding-top: 0;
 }
 
+/*BOTON DE REGRESAR*/
+.text {
+    margin-right: auto; /* Para empujar el botón hacia la derecha */
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Sin subrayado */
+    color: inherit;  /* Para heredar el color del texto */
+    margin-left: 15px; /* Espacio entre el texto y el botón */
+    color: var(--text-color);
+}
+
+.back-btn i {
+    font-size: 2em; /* Tamaño del ícono */
+}
+
+/*BOTON DE REGRESAR*/
 
 body {
     min-height: 100vh;
@@ -53,24 +74,24 @@ body {
 
 body.dark {
     --body-color: #121212;
-    --sidebar-color: #282828;
+    --sidebar-color: #1e1f20;
     --primary-color: #3a3b3c;
-    --primary-color-light: #3a3b3c;
+    --primary-color-light: #2c2d30;
     --toggle-color: #fff;
     --text-color: #ccc;
 }
 
-/* ===== Sidebar ===== */
+/* Sidebar */
 .sidebar {
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
+    top: 0; /* Mantén la barra al principio */
+    left: 0; 
+    height: 100vh; /* Altura total */
+    width: 260px; /* Ancho de la barra lateral */
+    padding: 10px 14px; /* Espaciado interno */
     background: var(--sidebar-color);
     transition: var(--tran-05);
-    z-index: 100;
+    z-index: 100; 
 }
 
 .sidebar.close {
@@ -119,6 +140,15 @@ body.dark {
     white-space: nowrap;
     opacity: 1;
 }
+
+.separator {
+    border: none; /* Eliminar el estilo por defecto */
+    height: 1px; /* Alto de la línea */
+    background-color: var(--text-color);
+    margin: 10px 0; /* Margen alrededor de la línea */
+}
+
+
 
 .sidebar.close .text {
     opacity: 0;
@@ -191,13 +221,6 @@ body.dark .sidebar header .toggle {
 
 .sidebar .menu {
     margin-top: 40px;
-}
-
-.separator {
-    border: none; /* Eliminar el estilo por defecto */
-    height: 1px; /* Alto de la línea */
-    background-color: var(--text-color);
-    margin: 10px 0; /* Margen alrededor de la línea */
 }
 
 .sidebar li.search-box {
@@ -443,7 +466,7 @@ body.dark .card-client:hover{
 }
 
 body.dark .card-client {
-    background: #242526;
+    background: #232425;
 }
 
 body.dark .card-list-client .default-client-name {

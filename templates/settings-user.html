@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajustes - CopyNato</title>
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
-    <link rel="stylesheet" href="../static/css/settings.css">
+    <link rel="stylesheet" href="../static/css/settings-user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -96,38 +96,70 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="text">Ajustes</div>
+            <div class="back-button">
+                <a href="javascript:history.back()" class="back-btn">
+                    <i class='bx bx-chevron-left' ></i> <!-- Puedes cambiar el ícono aquí -->
+                </a>
+                <div class="text">Manager usuarios</div>
+            </div>
         </div>
         <div class="form-container">
-            <div class="settings-options">
-                <div class="setting-option">
-                    <a href="{{ url_for('settings_user') }}">
-                        <i class="fas fa-users"></i>
-                        <span>Gestionar Usuarios</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-profile.html">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Perfil</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-security.html">
-                        <i class="fas fa-lock"></i>
-                        <span>Seguridad</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-notifications.html">
-                        <i class="fas fa-bell"></i>
-                        <span>Notificaciones</span>
-                    </a>
-                </div>
-                <!-- Agregar más opciones según sea necesario -->
+            <div class="form-card" id="registerUser">
+                <h3>Registrar Nuevo Usuario</h3>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="username">Usuario:</label>
+                        <input type="text" id="username" name="username" required placeholder="Ingrese el nombre de usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required placeholder="Ingrese la contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Cargo:</label>
+                        <select id="role" name="role" required>
+                            <option value="">Seleccione un cargo</option>
+                            <option value="admin">Administrador</option>
+                            <option value="user">Usuario</option>
+                            <option value="editor">Editor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-card" id="editUser">
+                <h3>Editar Usuario</h3>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="editUsername">Usuario:</label>
+                        <select id="editUsername" name="editUsername" required>
+                            <option value="">Seleccione un usuario</option>
+                            <option value="usuario1">Usuario 1</option>
+                            <option value="usuario2">Usuario 2</option>
+                            <option value="usuario3">Usuario 3</option>
+                            <!-- Aquí es donde deberías llenar con los usuarios reales del backend -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editRole">Cargo:</label>
+                        <select id="editRole" name="editRole" required>
+                            <option value="">Seleccione un cargo</option>
+                            <option value="admin">Administrador</option>
+                            <option value="user">Usuario</option>
+                            <option value="editor">Editor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Guardar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
     <script src="../static/js/sidebar.js"></script>
 </body>
 </html>
+

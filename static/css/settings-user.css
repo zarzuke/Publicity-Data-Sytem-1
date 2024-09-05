@@ -379,55 +379,87 @@ body.dark .home .text {
 /* =============================================== BASE ================================================== */
 
 .form-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
-.settings-options {
-    display: flex;
-    flex-direction: column; /* Ordenar verticalmente */
-    gap: 10px; /* Espacio entre las opciones */
+.form-card {
+    max-width: 400px; /* Ancho máximo de la tarjeta */
+    margin: 20px; /* Margen para separar las tarjetas */
+    padding: 20px;
+    background-color: var(--sidebar-color); /* Color de fondo blanco para la tarjeta */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
+    flex: 1; /* Para permitir flexibilidad en el ancho */
+    min-width: 300px; /* Ancho mínimo para las tarjetas */
 }
 
-.setting-option {
-    background-color: var(--sidebar-color); /* Color de fondo igual al de la barra lateral */
-    border-radius: 6px;
-    padding: 15px;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center; /* Centrar el contenido de los botones */
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.014);
+.form-card h3 {
+    text-align: center; /* Centramos el texto del encabezado */
+    margin-bottom: 30px; /* Espaciado bajo el encabezado */
+    color: rgb(63, 63, 63); /* Texto en negro */
+    font-size: 1.5em;
+    font-weight: 700;
 }
 
-.setting-option a {
-    text-decoration: none; /* Sin subrayado */
-    color: var(--text-color); /* Color del texto */
-    display: flex;
-    align-items: center; /* Centrar verticalmente el texto respecto al icono */
-    width: 100%; /* Hacer que el enlace ocupe todo el ancho del contenedor */
-    gap: 15px; /* Espacio entre el icono y el texto */
+.form-group {
+    margin-bottom: 15px; /* Separación entre grupos */
 }
 
-.setting-option:hover {
-    background-color: var(--primary-color-light); /* Cambiar color de fondo en hover */
+.form-group label {
+    display: block; /* Bloque para cada label */
+    margin-bottom: 5px; /* Separación debajo del label */
+    color: var(--text-color); /* Texto negro */
+    font-weight: 600;;
 }
 
-.setting-option i {
-    font-size: 20px; /* Tamaño del icono */
-    color: var(--primary-color); /* Color del icono */
+.form-group input,
+.form-group select {
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #f9f9f9; /* Fondo claro para inputs */
+    color: var(--text-color); /* Color del texto en negro */
 }
 
-/* Ajustes de estilos para el modo oscuro */
-body.dark .setting-option {
-    background-color: #1e1f20; /* Color de fondo en modo oscuro */
+.form-group button {
+    padding: 10px 15px; /* Espaciado interno */
+    color: #ffffff; /* Color de texto blanco */
+    background-color: var(--primary-color); /* Color de fondo negro para el botón */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Manita al pasar el mouse */
 }
 
-body.dark .setting-option:hover {
-    background-color: #3a3b3c; /* Color de fondo en hover en modo oscuro */
+.form-group button:hover {
+    background-color: darken(var(--primary-color), 10%); /* Color de fondo más oscuro al pasar el mouse */
 }
 
-body.dark .setting-option i {
-    color: #ccc; /* Color del icono en modo oscuro */
+/* ===================== Modo Oscuro ===================== */
+
+body.dark .form-card {
+    background-color: var(--sidebar-color); /* Fondo oscuro para la tarjeta */
 }
 
+body.dark .form-card h3,
+body.dark .form-group label,
+body.dark .form-group input,
+body.dark .form-group select,
+body.dark .form-group button {
+    color: var(--text-color); /* Color de texto claro */
+}
+
+body.dark .form-group input,
+body.dark .form-group select {
+    background-color: #343536; /* Fondo oscuro para inputs */
+    border: none; /* Borde gris más oscuro */
+}
+
+body.dark .form-group button {
+    background-color: #5a5a5a; /* Botón oscuro */
+}
 
 

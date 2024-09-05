@@ -47,6 +47,10 @@ def clients():
 def settings():
     return render_template("settings.html")
 
+@app.route("/settings/manager")
+def settings_user():
+    return render_template("settings-user.html")
+
 @app.route("/work/<string:user>")
 def work(user):
     id=try_work(user)
