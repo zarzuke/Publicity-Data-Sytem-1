@@ -10,7 +10,8 @@ function formatPhoneNumber(phoneNumber) {
     }
     return phoneNumber; // Devuelve el teléfono sin cambios si no coincide con el formato
   }
-  
+
+
 // Función para actualizar la previsualización
 function updatePreview() {
     const titleInput = document.getElementById('title');
@@ -231,18 +232,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const totalCostInput = document.getElementById('total-cost');
     const downPaymentInput = document.getElementById('down-payment');
     const remainingInput = document.getElementById('remaining');
+    const currencySelect = document.getElementById('currency');
 
     function calculateRemaining() {
         const totalCost = parseFloat(totalCostInput.value) || 0;
         const downPayment = parseFloat(downPaymentInput.value) || 0;
         const remaining = totalCost - downPayment;
 
-        // Asegúrate de no mostrar un valor negativo y formatear el número
+        // Asegúrate de no mostrar un valor negativo
         remainingInput.value = remaining < 0 ? '0' : formatNumber(remaining);
     }
 
     totalCostInput.oninput = calculateRemaining; // Calcula al cambiar el costo total
     downPaymentInput.oninput = calculateRemaining; // Calcula al cambiar el abono
+
+    // Agregar un evento de cambio para el selector de moneda
+    currencySelect.addEventListener('change', calculateRemaining);
 });
 
 document.addEventListener('click', function (event) {
@@ -299,7 +304,61 @@ function openDetails(title, date, name, phone, description) {
     window.open(url, '_blank'); // Abre en una nueva pestaña
 }
 
-// Asegúrate de que el script se ejecuta después de que el DOM esté completamente cargado
+// JOB ANIMACION Y ARREGLO
 
+document.addEventListener('DOMContentLoaded', () => {
+    const cardItems = document.querySelectorAll('.card-item');
 
+    cardItems.forEach(item => {
+        const jobTypesContainer = item.querySelector('.job-types-container');
+        const jobTypesWrapper = item.querySelector('.job-types-wrapper');
 
+        // Función para verificar si el contenido desborda
+        const isOverflowing = () => {
+            return jobTypesContainer.scrollWidth > jobTypesWrapper.clientWidth;
+        };
+
+        // Ajusta el ancho del contenedor basado en su contenido
+        jobTypesContainer.style.width = `${jobTypesContainer.scrollWidth}px`;
+
+        let scrollAmount = 0;
+        const scrollStep = 1; // Cambia la velocidad de desplazamiento aquí
+        let scrolling; // Variable para mantener el ciclo de desplazamiento
+        let direction = 1; // Direccion del desplazamiento: 1 para izquierda, -1 para derecha
+
+        const scroll = () => {
+            if (direction === 1) { // Desplazamiento hacia la izquierda
+                if (scrollAmount < jobTypesContainer.scrollWidth - jobTypesWrapper.clientWidth) {
+                    scrollAmount += scrollStep;
+                } else {
+                    // Cambia la dirección al llegar al final
+                    direction = -1; // Cambia a desplazamiento a la derecha
+                }
+            } else { // Desplazamiento hacia la derecha
+                if (scrollAmount > 0) {
+                    scrollAmount -= scrollStep;
+                } else {
+                    // Cambia la dirección al llegar al inicio
+                    direction = 1; // Cambia a desplazamiento a la izquierda
+                }
+            }
+            jobTypesContainer.style.transform = `translateX(-${scrollAmount}px)`;
+            scrolling = requestAnimationFrame(scroll);
+        };
+
+        // Al pasar el mouse
+        item.addEventListener('mouseenter', () => {
+            if (isOverflowing()) {
+                scrolling = requestAnimationFrame(scroll);
+            }
+        });
+
+        // Al salir del mouse
+        item.addEventListener('mouseleave', () => {
+            jobTypesContainer.style.transform = 'translateX(0)'; // Resetea la posición
+            cancelAnimationFrame(scrolling); // Detiene el desplazamiento
+            scrollAmount = 0; // Resetea el desplazamiento
+            direction = 1; // Resetea la dirección
+        });
+    });
+});

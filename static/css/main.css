@@ -402,6 +402,7 @@ body.dark .home .text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
 .card-list .card-item .card-title,
@@ -461,8 +462,7 @@ body.dark .card-list .card-item:hover {
 
 .card-list .card-item .job-title,
 .card-list .card-item .phone,
-.card-list .card-item .date,
-.card-list .card-item .types{
+.card-list .card-item .date{
     display: inline-block;
     background: #ffa7a7;
     padding: 8px 15px;
@@ -470,6 +470,16 @@ body.dark .card-list .card-item:hover {
     border-radius: 50px;
     font-weight: 600;
     color: #242526;
+}
+
+.card-list .card-item .types{
+    display: inline-block;
+    padding: 8px 15px;
+    font-size: 11px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #242526;
+    margin-right: 5px; /* Añade un margen derecho para separar los elementos */
 }
 
 .card-list .card-item .phone {
@@ -482,10 +492,86 @@ body.dark .card-list .card-item:hover {
     color: #2e2e2e;
 }
 
-.card-list .card-item .types {
-    background-color: #38d538;
+
+
+
+/* COLORES PARA JOBS */
+
+.job-type-pendon {
+    background-color: #78f1ff; /* Color específico para Designer */
     color: #2e2e2e;
 }
+
+.job-type-vinilo {
+    background-color: #a1c4fd; /* Color específico para Vinilo */
+    color: #2e2e2e;
+}
+
+.job-type-estructura- {
+    background-color: #ddceac; /* Color específico para Estructura */
+    color: #2e2e2e;
+}
+
+.job-type-valla-publicitaria {
+    background-color: #c6cde6; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+.job-type-tarjeta-de-presentacion {
+    background-color: #ffbefc; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+.job-type-volantes {
+    background-color: #97cfa1; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+.job-type-banderin {
+    background-color: #d9cec3; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+.job-type-camisa {
+    background-color: #d7d9c3; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+.job-type-neoflex {
+    background-color: #a7ccec; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+.job-type-corte-v {
+    background-color: #b1f5db; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+.job-type-acrilico {
+    background-color: #dac8fd; /* Color específico para Valla Publicitaria */
+    color: #2e2e2e;
+}
+
+
+.job-types-wrapper {
+    overflow: hidden; /* Oculta los elementos que desbordan */
+    width: 100%;
+}
+
+.job-types-wrapper {
+    overflow: hidden; /* Oculta los elementos que desbordan */
+    width: 100%;
+}
+
+.job-types-container {
+    display: flex; /* Muestra los trabajos en línea */
+    white-space: nowrap; /* Previene que los elementos se rompan a la siguiente línea */
+    position: relative; /* Posicionamiento relativo para el desplazamiento */
+    margin-top: 10px; /* Ajusta el margen superior aquí también si es necesario */
+    width: auto; /* Ajusta el ancho al contenido */
+    animation: none; /* No debe haber animación por defecto */
+}
+  
 
 .card-list .card-item .card-description {
     margin-top: 10px;
@@ -537,10 +623,11 @@ body.dark .card-list .card-item:hover {
 }
 
 .card-list .card-item .actions {
-    display: flex; /* Usar flexbox para alineación */
-    justify-content: space-between; /* Colocar espacios entre los elementos */
-    align-items: center; /* Centrar verticalmente los elementos */
-    width: 100%; /* Asegúrate de que ocupa el 100% del ancho del contenedor */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px; /* Ajusta el margen superior aquí también si es necesario */
 }
 
 /* Dark Mode Styles */
@@ -835,10 +922,21 @@ body.dark .preview-card-item .preview-card-name-container {
     gap: 1rem;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+#currency {
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde gris claro */
+    background-color: white; /* Fondo blanco */
+    color: #333; /* Color del texto */
+    font-size: 1rem; /* Tamaño de fuente consistente */
+    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+    cursor: pointer; /* Cambia el cursor al pasar encima */
+    margin-left: 10px; /* Espacio pequeño a la izquierda */
+}
+
+body.dark #currency {
+    background-color: #343536; /* Fondo oscuro para el selector */
+    color: #E0E0E0; /* Texto claro */
+    border: none;
 }
 
 .form-group label {

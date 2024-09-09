@@ -225,13 +225,22 @@
                             </div>
                             <div class="form-group">
                                 <label for="down-payment">Abono:</label>
-                                <input type="number" id="down-payment" name="down-payment" required>
+                                <div style="display: flex; align-items: center;">
+                                    <input type="number" id="down-payment" name="down-payment">
+                                    <select id="currency" name="currency">
+                                        <option value="bolivares">BS</option>
+                                        <option value="pesos">COP</option>
+                                        <option value="dolares">USD</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="remaining">Restante:</label>
                                 <input type="number" id="remaining" name="remaining" required readonly>
                             </div>
                         </div>
+                        
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="description">Comentarios:</label>
@@ -295,10 +304,13 @@
                         <span class="date">{{ item[1] }}</span>
                         <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
                     </p>
-                    <p class="card-info">
-                        {% for t in item2 %}
-                        <span class="types">{{ t }}</span> <!-- Cambié la clase aquí -->
-                        {% endfor %}
+                    <div class="job-types-wrapper">
+                        <div class="job-types-container" id="jobTypesContainer">
+                            {% for t in item2 %}
+                                <span class="types job-type-{{ t | lower | replace(' ', '-') }}">{{ t }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
                     </p>              
                     <div class="actions">
                         <div class="arrow">
