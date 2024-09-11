@@ -362,3 +362,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+function handleUserOptionChange() {
+    const userOption = document.getElementById('user-option').value;
+    const existingUserSelect = document.getElementById('existing-user-select');
+    const newUserFields = document.getElementById('new-user-fields');
+
+    if (userOption === 'existing') {
+        existingUserSelect.style.display = 'block';
+        newUserFields.style.display = 'none';
+    } else if (userOption === 'new') {
+        existingUserSelect.style.display = 'none';
+        newUserFields.style.display = 'block';
+    } else {
+        existingUserSelect.style.display = 'none';
+        newUserFields.style.display = 'none';
+    }
+}
+
+function autocompleteUser() {
+    const existingUsers = document.getElementById('existing-users');
+    const selectedOption = existingUsers.options[existingUsers.selectedIndex];
+    const name = selectedOption.getAttribute('data-name');
+    const surname = selectedOption.getAttribute('data-surname');
+    const phone = selectedOption.getAttribute('data-phone');
+
+    if (name) {
+        document.getElementById('name').value = name;
+        document.getElementById('surname').value = surname;
+        document.getElementById('phone').value = phone;
+        
+        // Habilitar campos
+        document.getElementById('name').disabled = false;
+        document.getElementById('surname').disabled = false;
+        document.getElementById('phone').disabled = false;
+    }
+}
+
+function clearUserFields() {
+    document.getElementById('name').value = "";
+    document.getElementById('surname').value = "";
+    document.getElementById('phone').value = "";
+
+    // Deshabilitar campos
+    document.getElementById('name').disabled = true;
+    document.getElementById('surname').disabled = true;
+    document.getElementById('phone').disabled = true;
+}
+
+

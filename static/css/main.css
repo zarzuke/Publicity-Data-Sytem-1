@@ -482,81 +482,76 @@ body.dark .card-list .card-item:hover {
     margin-right: 5px; /* Añade un margen derecho para separar los elementos */
 }
 
+.card-list .card-item .job-title{
+    background-color: #cbd3eb;
+    color: #242526;
+}
+
 .card-list .card-item .phone {
-    background-color: #c3d3fd;
-    color: #2e2e2e;
+    background-color: #d6d6d6;
+    color: #242526;
 }
 
 .card-list .card-item .date {
-    background-color: #d1d1d1;
-    color: #2e2e2e;
+    background-color: #d6d6d6;
+    color: #242526;
 }
 
-
-
-
-/* COLORES PARA JOBS */
 
 .job-type-pendon {
-    background-color: #78f1ff; /* Color específico para Designer */
+    background-color: #d7c6ff; /* Morado pastel claro */
     color: #2e2e2e;
-}
-
-.job-type-vinilo {
-    background-color: #a1c4fd; /* Color específico para Vinilo */
+  }
+  
+  .job-type-vinilo {
+    background-color: #efc6ff; /* Azul pastel claro */
     color: #2e2e2e;
-}
-
-.job-type-estructura- {
-    background-color: #ddceac; /* Color específico para Estructura */
+  }
+  
+  .job-type-estructura- {
+    background-color: rgb(255, 194, 252); /* Morado pastel más oscuro */
     color: #2e2e2e;
-}
-
-.job-type-valla-publicitaria {
-    background-color: #c6cde6; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-valla-publicitaria {
+    background-color: rgb(192, 214, 255); /* Azul pastel medio */
     color: #2e2e2e;
-}
-
-.job-type-tarjeta-de-presentacion {
-    background-color: #ffbefc; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-tarjeta-de-presentacion {
+    background-color: rgb(188, 255, 244); /* Morado pastel más claro */
     color: #2e2e2e;
-}
-
-.job-type-volantes {
-    background-color: #97cfa1; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-volantes {
+    background-color: rgb(178, 218, 255); /* Azul pastel más claro */
     color: #2e2e2e;
-}
-
-.job-type-banderin {
-    background-color: #d9cec3; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-banderin {
+    background-color: rgb(180, 254, 211); /* Morado pastel más oscuro */
     color: #2e2e2e;
-}
-
-.job-type-camisa {
-    background-color: #d7d9c3; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-camisa {
+    background-color: #d8ffc6; /* Morado pastel claro */
     color: #2e2e2e;
-}
-
-.job-type-neoflex {
-    background-color: #a7ccec; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-neoflex {
+    background-color: #fffbc6; /* Azul pastel medio */
     color: #2e2e2e;
-}
-
-.job-type-corte-v {
-    background-color: #b1f5db; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-corte-v {
+    background-color: #ffe0c6; /* Azul pastel claro */
     color: #2e2e2e;
-}
-
-.job-type-acrilico {
-    background-color: #dac8fd; /* Color específico para Valla Publicitaria */
+  }
+  
+  .job-type-acrilico {
+    background-color: rgb(255, 199, 162); /* Morado pastel más claro */
     color: #2e2e2e;
-}
-
-
-.job-types-wrapper {
-    overflow: hidden; /* Oculta los elementos que desbordan */
-    width: 100%;
-}
+  }
 
 .job-types-wrapper {
     overflow: hidden; /* Oculta los elementos que desbordan */
@@ -922,6 +917,26 @@ body.dark .preview-card-item .preview-card-name-container {
     gap: 1rem;
 }
 
+.form-group select {
+    width: 100%; /* Ancho completo */
+    padding: 0.5rem; /* Espaciado interno */
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: white; /* Fondo blanco */
+    color: #333; /* Color del texto */
+    font-size: 1rem; /* Tamaño de fuente coherente */
+    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+
+body.dark .form-group select {
+    background-color: #343536; /* Fondo oscuro para el selector en modo oscuro */
+    color: #E0E0E0; /* Texto claro en modo oscuro */
+    border: 1px solid transparent; /* Borde transparente por defecto */
+}
+
+
 #currency {
     border-radius: 5px; /* Bordes redondeados */
     border: 1px solid #ccc; /* Borde gris claro */
@@ -1083,7 +1098,7 @@ body.dark .custom-checkbox {
     background: white;
     border-radius: 12px; /* Bordes más suaves */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra más suave para un efecto elevado */
-    max-height: 90vh; 
+    max-height: 100vh; 
     overflow-y: auto; /* Habilitar desplazamiento si es necesario */
     border: 1px solid #EAEAEA; /* Bordes sutiles */
     transition: background-color 0.3s, border 0.3s; /* Transiciones suaves */
@@ -1264,3 +1279,4 @@ body.dark .preview-card-item {
     opacity: 1;
     visibility: visible;
 }
+
