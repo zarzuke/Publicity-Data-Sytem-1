@@ -51,10 +51,22 @@ def settings():
 def settings_user():
     return render_template("settings-user.html")
 
-@app.route("/work/<string:user>")
+
+##
+@app.route('/work/<string:user>')
 def work(user):
-    id=try_work(user)
-    return id
+    session['user'] = user
+    function = try_work(user)
+    return function
+    
+@app.route('/update/<string:user>', methods=['POST'])
+def update(user):
+    user = session.get('user')
+    comments = request.form['comments']
+    if comments:
+        try_comments(comments,user)
+    return redirect(url_for('work', user=user))
+
 
 @app.route("/Clients/<string:client>")
 def client(client):
