@@ -108,7 +108,3 @@ def save_files():
 
 def try_delete(id):
     delete_projects(id)
-    
-def try_comments(comments,user):
-    update(comments,user)
-    
