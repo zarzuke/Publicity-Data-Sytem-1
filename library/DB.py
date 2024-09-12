@@ -23,6 +23,9 @@ def project_inc():
                     "VALUES (?,?)", (title, details,))
 
         id = cursor.lastrowid
+        cursor.execute("UPDATE projects SET projectDate = ? WHERE projectId == ?",(id,id))
+        cursor.execute("UPDATE projects SET projectCharge = ? WHERE projectId == ?",(id,id))
+        
         cursor.execute("SELECT projectClientName FROM clientProject")
         clientes = cursor.fetchall()
 
