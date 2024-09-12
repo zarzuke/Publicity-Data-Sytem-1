@@ -129,28 +129,27 @@
                             <label for="title">Título:</label>
                             <input type="text" id="title" name="title" required>
                         </div>
-                        <!-- Selector para el usuario existente o agregar nuevo -->
                         <div class="form-group">
-                            <label for="user-option">Tipo de cliente:</label>
-                            <select id="user-option" name="user-option" onchange="handleUserOptionChange()">
-                                <option value="">Seleccione una opción</option>
-                                <option value="existing">Cliente existente</option>
-                                <option value="new">Nuevo cliente</option>
+                            <label for="user-type">Selecciona el tipo de usuario:</label>
+                            <select id="user-type" name="user-type" onchange="handleUserOptionChange()">
+                                <option value="" disabled selected>Selecciona el tipo de usuario</option>
+                                <option value="existing">Usuario existente</option>
+                                <option value="new">Crear nuevo usuario</option>
                             </select>
                         </div>
-
-                        <!-- Selector para el usuario existente -->
-                        <div class="form-group" id="existing-user-select" style="display: none;">
-                            <label for="existing-users">Seleccionar cliente existente:</label>
+                        
+                        <div class="form-group user-selection" id="existing-user-selection" style="display: none;">
+                            <label for="existing-users">Selecciona un usuario existente:</label>
                             <select id="existing-users" name="existing-users" onchange="autocompleteUser()">
-                                <option value="">Seleccione un cliente</option>
-                                <option value="1" data-name="Juan" data-surname="Pérez" data-phone="123456789">Juan
-                                    Pérez</option>
-                                <option value="2" data-name="María" data-surname="Gómez" data-phone="987654321">María
-                                    Gómez</option>
+                                <option value="" disabled selected>Selecciona un usuario</option>
+                                <!-- Aquí se llenarán las opciones con usuarios de la base de datos -->
+                                <option value="1" data-name="Juan" data-surname="Pérez" data-phone="123456789">Juan Pérez</option>
+                                <option value="2" data-name="María" data-surname="Gómez" data-phone="987654321">María Gómez</option>
+                                <!-- Otras opciones -->
                             </select>
                         </div>
-                        <div class="form-row" id="userFields">
+                        
+                        <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Nombre:</label>
                                 <input type="text" id="name" name="name" required disabled>
@@ -160,11 +159,14 @@
                                 <input type="text" id="surname" name="surname" required disabled>
                             </div>
                         </div>
-                        <div class="form-row" id="telField">
+                        <div class="form-row">
                             <div class="form-group">
                                 <label for="phone">Teléfono:</label>
                                 <input type="tel" id="phone" name="phone" value="" required disabled>
                             </div>
+                    
+                        
+                        
                             <div class="form-group">
                                 <label for="date">Fecha:</label>
                                 <input type="date" id="date" name="date" value="dd/mm/aaaa" required>
