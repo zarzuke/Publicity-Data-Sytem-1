@@ -108,7 +108,7 @@
             </div>
         </div>  
           <div class="card">
-                <h2>{{details[0][0]}}</h2>
+            <h2>{{ details[0][0] }}</h2>
                 <div class="info-container">
                     <div class="info-item">
                         <div class="info-title">Título:</div>
@@ -156,10 +156,12 @@
                     </div>
                     <div class="comment-section">
                         <div class="input-container">
-                            <textarea class="comment-input" rows="4" placeholder="Escribe tu comentario..."></textarea>
-                            <button class="submit-button">Enviar</button>
+                            <form action="{{ url_for('update', user=user) }}" method="post">
+                                <textarea class="comment-input" name="comments" rows="4" placeholder="Escribe tu comentario..."></textarea>
+                                <button class="submit-button" type="submit">Enviar</button>
+                            </form>                       
                         </div>
-                    </div>
+                    </div>                    
                 </div>
 
                 <div class="confirmation-modal hidden" id="confirmationModal">
