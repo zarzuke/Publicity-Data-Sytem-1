@@ -97,7 +97,7 @@
                     <div class="toggle-switch">
                         <span class="switch"></span>
                     </div>
-                </li>
+                </li>             
             </div>
         </div>
     </nav>
@@ -177,7 +177,7 @@
                                     <input type="checkbox" name="job-type" autocomplete="off" value="1" id="Pendón"
                                         onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
-                                    Pendón
+                                    Pendon
                                 </label>
                                 <label class="job-type-btn">
                                     <input type="checkbox" name="job-type" autocomplete="off" value="2" id="Vinilo"
@@ -199,9 +199,9 @@
                                 </label>
                                 <label class="job-type-btn">
                                     <input type="checkbox" name="job-type" autocomplete="off" value="5"
-                                        id="Presentación" onchange="updatePreview()">
+                                        id="Presentacion" onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
-                                    Presentación
+                                    Presentacion
                                 </label>
                                 <label class="job-type-btn">
                                     <input type="checkbox" name="job-type" autocomplete="off" value="6" id="Volantes"
@@ -213,7 +213,7 @@
                                     <input type="checkbox" name="job-type" autocomplete="off" value="7" id="Banderin"
                                         onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
-                                    Banderín
+                                    Banderin
                                 </label>
                                 <label class="job-type-btn">
                                     <input type="checkbox" name="job-type" autocomplete="off" value="8" id="Camisa"
@@ -237,7 +237,7 @@
                                     <input type="checkbox" name="job-type" autocomplete="off" value="11" id="Acrilico"
                                         onchange="updatePreview()">
                                     <span class="custom-checkbox"></span>
-                                    Acrílico
+                                    Acrilico
                                 </label>
                             </div>
                         </div>
@@ -290,23 +290,23 @@
                     </form>
                 </div>
                 <div class="preview-section">
-                    <h3 class="preview-title">Previsualización</h3>
                     <div class="preview-card-item">
-                        <img id="preview-image" src="" alt="Miniatura">
-                        <h3 class="preview-card-title"></h3>
-                        <p class="preview-card-name-container">
-                            <span class="preview-card-name"></span>
-                            <span class="preview-card-lastname"></span>
-                        </p>
-                        <p class="preview-card-info">
-                            <span class="preview-job-title"></span>
-                            <span class="preview-date"></span>
-                            <span class="preview-phone"><i class="fas fa-phone"></i></span>
-                        </p>
-                        <p class="preview-card-description"></p>
-                        <div class="preview-arrow">
-                            <i class="fas fa-arrow-right card-icon"></i>
+                        <img id="preview-image" src="default-image.jpg" alt="Imagen de previsualización" class="card-image">
+                        <p class="card-title preview-card-title"></p> <!-- Título -->
+                        <div class="preview-card-name card-name-container">
+                            <span class="card-name"></span> <span class="card-surname"></span>
                         </div>
+                        <p class="preview-card-info">
+                            <span class="job-title preview-job-title"> Designer </span> <!-- Cargo -->
+                            <span class="date preview-date"></span> <!-- Fecha -->
+                            <span class="phone preview-phone"><i class="fas fa-phone"></i> </span> <!-- Teléfono -->
+                        </p>
+                        <div class="job-types-wrapper">
+                            <div class="job-types-container preview-job-types-container">
+                                <!-- Los tipos de trabajo seleccionados se mostrarán aquí -->
+                            </div>
+                        </div>
+                        <p class="card-description preview-card-description"></p> <!-- Descripción -->
                     </div>
                 </div>
             </div>

@@ -37,7 +37,8 @@
 
 /*BOTON DE REGRESAR*/
 .text {
-    margin-right: auto; /* Para empujar el botón hacia la derecha */
+    margin-right: auto;
+    /* Para empujar el botón hacia la derecha */
 }
 
 .back-button {
@@ -48,14 +49,18 @@
 .back-btn {
     display: flex;
     align-items: center;
-    text-decoration: none; /* Sin subrayado */
-    color: inherit;  /* Para heredar el color del texto */
-    margin-left: 15px; /* Espacio entre el texto y el botón */
+    text-decoration: none;
+    /* Sin subrayado */
+    color: inherit;
+    /* Para heredar el color del texto */
+    margin-left: 15px;
+    /* Espacio entre el texto y el botón */
     color: var(--text-color);
 }
 
 .back-btn i {
-    font-size: 2em; /* Tamaño del ícono */
+    font-size: 2em;
+    /* Tamaño del ícono */
 }
 
 /*BOTON DE REGRESAR*/
@@ -84,14 +89,18 @@ body.dark {
 /* Sidebar */
 .sidebar {
     position: fixed;
-    top: 0; /* Mantén la barra al principio */
-    left: 0; 
-    height: 100vh; /* Altura total */
-    width: 260px; /* Ancho de la barra lateral */
-    padding: 10px 14px; /* Espaciado interno */
+    top: 0;
+    /* Mantén la barra al principio */
+    left: 0;
+    height: 100vh;
+    /* Altura total */
+    width: 260px;
+    /* Ancho de la barra lateral */
+    padding: 10px 14px;
+    /* Espaciado interno */
     background: var(--sidebar-color);
     transition: var(--tran-05);
-    z-index: 100; 
+    z-index: 100;
 }
 
 .sidebar.close {
@@ -142,10 +151,13 @@ body.dark {
 }
 
 .separator {
-    border: none; /* Eliminar el estilo por defecto */
-    height: 1px; /* Alto de la línea */
+    border: none;
+    /* Eliminar el estilo por defecto */
+    height: 1px;
+    /* Alto de la línea */
     background-color: var(--text-color);
-    margin: 10px 0; /* Margen alrededor de la línea */
+    margin: 10px 0;
+    /* Margen alrededor de la línea */
 }
 
 
@@ -378,7 +390,6 @@ body.dark .home .text {
 
 /* =============================================== BASE ================================================== */
 
-/* Card List Styles */
 .card-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -388,8 +399,8 @@ body.dark .home .text {
     gap: 20px;
 }
 
-/* Card Item Styles */
-.card-list .card-item {
+.card-list .card-item,
+.preview-section .preview-card-item {
     background: #fff;
     padding: 10px;
     border-radius: 8px;
@@ -418,15 +429,6 @@ body.dark .home .text {
     font-weight: 500;
 }
 
-
-.preview-card-item .preview-card-title,
-.preview-card-item .preview-card-name-container,
-.preview-card-item .preview-card-info {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .card-list .card-item:hover {
     transform: scale(1.03);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -439,18 +441,23 @@ body.dark .card-list .card-item:hover {
     box-shadow: 0 8px 100px #dadcff25;
 }
 
-.card-list .card-item img {
+.card-list .card-item img,
+.preview-section .preview-card-item img {
     width: 100%;
     aspect-ratio: 16/9;
     border-radius: 8px;
     object-fit: cover;
 }
 
-.card-list .card-item .card-title {
+.card-list .card-item .card-title,
+.preview-card-title {
     color: #1d1d1d;
+    /* Color del título */
     font-size: 1.438rem;
+    /* Tamaño del título */
     font-weight: 600;
     margin-top: 10px;
+    /* Espaciado por encima */
 }
 
 .card-list .card-item .card-info {
@@ -460,11 +467,31 @@ body.dark .card-list .card-item:hover {
     margin-top: 10px;
 }
 
+.preview-card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.preview-job-title,
+.preview-date,
+.preview-phone {
+    display: inline-block;
+    /* Alineado en línea */
+    padding: 8px 15px;
+    font-size: 11px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #242526;
+    margin-top: 10px;
+    /* Espacio entre elementos */
+}
+
 .card-list .card-item .job-title,
 .card-list .card-item .phone,
-.card-list .card-item .date{
+.card-list .card-item .date {
     display: inline-block;
-    background: #ffa7a7;
     padding: 8px 15px;
     font-size: 11px;
     border-radius: 50px;
@@ -472,103 +499,157 @@ body.dark .card-list .card-item:hover {
     color: #242526;
 }
 
-.card-list .card-item .types{
+.card-list .card-item .types {
     display: inline-block;
     padding: 8px 15px;
     font-size: 11px;
     border-radius: 50px;
     font-weight: 600;
     color: #242526;
-    margin-right: 5px; /* Añade un margen derecho para separar los elementos */
+    margin-right: 5px;
+    /* Añade un margen derecho para separar los elementos */
 }
 
-.card-list .card-item .job-title{
+.card-list .card-item .job-title,
+.preview-job-title {
     background-color: #cbd3eb;
     color: #242526;
 }
 
-.card-list .card-item .phone {
+.card-list .card-item .phone,
+.preview-phone {
     background-color: #d6d6d6;
     color: #242526;
 }
 
-.card-list .card-item .date {
+.card-list .card-item .date,
+.preview-date {
     background-color: #d6d6d6;
     color: #242526;
 }
 
 
 .job-type-pendon {
-    background-color: #d7c6ff; /* Morado pastel claro */
+    background-color: #d7c6ff;
+    /* Morado pastel claro */
     color: #2e2e2e;
-  }
-  
-  .job-type-vinilo {
-    background-color: #efc6ff; /* Azul pastel claro */
+}
+
+.job-type-vinilo {
+    background-color: #efc6ff;
+    /* Azul pastel claro */
     color: #2e2e2e;
-  }
-  
-  .job-type-estructura- {
-    background-color: rgb(255, 194, 252); /* Morado pastel más oscuro */
+}
+
+.job-type-estructura,
+.job-type-estructura- {
+    background-color: rgb(255, 194, 252);
+    /* Morado pastel más oscuro */
     color: #2e2e2e;
-  }
-  
-  .job-type-valla-publicitaria {
-    background-color: rgb(192, 214, 255); /* Azul pastel medio */
+}
+
+.job-type-valla-publicitaria {
+    background-color: rgb(192, 214, 255);
+    /* Azul pastel medio */
     color: #2e2e2e;
-  }
-  
-  .job-type-tarjeta-de-presentacion {
-    background-color: rgb(188, 255, 244); /* Morado pastel más claro */
+}
+
+.job-type-presentacion,
+.job-type-tarjeta-de-presentacion {
+    background-color: rgb(188, 255, 244);
+    /* Morado pastel más claro */
     color: #2e2e2e;
-  }
-  
-  .job-type-volantes {
-    background-color: rgb(178, 218, 255); /* Azul pastel más claro */
+}
+
+.job-type-volantes {
+    background-color: rgb(178, 218, 255);
+    /* Azul pastel más claro */
     color: #2e2e2e;
-  }
-  
-  .job-type-banderin {
-    background-color: rgb(180, 254, 211); /* Morado pastel más oscuro */
+}
+
+.job-type-banderin {
+    background-color: rgb(180, 254, 211);
+    /* Morado pastel más oscuro */
     color: #2e2e2e;
-  }
-  
-  .job-type-camisa {
-    background-color: #d8ffc6; /* Morado pastel claro */
+}
+
+.job-type-camisa {
+    background-color: #d8ffc6;
+    /* Morado pastel claro */
     color: #2e2e2e;
-  }
-  
-  .job-type-neoflex {
-    background-color: #fffbc6; /* Azul pastel medio */
+}
+
+.job-type-neoflex {
+    background-color: #fffbc6;
+    /* Azul pastel medio */
     color: #2e2e2e;
-  }
-  
-  .job-type-corte-v {
-    background-color: #ffe0c6; /* Azul pastel claro */
+}
+
+.job-type-corte-v {
+    background-color: #ffe0c6;
+    /* Azul pastel claro */
     color: #2e2e2e;
-  }
-  
-  .job-type-acrilico {
-    background-color: rgb(255, 199, 162); /* Morado pastel más claro */
+}
+
+.job-type-acrilico {
+    background-color: rgb(255, 199, 162);
+    /* Morado pastel más claro */
     color: #2e2e2e;
-  }
+}
 
 .job-types-wrapper {
-    overflow: hidden; /* Oculta los elementos que desbordan */
+    overflow: hidden;
+    /* Oculta los elementos que desbordan */
     width: 100%;
 }
 
 .job-types-container {
-    display: flex; /* Muestra los trabajos en línea */
-    white-space: nowrap; /* Previene que los elementos se rompan a la siguiente línea */
-    position: relative; /* Posicionamiento relativo para el desplazamiento */
-    margin-top: 10px; /* Ajusta el margen superior aquí también si es necesario */
-    width: auto; /* Ajusta el ancho al contenido */
-    animation: none; /* No debe haber animación por defecto */
+    display: flex;
+    /* Muestra los trabajos en línea */
+    white-space: nowrap;
+    /* Previene que los elementos se rompan a la siguiente línea */
+    position: relative;
+    /* Posicionamiento relativo para el desplazamiento */
+    margin-top: 10px;
+    /* Ajusta el margen superior aquí también si es necesario */
+    width: auto;
+    /* Ajusta el ancho al contenido */
+    animation: none;
+    /* No debe haber animación por defecto */
 }
-  
 
-.card-list .card-item .card-description {
+.preview-job-types-wrapper {
+    overflow: hidden;
+    /* Oculta los elementos que desbordan */
+    width: 100%;
+}
+
+.preview-job-types-container {
+    display: flex;
+    /* Muestra los trabajos en línea */
+    white-space: nowrap;
+    /* Previene que los elementos se rompan a la siguiente línea */
+    position: relative;
+    /* Posicionamiento relativo para el desplazamiento */
+    margin-top: 10px;
+    /* Ajusta el margen superior aquí también si es necesario */
+    width: auto;
+    /* Ajusta el ancho al contenido */
+}
+
+
+.preview-section .preview-job-types-container .types {
+    display: inline-block;
+    padding: 8px 15px;
+    font-size: 11px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #242526;
+    margin-right: 5px;
+}
+
+.card-list .card-item .card-description,
+.preview-section .preview-card-description {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 13px;
@@ -602,19 +683,25 @@ body.dark .card-list .card-item:hover {
     transition: 0.2s ease;
     cursor: pointer;
 }
+
 .card-list .card-item:hover .delete {
-    background: transparent; /* Cambia a transparente o la propiedad que desees */
+    background: transparent;
+    /* Cambia a transparente o la propiedad que desees */
     /* Color solo se aplicará cuando se haga hover sobre delete directamente */
 }
 
 .card-list .card-item .delete:hover {
-    background: #ff6d6d; /* Aquí el color de hover específico para .delete */
-    color: #fff; /* Color del icono de delete al hover */
+    background: #ff6d6d;
+    /* Aquí el color de hover específico para .delete */
+    color: #fff;
+    /* Color del icono de delete al hover */
 }
 
 .card-list .card-item:hover .arrow {
-    background: #756fd6; /* Aquí el color de hover específico para .arrow */
-    color: #fff; /* Color del icono de arrow al hover */
+    background: #756fd6;
+    /* Aquí el color de hover específico para .arrow */
+    color: #fff;
+    /* Color del icono de arrow al hover */
 }
 
 .card-list .card-item .actions {
@@ -622,7 +709,8 @@ body.dark .card-list .card-item:hover {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: 10px; /* Ajusta el margen superior aquí también si es necesario */
+    margin-top: 10px;
+    /* Ajusta el margen superior aquí también si es necesario */
 }
 
 /* Dark Mode Styles */
@@ -631,11 +719,13 @@ body.dark .card-list .card-item {
     color: #fff;
 }
 
-body.dark .card-item .card-title {
+body.dark .card-item .card-title,
+.preview-card-title {
     color: #d4d4d4;
 }
 
-body.dark .card-item .card-name {
+body.dark .card-item .card-name,
+.preview-card-name {
     color: #d4d4d4;
 }
 
@@ -750,115 +840,20 @@ body.dark .home-header .add-btn .button__text {
 
 
 .preview-section .preview-card-item {
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
-    list-style: none;
-    text-decoration: none;
-    border: 2px solid transparent;
-    transition: border 0.5s ease;
     width: 350px;
-    /* Ajusta el ancho aquí */
     height: auto;
-    /* Altura ajustada automáticamente */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-
-.preview-card-item .preview-card-description {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #707070;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-.preview-card-item img {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.preview-card-item .preview-card-title {
-    color: #1d1d1d;
-    font-size: 1.438rem;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-body.dark .preview-card-item .preview-card-title {
-    color: #d4d4d4;
-    font-size: 1.438rem;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-.preview-card-item .preview-card-info {
+body.dark .preview-section .preview-card-item {
+    background-color: #232425;
+    width: 350px;
+    height: auto;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-body.dark .preview-card-item .preview-card-name-container {
-    color: #d4d4d4;
-}
-
-.preview-card-item .preview-job-title,
-.preview-card-item .preview-date,
-.preview-card-item .preview-phone {
-    display: inline-block;
-    background: #F7DFF5;
-    padding: 8px 15px;
-    font-size: 10px;
-    border-radius: 50px;
-    font-weight: 600;
-}
-
-.preview-job-title {
-    display: inline-block;
-    max-width: 180px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  
-
-.preview-card-item .preview-phone {
-    background-color: #c3d3fd;
-    color: #2e2e2e;
-}
-
-.preview-card-item .preview-date {
-    background-color: #d1d1d1;
-    color: #2e2e2e;
-}
-
-.preview-card-item .preview-job-title {
-    background-color: #ffa7a7;
-    color: #2e2e2e;
-}
-
-.preview-card-item .preview-card-description {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #707070;
-}
-
-.preview-card-item .preview-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: rotate(-35deg);
-    height: 40px;
-    width: 40px;
-    color: #616161;
-    border-radius: 50%;
-    margin-top: auto;
-    transition: 0.2s ease;
 }
 
 .custum-file-upload input {
@@ -918,39 +913,60 @@ body.dark .preview-card-item .preview-card-name-container {
 }
 
 .form-group select {
-    width: 100%; /* Ancho completo */
-    padding: 0.5rem; /* Espaciado interno */
+    width: 100%;
+    /* Ancho completo */
+    padding: 0.5rem;
+    /* Espaciado interno */
     border: 1px solid #ccc;
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: white; /* Fondo blanco */
-    color: #333; /* Color del texto */
-    font-size: 1rem; /* Tamaño de fuente coherente */
-    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves */
-    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    background-color: white;
+    /* Fondo blanco */
+    color: #333;
+    /* Color del texto */
+    font-size: 1rem;
+    /* Tamaño de fuente coherente */
+    transition: border 0.3s, box-shadow 0.3s;
+    /* Transiciones suaves */
+    cursor: pointer;
+    /* Cambia el cursor al pasar el ratón */
 }
 
 
 body.dark .form-group select {
-    background-color: #343536; /* Fondo oscuro para el selector en modo oscuro */
-    color: #E0E0E0; /* Texto claro en modo oscuro */
-    border: 1px solid transparent; /* Borde transparente por defecto */
+    background-color: #343536;
+    /* Fondo oscuro para el selector en modo oscuro */
+    color: #E0E0E0;
+    /* Texto claro en modo oscuro */
+    border: 1px solid transparent;
+    /* Borde transparente por defecto */
 }
 
 
 #currency {
-    border-radius: 5px; /* Bordes redondeados */
-    border: 1px solid #ccc; /* Borde gris claro */
-    background-color: white; /* Fondo blanco */
-    color: #333; /* Color del texto */
-    font-size: 1rem; /* Tamaño de fuente consistente */
-    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves */
-    cursor: pointer; /* Cambia el cursor al pasar encima */
-    margin-left: 10px; /* Espacio pequeño a la izquierda */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    border: 1px solid #ccc;
+    /* Borde gris claro */
+    background-color: white;
+    /* Fondo blanco */
+    color: #333;
+    /* Color del texto */
+    font-size: 1rem;
+    /* Tamaño de fuente consistente */
+    transition: border 0.3s, box-shadow 0.3s;
+    /* Transiciones suaves */
+    cursor: pointer;
+    /* Cambia el cursor al pasar encima */
+    margin-left: 10px;
+    /* Espacio pequeño a la izquierda */
 }
 
 body.dark #currency {
-    background-color: #343536; /* Fondo oscuro para el selector */
-    color: #E0E0E0; /* Texto claro */
+    background-color: #343536;
+    /* Fondo oscuro para el selector */
+    color: #E0E0E0;
+    /* Texto claro */
     border: none;
 }
 
@@ -981,61 +997,84 @@ body.dark .form-group label {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center; /* Esta línea centra los botones horizontalmente */
-  }
+    justify-content: center;
+    /* Esta línea centra los botones horizontalmente */
+}
 
 .job-type-btn {
-    display: flex; /* Flex para mejor alineación */
+    display: flex;
+    /* Flex para mejor alineación */
     align-items: center;
     padding: 10px 15px;
-    background-color: rgba(221, 221, 221, 0); /* Fondo transparente */
-    color: rgb(61, 61, 61); /* Texto transparente */
+    background-color: rgba(221, 221, 221, 0);
+    /* Fondo transparente */
+    color: rgb(61, 61, 61);
+    /* Texto transparente */
     font-size: 2px;
-    border-radius: 5px; /* Bordes redondeados */
+    border-radius: 5px;
+    /* Bordes redondeados */
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    position: relative; /* Para posicionar el checkbox */
+    position: relative;
+    /* Para posicionar el checkbox */
     user-select: none;
 }
 
 .job-type-btn:hover {
-    transform: translateY(-2px); /* Efecto de elevación al hover */
+    transform: translateY(-2px);
+    /* Efecto de elevación al hover */
 }
 
 .job-type-btn input {
-    display: none; /* Ocultar el checkbox original */
+    display: none;
+    /* Ocultar el checkbox original */
 }
 
 .custom-checkbox {
     display: inline-block;
-    width: 24px; /* Ancho de la caja */
-    height: 24px; /* Alto de la caja */
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: #d4d4d4; /* Color de fondo de la checkbox */
-    margin-right: 10px; /* Espacio a la derecha */
-    position: relative; /*Para el checkmark */
+    width: 24px;
+    /* Ancho de la caja */
+    height: 24px;
+    /* Alto de la caja */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    background-color: #d4d4d4;
+    /* Color de fondo de la checkbox */
+    margin-right: 10px;
+    /* Espacio a la derecha */
+    position: relative;
+    /*Para el checkmark */
 }
 
 body.dark .custom-checkbox {
     display: inline-block;
-    width: 24px; /* Ancho de la caja */
-    height: 24px; /* Alto de la caja */
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: #696969; /* Color de fondo de la checkbox */
-    margin-right: 10px; /* Espacio a la derecha */
-    position: relative; /*Para el checkmark */
+    width: 24px;
+    /* Ancho de la caja */
+    height: 24px;
+    /* Alto de la caja */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    background-color: #696969;
+    /* Color de fondo de la checkbox */
+    margin-right: 10px;
+    /* Espacio a la derecha */
+    position: relative;
+    /*Para el checkmark */
 }
 
-.job-type-btn input:checked + .custom-checkbox {
-    background-color: #757eff; /* Color de fondo al seleccionar */
+.job-type-btn input:checked+.custom-checkbox {
+    background-color: #757eff;
+    /* Color de fondo al seleccionar */
 }
 
 
 /* Mostrar el texto al seleccionar */
 .job-type-btn:hover span,
-.job-type-btn input:checked + span {
-    color: white; /* Texto visible */
-    opacity: 1; /* Asegurar que el texto sea visible */
+.job-type-btn input:checked+span {
+    color: white;
+    /* Texto visible */
+    opacity: 1;
+    /* Asegurar que el texto sea visible */
 }
 
 
@@ -1050,7 +1089,8 @@ body.dark .custom-checkbox {
 }
 
 .submit-btn:hover {
-    background-color: #5c4ef8; /* Color más oscuro al pasar el ratón */
+    background-color: #5c4ef8;
+    /* Color más oscuro al pasar el ratón */
 }
 
 .reset-btn {
@@ -1064,7 +1104,8 @@ body.dark .custom-checkbox {
 }
 
 .reset-btn:hover {
-    background-color: #bb3835; /* Color más oscuro al pasar el ratón */
+    background-color: #bb3835;
+    /* Color más oscuro al pasar el ratón */
 }
 
 
@@ -1096,66 +1137,91 @@ body.dark .custom-checkbox {
     width: 60%;
     padding: 30px;
     background: white;
-    border-radius: 12px; /* Bordes más suaves */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra más suave para un efecto elevado */
-    max-height: 100vh; 
-    overflow-y: auto; /* Habilitar desplazamiento si es necesario */
-    border: 1px solid #EAEAEA; /* Bordes sutiles */
-    transition: background-color 0.3s, border 0.3s; /* Transiciones suaves */
+    border-radius: 12px;
+    /* Bordes más suaves */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    /* Sombra más suave para un efecto elevado */
+    max-height: 100vh;
+    overflow-y: auto;
+    /* Habilitar desplazamiento si es necesario */
+    border: 1px solid #EAEAEA;
+    /* Bordes sutiles */
+    transition: background-color 0.3s, border 0.3s;
+    /* Transiciones suaves */
 }
 
 /* Modo oscuro */
 body.dark .form-section {
-    background: #232425; /* Fondo más oscuro para la sección del formulario */
-    border: none; /* Eliminar bordes */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+    background: #232425;
+    /* Fondo más oscuro para la sección del formulario */
+    border: none;
+    /* Eliminar bordes */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    /* Sombra más pronunciada */
 }
+
 body.dark .form-group input,
 body.dark .form-group textarea {
-    background-color: #343536; /* Fondo oscuro para el input */
-    color: #E0E0E0; /* Texto claro */
-    border: 1px solid transparent; /* Sin bordes visibles al principio */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 0.5rem; /* Espaciado interno */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+    background-color: #343536;
+    /* Fondo oscuro para el input */
+    color: #E0E0E0;
+    /* Texto claro */
+    border: 1px solid transparent;
+    /* Sin bordes visibles al principio */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    padding: 0.5rem;
+    /* Espaciado interno */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    /* Transiciones suaves */
 }
 
 body.dark .form-group input:focus,
 body.dark .form-group textarea:focus {
-    outline: none; /* Suprime el contorno por defecto */
+    outline: none;
+    /* Suprime el contorno por defecto */
 }
 
 .upload-box {
-    border: 1px dashed #3d3d3d; /* Borde dashed para el área de carga */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 8px; /* Bordes redondeados */
-    transition: border-color 0.3s; /* Transición suave del color del borde */
+    border: 1px dashed #3d3d3d;
+    /* Borde dashed para el área de carga */
+    padding: 20px;
+    /* Espaciado interno */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    transition: border-color 0.3s;
+    /* Transición suave del color del borde */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer; /* Cambia el cursor cuando se pasa por encima */
+    cursor: pointer;
+    /* Cambia el cursor cuando se pasa por encima */
 }
 
 .upload-box:hover {
-    border-color: var(--primary-color); /* Cambia el color del borde en hover */
+    border-color: var(--primary-color);
+    /* Cambia el color del borde en hover */
 }
 
 .upload-icon-container {
-    text-align: center; /* Centra el icono y el texto */
-    color: var(--text-color); /* Color del texto */
+    text-align: center;
+    /* Centra el icono y el texto */
+    color: var(--text-color);
+    /* Color del texto */
 }
 
 .upload-icon-container i {
-    font-size: 30px; /* Aumentar el tamaño del ícono */
-    margin: 8px; /* Espacio debajo del ícono */
+    font-size: 30px;
+    /* Aumentar el tamaño del ícono */
+    margin: 8px;
+    /* Espacio debajo del ícono */
 }
 
 .upload-icon-container span {
-    font-size: 12px; /* Tamaño de la fuente del texto */
+    font-size: 12px;
+    /* Tamaño de la fuente del texto */
 }
-
-
 
 .add-modal .submit-btn {
     position: absolute;
@@ -1167,19 +1233,6 @@ body.dark .form-group textarea:focus {
     position: absolute;
     bottom: 30px;
     right: 180px;
-}
-
-.preview-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.preview-title {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: rgb(193, 208, 212)
 }
 
 .add-modal-content {
@@ -1194,39 +1247,15 @@ body.dark .form-group textarea:focus {
     align-items: center;
 }
 
-.preview-card-item {
-    background: var(--body-color);
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
-    list-style: none;
-    text-decoration: none;
-    border: 2px solid transparent;
-    transition: border 0.5s ease;
-    width: 300px;
-}
-
-body.dark .preview-card-item {
-    background: #232425;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
-    list-style: none;
-    text-decoration: none;
-    border: 2px solid transparent;
-    transition: border 0.5s ease;
-    width: 300px;
-}
-
 .form-group input[id="remaining"] {
     background-color: #f5f5f5;
     color: #666;
     border: 2px solid #ddd;
     pointer-events: none;
     opacity: 0.8;
-  }
-  
-  .confirmation-modal {
+}
+
+.confirmation-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -1251,7 +1280,8 @@ body.dark .preview-card-item {
     margin-top: 20px;
 }
 
-.confirm-btn, .cancel-btn {
+.confirm-btn,
+.cancel-btn {
     padding: 10px 20px;
     margin: 5px;
     border: none;
@@ -1279,4 +1309,3 @@ body.dark .preview-card-item {
     opacity: 1;
     visibility: visible;
 }
-
