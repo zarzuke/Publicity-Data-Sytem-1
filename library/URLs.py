@@ -1,6 +1,7 @@
 import sqlite3 
 from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
 from library.DB import *
+import subprocess
 
 def try_signup():
     bd = sqlite3.connect("library/database.db")
@@ -111,4 +112,10 @@ def try_delete(id):
     
 def try_comments(comments,user):
     update(comments,user)
+
+def try_open(id,nombre):
+    folder_path = f"trabajos/{id}.{nombre}"
+    if os.name == 'nt':  # Verifica si el sistema operativo es Windows
+        subprocess.Popen(f'explorer {folder_path}')
+    return 'Carpeta abierta'
     
