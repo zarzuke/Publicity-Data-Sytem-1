@@ -10,19 +10,22 @@ def project_inc():
         phone = request.form["phone"]
         date = request.form["date"]
         job_type = request.form.getlist('job-type')  # Cambio de nombre aquí 
-        total = request.form["total-cost"]
-        mid = request.form["down-payment"]
-        remaining = request.form["remaining"]
+        total = int(request.form["total-cost"])
+        mid = int(request.form["down-payment"])
+        remaining = int(request.form["remaining"])
         details = request.form["description"]
         client_name=name+" "+lastname
         
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO projects (projectName, projectDescript) "
-                    "VALUES (?,?)", (title, details,))
+        cursor.execute("INSERT INTO projects (projectName, projectDescript, projectPhase) "
+                    "VALUES (?,?,?)", (title, details,1,))
 
         id = cursor.lastrowid
+        cursor.execute("UPDATE projects SET projectDate = ? WHERE projectId == ?",(id,id))
+        cursor.execute("UPDATE projects SET projectCharge = ? WHERE projectId == ?",(id,id))
+        
         cursor.execute("SELECT projectClientName FROM clientProject")
         clientes = cursor.fetchall()
 

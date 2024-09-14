@@ -102,6 +102,11 @@ def delete(id):
     delete_projects(id)
     return redirect(url_for("login"))
 
+@app.route('/<string:id>/<string:nombre>', methods=['POST'])
+def open_folder(id,nombre):
+    function=try_open(id,nombre)
+    return function
+
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)

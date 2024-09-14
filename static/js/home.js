@@ -237,7 +237,7 @@ document.querySelectorAll('.delete').forEach(button => {
 
 // Función para formatear números con separadores de miles
 function formatNumber(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return Math.round(num).toString();
 }
 
 // CALCULAR RESTANTE
@@ -248,9 +248,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const currencySelect = document.getElementById('currency');
 
     function calculateRemaining() {
-        const totalCost = parseFloat(totalCostInput.value) || 0;
-        const downPayment = parseFloat(downPaymentInput.value) || 0;
-        const remaining = totalCost - downPayment;
+        const totalCost = parseInt(totalCostInput.value) || 0;
+        const downPayment = parseInt(downPaymentInput.value) || 0;
+        const remaining = parseInt(totalCost) - parseInt(downPayment);
 
         // Asegúrate de no mostrar un valor negativo
         remainingInput.value = remaining < 0 ? '0' : formatNumber(remaining);
