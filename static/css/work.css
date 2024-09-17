@@ -159,3 +159,25 @@ body.dark-mode .info-title {
 .submit-button:hover {
     background-color: #5c67fe; /* Color al pasar el mouse */
 }
+
+.button-container {
+    display: flex; /* Para alinear los botones en línea */
+    justify-content: space-between; /* Alinear los botones hacia la derecha */
+    margin-top: 10px; /* Espacio entre el textarea y los botones */
+}
+
+.additional-button {
+    margin-left: 10px; /* Espacio entre los botones */
+    padding: 12px 24px; /* Tamaño del botón */
+    background-color: #adadad; /* Color de fondo gris */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background 0.3s; /* Transición suave para efectos */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+.additional-button:hover {
+    background-color: #9b9b9b; /* Color al pasar el mouse */
+}

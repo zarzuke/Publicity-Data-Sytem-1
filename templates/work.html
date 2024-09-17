@@ -154,15 +154,18 @@
                         <div class="info-title">Tipo de trabajo:</div>
                         <div class="info-box">{{types}}</div>
                     </div>
-                    <div class="comment-section">
-                        <div class="input-container">
-                            <form action="{{ url_for('update', user=user) }}" method="post">
-                                <textarea class="comment-input" name="comments" rows="4" placeholder="Escribe tu comentario..."></textarea>
-                                <button class="submit-button" type="submit">Enviar</button>
-                            </form>                       
-                        </div>
-                    </div>                    
-                </div>
+<div class="comment-section">
+    <div class="input-container">
+        <form action="{{ url_for('update', user=user) }}" method="post">
+            <textarea class="comment-input" name="comments" rows="4" placeholder="Escribe tu comentario..."></textarea>
+            <div class="button-container">
+                <button class="submit-button" type="submit">Enviar</button>
+                <button class="additional-button" type="button">Botón 1</button>
+                <button class="additional-button" type="button">Botón 2</button>
+            </div>
+        </form>                       
+    </div>
+</div>          
 
                 <div class="confirmation-modal hidden" id="confirmationModal">
                     <div class="modal-content">

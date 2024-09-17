@@ -720,7 +720,7 @@ body.dark .card-list .card-item {
 }
 
 body.dark .card-item .card-title,
-.preview-card-title {
+body.dark .preview-card-title {
     color: #d4d4d4;
 }
 
