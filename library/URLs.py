@@ -41,8 +41,10 @@ def try_home():
     match g.user[1]:
         case 'Administrator':
             filas,tipos=get_project()
+            names,numbers=get_clients()
+            clients=zip(names,numbers)
             combine=zip(filas,tipos)
-            return render_template("home.html",user=g.user,filas=combine)
+            return render_template("home.html",user=g.user,filas=combine,clients=clients)
         case 'Designer':
             return redirect(url_for("designer", designer=g.user[0]))
         case _:
@@ -97,8 +99,9 @@ def try_form():
     return form
 
 def try_work(id):
-    work,types=get_details(id)
-    return render_template("work.html",user=g.user,details=work,types=types)
+    work,types,id=get_details(id)
+    print(work,id)
+    return render_template("work.html",user=g.user,details=work,types=types,nor=id)
 
 def try_client(client):
     data=get_works_client(client)
@@ -113,9 +116,13 @@ def try_delete(id):
 def try_comments(comments,user):
     update(comments,user)
 
-def try_open(id,nombre):
-    folder_path = f"trabajos/{id}.{nombre}"
-    if os.name == 'nt':  # Verifica si el sistema operativo es Windows
-        subprocess.Popen(f'explorer {folder_path}')
-    return 'Carpeta abierta'
-    
+def try_open(id, nombre):
+    folder_path = f"trabajos\{id}.{nombre}"
+    print(folder_path)
+    if os.path.exists(folder_path):
+        if os.name == 'nt':  # Verifica si el sistema operativo es Windows
+            subprocess.Popen(f'explorer {folder_path}')
+        return 'Carpeta abierta'
+    else:
+        return 'La carpeta no existe'
+

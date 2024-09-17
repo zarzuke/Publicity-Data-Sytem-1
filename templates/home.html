@@ -144,16 +144,16 @@
                             <label for="existing-users">Seleccionar cliente existente:</label>
                             <select id="existing-users" name="existing-users" onchange="autocompleteUser()">
                                 <option value="">Seleccione un cliente</option>
-                                <option value="1" data-name="Juan" data-surname="Pérez" data-phone="123456789">Juan
-                                    Pérez</option>
-                                <option value="2" data-name="María" data-surname="Gómez" data-phone="987654321">María
-                                    Gómez</option>
+                                {% for names, numbers in clients %}
+                                <option value="1" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">{{ names[0] }}
+                                    {{ names[1] }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="form-row" id="userFields">
                             <div class="form-group">
                                 <label for="name">Nombre:</label>
-                                <input type="text" id="name" name="name" required disabled>
+                                <input type="text" id="name" name="names" placeholder="Name" required disabled>
                             </div>
                             <div class="form-group">
                                 <label for="surname">Apellido:</label>

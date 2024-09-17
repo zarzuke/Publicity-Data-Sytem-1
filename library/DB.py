@@ -5,7 +5,7 @@ import os
 def project_inc():
     if request.method == "POST":
         title = request.form["title"]
-        name = request.form["name"]
+        name = request.form["names"]
         lastname = request.form["surname"]
         phone = request.form["phone"]
         date = request.form["date"]
@@ -13,6 +13,9 @@ def project_inc():
         total = int(request.form["total-cost"])
         mid = int(request.form["down-payment"])
         remaining = int(request.form["remaining"])
+        total = request.form["total-cost"]
+        mid = request.form["remaining"]
+        remaining = request.form["down-payment"]
         details = request.form["description"]
         client_name=name+" "+lastname
         
@@ -125,7 +128,7 @@ def get_details(id):
     for t in types:
         tipos.append(t[0])
     conn.close()
-    return filas,tipos
+    return filas,tipos,id
 
 def get_works_client(client):
     conn = sqlite3.connect('library/database.db')
@@ -271,3 +274,18 @@ def update(comments,user):
             print(f"An error occurred: {e}")
         finally:
             conn.close()
+            
+def get_clients():
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectClientName FROM clientProject")
+    names=cursor.fetchall()
+    cursor.execute("SELECT projectClientNumber FROM clientProject")
+    numbers=cursor.fetchall()
+    conn.close()
+    list=[]
+    for i in names:
+        new=i[0].split()
+        list.append(new)
+    return list,numbers
+get_clients()

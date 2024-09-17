@@ -102,7 +102,7 @@ def delete(id):
     delete_projects(id)
     return redirect(url_for("login"))
 
-@app.route('/<string:id>/<string:nombre>', methods=['POST'])
+@app.route('/open/<string:id>/<string:nombre>', methods=['POST'])
 def open_folder(id,nombre):
     function=try_open(id,nombre)
     return function
