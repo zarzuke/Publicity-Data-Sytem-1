@@ -41,7 +41,7 @@ def try_home():
     match g.user[1]:
         case 'Administrator':
             filas,tipos=get_project()
-            names,numbers=get_clients()
+            names,numbers=get_clients01()
             clients=zip(names,numbers)
             combine=zip(filas,tipos)
             return render_template("home.html",user=g.user,filas=combine,clients=clients)

@@ -275,7 +275,7 @@ def update(comments,user):
         finally:
             conn.close()
             
-def get_clients():
+def get_clients01():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("SELECT projectClientName FROM clientProject")
