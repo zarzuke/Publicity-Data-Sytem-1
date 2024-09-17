@@ -288,4 +288,3 @@ def get_clients01():
         new=i[0].split()
         list.append(new)
     return list,numbers
-get_clients()
