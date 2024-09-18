@@ -152,7 +152,7 @@
                     </div>
                     <div class="info-item">
                         <div class="info-title">Tipo de trabajo:</div>
-                        <div class="info-box">{{types}}</div>
+                        <div class="info-box">{% for type in types %}{{ type }}, {% endfor %}</div>
                     </div>
                     <div class="comment-section">
                         <div class="input-container">
