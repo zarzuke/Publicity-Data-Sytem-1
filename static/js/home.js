@@ -410,9 +410,9 @@ function handleUserOptionChange() {
         document.getElementById('phone').value = "";
 
         existingUserSelect.style.display = 'block'; // Mostrar el selector de 'Cliente existente'
-        document.getElementById('name').disabled = true;
-        document.getElementById('surname').disabled = true;
-        document.getElementById('phone').disabled = true;
+        document.getElementById('name').disabled = false;
+        document.getElementById('surname').disabled = false;
+        document.getElementById('phone').disabled = false;
     } else {
         existingUserSelect.style.display = 'none'; // Mantener oculto si no se selecciona ninguna opción
         document.getElementById('name').disabled = true;
@@ -452,10 +452,6 @@ function clearUserFields() {
     document.getElementById('surname').value = "";
     document.getElementById('phone').value = "";
 
-    // Deshabilitar campos
-    document.getElementById('name').disabled = true;
-    document.getElementById('surname').disabled = true;
-    document.getElementById('phone').disabled = true;
 }
 
 let scrollingPreview;
