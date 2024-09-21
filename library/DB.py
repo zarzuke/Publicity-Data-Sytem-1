@@ -138,7 +138,7 @@ def get_works_client(client):
                 SELECT p.projectName, dateProject.projectDateStart, 
                 chargeProject.projectChargeTotalPayment,
                 clientProject.projectClientName, clientProject.projectClientNumber,
-                p.projectDescript,p.projectWorker, p.projectId
+                p.projectDescript, p.projectId, p.projectWorker
                 FROM projects p
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
