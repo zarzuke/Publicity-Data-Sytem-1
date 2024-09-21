@@ -104,8 +104,9 @@ def try_work(id):
     return render_template("work.html",user=g.user,details=work,types=types,nor=id)
 
 def try_client(client):
-    data=get_works_client(client)
-    return render_template("Client.html",user=g.user,filas=data)
+    work,types=get_works_client(client)
+    combine=zip(work,types)
+    return render_template("design.html",user=g.user,filas=combine)
 
 def save_files():
     pass

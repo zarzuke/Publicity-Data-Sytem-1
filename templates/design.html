@@ -108,7 +108,7 @@
         <div class="card-list" id="cardList">
             {% for item, item2 in filas %}
             <div class="card-item" data-job-type="designer" style="cursor: pointer;">
-                <a href="{{ url_for('work', user=item[6] )}}" style="text-decoration: none;color: black">
+                <a href="{{ url_for('work', user=item[7] )}}" style="text-decoration: none;color: black">
                     <img src="../static/img/editor.jpg" alt="Card Image">
                     <p class="card-title">{{ item[0] }}</p>
                     <p class="card-name-container">
@@ -119,7 +119,13 @@
                         <span class="date">{{ item[1] }}</span>
                         <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
                     </p>
-                    <p class="card-description">{{ item2 }}</p>
+                    <div class="job-types-wrapper">
+                        <div class="job-types-container" id="jobTypesContainer">
+                            {% for t in item2 %}
+                            <span class="types job-type-{{ t | lower | replace(' ', '-') }}">{{ t }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
                     <div class="actions">
                         <div class="arrow">
                             <i class="fas fa-arrow-right card-icon" title="Abrir"></i>

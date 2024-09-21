@@ -51,8 +51,6 @@ def settings():
 def settings_user():
     return render_template("settings-user.html")
 
-
-##
 @app.route('/work/<string:user>')
 def work(user):
     session['user'] = user
@@ -66,7 +64,6 @@ def update(user):
     if comments:
         try_comments(comments,user)
     return redirect(url_for('work', user=user))
-
 
 @app.route("/Clients/<string:client>")
 def client(client):
@@ -99,6 +96,7 @@ def ending():
     
 @app.route("/delete/<string:id>")
 def delete(id):
+    #save_record(id)
     delete_projects(id)
     return redirect(url_for("login"))
 

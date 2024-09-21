@@ -18,7 +18,8 @@ def project_inc():
         remaining = request.form["down-payment"]
         details = request.form["description"]
         client_name=name+" "+lastname
-        
+        currency = request.form.get("currency")
+
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
 
@@ -41,9 +42,9 @@ def project_inc():
                        (SELECT projectClientId FROM clientProject WHERE projectClientName == ?) 
                        WHERE projectId == ?""",(client_name, id))
 
-        cursor.execute("INSERT INTO chargeProject (projectChargeId,projectChargeInstallment, "
-                   "projectChargeBalance, projectChargeTotalPayment) VALUES (?, ?, ?, ?)",
-                   (id, remaining, mid, total))
+        cursor.execute("INSERT INTO chargeProject (projectChargeId, projectChargeCurrency, projectChargeInstallment, "
+                   "projectChargeBalance, projectChargeTotalPayment) VALUES (?, ?, ?, ?, ?)",
+                   (id, currency, remaining, mid, total))
 
         cursor.execute("INSERT INTO dateProject (projectDateId,projectDateStart) VALUES (?, ?)",
                    (id, date))
@@ -145,8 +146,22 @@ def get_works_client(client):
                 WHERE projectClientName == ?
                 """,(client,))
     filas = cursor.fetchall()
+    cursor.execute("""
+                    SELECT projectTypeName, projectId
+                    FROM ManyTypes m
+                    INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                    """)
+    types=cursor.fetchall()
+    tipos=[]
+    for f in filas:
+        lista = [] 
+        for t in types:
+            if f[7] == t[1]:
+                lista.append(t[0])
+        tipos.append(lista)
+
     conn.close()
-    return filas
+    return filas,tipos
 
 def change_phase(id):
     conn = sqlite3.connect('library/database.db')
@@ -288,3 +303,30 @@ def get_clients01():
         new=i[0].split()
         list.append(new)
     return list,numbers
+
+def save_record(id):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("""SELECT projectClientName, projectChargeTotalPayment, projectDateStart
+                    FROM projects
+                    INNER JOIN clientProject ON projectClient = projectClientId
+                    INNER JOIN chargeProject ON projectCharge = projectChargeId
+                    INNER JOIN dateProject ON projectDate = projectDateId
+                    WHERE projectId = ?""",(id,))
+    record = cursor.fetchone()
+    cursor.execute("""
+                SELECT projectTypeName
+                FROM ManyTypes m
+                INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                WHERE projectId == ?
+                """,(id,))
+    types=cursor.fetchall()
+    
+    name,payment,date = record
+    types_str = str()
+    for t in types:
+        types_str = types_str + "," + t[0]
+    
+    cursor.execute("INSERT INTO record (recordName,recordPayment,recordDate,recordTypeWork) VALUES (?,?,?,?)",(name,payment,date,types_str))
+    conn.commit()
+    conn.close()
