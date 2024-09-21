@@ -146,8 +146,22 @@ def get_works_client(client):
                 WHERE projectClientName == ?
                 """,(client,))
     filas = cursor.fetchall()
+    cursor.execute("""
+                    SELECT projectTypeName, projectId
+                    FROM ManyTypes m
+                    INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                    """)
+    types=cursor.fetchall()
+    tipos=[]
+    for f in filas:
+        lista = [] 
+        for t in types:
+            if f[7] == t[1]:
+                lista.append(t[0])
+        tipos.append(lista)
+
     conn.close()
-    return filas
+    return filas,tipos
 
 def change_phase(id):
     conn = sqlite3.connect('library/database.db')
