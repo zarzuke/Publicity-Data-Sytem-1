@@ -97,7 +97,7 @@
                     <div class="toggle-switch">
                         <span class="switch"></span>
                     </div>
-                </li>             
+                </li>
             </div>
         </div>
     </nav>
@@ -145,7 +145,8 @@
                             <select id="existing-users" name="existing-users" onchange="autocompleteUser()">
                                 <option value="">Seleccione un cliente</option>
                                 {% for names, numbers in clients %}
-                                <option value="1" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">{{ names[0] }}
+                                <option value="1" data-name="{{ names[0] }}" data-surname="{{ names[1] }}"
+                                    data-phone="{{numbers[0]}}">{{ names[0] }}
                                     {{ names[1] }}</option>
                                 {% endfor %}
                             </select>
@@ -241,6 +242,31 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Destino:</label>
+                            <div class="destination-selects">
+                                <select id="role1" name="role1">
+                                    <option value="">Diseñador</option>
+                                    <option value="test1">Juan</option>
+                                    <option value="test2">Maria</option>
+                                    <option value="test3">Pedro</option>
+                                </select>
+                                <select id="role2" name="role2">
+                                    <option value="">Elaborador</option>
+                                    <option value="test1">Juan</option>
+                                    <option value="test2">Maria</option>
+                                    <option value="test3">Pedro</option>
+                                </select>
+                                <select id="role3" name="role3">
+                                    <option value="">Instalador</option>
+                                    <option value="test1">Juan</option>
+                                    <option value="test2">Maria</option>
+                                    <option value="test3">Pedro</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="total-cost">Costo total:</label>
@@ -287,11 +313,13 @@
                                 <button type="reset" class="reset-btn">Restablecer</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
                 <div class="preview-section">
                     <div class="preview-card-item">
-                        <img id="preview-image" src="default-image.jpg" alt="Imagen de previsualización" class="card-image">
+                        <img id="preview-image" src="default-image.jpg" alt="Imagen de previsualización"
+                            class="card-image">
                         <p class="card-title preview-card-title"></p> <!-- Título -->
                         <div class="preview-card-name card-name-container">
                             <span class="card-name"></span> <span class="card-surname"></span>

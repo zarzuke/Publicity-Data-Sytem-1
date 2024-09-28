@@ -725,7 +725,7 @@ body.dark .preview-card-title {
 }
 
 body.dark .card-item .card-name,
-.preview-card-name {
+body.dark .preview-card-name {
     color: #d4d4d4;
 }
 
@@ -913,6 +913,7 @@ body.dark .preview-section .preview-card-item {
 }
 
 .form-group select {
+    
     width: 100%;
     /* Ancho completo */
     padding: 0.5rem;
@@ -1309,3 +1310,20 @@ body.dark .form-group textarea:focus {
     opacity: 1;
     visibility: visible;
 }
+
+.destination-selects {
+    display: flex; /* Utiliza flexbox para alinear en fila */
+}
+
+.destination-selects select { /* Permite que cada selector ocupe el mismo espacio */
+    width: 271px; /* Permite que los selectores se reduzcan en tamaño si es necesario */
+    margin-right: 10px; /* Espacio entre selectores, excepto el último */
+}
+
+/* Elimina el margen derecho del último selector */
+.destination-selects select:last-child {
+    margin-right: 0; /* Sin margen derecho en el último selector */
+}
+
+
+

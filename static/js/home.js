@@ -481,3 +481,4 @@ function startPreviewScrolling(container) {
 
     scrollingPreview = requestAnimationFrame(scroll);
 }
+
