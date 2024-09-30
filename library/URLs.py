@@ -108,8 +108,29 @@ def try_client(client):
     combine=zip(work,types)
     return render_template("design.html",user=g.user,filas=combine)
 
-def save_files():
-    pass
+def try_settings():
+    user = g.user
+    print(user)
+    return render_template("settings-user.html",user=g.user)
+
+def try_record():
+    filas = get_record()
+    return render_template("settings-record.html",user=g.user,filas=filas )
+
+def try_record_file():
+    filas = created_record()
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Sheet1"
+    
+    for fila in filas:
+        ws.append(fila)
+    
+    buffer = io.BytesIO()
+    wb.save(buffer)
+    buffer.seek(0)
+    
+    return send_file(buffer, as_attachment=True, download_name='record.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 def try_delete(id):
     delete_projects(id)

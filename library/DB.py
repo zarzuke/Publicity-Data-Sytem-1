@@ -1,6 +1,8 @@
 import sqlite3 
-from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
+from flask import Flask, render_template, request, make_response, redirect, url_for, flash, session, g, send_file  
 import os
+import openpyxl
+import io
 
 def project_inc():
     if request.method == "POST":
@@ -337,6 +339,7 @@ def save_record(id):
     conn.commit()
     conn.close()
     
+<<<<<<< Updated upstream
 def get_workers():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
@@ -348,3 +351,28 @@ def get_workers():
     install=cursor.fetchall()
     conn.close()
     return design,craft,install
+=======
+def get_record():
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM record")
+    filas = cursor.fetchall()
+    print(filas)
+    conn.close()
+    return filas
+
+import io
+from openpyxl import Workbook
+
+def created_record():
+    # Conectar a la base de datos
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM record")
+    filas = cursor.fetchall()
+    conn.close()
+    filas.insert(0,("id","Nombre","Pago","Fecha","TipoDeTrabajo"))
+    print(filas)
+    return filas
+
+>>>>>>> Stashed changes

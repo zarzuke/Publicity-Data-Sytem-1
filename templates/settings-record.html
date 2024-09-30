@@ -96,44 +96,29 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="text">Ajustes</div>
-        </div>
-        <div class="form-container">
-            <div class="settings-options">
-                <div class="setting-option">
-                    <a href="{{ url_for('settings_user') }}">
-                        <i class="fas fa-users"></i>
-                        <span>Gestionar Usuarios</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="{{ url_for('settings_record') }}">
-                        <i class="fas fa-clock"></i>
-                        <span>Historial</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-profile.html">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Perfil</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-security.html">
-                        <i class="fas fa-lock"></i>
-                        <span>Seguridad</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-notifications.html">
-                        <i class="fas fa-bell"></i>
-                        <span>Notificaciones</span>
-                    </a>
-                </div>
-                <!-- Agregar más opciones según sea necesario -->
+            <div class="back-button">
+                <a href="javascript:history.back()" class="back-btn">
+                    <i class='bx bx-chevron-left' ></i> <!-- Puedes cambiar el ícono aquí -->
+                </a>
+                <div class="text">Historial</div>
             </div>
         </div>
+        <div class="grid-container">
+            {% for item in filas %}
+                {% for item2 in item %}
+                    <div class="grid-item">{{ item2 }}</div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <form action="{{ url_for('create_record') }}" target="response_frame">
+            <div class="button-container">
+                <button class="submit-button" type="submit" id="saveButton">Guardar</button>
+            </div>
+        </form>
+        <iframe name="response_frame" style="border:none; width:100%; height:50px;"></iframe>
     </section>
     <script src="../static/js/sidebar.js"></script>
+    
 </body>
 </html>
+

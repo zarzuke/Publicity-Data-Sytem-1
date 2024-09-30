@@ -429,5 +429,47 @@ body.dark .setting-option i {
     color: #ccc; /* Color del icono en modo oscuro */
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 2px;
+    padding: 10px;
+    width: 80%; 
+    margin: 0 auto; 
+    margin-bottom: 20px;
+}
 
+.grid-item {
+    background-color: #3a3b3c;
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    color: #ccc
+}
 
+.grid-item:hover {
+    background-color: #A9A9A9; /* Cambia el color de fondo al pasar el ratón */
+}
+
+.grid-item:active {
+    transform: scale(0.95); /* Cambia a dorado cuando está activo */
+}
+
+.submit-button {
+    margin-top: 10px; /* Espacio entre el textarea y el botón */
+    padding: 12px 24px; /* Tamaño del botón */
+    background-color: #5f5cfe; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background 0.3s; /* Transición suave para efectos */
+    font-size: 16px; /* Tamaño de fuente */
+}
+.submit-button:hover {
+    background-color: #5c67fe; /* Color al pasar el mouse */
+}
+
+.button-container {
+    text-align: center;
+}

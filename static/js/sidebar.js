@@ -87,3 +87,25 @@ closeButton.addEventListener('click', () => {
   modalBackdrop.classList.remove('visible');
   document.body.style.overflow = 'auto'; // Restaura el scroll
 });
+
+document.querySelectorAll('.grid-item').forEach(item => {
+  item.addEventListener('click', () => {
+      item.classList.toggle('active');
+  });
+});
+
+document.getElementById('saveButton').addEventListener('click', function() {
+  fetch('/download')
+      .then(response => response.blob())
+      .then(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'record.xlsx';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+      })
+      .catch(error => console.error('Error al descargar el archivo:', error));
+});
