@@ -9,7 +9,7 @@ def project_inc():
         lastname = request.form["surname"]
         phone = request.form["phone"]
         date = request.form["date"]
-        job_type = request.form.getlist('job-type')  # Cambio de nombre aquí 
+        job_type = request.form.getlist('job-type')
         total = int(request.form["total-cost"])
         mid = int(request.form["down-payment"])
         remaining = int(request.form["remaining"])
@@ -19,12 +19,15 @@ def project_inc():
         details = request.form["description"]
         client_name=name+" "+lastname
         currency = request.form.get("currency")
+        designer=request.form["designer"]
+        crafter=request.form["crafter"]
+        installer=request.form["installer"]
 
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO projects (projectName, projectDescript, projectPhase) "
-                    "VALUES (?,?,?)", (title, details,1,))
+        cursor.execute("INSERT INTO projects (projectName, projectDescript, projectPhase, projectDesigner, projectCrafter, projectInstaller) "
+                    "VALUES (?,?,?,?,?,?)", (title, details,1,designer,crafter,installer,))
 
         id = cursor.lastrowid
         cursor.execute("UPDATE projects SET projectDate = ? WHERE projectId == ?",(id,id))
@@ -118,6 +121,9 @@ def get_details(id):
                 WHERE projectId == ?
                 """,(id,))
     filas = cursor.fetchall()
+    details=filas[0][9].split('\n')
+    info=list(filas[0])
+    info[9]=details
     cursor.execute("""
                 SELECT projectTypeName
                 FROM ManyTypes m
@@ -129,7 +135,7 @@ def get_details(id):
     for t in types:
         tipos.append(t[0])
     conn.close()
-    return filas,tipos,id
+    return info,tipos,id
 
 def get_works_client(client):
     conn = sqlite3.connect('library/database.db')
@@ -138,7 +144,7 @@ def get_works_client(client):
                 SELECT p.projectName, dateProject.projectDateStart, 
                 chargeProject.projectChargeTotalPayment,
                 clientProject.projectClientName, clientProject.projectClientNumber,
-                p.projectDescript, p.projectId, p.projectWorker
+                p.projectDescript, p.projectId, p.projectDesigner
                 FROM projects p
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -168,7 +174,7 @@ def change_phase(id):
     cursor = conn.cursor()
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchall()
-    cursor.execute("""UPDATE projects SET projectPhase == ?+1 WHERE projectId == ?""",(phase[0],id))
+    cursor.execute("""UPDATE projects SET projectPhase == ?+1 WHERE projectId == ?""",(phase[0][0],id))
     conn.commit()
     conn.close()
     
@@ -176,8 +182,8 @@ def return_phase(id):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
-    phase = cursor.fetchall()
-    cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0],id))
+    phase = cursor.fetchone()
+    cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0][0],id))
     conn.commit()
     conn.close()
 
@@ -225,7 +231,7 @@ def get_project_worker(worker):
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
-                WHERE projectWorker == ?
+                WHERE projectDesigner == ?
                 """,(worker,))
     filas = cursor.fetchall()
     cursor.execute("""
@@ -330,3 +336,15 @@ def save_record(id):
     cursor.execute("INSERT INTO record (recordName,recordPayment,recordDate,recordTypeWork) VALUES (?,?,?,?)",(name,payment,date,types_str))
     conn.commit()
     conn.close()
+    
+def get_workers():
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT userName FROM users WHERE userRol= 'Designer'")
+    design=cursor.fetchall()
+    cursor.execute("SELECT userName FROM users WHERE userRol= 'Crafter'")
+    craft=cursor.fetchall()
+    cursor.execute("SELECT userName FROM users WHERE userRol= 'Installer'")
+    install=cursor.fetchall()
+    conn.close()
+    return design,craft,install

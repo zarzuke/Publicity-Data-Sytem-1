@@ -11,14 +11,16 @@ window.onload = function() {
     ];
 
     cardItems.forEach((card, index) => {
-        // Asigna la imagen fija según el índice del card
+        // Asigna la imagen fija según el índice del card, repitiendo si es necesario
         const imgElement = card.querySelector('.card-image');
-        if (index < fixedImages.length) {
-            imgElement.src = fixedImages[index];
+        if (imgElement) {
+            imgElement.src = fixedImages[index % fixedImages.length];
         }
     });
 
     // Asignar la primera imagen para la previsualización
     const previewImage = document.getElementById('preview-image');
-    previewImage.src = fixedImages[0]; // Asignar imagen deseada para la previsualización
+    if (previewImage) {
+        previewImage.src = fixedImages[0]; // Asignar imagen deseada para la previsualización
+    }
 }

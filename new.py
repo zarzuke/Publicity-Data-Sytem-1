@@ -13,11 +13,6 @@ def before_request():
     else:
         g.user = None
 
-@app.route("/registro",methods=["POST","GET"])
-def signup():
-    function = try_signup()
-    return function
-
 @app.route("/",methods=["POST","GET"])
 def login():
     function = try_login()
@@ -45,11 +40,12 @@ def clients():
 
 @app.route("/settings")
 def settings():
-    return render_template("settings.html")
+    return render_template("settings.html",user=g.user)
 
-@app.route("/settings/manager")
+@app.route("/settings/manager",methods=["POST","GET"])
 def settings_user():
-    return render_template("settings-user.html")
+    function=try_signup()
+    return function
 
 @app.route('/work/<string:user>')
 def work(user):
@@ -105,6 +101,12 @@ def open_folder(id,nombre):
     function=try_open(id,nombre)
     return function
 
+@app.route('/next/<string:id>')
+def next(id):
+    print(id)
+    function=try_next(id)
+    return function
+    
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)

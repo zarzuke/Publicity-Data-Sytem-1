@@ -245,23 +245,20 @@
                         <div class="form-group">
                             <label>Destino:</label>
                             <div class="destination-selects">
-                                <select id="role1" name="role1">
-                                    <option value="">Diseñador</option>
-                                    <option value="test1">Juan</option>
-                                    <option value="test2">Maria</option>
-                                    <option value="test3">Pedro</option>
+                                <select id="role1" name="designer">
+                                    {% for desingers in design %}
+                                    <option value="{{desingers[0]}}">{{desingers[0]}}</option>
+                                    {% endfor %}
                                 </select>
-                                <select id="role2" name="role2">
-                                    <option value="">Elaborador</option>
-                                    <option value="test1">Juan</option>
-                                    <option value="test2">Maria</option>
-                                    <option value="test3">Pedro</option>
+                                <select id="role2" name="crafter">
+                                    {% for crafters in craft %}
+                                    <option value="{{crafters[0]}}">{{crafters[0]}}</option>
+                                    {% endfor %}
                                 </select>
-                                <select id="role3" name="role3">
-                                    <option value="">Instalador</option>
-                                    <option value="test1">Juan</option>
-                                    <option value="test2">Maria</option>
-                                    <option value="test3">Pedro</option>
+                                <select id="role3" name="installer">
+                                    {% for installers in install %}
+                                    <option value="{{installers[0]}}">{{installers[0]}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>

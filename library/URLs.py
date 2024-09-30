@@ -4,17 +4,16 @@ from library.DB import *
 import subprocess
 
 def try_signup():
-    bd = sqlite3.connect("library/database.db")
-    cursor = bd.cursor()
     if request.method=="POST":
+        bd = sqlite3.connect("library/database.db")
+        cursor = bd.cursor()
         username=request.form["username"]
         password=request.form["password"]
-        cursor.execute("INSERT INTO users (userName,userPassword) VALUES (?, ?)", (username, password))
+        role=request.form["role"]
+        cursor.execute("INSERT INTO users (userName,userPassword,userRol) VALUES (?, ?, ?)", (username, password, role,))
         bd.commit()
-        flash("Se ha registrado de forma exitosa")
-        bd.close()
-        return redirect(url_for("login"))
-    return render_template("signup.html")
+        bd.close()    
+    return render_template("settings-user.html",user=g.user)
 
 def try_login():
     if g.user:
@@ -42,9 +41,10 @@ def try_home():
         case 'Administrator':
             filas,tipos=get_project()
             names,numbers=get_clients01()
+            design,craft,install=get_workers()
             clients=zip(names,numbers)
             combine=zip(filas,tipos)
-            return render_template("home.html",user=g.user,filas=combine,clients=clients)
+            return render_template("home.html",user=g.user,filas=combine,clients=clients,design=design,craft=craft,install=install)
         case 'Designer':
             return redirect(url_for("designer", designer=g.user[0]))
         case _:
@@ -127,3 +127,6 @@ def try_open(id, nombre):
     else:
         return 'La carpeta no existe'
 
+def try_next(id):
+    change_phase(id)
+    return redirect(url_for('work', user=id))
