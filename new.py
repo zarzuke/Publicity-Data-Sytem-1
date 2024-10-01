@@ -42,11 +42,11 @@ def clients():
 def settings():
     return render_template("settings.html",user=g.user)
 
-<<<<<<< Updated upstream
 @app.route("/settings/manager",methods=["POST","GET"])
 def settings_user():
     function=try_signup()
-=======
+    return function
+
 @app.route("/settings/record")
 def settings_record():
     filas = try_record()
@@ -55,12 +55,6 @@ def settings_record():
 @app.route("/download")
 def create_record():
     function= try_record_file()
-    return function
-
-@app.route("/settings/manager")
-def settings_user():
-    function = try_settings()
->>>>>>> Stashed changes
     return function
 
 @app.route('/work/<string:user>')

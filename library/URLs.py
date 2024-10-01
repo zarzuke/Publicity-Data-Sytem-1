@@ -139,7 +139,7 @@ def try_comments(comments,user):
     update(comments,user)
 
 def try_open(id, nombre):
-    folder_path = f"trabajos\{id}.{nombre}"
+    folder_path = f"trabajos/{id}.{nombre}"
     print(folder_path)
     if os.path.exists(folder_path):
         if os.name == 'nt':  # Verifica si el sistema operativo es Windows

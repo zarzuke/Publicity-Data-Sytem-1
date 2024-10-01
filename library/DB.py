@@ -339,7 +339,15 @@ def save_record(id):
     conn.commit()
     conn.close()
     
-<<<<<<< Updated upstream
+def get_record():
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM record")
+    filas = cursor.fetchall()
+    print(filas)
+    conn.close()
+    return filas
+
 def get_workers():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
@@ -351,15 +359,6 @@ def get_workers():
     install=cursor.fetchall()
     conn.close()
     return design,craft,install
-=======
-def get_record():
-    conn = sqlite3.connect('library/database.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM record")
-    filas = cursor.fetchall()
-    print(filas)
-    conn.close()
-    return filas
 
 import io
 from openpyxl import Workbook
@@ -375,4 +374,3 @@ def created_record():
     print(filas)
     return filas
 
->>>>>>> Stashed changes
