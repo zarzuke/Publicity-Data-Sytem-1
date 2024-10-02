@@ -162,7 +162,7 @@
                                     <button class="submit-button" type="submit">Enviar</button>
                                 </form>
                                 
-                                <form action="{{ url_for('open_folder', id=nor, nombre=details[0][0]) }}"target="response_frame">
+                                <form action="{{ url_for('open_folder', id=nor, nombre=details[0]) }}"target="response_frame">
                                     <button class="additional-button" type="submit">Abrir Carpeta</button>
                                 </form>
                                 <form action="{{ url_for('next', id=nor) }}">

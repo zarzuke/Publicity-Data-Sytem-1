@@ -1,5 +1,5 @@
 import sqlite3 
-from flask import Flask, render_template, request,make_response,redirect,url_for,flash,session,g
+from flask import render_template, request,make_response,redirect,url_for,flash,session,g,jsonify
 from library.DB import *
 import subprocess
 
@@ -37,19 +37,12 @@ def try_login():
     return render_template("index.html")
 
 def try_home():
-    match g.user[1]:
-        case 'Administrator':
-            filas,tipos=get_project()
-            names,numbers=get_clients01()
-            design,craft,install=get_workers()
-            clients=zip(names,numbers)
-            combine=zip(filas,tipos)
-            return render_template("home.html",user=g.user,filas=combine,clients=clients,design=design,craft=craft,install=install)
-        case 'Designer':
-            return redirect(url_for("designer", designer=g.user[0]))
-        case _:
-            flash("Debe de iniciar sesión primero.")
-            return render_template("index.html")
+        filas,tipos=get_project()
+        names,numbers=get_clients01()
+        design,craft,install=get_workers()
+        clients=zip(names,numbers)
+        combine=zip(filas,tipos)
+        return render_template("home.html",user=g.user,filas=combine,clients=clients,design=design,craft=craft,install=install)
 
 def try_design():
     estado = 'Diseño'
@@ -139,15 +132,20 @@ def try_comments(comments,user):
     update(comments,user)
 
 def try_open(id, nombre):
-    folder_path = f"trabajos/{id}.{nombre}"
-    print(folder_path)
-    if os.path.exists(folder_path):
-        if os.name == 'nt':  # Verifica si el sistema operativo es Windows
-            subprocess.Popen(f'explorer {folder_path}')
-        return 'Carpeta abierta'
-    else:
-        return 'La carpeta no existe'
-
+    folder_path = f"trabajos\\{id}.{nombre}"
+    try:
+        os.startfile(folder_path)  # Para Windows
+        return jsonify({"status": "success", "message": f"Opened folder: {folder_path}"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
+    
+    
 def try_next(id):
-    change_phase(id)
-    return redirect(url_for('work', user=id))
+    phase=check_phase(id)
+    if phase[0][0]==4:
+        save_record(id)
+        delete_projects(id)
+        return redirect(url_for("home"))
+    else:
+        change_phase(id)
+        return redirect(url_for('work', user=id))

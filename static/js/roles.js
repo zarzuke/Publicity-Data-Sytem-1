@@ -17,10 +17,29 @@ document.addEventListener('DOMContentLoaded', function() {
         entrega.style.display = 'none';
         home.style.display = 'none';
         setting.style.display = 'none';
-    } else if (role === 'Administrator') {
+    } 
+    else if (role === 'Administrator') {
         cdiseño.style.display = 'block';
         aprobacion.style.display = 'block';
         elaboracion.style.display = 'block';
         entrega.style.display = 'block';
+    }
+    else if (role === 'Crafter') {
+        client.style.display = 'none';
+        diseño.style.display = 'none';
+        aprobacion.style.display = 'block';
+        elaboracion.style.display = 'none';
+        entrega.style.display = 'none';
+        home.style.display = 'none';
+        setting.style.display = 'none';
+    }
+    else if (role === 'Installer') {
+        client.style.display = 'none';
+        diseño.style.display = 'none';
+        aprobacion.style.display = 'none';
+        elaboracion.style.display = 'none';
+        entrega.style.display = 'Block';
+        home.style.display = 'none';
+        setting.style.display = 'none';
     }
   });

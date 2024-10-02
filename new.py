@@ -1,4 +1,4 @@
-from flask import Flask,session,g
+from flask import Flask,session,g,jsonify
 from library.URLs import *
 from library.DB import delete_projects
 app = Flask(__name__)
@@ -106,10 +106,12 @@ def delete(id):
     delete_projects(id)
     return redirect(url_for("login"))
 
-@app.route('/open/<string:id>/<string:nombre>', methods=['POST'])
-def open_folder(id,nombre):
-    function=try_open(id,nombre)
-    return function
+@app.route('/open/<string:id>/<string:nombre>')
+def open_folder(id, nombre):
+    try:
+        return try_open(id, nombre)
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
 
 @app.route('/next/<string:id>')
 def next(id):

@@ -176,9 +176,17 @@ def change_phase(id):
     cursor = conn.cursor()
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchall()
+    print(phase)
     cursor.execute("""UPDATE projects SET projectPhase == ?+1 WHERE projectId == ?""",(phase[0][0],id))
     conn.commit()
     conn.close()
+    
+def check_phase(id):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
+    phase = cursor.fetchall()
+    return phase
     
 def return_phase(id):
     conn = sqlite3.connect('library/database.db')
