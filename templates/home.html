@@ -245,19 +245,19 @@
                         <div class="form-group">
                             <label>Personal a Cargo:</label>
                             <div class="destination-selects">
-                                <select id="role1" name="designer">}
+                                <select id="role1" name="designer" required>
                                     <option value="">Diseñador</option>
                                     {% for desingers in design %}
                                     <option value="{{desingers[0]}}">{{desingers[0]}}</option>
                                     {% endfor %}
                                 </select>
-                                <select id="role2" name="crafter">
+                                <select id="role2" name="crafter" required>
                                     <option value="crafter">Impresion/Corte</option>
                                     {% for crafters in craft %}
                                     <option value="{{crafters[0]}}">{{crafters[0]}}</option>
                                     {% endfor %}
                                 </select>
-                                <select id="role3" name="installer">
+                                <select id="role3" name="installer" required>
                                     <option value="Installer">Instalador</option>
                                     {% for installers in install %}
                                     <option value="{{installers[0]}}">{{installers[0]}}</option>
