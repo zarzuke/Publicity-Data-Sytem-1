@@ -37,23 +37,30 @@ def try_login():
     return render_template("index.html")
 
 def try_home():
-        filas,tipos=get_project()
-        names,numbers=get_clients01()
-        design,craft,install=get_workers()
-        clients=zip(names,numbers)
-        combine=zip(filas,tipos)
-        return render_template("home.html",user=g.user,filas=combine,clients=clients,design=design,craft=craft,install=install)
+    match g.user[1]:
+        case 'Administrator':
+            filas,tipos=get_project()
+            names,numbers=get_clients01()
+            design,craft,install=get_workers()
+            clients=zip(names,numbers)
+            combine=zip(filas,tipos)
+            return render_template("home.html",user=g.user,filas=combine,clients=clients,design=design,craft=craft,install=install)
+        case 'Designer':
+            return redirect(url_for("design", designer=g.user[1]))
+        case 'Crafter':
+            return redirect(url_for("crafting"))
+        case 'Installer':
+            return redirect(url_for("ending"))
+        case _:
+            flash("Debe de iniciar sesión primero.")
+            return render_template("index.html")
 
 def try_design():
     estado = 'Diseño'
-    if g.user[1] == 'Administrator':
-        filas,tipos=get_project_phase(1)
-        combine=zip(filas,tipos)
-        return render_template("design.html",user=g.user,filas=combine,estado=estado)
-    else:
-        filas,tipos=get_project_worker(g.user[0])
-        combine=zip(filas,tipos)
-        return render_template("design.html",user=g.user,filas=combine,estado=estado)
+    filas,tipos=get_project_phase(1)
+    combine=zip(filas,tipos)
+    return render_template("design.html",user=g.user,filas=combine,estado=estado)
+
     
 def try_approval():
     estado = 'Aprobación'
@@ -73,7 +80,6 @@ def try_ending():
     combine=zip(filas,tipos)
     return render_template("design.html",user=g.user,filas=combine,estado=estado)
     
-
 def try_logout():
     session.pop("username", None)
     flash("Sesión cerrada correctamente.")
