@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
     else if (role === 'Crafter') {
         client.style.display = 'none';
         diseño.style.display = 'none';
-        aprobacion.style.display = 'block';
-        elaboracion.style.display = 'none';
+        aprobacion.style.display = 'none';
+        elaboracion.style.display = 'block';
         entrega.style.display = 'none';
         home.style.display = 'none';
         setting.style.display = 'none';

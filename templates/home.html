@@ -243,19 +243,22 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Destino:</label>
+                            <label>Personal a Cargo:</label>
                             <div class="destination-selects">
-                                <select id="role1" name="designer">
+                                <select id="role1" name="designer">}
+                                    <option value="">Diseñador</option>
                                     {% for desingers in design %}
                                     <option value="{{desingers[0]}}">{{desingers[0]}}</option>
                                     {% endfor %}
                                 </select>
                                 <select id="role2" name="crafter">
+                                    <option value="crafter">Impresion/Corte</option>
                                     {% for crafters in craft %}
                                     <option value="{{crafters[0]}}">{{crafters[0]}}</option>
                                     {% endfor %}
                                 </select>
                                 <select id="role3" name="installer">
+                                    <option value="Installer">Instalador</option>
                                     {% for installers in install %}
                                     <option value="{{installers[0]}}">{{installers[0]}}</option>
                                     {% endfor %}

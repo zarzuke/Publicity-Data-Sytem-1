@@ -123,6 +123,7 @@ def get_details(id):
                 WHERE projectId == ?
                 """,(id,))
     filas = cursor.fetchall()
+    print(filas)
     details=filas[0][9].split('\n')
     info=list(filas[0])
     info[9]=details
@@ -284,27 +285,18 @@ def delete_projects(id):
     if os.path.exists(direction):
         os.rename(direction,direction+"[Finished]")
 
-def update(comments,user):
+def update(user,worker):
     if request.method == "POST":
         new_comments = request.form['comments']
-        try:
-            conn = sqlite3.connect('library/database.db')
-            cursor = conn.cursor()
-            if new_comments:
-                cursor.execute("SELECT projectDescript, projectPhase FROM projects WHERE projectId = ?", (user,))
-                result = cursor.fetchone()
-                if result:
-                    old_comments, phase = result
-                    if old_comments:
-                        all_comments = old_comments + f"\n" + new_comments
-                        cursor.execute("UPDATE projects SET projectDescript = ? WHERE projectId = ?", (all_comments, user))
-                    else:
-                        cursor.execute("UPDATE projects SET projectDescript = ? WHERE projectId = ?", (new_comments, user))
-            conn.commit()
-        except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
-        finally:
-            conn.close()
+        conn = sqlite3.connect('library/database.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT projectDescript FROM projects WHERE projectId = ?", (user,))
+        result = cursor.fetchall()
+        old_comments= f"{result[0][0]}"
+        all_comments = old_comments + f"\n" + worker+f": "+ new_comments
+        cursor.execute("UPDATE projects SET projectDescript = ? WHERE projectId = ?", (all_comments, user))
+        conn.commit()
+        conn.close()
             
 def get_clients01():
     conn = sqlite3.connect('library/database.db')
