@@ -63,13 +63,10 @@ def work(user):
     function = try_work(user)
     return function
     
-@app.route('/update/<string:user>', methods=['POST'])
-def update(user):
-    user = session.get('user')
-    comments = request.form['comments']
-    if comments:
-        try_comments(comments,user)
-    return redirect(url_for('work', user=user))
+@app.route('/update/<string:id>/<string:user>', methods=['POST'])
+def update(id,user):
+    try_comments(id,user)
+    return redirect(url_for('work', user=id))
 
 @app.route("/Clients/<string:client>")
 def client(client):

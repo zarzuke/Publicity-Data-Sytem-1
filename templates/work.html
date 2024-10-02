@@ -156,7 +156,7 @@
                     </div>
                     <div class="comment-section">
                         <div class="input-container">
-                            <form action="{{ url_for('update', user=user) }}" method="post">
+                            <form action="{{ url_for('update', id=nor, user=user[0]) }}" method="post">
                             <textarea class="comment-input" name="comments" rows="4" placeholder="Escribe tu comentario..."></textarea>
                             <div class="button-container">
                                     <button class="submit-button" type="submit">Enviar</button>

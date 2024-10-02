@@ -128,8 +128,9 @@ def try_record_file():
 def try_delete(id):
     delete_projects(id)
     
-def try_comments(comments,user):
-    update(comments,user)
+def try_comments(user,worker):
+    update(user,worker)
+    return redirect(url_for("work",user=user))
 
 def try_open(id, nombre):
     folder_path = f"trabajos\\{id}.{nombre}"
