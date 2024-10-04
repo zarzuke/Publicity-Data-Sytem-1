@@ -1,8 +1,5 @@
 import sqlite3 
 from flask import Flask, render_template, request, make_response, redirect, url_for, flash, session, g, send_file  
-import os
-import openpyxl
-import io
 
 def project_inc():
     if request.method == "POST":
@@ -315,7 +312,7 @@ def get_clients01():
 def save_record(id):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
-    cursor.execute("""SELECT projectClientName, projectChargeTotalPayment, projectDateStart
+    cursor.execute("""SELECT projectName ,projectClientName, projectChargeTotalPayment, projectChargeCurrency, projectDateStart
                     FROM projects
                     INNER JOIN clientProject ON projectClient = projectClientId
                     INNER JOIN chargeProject ON projectCharge = projectChargeId
@@ -330,21 +327,55 @@ def save_record(id):
                 """,(id,))
     types=cursor.fetchall()
     
-    name,payment,date = record
+    name,client,payment,currency,date = record
     types_str = str()
     for t in types:
         types_str = types_str + "," + t[0]
     
-    cursor.execute("INSERT INTO record (recordName,recordPayment,recordDate,recordTypeWork) VALUES (?,?,?,?)",(name,payment,date,types_str))
+    cursor.execute("INSERT INTO record (recordName,recordClient,recordPayment,recordCurrency,recordDate,recordTypeWork) VALUES (?,?,?,?,?)",(name,client,payment,currency,date,types_str))
     conn.commit()
     conn.close()
     
 def get_record():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM record")
+    cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork FROM record 
+                INNER JOIN typeCurrency ON recordCurrency = currencyTypeId""")
     filas = cursor.fetchall()
-    print(filas)
+    conn.close()
+    
+    cabecera = ['Nombre','Cliente','Precio','Divisa','Fecha','Tipo de Trabajo']
+    filas.insert(0,cabecera)
+    return filas
+
+def record(client, date):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    filas = []  # Inicializar filas
+
+    if client and date:
+        date = date[6]+date[7]
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+                          FROM record 
+                          INNER JOIN typeCurrency ON recordCurrency = currencyTypeId
+                          WHERE recordClient = ? AND strftime('%W', recordDate) = ?""", (client, date))
+    elif client:
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+                          FROM record 
+                          INNER JOIN typeCurrency ON recordCurrency = currencyTypeId
+                          WHERE recordClient = ?""", (client,))
+    elif date:
+        date = date[6]+date[7]
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+                          FROM record 
+                          INNER JOIN typeCurrency ON recordCurrency = currencyTypeId
+                          WHERE strftime('%W', recordDate) = ?""", (date,))
+    else:
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+                          FROM record 
+                          INNER JOIN typeCurrency ON recordCurrency = currencyTypeId""")
+    
+    filas = cursor.fetchall()
     conn.close()
     return filas
 
@@ -360,17 +391,4 @@ def get_workers():
     conn.close()
     return design,craft,install
 
-import io
-from openpyxl import Workbook
-
-def created_record():
-    # Conectar a la base de datos
-    conn = sqlite3.connect('library/database.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM record")
-    filas = cursor.fetchall()
-    conn.close()
-    filas.insert(0,("id","Nombre","Pago","Fecha","TipoDeTrabajo"))
-    print(filas)
-    return filas
 

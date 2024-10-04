@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/css/settings.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <nav class="sidebar close">
@@ -103,22 +104,64 @@
                 <div class="text">Historial</div>
             </div>
         </div>
-        <div class="grid-container">
-            {% for item in filas %}
-                {% for item2 in item %}
-                    <div class="grid-item">{{ item2 }}</div>
+        <form action="{{ url_for('create_record') }}" target="response_frame" method="POST">
+            <div class="container">
+                <div class="select-container" id="existing-user-select">
+                    <select class="select" id="select-client" name="client" onchange="autocompleteUser()">
+                        <option value="">Seleccione un cliente</option>
+                        {% for names, numbers in clients %}
+                        <option value="{{ names[0] }} {{ names[1] }}" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">
+                            {{ names[0] }} {{ names[1] }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>            
+                <div class="select-container">
+                    <input type="week" id="date" name="date" class="select-date">
+                    <button id="updateButton" class="button" type="button">Cargar</button>
+                </div>
+            </div>
+            <div class="grid-container">
+                {% for item in filas %}
+                    {% for item2 in item %}
+                        <div class="grid-item">{{ item2 }}</div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        </div>
-        <form action="{{ url_for('create_record') }}" target="response_frame">
+            </div>
             <div class="button-container">
                 <button class="submit-button" type="submit" id="saveButton">Guardar</button>
             </div>
         </form>
+                    
         <iframe name="response_frame" style="border:none; width:100%; height:50px;"></iframe>
     </section>
+    <script>
+        $(document).ready(function() {
+            $('#updateButton').click(function() {
+                var client = $('#select-client').val();
+                var date = $('#date').val();
+                console.log('Cliente:', client); // Depuración
+                console.log('Fecha:', date); // Depuración
+        
+                $.post('/update_grid', {client: client, date: date})
+                    .done(function(data) {
+                        console.log('Datos recibidos:', data); // Depuración
+                        var gridContainer = $('.grid-container');
+                        gridContainer.empty();
+                        data.forEach(function(row) {
+                            row.forEach(function(cell) {
+                                var div = $('<div>').addClass('grid-item').text(cell);
+                                gridContainer.append(div);
+                            });
+                        });
+                    })
+                    .fail(function() {
+                        alert('Error al actualizar la cuadrícula.');
+                    });
+            });
+        });                                                         
+    </script>
     <script src="../static/js/sidebar.js"></script>
-    
 </body>
 </html>
 

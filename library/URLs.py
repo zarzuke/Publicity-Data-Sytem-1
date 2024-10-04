@@ -1,7 +1,10 @@
 import sqlite3 
-from flask import render_template, request,make_response,redirect,url_for,flash,session,g,jsonify
+from flask import render_template, request,make_response,redirect,url_for,flash,session,g,jsonify,send_file
 from library.DB import *
 import subprocess
+import openpyxl
+from openpyxl import load_workbook
+import io
 
 def try_signup():
     if request.method=="POST":
@@ -114,22 +117,37 @@ def try_settings():
 
 def try_record():
     filas = get_record()
-    return render_template("settings-record.html",user=g.user,filas=filas )
+    names,numbers=get_clients01()
+    design,craft,install=get_workers()
+    clients=zip(names,numbers)
+    return render_template("settings-record.html",user=g.user,filas=filas,clients=clients)
 
-def try_record_file():
-    filas = created_record()
-    wb = Workbook()
-    ws = wb.active
-    ws.title = "Sheet1"
+def try_record_fildered(client,date):
+    filas = record(client,date)
     
-    for fila in filas:
-        ws.append(fila)
-    
-    buffer = io.BytesIO()
-    wb.save(buffer)
-    buffer.seek(0)
-    
-    return send_file(buffer, as_attachment=True, download_name='record.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    cabecera = ['Nombre', 'Cliente', 'Precio', 'Divisa', 'Fecha', 'Tipo de Trabajo']
+    filas.insert(0, cabecera)
+    return filas
+
+def try_record_file(client, date):
+    filas = record(client, date)
+    try:
+        wb = load_workbook('Plantilla.xlsx')
+        ws = wb.active
+        
+        start_row = 3
+        for i, fila in enumerate(filas, start=start_row):
+            for j, value in enumerate(fila, start=1):
+                ws.cell(row=i, column=j, value=value)
+        
+        buffer = io.BytesIO()
+        wb.save(buffer)
+        buffer.seek(0)
+        
+        return send_file(buffer, as_attachment=True, download_name='record.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    except Exception as e:
+        print(f"Error al procesar el archivo de Excel: {e}")
+        return None
 
 def try_delete(id):
     delete_projects(id)

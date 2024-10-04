@@ -431,7 +431,7 @@ body.dark .setting-option i {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); 
+    grid-template-columns: repeat(6, 1fr); 
     gap: 2px;
     padding: 10px;
     width: 80%; 
@@ -472,4 +472,60 @@ body.dark .setting-option i {
 
 .button-container {
     text-align: center;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.select-container {
+    display: inline-block; /* Hace que los divs se alineen en línea */
+    margin-right: 10px; /* Espacio entre los botones */
+}
+
+/* Estilos para el botón */
+.select {  
+    padding: 12px 24px; /* Tamaño del botón */
+    background-color: #333; /* Fondo del botón */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    font-size: 1rem; /* Tamaño de fuente coherente */
+}
+
+/* Estilo al pasar el ratón */
+.select:hover {
+    border: 1px solid #555; /* Borde al pasar el ratón */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+}
+
+/* Estilos para el botón */
+.select-date {  
+    padding: 10px 15px; /* Tamaño del botón */
+    background-color: #333; /* Fondo del botón */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    font-size: 1rem; /* Tamaño de fuente coherente */
+}
+
+/* Estilo al pasar el ratón */
+.select-date:hover {
+    border: 1px solid #555; /* Borde al pasar el ratón */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+}
+
+.button {
+    padding: 12px 24px; /* Tamaño del botón */
+    background-color: #333; /* Fondo del botón */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    font-size: 1rem; /* Tamaño de fuente coherente */
+}
+
+/* Estilo al pasar el ratón */
+.button:hover {
+    border: 1px solid #555; /* Borde al pasar el ratón */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
 }

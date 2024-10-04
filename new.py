@@ -47,14 +47,27 @@ def settings_user():
     function=try_signup()
     return function
 
-@app.route("/settings/record")
+@app.route("/settings/record",methods=['GET', 'POST'])
 def settings_record():
-    filas = try_record()
-    return filas
+    function = try_record()
+    return function
 
-@app.route("/download")
+@app.route('/update_grid', methods=['POST'])
+def update_grid():
+    client = request.form.get('client')
+    date = request.form.get('date')
+    print(date)
+    filas = try_record_fildered(client,date)
+    return jsonify(filas)
+
+@app.route("/download", methods=["POST"])
 def create_record():
-    function= try_record_file()
+    client = request.form.get('client')
+    date = request.form.get('date')
+    
+    function = try_record_file(client, date)
+    if function is None:
+        return "Error processing the Excel file", 500
     return function
 
 @app.route('/work/<string:user>')
