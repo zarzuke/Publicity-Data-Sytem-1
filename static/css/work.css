@@ -181,3 +181,18 @@ body.dark-mode .info-title {
 .additional-button:hover {
     background-color: #9b9b9b; /* Color al pasar el mouse */
 }
+
+.flash-messages {
+    padding: 10px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.flash-message {
+    margin: 5px 0;
+    padding: 5px;
+    border-left: 4px solid #28a745; /* Color verde para mensajes de éxito */
+    color: #333;
+}
