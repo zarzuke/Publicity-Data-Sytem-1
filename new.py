@@ -76,12 +76,9 @@ def work(user):
     function = try_work(user)
     return function
     
-@app.route('/update')
-def update():
-    id=request.args.get("id")
-    user=request.args.get("user")
-    commets=request.args.get("comments")
-    try_comments(id,user,commets)
+@app.route('/update/<string:id>/<string:user>', methods=['POST'])
+def update(id,user):
+    try_comments(id,user)
     return redirect(url_for('work', user=id))
 
 @app.route("/Clients/<string:client>")
@@ -126,9 +123,10 @@ def open_folder(id, nombre):
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 
-@app.route('/next/<string:id>/<string:status>')
-def next(id,status):
-    function=try_next(id,status)
+@app.route('/next/<string:id>')
+def next(id):
+    print(id)
+    function=try_next(id)
     return function
     
 app.secret_key="12345"

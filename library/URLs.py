@@ -152,8 +152,8 @@ def try_record_file(client, date):
 def try_delete(id):
     delete_projects(id)
     
-def try_comments(user,worker,comments):
-    update(user,worker,comments)
+def try_comments(user,worker):
+    update(user,worker)
     return redirect(url_for("work",user=user))
 
 def try_open(id, nombre):
@@ -165,27 +165,12 @@ def try_open(id, nombre):
         return jsonify({"status": "error", "message": str(e)})
     
     
-def try_next(id,status):
+def try_next(id):
     phase=check_phase(id)
-    if status=="none":
-        flash('Datos incorrectos seleccione estatus')
-        return redirect(url_for('work', user=id))
     if phase[0][0]==4:
         save_record(id)
         delete_projects(id)
-        flash('Trabajo Finalizado')
         return redirect(url_for("home"))
-    elif phase[0][0]==1:
-        if status=="approved":
-            change_phase(id)
-            flash('Fase Aprovada')
-            return redirect(url_for('work', user=id))
     else:
-        if status=="approved":
-            change_phase(id)
-            flash('Fase Aprovada')
-            return redirect(url_for('work', user=id))
-        elif status=="canceled":
-            return_phase(id)
-            flash('Fase Negada')
-            return redirect(url_for('work', user=id))
+        change_phase(id)
+        return redirect(url_for('work', user=id))

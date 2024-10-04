@@ -9,7 +9,6 @@
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/scrollbar.css">
-    <link rel="stylesheet" href="../static/css/flash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -246,19 +245,19 @@
                         <div class="form-group">
                             <label>Personal a Cargo:</label>
                             <div class="destination-selects">
-                                <select id="role1" name="designer" required>
+                                <select id="role1" name="designer">}
                                     <option value="">Diseñador</option>
                                     {% for desingers in design %}
                                     <option value="{{desingers[0]}}">{{desingers[0]}}</option>
                                     {% endfor %}
                                 </select>
-                                <select id="role2" name="crafter" required>
+                                <select id="role2" name="crafter">
                                     <option value="crafter">Impresion/Corte</option>
                                     {% for crafters in craft %}
                                     <option value="{{crafters[0]}}">{{crafters[0]}}</option>
                                     {% endfor %}
                                 </select>
-                                <select id="role3" name="installer" required>
+                                <select id="role3" name="installer">
                                     <option value="Installer">Instalador</option>
                                     {% for installers in install %}
                                     <option value="{{installers[0]}}">{{installers[0]}}</option>
@@ -340,16 +339,6 @@
                 </div>
             </div>
         </div>
-        <!-- Mensajes Flash -->
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flash-messages">
-                {% for message in messages %}
-                    <div class="flash-message">{{ message }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% endwith %}
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
             {% for item, item2 in filas %}
