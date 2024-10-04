@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/scrollbar.css">
+    <link rel="stylesheet" href="../static/css/flash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -339,6 +340,16 @@
                 </div>
             </div>
         </div>
+        <!-- Mensajes Flash -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
             {% for item, item2 in filas %}

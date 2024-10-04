@@ -177,7 +177,6 @@ def change_phase(id):
     cursor = conn.cursor()
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchall()
-    print(phase)
     cursor.execute("""UPDATE projects SET projectPhase == ?+1 WHERE projectId == ?""",(phase[0][0],id))
     conn.commit()
     conn.close()
@@ -194,7 +193,8 @@ def return_phase(id):
     cursor = conn.cursor()
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchone()
-    cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0][0],id))
+    print(phase)
+    cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0],id,))
     conn.commit()
     conn.close()
 
@@ -285,18 +285,17 @@ def delete_projects(id):
     if os.path.exists(direction):
         os.rename(direction,direction+"[Finished]")
 
-def update(user,worker):
-    if request.method == "POST":
-        new_comments = request.form['comments']
-        conn = sqlite3.connect('library/database.db')
-        cursor = conn.cursor()
-        cursor.execute("SELECT projectDescript FROM projects WHERE projectId = ?", (user,))
-        result = cursor.fetchall()
-        old_comments= f"{result[0][0]}"
-        all_comments = old_comments + f"\n" + worker+f": "+ new_comments
-        cursor.execute("UPDATE projects SET projectDescript = ? WHERE projectId = ?", (all_comments, user))
-        conn.commit()
-        conn.close()
+def update(user,worker,commments):
+    new_comments = commments
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectDescript FROM projects WHERE projectId = ?", (user,))
+    result = cursor.fetchall()
+    old_comments= f"{result[0][0]}"
+    all_comments = old_comments + f"\n" + worker+f": "+ new_comments
+    cursor.execute("UPDATE projects SET projectDescript = ? WHERE projectId = ?", (all_comments, user))
+    conn.commit()
+    conn.close()
             
 def get_clients01():
     conn = sqlite3.connect('library/database.db')
