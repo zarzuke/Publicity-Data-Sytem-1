@@ -121,8 +121,8 @@ def ending():
 @app.route("/delete/<string:id>")
 def delete(id):
     #save_record(id)
-    delete_projects(id)
-    return redirect(url_for("login"))
+    function=try_delete(id)
+    return function
 
 @app.route('/open/<string:id>/<string:nombre>/<string:cliente>')
 def open_folder(id,nombre,cliente):

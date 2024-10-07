@@ -153,7 +153,9 @@ def try_create_client():
     client = request.form.get("client")
     number = request.form["phone"]
     create_client(client,number)
-    return redirect(url_for('settings_client'))
+    flash("Cliente Creado Satisfactoriamente")
+    cliente=get_clients()
+    return render_template("settings-client.html",user=g.user,cliente=cliente)
     
 def try_edit_clients():
     if g.user:
@@ -165,10 +167,14 @@ def try_edit_clients():
 
 def try_delete_client(id):
     delete_client(id)
-    return redirect(url_for('settings_client'))
+    flash("Cliente Borrado Satisfactoriamente")
+    cliente=get_clients()
+    return render_template("settings-client.html",user=g.user,cliente=cliente)
 
 def try_delete(id):
     delete_projects(id)
+    flash("Trabajo Borrado Satisfactoriamente")
+    return redirect("/home")
     
 def try_comments(user,worker,comments):
     update(user,worker,comments)
@@ -192,7 +198,7 @@ def try_next(id,status):
         save_record(id)
         delete_projects(id)
         flash('Trabajo Finalizado')
-        return redirect(url_for("home"))
+        return redirect("/home")
     elif phase[0][0]==1:
         if status=="approved":
             change_phase(id)

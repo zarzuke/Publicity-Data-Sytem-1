@@ -60,7 +60,7 @@ def project_inc():
         direction = os.path.join(os.getcwd(), "trabajos", f"[{client_name}]-{title}")
         if not os.path.exists(direction):
             os.makedirs(direction)
-
+    flash("Trabajo Creado Satisfactoriamente")
     return redirect("/home")
 
 def get_clients():
