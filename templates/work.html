@@ -172,7 +172,7 @@
                         <textarea class="comment-input" name="comments" rows="4" placeholder="Escribe tu comentario..." id="comments"></textarea>
                         <div class="button-container">
                             <button class="submit-button" type="submit" onclick="sendData('{{ nor }}', '{{ user[0] }}')">Enviar</button>
-                            <form action="{{ url_for('open_folder', id=nor, nombre=details[0]) }}" target="response_frame">
+                            <form action="{{ url_for('open_folder', id=nor, nombre=details[0], cliente=details[7]) }}" target="response_frame">
                                 <button class="additional-button" type="submit">Abrir Carpeta</button>
                             </form>
 

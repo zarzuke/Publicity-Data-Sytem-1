@@ -70,6 +70,11 @@ def create_record():
         return "Error processing the Excel file", 500
     return function
 
+@app.route("/settings/client")
+def settings_client():
+    function = try_edit_clients()
+    return function
+
 @app.route('/work/<string:user>')
 def work(user):
     session['user'] = user
@@ -119,12 +124,22 @@ def delete(id):
     delete_projects(id)
     return redirect(url_for("login"))
 
-@app.route('/open/<string:id>/<string:nombre>')
-def open_folder(id, nombre):
+@app.route('/open/<string:id>/<string:nombre>/<string:cliente>')
+def open_folder(id,nombre,cliente):
     try:
-        return try_open(id, nombre)
+        return try_open(id, nombre, cliente)
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
+
+@app.route('/create-client',methods=["POST"])
+def create_client():
+    function=try_create_client()
+    return function
+
+@app.route('/delete-client/<string:id>')
+def delete_client(id):
+    function=try_delete_client(id)
+    return function
 
 @app.route('/next/<string:id>/<string:status>')
 def next(id,status):

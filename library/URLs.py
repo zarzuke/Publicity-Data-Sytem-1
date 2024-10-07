@@ -132,7 +132,7 @@ def try_record_fildered(client,date):
 def try_record_file(client, date):
     filas = record(client, date)
     try:
-        wb = load_workbook('Plantilla.xlsx')
+        wb = load_workbook('library/Plantilla.xlsx')
         ws = wb.active
         
         start_row = 3
@@ -149,6 +149,24 @@ def try_record_file(client, date):
         print(f"Error al procesar el archivo de Excel: {e}")
         return None
 
+def try_create_client():
+    client = request.form.get("client")
+    number = request.form["phone"]
+    create_client(client,number)
+    return redirect(url_for('settings_client'))
+    
+def try_edit_clients():
+    if g.user:
+        cliente=get_clients()
+        return render_template("settings-client.html",user=g.user,cliente=cliente)
+    
+    flash("Debe de iniciar sesión primero.")
+    return render_template("index.html")
+
+def try_delete_client(id):
+    delete_client(id)
+    return redirect(url_for('settings_client'))
+
 def try_delete(id):
     delete_projects(id)
     
@@ -156,8 +174,8 @@ def try_comments(user,worker,comments):
     update(user,worker,comments)
     return redirect(url_for("work",user=user))
 
-def try_open(id, nombre):
-    folder_path = f"trabajos\\{id}.{nombre}"
+def try_open(id, title, client):
+    folder_path = f"trabajos\\[{client}]-{title}"
     try:
         os.startfile(folder_path)  # Para Windows
         return jsonify({"status": "success", "message": f"Opened folder: {folder_path}"})

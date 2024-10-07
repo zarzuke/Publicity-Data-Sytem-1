@@ -6,11 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajustes - CopyNato</title>
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
-    <link rel="stylesheet" href="../static/css/settings.css">
+    <link rel="stylesheet" href="../static/css/settings-user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="info">
+            <div class="info__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"><path fill="#393a37" d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z"></path></svg>
+            </div>
+            <div class="info__title">{{ message }}</div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -96,44 +108,37 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="text">Ajustes</div>
-        </div>
-        <div class="form-container">
-            <div class="settings-options">
-                <div class="setting-option">
-                    <a href="{{ url_for('settings_user') }}">
-                        <i class="fas fa-users"></i>
-                        <span>Gestionar Usuarios</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="{{ url_for('settings_record') }}">
-                        <i class="fas fa-clock"></i>
-                        <span>Historial</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="{{ url_for('settings_client') }}">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Gestionar Clientes</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-security.html">
-                        <i class="fas fa-lock"></i>
-                        <span>Seguridad</span>
-                    </a>
-                </div>
-                <div class="setting-option">
-                    <a href="settings-notifications.html">
-                        <i class="fas fa-bell"></i>
-                        <span>Notificaciones</span>
-                    </a>
-                </div>
-                <!-- Agregar más opciones según sea necesario -->
+            <div class="back-button">
+                <a href="javascript:history.back()" class="back-btn">
+                    <i class='bx bx-chevron-left' ></i> <!-- Puedes cambiar el ícono aquí -->
+                </a>
+                <div class="text">Manager usuarios</div>
             </div>
         </div>
+        <div class="form-container">
+            <div class="form-card" id="registerUser">
+                <h3>Registrar Nuevo Cliente</h3>
+                <form method="POST" action="{{ url_for('settings_user') }}">
+                    <div class="form-group">
+                        <label for="firstname">Nombre:</label>
+                        <input type="text" id="firstname" name="firstname" required placeholder="Ingrese el nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Apellido:</label>
+                        <input type="text" id="lastname" name="lastname" required placeholder="Ingrese el apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono:</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Ingrese el numero de telefono">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>        
     </section>
     <script src="../static/js/sidebar.js"></script>
 </body>
 </html>
+

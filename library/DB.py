@@ -1,5 +1,6 @@
 import sqlite3 
 from flask import Flask, render_template, request, make_response, redirect, url_for, flash, session, g, send_file  
+import os 
 
 def project_inc():
     if request.method == "POST":
@@ -56,7 +57,7 @@ def project_inc():
 
         conn.commit()
     
-        direction = os.path.join(os.getcwd(), "trabajos", str(id)+"."+title)
+        direction = os.path.join(os.getcwd(), "trabajos", f"[{client_name}]-{title}")
         if not os.path.exists(direction):
             os.makedirs(direction)
 
@@ -65,7 +66,7 @@ def project_inc():
 def get_clients():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT projectClientName,ProjectClientNumber FROM clientProject")
+    cursor.execute("SELECT projectClientName,ProjectClientNumber,projectClientId FROM clientProject")
     filas = cursor.fetchall()
     clientes= []
     for elemento in filas:
@@ -390,4 +391,16 @@ def get_workers():
     conn.close()
     return design,craft,install
 
+def create_client(client,number):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO clientProject (projectClientName,projectClientNumber) VALUES (?,?)",(client,number))
+    conn.commit()
+    conn.close()
 
+def delete_client(id):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM clientProject WHERE projectClientId = ?",(id,))
+    conn.commit()
+    conn.close()

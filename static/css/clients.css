@@ -677,7 +677,32 @@ input[type="text"] {
     ta el ancho aquí */
 }
 
+.card-list-client .card-client .delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    color: #616161;
+    border-radius: 50%;
+    transition: 0.2s ease;
+    cursor: pointer;
+    margin-left: auto; /* Empuja el elemento hacia la derecha */
+}
 
+
+.card-list-client .card-client:hover .delete {
+    background: transparent;
+    /* Cambia a transparente o la propiedad que desees */
+    /* Color solo se aplicará cuando se haga hover sobre delete directamente */
+}
+
+.card-list-client .card-client .delete:hover {
+    background: #ff6d6d;
+    /* Aquí el color de hover específico para .delete */
+    color: #fff;
+    /* Color del icono de delete al hover */
+}
 
 
 .preview-card img {
