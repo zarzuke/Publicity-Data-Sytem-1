@@ -105,6 +105,16 @@
     <section class="home">
         <div class="home-header">
             <div class="text">Inicio</div>
+            <div class="sort-dropdown">
+                <button class="sort-btn" type="button" onclick="toggleDropdown()">
+                    <i class="fa-solid fa-list"></i>
+                </button>                
+                <div class="sort-options hidden" id="sortOptions">
+                    <div class="sort-option" onclick="sortBy('date')">Fecha</div>
+                    <div class="sort-option" onclick="sortBy('a-z')">De A-Z</div>
+                    <div class="sort-option" onclick="sortBy('z-a')">De Z-A</div>
+                </div>
+            </div>
             <button class="add-btn" type="button">
                 <span class="button__text">Añadir</span>
                 <span class="button__icon">
@@ -117,6 +127,15 @@
                 </span>
             </button>
         </div>
+        
+        <!-- Botones flotantes -->
+<div class="floating-buttons">
+    <button id="addButton" class="floating-btn" title="Añadir">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+
+
         <div class="add-modal hidden">
             <div class="add-modal-content">
                 <div class="form-section">
@@ -402,6 +421,7 @@
     <script src="../static/js/home.js"></script>
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/card-color.js"></script>
+    <script src="../static/js/btn-floating.js"></script>
     <script>
     </script>
 </body>

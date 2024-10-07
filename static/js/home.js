@@ -165,8 +165,10 @@ addBtn.addEventListener('click', () => {
     document.body.style.overflow = 'hidden'; // Bloquea el scroll
     addModal.focus(); // Enfoca la ventana modal
 
-    updatePreview();
+    updatePreview(); // Asegúrate de que la previsualización se actualice correctamente
 });
+
+
 
 closeButton.addEventListener('click', () => {
     addModal.classList.add('hidden');
@@ -439,13 +441,13 @@ function autocompleteUser() {
         document.getElementById('name').value = name;
         document.getElementById('surname').value = surname;
         document.getElementById('phone').value = phone;
-
-        // No habilitar los campos, mantenerlos deshabilitados
-        // document.getElementById('name').disabled = false; // Elimina esta línea
-        // document.getElementById('surname').disabled = false; // Elimina esta línea
-        // document.getElementById('phone').disabled = false; // Elimina esta línea
     }
+
+    // Llama a updatePreview después de autocompletar los campos
+    updatePreview();
 }
+
+
 
 function clearUserFields() {
     document.getElementById('name').value = "";
@@ -481,4 +483,45 @@ function startPreviewScrolling(container) {
 
     scrollingPreview = requestAnimationFrame(scroll);
 }
+
+
+// BOTON ORDENAR
+function toggleDropdown() {
+    const options = document.getElementById('sortOptions');
+    options.classList.toggle('hidden');
+}
+
+function sortBy(criteria) {
+    const cardList = document.getElementById("cardList");
+    const cards = Array.from(cardList.children);
+
+
+    if (criteria === 'date') {
+        // Aquí implementa la lógica para ordenar por fecha
+        cards.sort((a, b) => {
+            const dateA = new Date(a.querySelector('.date').textContent);
+            const dateB = new Date(b.querySelector('.date').textContent);
+            return dateA - dateB; // Orden ascendente
+        });
+    } else if (criteria === 'a-z') {
+        cards.sort((a, b) => {
+            const nameA = a.querySelector('.card-title').textContent.toUpperCase();
+            const nameB = b.querySelector('.card-title').textContent.toUpperCase();
+            return nameA.localeCompare(nameB); // Orden alfabético ascendente
+        });
+    } else if (criteria === 'z-a') {
+        cards.sort((a, b) => {
+            const nameA = a.querySelector('.card-title').textContent.toUpperCase();
+            const nameB = b.querySelector('.card-title').textContent.toUpperCase();
+            return nameB.localeCompare(nameA); // Orden alfabético descendente
+        });
+    }
+
+
+    // Limpia y vuelve a agregar las tarjetas en el nuevo orden
+    cardList.innerHTML = ''; // Borra los elementos existentes
+    cards.forEach(card => cardList.appendChild(card)); // Añade las tarjetas reordenadas
+    toggleDropdown(); // Cierra el menú desplegable después de hacer la selección
+}
+
 
