@@ -111,13 +111,14 @@ def get_details(id):
     cursor.execute("""
                 SELECT projectName, 
                 projectDateStart, projectDateFinished,
-                projectChargeCurrency, projectChargeInstallment, projectChargeBalance, projectChargeTotalPayment,
+                currencyTypeName, projectChargeInstallment, projectChargeBalance, projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
                 projectDescript
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
+				JOIN typeCurrency on currencyTypeId = projectChargeCurrency
                 WHERE projectId == ?
                 """,(id,))
     filas = cursor.fetchall()
