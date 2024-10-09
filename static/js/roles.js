@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const role = document.getElementById('role').textContent.trim();
-    const clientLink = document.getElementById('client');
+    var role = document.getElementById('role').textContent.trim();
+    const client = document.getElementById('client');
     const diseño = document.getElementById('diseño');
     const aprobacion = document.getElementById('aprobacion');
     const elaboracion = document.getElementById('elaboracion');
     const entrega = document.getElementById('entrega');
-    const client = document.getElementById('client')
-    const home = document.getElementById('home')
-    const setting = document.getElementById('setting')
+    const home = document.getElementById('home');
+    const setting = document.getElementById('setting');
+    const edit = document.getElementById('editbutton');
   
     if (role === 'Designer') {
         client.style.display = 'none';
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setting.style.display = 'none';
     } 
     else if (role === 'Administrator') {
-        cdiseño.style.display = 'block';
+        diseño.style.display = 'block';
         aprobacion.style.display = 'block';
         elaboracion.style.display = 'block';
         entrega.style.display = 'block';
@@ -38,8 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
         diseño.style.display = 'none';
         aprobacion.style.display = 'none';
         elaboracion.style.display = 'none';
-        entrega.style.display = 'Block';
+        entrega.style.display = 'block';
         home.style.display = 'none';
         setting.style.display = 'none';
+        edit.style.display = "none";
     }
-  });
+});

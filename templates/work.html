@@ -50,14 +50,31 @@
                 </ul>
             </div>
             <div class="bottom-content">
-                <li class=""><a href="{{ url_for('settings') }}"><i class='bx bx-cog icon'></i><span
-                            class="text nav-text">Ajustes</span></a></li>
-                <li class=""><a href="{{ url_for('logout') }}"><i class='bx bx-log-out icon'></i><span
-                            class="text nav-text">Salir</span></a></li>
+                {% if user[1] != "Administrator" %}
+                    <!-- No mostrar nada -->
+                {% else %}
+                    <li class="" id="setting">
+                        <a href="{{ url_for('settings') }}">
+                            <i class='bx bx-cog icon'></i>
+                            <span class="text nav-text">Ajustes</span>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="">
+                    <a href="{{ url_for('logout') }}">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Salir</span>
+                    </a>
+                </li>
                 <li class="mode">
-                    <div class="sun-moon"><i class='bx bx-moon icon moon'></i><i class='bx bx-sun icon sun'></i></div>
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
                     <span class="mode-text text">Modo oscuro</span>
-                    <div class="toggle-switch"><span class="switch"></span></div>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
                 </li>
             </div>
         </div>
@@ -66,7 +83,7 @@
     <section class="home">
         <div class="home-header">
             <div class="back-button">
-                <a href="javascript:history.back()" class="back-btn">
+                <a href="/home" class="back-btn">
                     <i class='bx bx-chevron-left'></i>
                 </a>
                 <div class="text">Detalles</div>
@@ -123,7 +140,11 @@
                     <div class="info-title">Total:</div>
                     <div class="info-box money">
                         <span>{{details[6]}}</span>
-                        <i class="bx bx-edit edit-total"></i>
+                        {% if user[1] != "Administrator" %}
+                            <!-- No mostrar nada -->
+                        {% else %}
+                        <i class="bx bx-edit edit-total" id="editbutton"></i>
+                        {% endif %}
                     </div>
                 </div>
                 
@@ -194,6 +215,7 @@
                     </div>
                 </div>
             </div>
+            <script src="../static/js/roles.js"></script>
             <script src="../static/js/home.js"></script>
             <script src="../static/js/sidebar.js"></script>
             <script src="../static/js/work.js"></script>
