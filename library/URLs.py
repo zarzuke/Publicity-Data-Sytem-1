@@ -194,6 +194,15 @@ def try_next(id,status):
     if status=="none":
         flash('Datos incorrectos seleccione estatus')
         return redirect(url_for('work', user=id))
+    
+    if status=="canceled":
+        if phase[0][0]==1:
+            pass
+        else:    
+            return_phase(id)
+            flash('Fase Negada')
+            return redirect(url_for('work', user=id))
+    
     if phase[0][0]==4:
         save_record(id)
         delete_projects(id)
@@ -202,14 +211,15 @@ def try_next(id,status):
     elif phase[0][0]==1:
         if status=="approved":
             change_phase(id)
-            flash('Fase Aprovada')
+            flash('Fase Aprobada')
             return redirect(url_for('work', user=id))
     else:
         if status=="approved":
             change_phase(id)
-            flash('Fase Aprovada')
+            flash('Fase Aprobada')
             return redirect(url_for('work', user=id))
-        elif status=="canceled":
-            return_phase(id)
-            flash('Fase Negada')
-            return redirect(url_for('work', user=id))
+
+def try_update_balance(id,charge,comments):
+    update_currency(id,charge)
+    text=f"Cambio de costo Total a {charge} por motivo de: {comments}"
+    update(id,"Sistema",text)

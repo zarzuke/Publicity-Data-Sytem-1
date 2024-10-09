@@ -81,7 +81,7 @@ def get_project():
                 SELECT projectName, projectDateStart, 
                 projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript,projectId
+                projectDescript,projectId,projectPhase
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -284,6 +284,7 @@ def delete_projects(id):
         os.rename(direction,direction+"[Finished]")
 
 def update(user,worker,commments):
+    print(user,worker,commments)
     new_comments = commments
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
@@ -332,7 +333,7 @@ def save_record(id):
     for t in types:
         types_str = types_str + "," + t[0]
     
-    cursor.execute("INSERT INTO record (recordName,recordClient,recordPayment,recordCurrency,recordDate,recordTypeWork) VALUES (?,?,?,?,?)",(name,client,payment,currency,date,types_str))
+    cursor.execute("INSERT INTO record (recordName,recordClient,recordPayment,recordCurrency,recordDate,recordTypeWork) VALUES (?,?,?,?,?,?)",(name,client,payment,currency,date,types_str))
     conn.commit()
     conn.close()
     
@@ -402,5 +403,16 @@ def delete_client(id):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("DELETE FROM clientProject WHERE projectClientId = ?",(id,))
+    conn.commit()
+    conn.close()
+    
+def update_currency(id,new):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectChargeInstallment FROM chargeProject WHERE projectChargeId = ?",(id,))
+    balance=cursor.fetchone()
+    intbas=int(balance[0])
+    newbalance=int(new)-intbas
+    cursor.execute("UPDATE chargeProject SET projectChargeTotalPayment = ?,projectChargeBalance = ?  WHERE projectChargeId=? ",(new,newbalance,id,))
     conn.commit()
     conn.close()

@@ -380,7 +380,19 @@
                         <span class="card-name">{{ item[3] }}</span>
                     </p>
                     <p class="card-info">
-                        <span class="job-title"> Designer </span>
+                        <span class="job-title">
+                            {% if item[7] == 1 %}
+                                Diseño
+                            {% elif item[7] == 2 %}
+                                Aprobación
+                            {% elif item[7] == 3 %}
+                                Elaboración
+                            {% elif item[7] == 4 %}
+                                Entrega
+                            {% else %}
+                                Valor no reconocido
+                            {% endif %}
+                        </span>
                         <span class="date">{{ item[1] }}</span>
                         <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
                     </p>

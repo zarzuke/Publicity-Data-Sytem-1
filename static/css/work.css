@@ -350,7 +350,7 @@ body.dark .comment-input{
 
 .modal-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -369,7 +369,7 @@ body.dark .comment-input{
 }
 
 .modal-actions .cancel-btn {
-    background-color: #ccc;
+    background-color: #ff3d3d;
 }
 
 .hidden {

@@ -1,43 +1,28 @@
-function sendData(id, user) {
-    var comments = document.getElementById('comments').value;
-    
-    var url = `/update?id=${id}&user=${user}&comments=${comments}`;
-    
+function updateCurrency(){
+    var id = document.getElementById('id').value;
+    var charge = document.getElementById('newTotalInput').value;
+    var comments= document.getElementById('TotalReason').value;
+    var url = `/work/balance?id=${id}&charge=${charge}&args=${comments}`;
     window.location.href = url;
 }
 
-function showModal(itemId) {
-    document.getElementById('confirmationModal').classList.remove('hidden');
-    document.getElementById('confirmDelete').onclick = function() {
-        var status = document.getElementById('status').value;
-        var url = `/next/${itemId}/${status}`;
+
+
+function sendData() {
+    var comments = document.getElementById('comments').value;
+    var id = document.getElementById('id').value;
+    var user = document.getElementById('user').value;
+
+    if (comments.trim() === "") {
+        alert("Ingrese comentarios");
+    } else {
+        var url = `/update?id=${id}&user=${user}&comments=${comments}`;
         window.location.href = url;
-    };
+    }
 }
 
-document.getElementById('cancelDelete').addEventListener('click', function() {
-    document.getElementById('confirmationModal').classList.add('hidden');
-});
 
 
-
-function setStatus(status, button) {
-    // Seleccionar todos los botones de estado
-    const buttons = document.querySelectorAll('.status-button');
-    
-    // Quitar la clase activa de todos los botones, excepto el que fue clickeado
-    buttons.forEach(btn => {
-        if (btn !== button) {
-            btn.classList.remove('active');
-        }
-    });
-
-    // Alternar la clase activa en el botón que fue clickeado
-    button.classList.toggle('active');
-    
-    // Puedes usar el valor del estado si es necesario
-    console.log(`Estado seleccionado: ${status}`);
-}
 
 
 
@@ -51,8 +36,9 @@ function setStatus(status, button) {
         if (event.key === 'Enter') {
             // Evitar el comportamiento por defecto de crear nueva línea
             event.preventDefault();
-            // Llamar a la función sendData al presionar Enter
-            sendData('{{ nor }}', '{{ user[0] }}');
+            // Llamar a la función sendData al presionar Enter{
+            
+            sendData();
         }
     });
 
@@ -90,3 +76,45 @@ editTotalButton.addEventListener('click', showTotalEditModal);
 confirmTotalEditButton.addEventListener('click', updateTotal);
 cancelTotalEditButton.addEventListener('click', closeTotalEditModal);
 
+
+
+function handleComplete(id) {
+    const approvedButton = document.getElementById('approved');
+    const rejectedButton = document.getElementById('rejected');
+
+    if (approvedButton.classList.contains('active')) {
+        // Acción si el estado es "Aprobado"
+        showModal('approved',id);
+    } else if (rejectedButton.classList.contains('active')) {
+        // Acción si el estado es "Rechazado"
+        showModal('canceled',id);
+    } else {
+        // Acción si no se ha seleccionado ningún estado
+        alert('Por favor, selecciona un estado antes de completar.');
+    }
+}
+
+
+function setStatus(status, element) {
+    // Reset all buttons
+    document.querySelectorAll('.status-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    // Set the clicked button as active
+    element.classList.add('active');
+    // Store the status in a hidden input or a variable
+    document.getElementById('status').value = status;
+}
+
+
+function showModal(status,itemId) {
+    document.getElementById('confirmationModal').classList.remove('hidden');
+    document.getElementById('confirmDelete').onclick = function() {
+        var url = `/next/${itemId}/${status}`;
+        window.location.href = url;
+    };
+}
+
+document.getElementById('cancelDelete').addEventListener('click', function() {
+    document.getElementById('confirmationModal').classList.add('hidden');
+});

@@ -80,6 +80,15 @@ def work(user):
     session['user'] = user
     function = try_work(user)
     return function
+
+@app.route('/work/balance')
+def balance_update():
+    id=request.args.get("id")
+    charge=request.args.get("charge")
+    reason=request.args.get("args")
+    print(reason,id,charge)
+    try_update_balance(id,charge,reason)
+    return redirect(url_for('work', user=id))
     
 @app.route('/update')
 def update():
@@ -146,6 +155,8 @@ def next(id,status):
     function=try_next(id,status)
     return function
     
+
+
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)
