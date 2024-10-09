@@ -681,8 +681,8 @@ input[type="text"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 25px;
-    width: 25px;
+    height: 35px;
+    width: 35px;
     color: #616161;
     border-radius: 50%;
     transition: 0.2s ease;

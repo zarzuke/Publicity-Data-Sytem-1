@@ -31,69 +31,33 @@
         <div class="menu-bar">
             <div class="menu">
                 <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="{{ url_for('home') }}">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">Inicio</span>
-                        </a>
-                    </li>
-                    <li class="nav-link" id="client">
-                        <a href="{{ url_for('clients') }}">
-                            <i class='bx bx-user icon'></i>
-                            <span class="text nav-text">Clientes</span>
-                        </a>
-                    </li>
+                    <li class="nav-link"><a href="{{ url_for('home') }}"><i class='bx bx-home-alt icon'></i><span
+                                class="text nav-text">Inicio</span></a></li>
+                    <li class="nav-link" id="client"><a href="{{ url_for('clients') }}"><i
+                                class='bx bx-user icon'></i><span class="text nav-text">Clientes</span></a></li>
                 </ul>
                 <hr class="separator">
                 <ul class="menu-links">
-                    <li class="nav-link" id="diseño">
-                        <a href="{{ url_for('design') }}">
-                            <i class='bx bx-image-alt icon'></i>
-                            <span class="text nav-text">Diseño</span>
-                        </a>
+                    <li class="nav-link" id="diseño"><a href="{{ url_for('design') }}"><i
+                                class='bx bx-image-alt icon'></i><span class="text nav-text">Diseño</span></a></li>
+                    <li class="nav-link" id="aprobacion"><a href="{{ url_for('approval') }}"><i
+                                class='bx bx-check-circle icon'></i><span class="text nav-text">Aprobación</span></a>
                     </li>
-                    <li class="nav-link" id="aprobacion">
-                        <a href="{{ url_for('approval') }}">
-                            <i class='bx bx-check-circle icon'></i>
-                            <span class="text nav-text">Aprobación</span>
-                        </a>
-                    </li>
-                    <li class="nav-link" id="elaboracion">
-                        <a href="{{ url_for('crafting') }}">
-                            <i class='bx bx-edit icon'></i>
-                            <span class="text nav-text">Elaboración</span>
-                        </a>
-                    </li>
-                    <li class="nav-link" id="entrega">
-                        <a href="{{ url_for('ending') }}">
-                            <i class='bx bx-send icon'></i>
-                            <span class="text nav-text">Entrega</span>
-                        </a>
-                    </li>
+                    <li class="nav-link" id="elaboracion"><a href="{{ url_for('crafting') }}"><i
+                                class='bx bx-edit icon'></i><span class="text nav-text">Elaboración</span></a></li>
+                    <li class="nav-link" id="entrega"><a href="{{ url_for('ending') }}"><i
+                                class='bx bx-send icon'></i><span class="text nav-text">Entrega</span></a></li>
                 </ul>
             </div>
             <div class="bottom-content">
-                <li class="">
-                    <a href="{{ url_for('settings') }}">
-                        <i class='bx bx-cog icon'></i>
-                        <span class="text nav-text">Ajustes</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ url_for('logout') }}">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Salir</span>
-                    </a>
-                </li>
+                <li class=""><a href="{{ url_for('settings') }}"><i class='bx bx-cog icon'></i><span
+                            class="text nav-text">Ajustes</span></a></li>
+                <li class=""><a href="{{ url_for('logout') }}"><i class='bx bx-log-out icon'></i><span
+                            class="text nav-text">Salir</span></a></li>
                 <li class="mode">
-                    <div class="sun-moon">
-                        <i class='bx bx-moon icon moon'></i>
-                        <i class='bx bx-sun icon sun'></i>
-                    </div>
+                    <div class="sun-moon"><i class='bx bx-moon icon moon'></i><i class='bx bx-sun icon sun'></i></div>
                     <span class="mode-text text">Modo oscuro</span>
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
+                    <div class="toggle-switch"><span class="switch"></span></div>
                 </li>
             </div>
         </div>
@@ -111,20 +75,36 @@
 
         <!-- Mensajes Flash -->
         {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <div class="flash-messages">
-                {% for message in messages %}
-                    <div class="flash-message">{{ message }}</div>
-                {% endfor %}
-            </div>
-          {% endif %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+            <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% endwith %}
+
         <div class="card">
             <h2>{{ details[0] }}</h2>
+            <div class="info-title"></div>
+            <div class="job-types-wrappers">
+                <div class="job-types-containers" id="jobTypesContainer">
+                    {% for t in types %}
+                    <span class="types job-type-{{ t | lower | replace(' ', '-') }}">{{ t }}</span>
+                    {% endfor %}
+                </div>
             <div class="info-container">
                 <div class="info-item">
-                    <div class="info-title">Título:</div>
-                    <div class="info-box">{{details[0]}}</div>
+                    <div class="info-title">Cliente titular:</div>
+                    <div class="info-box">
+                        <img src="/static/img/user-default.png" class="client-image">
+                        <!-- Ajusta la ruta a la imagen y el índice según tu estructura -->
+                        <span>{{ details[7] }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-title">Teléfono:</div>
+                    <div class="info-box">{{details[8]}}</div>
                 </div>
                 <div class="info-item">
                     <div class="info-title">Fecha de registro:</div>
@@ -134,73 +114,96 @@
                     <div class="info-title">Fecha de entrega:</div>
                     <div class="info-box">{{details[2]}}</div>
                 </div>
+
                 <div class="info-item">
                     <div class="info-title">Tipo de moneda:</div>
                     <div class="info-box">{{details[3]}}</div>
                 </div>
+                <div class="info-item total-info">
+                    <div class="info-title">Total:</div>
+                    <div class="info-box money">
+                        <span>{{details[6]}}</span>
+                        <i class="bx bx-edit edit-total"></i>
+                    </div>
+                </div>
+                
+                <div class="confirmation-modal hidden" id="totalEditModal">
+                    <div class="modal-content">
+                        <h3>Editar total</h3>
+                        <div class="modal-input-container">
+                            <input type="text" id="newTotalInput" placeholder="Nuevo total" />
+                        </div>
+                        <div class="modal-textarea-container">
+                            <textarea id="changeTotalReason" rows="4" placeholder="Motivo del cambio"></textarea>
+                        </div>
+                        <div class="modal-actions">
+                            <button id="confirmTotalEdit" class="confirm-btn">Guardar</button>
+                            <button id="cancelTotalEdit" class="cancel-btn">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
                 <div class="info-item">
                     <div class="info-title">Abonado:</div>
-                    <div class="info-box">{{details[4]}}</div>
+                    <div class="info-box money">{{details[4]}}</div>
                 </div>
                 <div class="info-item">
                     <div class="info-title">Restante de abono:</div>
-                    <div class="info-box">{{details[5]}}</div>
+                    <div class="info-box money">{{details[5]}}</div>
                 </div>
-                <div class="info-item">
-                    <div class="info-title">Total:</div>
-                    <div class="info-box">{{details[6]}}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-title">Cliente titular:</div>
-                    <div class="info-box">{{details[7]}}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-title">Teléfono:</div>
-                    <div class="info-box">{{details[8]}}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-title">Descripción:</div>
-                    <div class="info-box">{% for text in details[9]%} {{text}} <br><br> {%endfor%} </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-title">Tipo de trabajo:</div>
-                    <div class="info-box">{% for type in types %}{{ type }}, {% endfor %}</div>
+            </div>
+                <div class="history-item">
+                    <div class="info-title">Historial de desarrollo:</div>
+                    <div class="info-box">
+                        {% for text in details[9] %}
+                        {{ text }} <br>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="comment-section">
                     <div class="input-container">
-                        <textarea class="comment-input" name="comments" rows="4" placeholder="Escribe tu comentario..." id="comments"></textarea>
+                        <textarea class="comment-input" name="comments" rows="4" placeholder="oprime ENTER para enviar..." id="comments"></textarea>
                         <div class="button-container">
-                            <button class="submit-button" type="submit" onclick="sendData('{{ nor }}', '{{ user[0] }}')">Enviar</button>
-                            <form action="{{ url_for('open_folder', id=nor, nombre=details[0], cliente=details[7]) }}" target="response_frame">
-                                <button class="additional-button" type="submit">Abrir Carpeta</button>
-                            </form>
 
+                            <form action="{{ url_for('open_folder', id=nor, nombre=details[0], cliente=details[7]) }}" target="response_frame">
+                                <button class="additional-button" type="submit"><i class="bx bx-folder-open"></i> Abrir Carpeta</button>
+                            </form>
                             <div class="destination-selects">
-                                <select id="status" name="designer" required>
-                                    <option value="none">Estatus</option>
-                                    <option value="approved">Aprobado</option>
-                                    <option value="canceled">Negado</option>
-                                </select>
+                                <button class="status-button approved" id="status" type="button" onclick="setStatus('approved', this)">
+                                    Aprobado
+                                </button>
+                                <button class="status-button rejected" id="status" type="button" onclick="setStatus('canceled', this)">
+                                    Rechazado
+                                </button>
                             </div>
-                            <button class="additional-button" type="button" onclick="showModal('{{ nor }}')">Completado</button>
+                            
+                            
+                            
+                            
+                            <button class="additional-button" type="button" onclick="showModal('{{ nor }}')"><i class="bx bx-check-circle"></i> Completado</button>
                         </div>
                     </div>
                 </div>
-                <div class="confirmation-modal hidden" id="confirmationModal">
-                    <div class="modal-content">
-                        <h3>¿Estás seguro de que deseas eliminar?</h3>
-                        <p>Esta acción no se puede deshacer.</p>
-                        <div class="modal-actions">
-                            <button id="confirmDelete" class="confirm-btn">Sí, eliminar</button>
-                            <button id="cancelDelete" class="cancel-btn">Cancelar</button>
-                        </div>
+                
+                
+                
+            <div class="confirmation-modal hidden" id="confirmationModal">
+                <div class="modal-content">
+                    <h3>¿Estás seguro de que deseas eliminar?</h3>
+                    <p>Esta acción no se puede deshacer.</p>
+                    <div class="modal-actions">
+                        <button id="confirmDelete" class="confirm-btn">Sí, eliminar</button>
+                        <button id="cancelDelete" class="cancel-btn">Cancelar</button>
                     </div>
                 </div>
-                <script src="../static/js/home.js"></script>
-                <script src="../static/js/sidebar.js"></script>
-                <script src="../static/js/work.js"></script>
-            </section>
-            <iframe name="response_frame" style="border:none; width:100%; height:50px;"></iframe>
+            </div>
+            <script src="../static/js/home.js"></script>
+            <script src="../static/js/sidebar.js"></script>
+            <script src="../static/js/work.js"></script>
+        </div>
+        <iframe name="response_frame" style="border: none; width: 100%; height: 50px;"></iframe>
+    </section>
 </body>
 
 </html>

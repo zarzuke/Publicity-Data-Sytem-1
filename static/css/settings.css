@@ -440,20 +440,27 @@ body.dark .setting-option i {
 }
 
 .grid-item {
-    background-color: #3a3b3c;
+    background-color: #f5f5f5; /* Color de fondo en modo claro */
+    color: #333; /* Color del texto en modo claro */
     padding: 10px;
     text-align: center;
     transition: background-color 0.3s, transform 0.3s;
-    color: #ccc
 }
 
 .grid-item:hover {
-    background-color: #A9A9A9; /* Cambia el color de fondo al pasar el ratón */
+    background-color: #e0e0e0; /* Color de fondo al pasar el mouse en modo claro */
 }
 
-.grid-item:active {
-    transform: scale(0.95); /* Cambia a dorado cuando está activo */
+/* Estilos para la tabla en modo oscuro */
+body.dark .grid-item {
+    background-color: #3a3b3c; /* Color de fondo en modo oscuro */
+    color: #ccc; /* Color del texto en modo oscuro */
 }
+
+body.dark .grid-item:hover {
+    background-color: #555555; /* Color de fondo al pasar el mouse en modo oscuro */
+}
+
 
 .submit-button {
     margin-top: 10px; /* Espacio entre el textarea y el botón */
@@ -488,8 +495,8 @@ body.dark .setting-option i {
 
 /* Estilos para el botón */
 .select {  
-    padding: 12px 24px; /* Tamaño del botón */
-    background-color: #333; /* Fondo del botón */
+    padding: 11px 15px; /* Tamaño del botón */
+    background-color: #4755b0; /* Fondo del botón */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     font-size: 1rem; /* Tamaño de fuente coherente */
@@ -497,14 +504,14 @@ body.dark .setting-option i {
 
 /* Estilo al pasar el ratón */
 .select:hover {
-    border: 1px solid #555; /* Borde al pasar el ratón */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+    cursor: pointer;
 }
 
 /* Estilos para el botón */
 .select-date {  
     padding: 10px 15px; /* Tamaño del botón */
-    background-color: #333; /* Fondo del botón */
+    background-color: #4755b0; /* Fondo del botón */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     font-size: 1rem; /* Tamaño de fuente coherente */
@@ -512,13 +519,13 @@ body.dark .setting-option i {
 
 /* Estilo al pasar el ratón */
 .select-date:hover {
-    border: 1px solid #555; /* Borde al pasar el ratón */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+    cursor: pointer;
 }
 
 .button {
-    padding: 12px 24px; /* Tamaño del botón */
-    background-color: #333; /* Fondo del botón */
+    padding: 11px 24px; /* Tamaño del botón */
+    background-color: #4755b0; /* Fondo del botón */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     font-size: 1rem; /* Tamaño de fuente coherente */
@@ -526,6 +533,6 @@ body.dark .setting-option i {
 
 /* Estilo al pasar el ratón */
 .button:hover {
-    border: 1px solid #555; /* Borde al pasar el ratón */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+    cursor: pointer;
 }

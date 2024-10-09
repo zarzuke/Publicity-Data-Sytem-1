@@ -47,114 +47,215 @@ body {
 .card {
     background-color: #ffffff; /* Fondo blanco */
     border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra */
-    padding: 15px; /* Espaciado interno reducido */
+    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.055); /* Sombra */
+    padding: 25px; /* Espaciado interno reducido */
     margin: auto; /* Margen superior e inferior */
     max-width: 1000px; /* Ancho máximo para centrar */
     text-align: left; /* Alinear texto a la izquierda */
 }
 
+.client-image {
+    width: 30px; /* Ajusta el tamaño según sea necesario */
+    height: 30px; /* Mantiene la proporción de la imagen */
+    border-radius: 50%; /* Para que sea circular */
+    margin-right: 5px; /* Espacio entre el nombre del cliente y la imagen */
+    vertical-align: middle; /* Alinear verticalmente con el texto */
+}
+
+.destination-selects {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.status-button {
+    flex: 1; /* Cada botón ocupará el mismo espacio */
+    padding: 12px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 25px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background 0.3s, color 0.3s; /* Transiciones suaves */
+}
+
+.status-button.approved {
+    background-color: #858585; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+}
+
+.status-button.rejected {
+    background-color: #858585; /* Color rojo para rechazo */
+    color: white; /* Texto blanco */
+}
+
+/* Cambiar apariencia cuando el botón está activo */
+.status-button.active {
+    opacity: 0.8; /* Efecto de hover */
+}
+
+/* Cambiar color al estar activo */
+.status-button.approved.active {
+    background-color: #28b657; /* Color más oscuro para "Aprobado" */
+}
+
+.status-button.rejected.active {
+    background-color: #ff4860; /* Color más oscuro para "Rechazo" */
+}
+
+
+
+.types {
+    display: inline-block;
+    padding: 8px 15px;
+    font-size: 11px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #242526;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: default;
+    /* Añade un margen derecho para separar los elementos */
+}
+
+.full-width {
+    width: 100%;
+    background-color: #f8f8f8; /* Ajusta el fondo gris que deseas */
+}
+
+.full-width-box {
+    background-color: #f0f0f0; /* Fondo gris claro para el contenido */
+    padding: 100px; /* Espaciado interno adecuado */
+    border-radius: 8px; /* Esquinas redondeadas */
+}
+
+
+
+.job-types-containers {
+    /* Muestra los trabajos en línea */
+    white-space: nowrap;
+    /* Previene que los elementos se rompan a la siguiente línea */
+    position: relative; /* Cambiado a relative para un posicionamiento correcto */
+    margin-bottom: 20px;
+    /* Ajusta el margen superior aquí también si es necesario */
+    width: 100%; /* Asigna el ancho total de su contenedor padre */
+    overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+    white-space: normal; /* Permite que los elementos se rompan */
+    display: block; /* Puede cambiar a flex o grid según el diseño que estés utilizando */
+}
+
 /* Título de la tarjeta */
 .card h2 {
     font-size: 1.6em; /* Tamaño del título más pequeño */
-    margin-bottom: 15px; /* Espaciado debajo del título reducido */
+    margin-bottom: 10px; /* Espaciado debajo del título reducido */
     color: #333; /* Color del texto */
+}
+
+body.dark .card h2 {
+    color: #d4d4d4;
 }
 
 /* Contenedor de información */
 .info-container {
-    display: flex; 
-    flex-wrap: wrap; /* Permitir que los elementos se ajusten */
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
 }
+
 
 /* Estilo de cada elemento de información */
 .info-item {
-    flex: 1; /* Permitir que los elementos crezcan y se reduzcan */
-    min-width: 300px; /* Ancho mínimo reducido */
-    margin: 7px; /* Margen entre elementos reducido */
-    padding: 5px; /* Espaciado interno reducido */
-    background-color: #f9f9f9; /* Fondo gris claro */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    display: flex; /* Flexbox para alineación */
-    flex-direction: column; /* Apilar elementos verticalmente */
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 12px;
+    transition: background-color 0.3s;
 }
 
-/* Estilo del título de cada información */
+body.dark .info-item {
+    background-color: #232425;
+    border-radius: 8px;
+    padding: 12px;
+    transition: background-color 0.3s;
+}
+
+.history-item {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+body.dark .history-item {
+    background-color: #1c1d1e;
+}
+
+
+.info-item:hover {
+    background-color: #e0e0e0;
+}
+
+body.dark .info-item:hover {
+    background-color: #1c1d1e;
+}
+
 .info-title {
-    font-weight: 600; /* Negrita */
-    color: #6b6b6b; /* Color gris para el título */
-    margin-bottom: 3px; /* Espacio debajo del título */
-    font-size: 0.8em; /* Tamaño de fuente más pequeño para el título */
+    font-weight: 600;
+    color: #555;
 }
 
-/* Estilo del valor de la información */
-.info-box {
-    font-size: 1em; /* Tamaño de la fuente más pequeño */
-    color: #333; /* Color del texto */
-    background-color: #fff; /* Fondo blanco */
-    padding: 3px; /* Espaciado interno reducido */
-    border-radius: 3px; /* Bordes redondeados */
-    border: 1px solid #ddd; /* Borde ligero */
+body.dark .info-title {
+    color: #8f8f8f;
 }
+
 
 /* Ajuste de modo oscuro (ejemplo) */
-body.dark-mode .card {
-    background-color: #2c2c2c; /* Fondo oscuro */
+body.dark .card {
+    background-color: #232425; /* Fondo oscuro */
     color: #f0f0f0; /* Texto claro */
 }
 
-body.dark-mode .info-item {
-    background-color: #3c3c3c; /* Fondo gris oscuro */
-}
-
-body.dark-mode .info-title {
-    color: #f0f0f0; /* Color claro para título */
-}
-
-.input-container {
-    margin: 0px 0; /* Espacio antes y después del input */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch; /* Alineamos al centro y que ocupe todo el ancho */
-}
-
 .comment-section {
-    margin-top: 20px; /* Espacio encima del área de comentarios */
-    padding: 15px; /* Espaciado interno para el área de comentarios */
+    margin-top: 10px; /* Espacio encima del área de comentarios */
+    padding: 5px; /* Espaciado interno para el área de comentarios */
     background-color: #f9f9f9; /* Color de fondo */
     border-radius: 8px; /* Esquinas redondeadas */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra similar a la tarjeta */
     width: 100%; /* Ancho completo */
     display: flex;
     flex-direction: column; /* Alinear elementos verticalmente */
 }
 
+body.dark .comment-section{
+    background-color: #232425;
+}
+
 .comment-input {
     width: 100%; /* Hacer el input del ancho completo */
     padding: 20px; /* Espaciado interno */
-    border: 2px solid #adadad; /* Borde azul */
+    border: 1px solid #adadad; /* Borde azul */
     border-radius: 10px; /* Esquinas redondeadas */
     outline: none; /* Sin borde de foco predeterminado */
-    font-size: 18px; /* Tamaño de fuente más grande */
+    font-size: 16px; /* Tamaño de fuente más grande */
     resize: none; /* Deshabilitar el redimensionamiento */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    margin-top: 0px; /* Margen superior para mayor espacio */
+    margin-bottom: 10px; /* Espacio debajo del textarea */
 }
-.comment-input:focus {
-    border-color: #5f5cfe; /* Color de borde cuando está enfocado */
+
+body.dark .comment-input{
+    color: white;
+    background-color: #232425;
+    border: 1px solid #4e4e4e; /* Borde azul */
 }
+
 .submit-button {
-    margin-top: 10px; /* Espacio entre el textarea y el botón */
+    position: relative; /* Posicionamiento para el botón de enviar */
     padding: 12px 24px; /* Tamaño del botón */
     background-color: #5f5cfe; /* Color de fondo azul */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
-    border-radius: 5px; /* Esquinas redondeadas */
+    border-radius: 25px; /* Esquinas redondeadas */
     cursor: pointer; /* Cambia el cursor al pasar el mouse */
     transition: background 0.3s; /* Transición suave para efectos */
     font-size: 16px; /* Tamaño de fuente */
+    display: flex; /* Flex para centrar el icono y texto */
+    align-items: center; /* Centrar verticalmente */
 }
 .submit-button:hover {
     background-color: #5c67fe; /* Color al pasar el mouse */
@@ -167,19 +268,19 @@ body.dark-mode .info-title {
 }
 
 .additional-button {
-    margin-left: 10px; /* Espacio entre los botones */
     padding: 12px 24px; /* Tamaño del botón */
-    background-color: #adadad; /* Color de fondo gris */
+    background: #695cfe;
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
-    border-radius: 5px; /* Esquinas redondeadas */
+    border-radius: 25px; /* Esquinas redondeadas */
     cursor: pointer; /* Cambia el cursor al pasar el mouse */
     transition: background 0.3s; /* Transición suave para efectos */
     font-size: 16px; /* Tamaño de fuente */
+
 }
 
 .additional-button:hover {
-    background-color: #9b9b9b; /* Color al pasar el mouse */
+    background: #5b51c0;
 }
 
 .flash-messages {
@@ -197,4 +298,81 @@ body.dark-mode .info-title {
     color: #333;
 }
 
+
+.total-info .info-box {
+    display: flex;
+    align-items: center;
+}
+
+.total-info .edit-total {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #695cfe;
+    transition: color 0.3s;
+}
+
+.total-info .edit-total:hover {
+    color: #5b51c0;
+}
+
+.confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.651);
+    z-index: 100;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.modal-input-container,
+.modal-textarea-container {
+    margin-bottom: 15px;
+}
+
+.modal-input-container input,
+.modal-textarea-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions .confirm-btn,
+.modal-actions .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.modal-actions .confirm-btn {
+    background-color: #695cfe;
+    color: #fff;
+}
+
+.modal-actions .cancel-btn {
+    background-color: #ccc;
+}
+
+.hidden {
+    display: none;
+}
 
