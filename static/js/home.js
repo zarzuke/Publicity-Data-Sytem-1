@@ -97,6 +97,7 @@ searchInput = document.getElementById("searchInput"),
     cardList = document.getElementById("cardList"),
     cardItems = cardList.getElementsByClassName("card-item"),
     addBtn = document.querySelector('.add-btn'),
+    addBtn2 = document.querySelector('.floating-btn'),
     addModal = document.querySelector('.add-modal'),
     modalBackdrop = document.querySelector('.modal-backdrop'),
     closeButton = addModal.querySelector('.close-button'),
@@ -158,6 +159,17 @@ searchInput.addEventListener("input", () => {
 });
 
 addBtn.addEventListener('click', () => {
+    addModal.classList.remove('hidden');
+    addModal.classList.add('visible');
+    modalBackdrop.classList.remove('hidden');
+    modalBackdrop.classList.add('visible');
+    document.body.style.overflow = 'hidden'; // Bloquea el scroll
+    addModal.focus(); // Enfoca la ventana modal
+
+    updatePreview(); // Asegúrate de que la previsualización se actualice correctamente
+});
+
+addBtn2.addEventListener('click', () => {
     addModal.classList.remove('hidden');
     addModal.classList.add('visible');
     modalBackdrop.classList.remove('hidden');
@@ -264,6 +276,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Agregar un evento de cambio para el selector de moneda
     currencySelect.addEventListener('change', calculateRemaining);
 });
+
+
 
 document.addEventListener('click', function (event) {
     const sidebar = document.querySelector('.sidebar');
@@ -523,5 +537,4 @@ function sortBy(criteria) {
     cards.forEach(card => cardList.appendChild(card)); // Añade las tarjetas reordenadas
     toggleDropdown(); // Cierra el menú desplegable después de hacer la selección
 }
-
 
