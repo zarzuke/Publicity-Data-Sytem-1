@@ -417,3 +417,99 @@ def update_currency(id,new):
     cursor.execute("UPDATE chargeProject SET projectChargeTotalPayment = ?,projectChargeBalance = ?  WHERE projectChargeId=? ",(new,newbalance,id,))
     conn.commit()
     conn.close()
+
+def get_project_designer(worker):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+                SELECT projectName, projectDateStart, 
+                projectChargeTotalPayment,
+                projectClientName, projectClientNumber,
+                projectDescript,projectId
+                FROM projects 
+                JOIN dateProject on projectDateId = projectDate
+                JOIN chargeProject on projectChargeId = projectCharge
+                JOIN clientProject on projectClientId = projectClient
+                WHERE projectDesigner == ? AND projectPhase == 1
+                """,(worker,))
+    filas = cursor.fetchall()
+    cursor.execute("""
+                SELECT projectTypeName, projectId
+                FROM ManyTypes m
+                INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                   """)
+    types=cursor.fetchall()
+    tipos=[]
+    for f in filas:
+        lista = [] 
+        for t in types:
+            if f[6] == t[1]:
+                lista.append(t[0])
+        tipos.append(lista)
+
+    conn.close()
+    return filas,tipos
+
+def get_project_crafter(worker):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+                SELECT projectName, projectDateStart, 
+                projectChargeTotalPayment,
+                projectClientName, projectClientNumber,
+                projectDescript,projectId
+                FROM projects 
+                JOIN dateProject on projectDateId = projectDate
+                JOIN chargeProject on projectChargeId = projectCharge
+                JOIN clientProject on projectClientId = projectClient
+                WHERE projectCrafter == ? AND projectPhase == 3
+                """,(worker,))
+    filas = cursor.fetchall()
+    cursor.execute("""
+                SELECT projectTypeName, projectId
+                FROM ManyTypes m
+                INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                   """)
+    types=cursor.fetchall()
+    tipos=[]
+    for f in filas:
+        lista = [] 
+        for t in types:
+            if f[6] == t[1]:
+                lista.append(t[0])
+        tipos.append(lista)
+
+    conn.close()
+    return filas,tipos
+
+def get_project_installer(worker):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+                SELECT projectName, projectDateStart, 
+                projectChargeTotalPayment,
+                projectClientName, projectClientNumber,
+                projectDescript,projectId
+                FROM projects 
+                JOIN dateProject on projectDateId = projectDate
+                JOIN chargeProject on projectChargeId = projectCharge
+                JOIN clientProject on projectClientId = projectClient
+                WHERE projectCrafter == ? AND projectPhase == 4
+                """,(worker,))
+    filas = cursor.fetchall()
+    cursor.execute("""
+                SELECT projectTypeName, projectId
+                FROM ManyTypes m
+                INNER JOIN typeProject t ON m.projectTypeId == t.projectTypeId
+                   """)
+    types=cursor.fetchall()
+    tipos=[]
+    for f in filas:
+        lista = [] 
+        for t in types:
+            if f[6] == t[1]:
+                lista.append(t[0])
+        tipos.append(lista)
+
+    conn.close()
+    return filas,tipos

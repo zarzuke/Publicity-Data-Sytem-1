@@ -6,12 +6,13 @@ app = Flask(__name__)
 @app.route("/menu")
 def index():
      return "interfaz principal"
+ 
 @app.before_request
 def before_request():
     if "username" in session:
         g.user = session["username"]
     else:
-        g.user = None
+        g.user = ["vacio","vacio"]
 
 @app.route("/",methods=["POST","GET"])
 def login():
@@ -40,7 +41,8 @@ def clients():
 
 @app.route("/settings")
 def settings():
-    return render_template("settings.html",user=g.user)
+    function=try_settings()
+    return function
 
 @app.route("/settings/manager",methods=["POST","GET"])
 def settings_user():
