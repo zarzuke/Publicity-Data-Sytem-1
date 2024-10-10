@@ -166,6 +166,11 @@ addBtn.addEventListener('click', () => {
     document.body.style.overflow = 'hidden'; // Bloquea el scroll
     addModal.focus(); // Enfoca la ventana modal
 
+    // Establecer la fecha actual
+    const dateInput = document.getElementById('date');
+    dateInput.value = new Date().toISOString().slice(0, 10); // Formato AAAA-MM-DD
+    dateInput.disabled = true; // Deshabilitar el campo de fecha
+
     updatePreview(); // Asegúrate de que la previsualización se actualice correctamente
 });
 
@@ -277,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currencySelect.addEventListener('change', calculateRemaining);
 });
 
-
+// CERRAR SIDEBAR AL CLICKEAR AFUERA
 
 document.addEventListener('click', function (event) {
     const sidebar = document.querySelector('.sidebar');
@@ -295,13 +300,14 @@ document.addEventListener('click', function (event) {
         sidebar.classList.add('close');
     }
 });
+
+
 function resetPreview() {
     // Valores iniciales para la previsualización
     const initialTitle = "";
     const initialName = "";
     const initialLastname = "";
     const initialJobTitle = ""; // Si no se está usando, se puede eliminar
-    const initialDate = "";
     const initialPhone = "";
     const initialDescription = "";
 
@@ -310,7 +316,6 @@ function resetPreview() {
     document.getElementById('name').value = initialName;
     document.getElementById('surname').value = initialLastname;
     document.getElementById('phone').value = initialPhone;
-    document.getElementById('date').value = initialDate;
     document.getElementById('description').value = initialDescription;
 
     // Reiniciar el estado de los checkboxes
@@ -537,4 +542,11 @@ function sortBy(criteria) {
     cards.forEach(card => cardList.appendChild(card)); // Añade las tarjetas reordenadas
     toggleDropdown(); // Cierra el menú desplegable después de hacer la selección
 }
+
+//contador de trabajos 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const totalJobs = document.getElementById('totalJobs');
+    totalJobs.textContent = document.querySelectorAll('.card-item').length; // Cuenta los elementos de la tarjeta
+});
 

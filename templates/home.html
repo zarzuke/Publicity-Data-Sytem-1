@@ -108,7 +108,7 @@
             <div class="sort-dropdown">
                 <button class="sort-btn" type="button" onclick="toggleDropdown()">
                     <i class="fa-solid fa-list"></i>
-                </button>                
+                </button>
                 <div class="sort-options hidden" id="sortOptions">
                     <div class="sort-option" onclick="sortBy('date')">Fecha</div>
                     <div class="sort-option" onclick="sortBy('a-z')">De A-Z</div>
@@ -127,13 +127,13 @@
                 </span>
             </button>
         </div>
-        
+
         <!-- Botones flotantes -->
-<div class="floating-buttons">
-    <button class="floating-btn" title="Añadir">
-        <i class="fas fa-plus"></i>
-    </button>
-</div>
+        <div class="floating-buttons">
+            <button class="floating-btn" title="Añadir">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
 
 
         <div class="add-modal hidden">
@@ -187,7 +187,7 @@
                                 <input type="tel" id="phone" name="phone" value="" required disabled>
                             </div>
                             <div class="form-group">
-                                <label for="date">Fecha:</label>
+                                <label for="date">Fecha de registro:</label>
                                 <input type="date" id="date" name="date" value="dd/mm/aaaa" required>
                             </div>
                         </div>
@@ -285,17 +285,19 @@
                                 </select>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="total-cost">Costo total:</label>
-                                <input type="number" id="total-cost" name="total-cost" required oninput="formatearMoneda()">
+                                <input type="number" id="total-cost" name="total-cost" required
+                                    oninput="formatearMoneda()">
                             </div>
                             <div class="form-group">
                                 <label for="down-payment">Abono:</label>
                                 <div style="display: flex; align-items: center;">
-                                    <input type="number" id="down-payment" name="down-payment" oninput="formatearMoneda()">
+                                    <input type="number" id="down-payment" name="down-payment"
+                                        oninput="formatearMoneda()">
                                     <select id="currency" name="currency" onchange="formatearMoneda()">
                                         <option value="3">Bs.S</option>
                                         <option value="2">COP</option>
@@ -305,8 +307,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="remaining">Restante:</label>
-                                <input type="number" id="remaining" name="remaining" required readonly oninput="formatearMoneda()">
-                            </div>                        
+                                <input type="number" id="remaining" name="remaining" required readonly
+                                    oninput="formatearMoneda()">
+                            </div>
                         </div>
 
                         <div class="form-row">
@@ -345,7 +348,7 @@
                             <span class="card-name"></span> <span class="card-surname"></span>
                         </div>
                         <p class="preview-card-info">
-                            <span class="job-title preview-job-title"> Designer </span> <!-- Cargo -->
+                            <span class="job-title preview-job-title"> Fase </span> <!-- Cargo -->
                             <span class="date preview-date"></span> <!-- Fecha -->
                             <span class="phone preview-phone"><i class="fas fa-phone"></i> </span> <!-- Teléfono -->
                         </p>
@@ -359,14 +362,34 @@
                 </div>
             </div>
         </div>
+        <div class="counter-container">
+            <div class="counter-box box-a">
+                <h2>Total de Trabajos</h2>
+                <span id="totalJobs">0</span>
+            </div>
+            <div class="counter-box box-b">
+                <h2>Contador 2</h2>
+                <span>0</span>
+            </div>
+            <div class="counter-box box-c">
+                <h2>Contador 3</h2>
+                <span>0</span>
+            </div>
+            <div class="counter-box box-d">
+                <h2>Contador 4</h2>
+                <span>0</span>
+            </div>
+        </div>
+        
+        
         <!-- Mensajes Flash -->
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="flash-messages">
-                {% for message in messages %}
-                    <div class="flash-message">{{ message }}</div>
-                {% endfor %}
-            </div>
+        <div class="flash-messages">
+            {% for message in messages %}
+            <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
         {% endif %}
         {% endwith %}
         <div class="modal-backdrop hidden"></div>
@@ -382,15 +405,15 @@
                     <p class="card-info">
                         <span class="job-title">
                             {% if item[7] == 1 %}
-                                Diseño
+                            Diseño
                             {% elif item[7] == 2 %}
-                                Aprobación
+                            Aprobación
                             {% elif item[7] == 3 %}
-                                Elaboración
+                            Elaboración
                             {% elif item[7] == 4 %}
-                                Entrega
+                            Entrega
                             {% else %}
-                                Valor no reconocido
+                            Valor no reconocido
                             {% endif %}
                         </span>
                         <span class="date">{{ item[1] }}</span>
@@ -438,7 +461,7 @@
         function mostrarModal() {
             var modal = document.getElementById('add-modal-content');
             modal.style.display = 'block';
-          }
+        }
     </script>
 </body>
 

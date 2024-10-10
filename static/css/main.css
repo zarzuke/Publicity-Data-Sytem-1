@@ -394,7 +394,7 @@ body.dark .home .text {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     max-width: 1600px;
-    margin: 30px auto;
+    margin: 0px auto;
     padding: 20px;
     gap: 20px;
 }
@@ -438,7 +438,7 @@ body.dark .home .text {
 body.dark .card-list .card-item:hover {
     transform: scale(1.03);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 100px #dadcff25;
+    box-shadow: 0 8px 100px #000000b7;
 }
 
 .card-list .card-item img,
@@ -486,6 +486,13 @@ body.dark .card-list .card-item:hover {
     color: #242526;
     margin-top: 10px;
     /* Espacio entre elementos */
+}
+
+.form-group input[id="date"] {
+    pointer-events: none;
+    opacity: 0.7;
+    background-color: #d4d4d4;
+    border: none;
 }
 
 .card-list .card-item .job-title,
@@ -1163,6 +1170,7 @@ body.dark .form-section {
 
 body.dark .form-group input,
 body.dark .form-group textarea {
+    font-weight: 300;
     background-color: #343536;
     /* Fondo oscuro para el input */
     color: #E0E0E0;
@@ -1249,11 +1257,10 @@ body.dark .form-group textarea:focus {
 }
 
 .form-group input[id="remaining"] {
-    background-color: #f5f5f5;
-    color: #666;
-    border: 2px solid #ddd;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.7;
+    background-color: #d4d4d4;
+    border: none;
 }
 
 .confirmation-modal {
@@ -1380,6 +1387,7 @@ body.dark .sort-btn {
 }
 
 .floating-buttons {
+    z-index: 100; /* Aumenta el z-index para que aparezcan por encima */
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -1413,6 +1421,7 @@ body.dark .sort-btn {
     animation: fadeIn 0.5s;
 }
 
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1439,5 +1448,56 @@ body.dark .sort-btn {
     animation: fadeOut 0.5s forwards; /* `forwards` mantiene el estado final */
     display: flex; /* Asegúrate de que esté visible mientras se anima */
 }
+
+
+.counter-container {
+    display: flex;
+    justify-content: center; /* Centrar elementos horizontalmente */
+    align-items: center; /* Centrar elementos verticalmente */
+    flex-wrap: wrap; /* Permite que los contadores se ajusten en varias líneas si es necesario */
+    margin-top: 20px;
+}
+
+.counter-box {
+    width: 300px; /* Cambia este valor para hacer el counter-box más pequeño */
+    color: white; /* Color del texto */
+    padding: 8px;
+    border-radius: 12px; /* Bordes más redondeados */
+    text-align: center; /* Centrar texto */
+    transition: transform 0.3s ease; /* Transición suave para el efecto hover */
+    position: relative; /* Para efectos de pseudo-elementos */
+    overflow: hidden; /* Para ocultar el pseudo-elemento */
+    margin: 10px; /* Ajusta este valor para reducir el espacio entre los contadores */
+    cursor: default;
+}
+
+
+
+/* Estilos de color para los diferentes contadores */
+.box-a {
+    background: #576974; /* Azul */
+}
+.box-b {
+    background: #525f7c; /* Rojo */
+}
+.box-c {
+    background: #50928f; /* Verde */
+}
+.box-d {
+    background: #c9b181; /* Amarillo */
+}
+
+/* Estilo para el texto */
+.counter-box h2 {
+    font-size: 0.9rem; /* Tamaño más grande para una mejor legibilidad */
+    font-weight: 500; /* Un poco más ligero que el normal */
+}
+
+.counter-box span {
+    font-size: 1.5rem; /* Aumenta el tamaño del número */
+    font-weight: bold; /* Hacer el número más prominente */
+}
+
+
 
 

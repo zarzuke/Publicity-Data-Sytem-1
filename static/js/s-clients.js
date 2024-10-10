@@ -9,3 +9,4 @@ function showModal(itemId) {
 document.getElementById('cancelDelete').addEventListener('click', function() {
     document.getElementById('confirmationModal').classList.add('hidden');
 });
+

@@ -101,7 +101,10 @@
             </div>
         </div>
     </nav>
-
+    <section class="home">
+        <div class="home-header">
+            <div class="text">Clientes</div>
+        </div>
 <div class="modal-backdrop hidden"></div>
         <div class="card-list-client">
             {% for item in cliente %}
@@ -159,21 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!sidebar.contains(event.target) && !cardList.contains(event.target)) {
             sidebar.classList.add('close'); // Cierra el menú
         }
-    });
-
-    
-    // Previsualización en tiempo real
-    const nameInput = document.getElementById('name');
-    const companyInput = document.getElementById('company');
-    const previewName = document.getElementById('previewName');
-    const previewCompany = document.getElementById('previewCompany');
-
-    nameInput.addEventListener('input', function () {
-        previewName.textContent = nameInput.value;
-    });
-
-    companyInput.addEventListener('input', function () {
-        previewCompany.textContent = companyInput.value || 'N/A';
     });
 });
 
