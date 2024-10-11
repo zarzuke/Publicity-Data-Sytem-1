@@ -127,7 +127,8 @@
                 </div>
                 <div class="info-item">
                     <div class="info-title">Fecha de registro:</div>
-                    <div class="info-box">{{details[1]}}</div>
+                    {% set date = details[1].split('-') %}
+                    <div class="info-box">{{date[2]}}/{{date[1]}}/{{date[0]}}</div>
                 </div>
                 <div class="info-item">
                     <div class="info-title">Fecha de entrega:</div>
