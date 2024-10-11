@@ -430,9 +430,16 @@ function handleUserOptionChange() {
         document.getElementById('phone').value = "";
 
         existingUserSelect.style.display = 'block'; // Mostrar el selector de 'Cliente existente'
+        const phoneInput = document.getElementById('phone');
+        phoneInput.setAttribute('readonly', true);
+        const name = document.getElementById('name');
+        name.setAttribute('readonly', true);
+        const surname = document.getElementById('surname');
+        surname.setAttribute('readonly', true);
         document.getElementById('name').disabled = false;
         document.getElementById('surname').disabled = false;
         document.getElementById('phone').disabled = false;
+
     } else {
         existingUserSelect.style.display = 'none'; // Mantener oculto si no se selecciona ninguna opción
         document.getElementById('name').disabled = true;
@@ -442,13 +449,9 @@ function handleUserOptionChange() {
 
     // Habilitar o deshabilitar los campos según la opción seleccionada
     if (userOption === 'new') {
-        const phoneInput = document.getElementById('phone');
-        const name = document.getElementById('name');
-        const surname = document.getElementById('surname')
-        phoneInput.setAttribute('readonly', true);
-        name.setAttribute('readonly', true);
-        surname.setAttribute('readonly', true);
-
+        document.getElementById('name').disabled = false;
+        document.getElementById('surname').disabled = false;
+        document.getElementById('phone').disabled = false;
     }
 }
 
@@ -458,12 +461,15 @@ function autocompleteUser() {
     const name = selectedOption.getAttribute('data-name');
     const surname = selectedOption.getAttribute('data-surname');
     const phone = selectedOption.getAttribute('data-phone');
+    const country = selectedOption.getAttribute('country-phone');
 
     if (name) {
         document.getElementById('name').value = name;
         document.getElementById('surname').value = surname;
         document.getElementById('phone').value = phone;
+        document.getElementById('country-code').value = country;
     }
+
 
     // Llama a updatePreview después de autocompletar los campos
     updatePreview();

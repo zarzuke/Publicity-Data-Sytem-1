@@ -95,7 +95,7 @@ def try_crafting():
         return redirect(url_for('login'))
     else:
         if g.user[1]=="Administrator":
-            estado = 'Diseño'
+            estado = 'Creacion'
             filas,tipos=get_project_phase(3)
             combine=zip(filas,tipos)
             return render_template("design.html",user=g.user,filas=combine,estado=estado)
@@ -112,7 +112,7 @@ def try_ending():
         return redirect(url_for('login'))
     else:
         if g.user[1]=="Administrator":
-            estado = 'Diseño'
+            estado = 'Entrega'
             filas,tipos=get_project_phase(4)
             combine=zip(filas,tipos)
             return render_template("design.html",user=g.user,filas=combine,estado=estado)

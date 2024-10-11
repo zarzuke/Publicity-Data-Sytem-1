@@ -165,8 +165,9 @@
                             <select id="existing-users" name="existing-users" onchange="autocompleteUser()">
                                 <option value="">Seleccione un cliente</option>
                                 {% for names, numbers in clients %}
+                                {% set split_numbers = numbers[0].split(' ') %}
                                 <option value="1" data-name="{{ names[0] }}" data-surname="{{ names[1] }}"
-                                    data-phone="{{numbers[0]}}">{{ names[0] }}
+                                    data-phone="{{split_numbers[1]}}" country-phone="{{split_numbers[0]}}">{{ names[0] }}
                                     {{ names[1] }}</option>
                                 {% endfor %}
                             </select>
@@ -426,7 +427,8 @@
                             Valor no reconocido
                             {% endif %}
                         </span>
-                        <span class="date">{{ item[1] }}</span>
+                        {% set date = item[1].split('-') %}
+                        <span class="date">{{date[2]}}/{{date[1]}}/{{date[0]}}</span>
                         <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>
                     </p>
                     <div class="job-types-wrapper">
