@@ -169,7 +169,7 @@ addBtn.addEventListener('click', () => {
     // Establecer la fecha actual
     const dateInput = document.getElementById('date');
     dateInput.value = new Date().toISOString().slice(0, 10); // Formato AAAA-MM-DD
-    dateInput.disabled = true; // Deshabilitar el campo de fecha
+    dateInput.disabled = false; // Deshabilitar el campo de fecha
 
     updatePreview(); // Asegúrate de que la previsualización se actualice correctamente
 });
@@ -267,12 +267,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const currencySelect = document.getElementById('currency');
 
     function calculateRemaining() {
-        const totalCost = parseInt(totalCostInput.value) || 0;
-        const downPayment = parseInt(downPaymentInput.value) || 0;
-        const remaining = parseInt(totalCost) - parseInt(downPayment);
+        const totalCost = parseFloat(totalCostInput.value) || 0;
+        const downPayment = parseFloat(downPaymentInput.value) || 0;
+
+        if (downPayment > totalCost) {
+            alert("El abono no puede ser superior al costo total.");
+            downPaymentInput.value = totalCost;  // Puedes ajustar esto según lo necesites
+        }
+
+        const remaining = totalCost - downPayment;
 
         // Asegúrate de no mostrar un valor negativo
-        remainingInput.value = remaining < 0 ? '0' : formatNumber(remaining);
+        remainingInput.value = remaining < 0 ? '0' : remaining.toFixed(2);
     }
 
     totalCostInput.oninput = calculateRemaining; // Calcula al cambiar el costo total
@@ -281,6 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Agregar un evento de cambio para el selector de moneda
     currencySelect.addEventListener('change', calculateRemaining);
 });
+
 
 // CERRAR SIDEBAR AL CLICKEAR AFUERA
 
@@ -550,3 +557,8 @@ document.addEventListener("DOMContentLoaded", function() {
     totalJobs.textContent = document.querySelectorAll('.card-item').length; // Cuenta los elementos de la tarjeta
 });
 
+const phoneInput = document.getElementById('phone');
+
+    phoneInput.addEventListener('input', function() {
+        phoneInput.value = phoneInput.value.replace(/[^\d]/g, ''); // Permitir solo números
+    });

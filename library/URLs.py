@@ -39,7 +39,6 @@ def try_login():
             return redirect("/home")
         else:
                 flash("Credenciales inválidas, intente de nuevo")
-    flash("bienvenido")
     return render_template("index.html")
 
 def try_home():
