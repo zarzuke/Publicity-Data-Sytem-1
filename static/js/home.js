@@ -133,14 +133,6 @@ addForm.addEventListener('submit-btn', (event) => {
     const remaining = addForm.elements.remaining.value;
     const description = addForm.elements.description.value;
 
-    console.log('Name:', name);
-    console.log('Surname:', surname);
-    console.log('Phone:', phone);
-    console.log('Job Types:', jobTypes.join(', ')); // Mostrar todos los tipos de trabajo seleccionados
-    console.log('Total Cost:', totalCost);
-    console.log('Down Payment:', downPayment);
-    console.log('Remaining:', remaining);
-    console.log('Description:', description);
 });
 
 
@@ -450,9 +442,13 @@ function handleUserOptionChange() {
 
     // Habilitar o deshabilitar los campos según la opción seleccionada
     if (userOption === 'new') {
-        document.getElementById('name').disabled = false;
-        document.getElementById('surname').disabled = false;
-        document.getElementById('phone').disabled = false;
+        const phoneInput = document.getElementById('phone');
+        const name = document.getElementById('name');
+        const surname = document.getElementById('surname')
+        phoneInput.setAttribute('readonly', true);
+        name.setAttribute('readonly', true);
+        surname.setAttribute('readonly', true);
+
     }
 }
 
