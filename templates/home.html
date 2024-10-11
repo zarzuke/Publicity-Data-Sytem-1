@@ -184,13 +184,7 @@
                         <div class="form-row" id="telField">
                             <div class="form-group">
                                 <label for="phone">Teléfono:</label>
-                                <div style="display: flex; align-items: center;">
-                                    <select id="country-code" name="country-code" style="width: 80px;">
-                                        <option value="+58">+58</option>
-                                        <option value="+57">+57</option>
-                                    </select>
-                                    <input type="tel" id="phone" name="phone" value="" required maxlength="10">
-                                </div>                            
+                                <input type="tel" id="phone" name="phone" value="" required disabled>
                             </div>
                             <div class="form-group">
                                 <label for="date">Fecha de registro:</label>
@@ -297,19 +291,14 @@
                             <div class="form-group">
                                 <label for="total-cost">Costo total:</label>
                                 <input type="number" id="total-cost" name="total-cost" required
-                                    oninput="formatearMoneda()" step="0.01">
+                                    oninput="formatearMoneda()">
                             </div>
                             <div class="form-group">
                                 <label for="down-payment">Abono:</label>
                                 <div style="display: flex; align-items: center;">
                                     <input type="number" id="down-payment" name="down-payment"
-                                        oninput="formatearMoneda()" step="0.01">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="down-payment">Tipo de Moneda:</label>
-                                <div style="display: flex; align-items: center;">
-                                    <select id="currency" name="currency" onchange="formatearMoneda()" step="0.01">
+                                        oninput="formatearMoneda()">
+                                    <select id="currency" name="currency" onchange="formatearMoneda()">
                                         <option value="3">Bs.S</option>
                                         <option value="2">COP</option>
                                         <option value="1">USD</option>
@@ -318,13 +307,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="remaining">Restante:</label>
-                                <input type="number" id="remaining" name="remaining" required readonly>
+                                <input type="number" id="remaining" name="remaining" required readonly
+                                    oninput="formatearMoneda()">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="description">Descripcion:</label>
+                                <label for="description">Comentarios:</label>
                                 <textarea id="description" name="description" rows="4" required
                                     style="resize: none;"></textarea>
                             </div>

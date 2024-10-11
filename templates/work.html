@@ -87,7 +87,7 @@
                     <i class='bx bx-chevron-left'></i>
                 </a>
                 <div class="text">
-                    <a href="/home" style="color: #695cfe; text-decoration: none;">Inicio</a> > Detalles
+                    <a href="home.html" style="color: #695cfe; text-decoration: none;">Inicio</a> > Detalles
                 </div>
             </div>
         </div>
@@ -196,15 +196,9 @@
                                 <button class="status-button approved" id="approved" type="button" onclick="setStatus('approved', this)">
                                     Aprobado
                                 </button>
-
-                                {% if user[1] != "Administrator" %}
-                            <!-- No mostrar nada -->
-                                {% else %}
                                 <button class="status-button rejected" id="rejected" type="button" onclick="setStatus('canceled', this)">
                                     Rechazado
                                 </button>
-                                {% endif %}
-                                
                             </div>
                             
                             <button class="additional-button" type="button" onclick="handleComplete('{{nor}}')"><i class="bx bx-check-circle"></i> Completado</button>
