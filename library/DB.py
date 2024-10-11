@@ -7,12 +7,13 @@ def project_inc():
         title = request.form["title"]
         name = request.form["names"]
         lastname = request.form["surname"]
+        country = request.form["country-code"]
         phone = request.form["phone"]
-        date = request.form["date"]
+        date = request.form.get("date")
         job_type = request.form.getlist('job-type')
-        total = int(request.form["total-cost"])
-        mid = int(request.form["down-payment"])
-        remaining = int(request.form["remaining"])
+        total = float(request.form["total-cost"])
+        mid = float(request.form["down-payment"])
+        remaining = float(request.form["remaining"])
         total = request.form["total-cost"]
         mid = request.form["remaining"]
         remaining = request.form["down-payment"]
@@ -22,10 +23,11 @@ def project_inc():
         designer=request.form["designer"]
         crafter=request.form["crafter"]
         installer=request.form["installer"]
-
+        fp=f"+{country}{phone}"
         conn = sqlite3.connect('library/database.db')
         cursor = conn.cursor()
-
+        if mid=="":
+            mid=0
         cursor.execute("INSERT INTO projects (projectName, projectDescript, projectPhase, projectDesigner, projectCrafter, projectInstaller) "
                     "VALUES (?,?,?,?,?,?)", (title, details,1,designer,crafter,installer,))
 
@@ -39,7 +41,7 @@ def project_inc():
         cursor.execute("SELECT COUNT(1) FROM clientProject WHERE projectClientName ==?",(client_name,))
         if cursor.fetchone()[0] == 0:
             cursor.execute("INSERT INTO clientProject (projectClientName, projectClientNumber) VALUES (?, ?)",
-                    (client_name, phone))
+                    (client_name, fp))
         
         cursor.execute("""UPDATE projects SET projectClient = 
                        (SELECT projectClientId FROM clientProject WHERE projectClientName == ?) 
