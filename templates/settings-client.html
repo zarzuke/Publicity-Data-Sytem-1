@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../static/css/clients.css">
     <link rel="stylesheet" href="../static/css/scrollbar.css">
     <link rel="stylesheet" href="../static/css/flash.css">    
+    <link rel="stylesheet" href="../static/css/settings-user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -172,6 +173,32 @@
     </div>
 {% endif %}
 {% endwith %}
+<div class="form-card-cl" id="editUser">
+    <h3>Editar Cliente</h3>
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="editUsername">Cliente:</label>
+            <select id="editUsername" name="editUsername" required>
+                <option value="">Seleccione un usuario</option>
+                <option value="usuario1">Usuario 1</option>
+                <option value="usuario2">Usuario 2</option>
+                <option value="usuario3">Usuario 3</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="editRole">Telefono:</label>
+            <select id="editRole" name="editRole" required>
+                <option value="">Seleccione un cargo</option>
+                <option value="admin">Administrador</option>
+                <option value="user">Usuario</option>
+                <option value="editor">Editor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</div>
 <div class="modal-backdrop hidden"></div>
     <div class="card-list-client">
         {% for item in cliente %}

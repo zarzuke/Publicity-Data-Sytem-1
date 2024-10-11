@@ -404,6 +404,26 @@ body.dark .home .text {
     font-weight: 700;
 }
 
+.form-card-cl {
+    max-width: 320px; /* Ancho máximo de la tarjeta */
+    max-height: 350px;
+    margin: 20px; /* Margen para separar las tarjetas */
+    padding: 20px;
+    background-color: var(--sidebar-color); /* Color de fondo blanco para la tarjeta */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
+    flex: 1; /* Para permitir flexibilidad en el ancho */
+    min-width: 300px; /* Ancho mínimo para las tarjetas */
+}
+
+.form-card-cl h3 {
+    text-align: center; /* Centramos el texto del encabezado */
+    margin-bottom: 30px; /* Espaciado bajo el encabezado */
+    color: rgb(63, 63, 63); /* Texto en negro */
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
 .form-group {
     margin-bottom: 15px; /* Separación entre grupos */
 }

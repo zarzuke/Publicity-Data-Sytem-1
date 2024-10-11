@@ -332,9 +332,7 @@ def save_record(id):
     types=cursor.fetchall()
     
     name,client,payment,currency,date = record
-    types_str = str()
-    for t in types:
-        types_str = types_str + "," + t[0]
+    types_str = ','.join(t[0] for t in types)
     
     cursor.execute("INSERT INTO record (recordName,recordClient,recordPayment,recordCurrency,recordDate,recordTypeWork) VALUES (?,?,?,?,?,?)",(name,client,payment,currency,date,types_str))
     conn.commit()
@@ -496,7 +494,7 @@ def get_project_installer(worker):
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
-                WHERE projectCrafter == ? AND projectPhase == 4
+                WHERE projectInstaller == ? AND projectPhase == 4
                 """,(worker,))
     filas = cursor.fetchall()
     cursor.execute("""
