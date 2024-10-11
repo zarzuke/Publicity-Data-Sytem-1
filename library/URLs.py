@@ -146,6 +146,7 @@ def try_work(id):
         flash("Debe de iniciar sesión primero.")
         return redirect(url_for('login'))
     else:
+        print(id)
         work,types,id=get_details(id)
         print(work,id)
         return render_template("work.html",user=g.user,details=work,types=types,nor=id)
