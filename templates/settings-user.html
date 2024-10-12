@@ -108,11 +108,16 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="back-button">
-                <a href="javascript:history.back()" class="back-btn">
-                    <i class='bx bx-chevron-left' ></i> <!-- Puedes cambiar el ícono aquí -->
-                </a>
-                <div class="text">Manager usuarios</div>
+                <div class="home-header">
+                    <div class="back-button">
+                        <a href="/settings" class="back-btn">
+                            <i class='bx bx-chevron-left'></i>
+                        </a>
+                        <div class="text">
+                            <a href="/settings" style="color: #695cfe; text-decoration: none;">Configuracion</a> > Gestion de Usuarios
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-container">
@@ -149,20 +154,34 @@
                         <label for="editUsername">Usuario:</label>
                         <select id="editUsername" name="editUsername" required>
                             <option value="">Seleccione un usuario</option>
-                            <option value="usuario1">Usuario 1</option>
-                            <option value="usuario2">Usuario 2</option>
-                            <option value="usuario3">Usuario 3</option>
-                            <!-- Aquí es donde deberías llenar con los usuarios reales del backend -->
+                            {% for work in workers %}
+                            {% set role=work[1] %}
+                            {% if role == "Designer" %}
+                                {% set role = "Diseñador" %}
+                            {% elif role == "Crafter" %}
+                                {% set role = "Elaborador" %}
+                            {% elif role == "Installer" %}
+                                {% set role = "Instalador" %}
+                            {% else %}
+                                {% set role = "Administrador" %}
+                            {% endif %}
+
+                            <option value="usuario1">{{work[0]}} - {{role}}</option>
+                            {%endfor%}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="editRole">Cargo:</label>
                         <select id="editRole" name="editRole" required>
                             <option value="">Seleccione un cargo</option>
-                            <option value="admin">Administrador</option>
-                            <option value="user">Usuario</option>
-                            <option value="editor">Editor</option>
+                            <option value="admin">Diseñador</option>
+                            <option value="user">Elaborador</option>
+                            <option value="editor">Instalador</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required placeholder="Ingrese contraseña nueva">
                     </div>
                     <div class="form-group">
                         <button type="submit">Guardar</button>

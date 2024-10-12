@@ -115,7 +115,7 @@ def get_details(id):
                 projectDateStart, projectDateFinished,
                 currencyTypeName, projectChargeInstallment, projectChargeBalance, projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript
+                projectDescript,projectPhase
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -393,6 +393,14 @@ def get_workers():
     conn.close()
     return design,craft,install
 
+def get_users():
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT userName,userRol FROM users WHERE userRol != 'Administrator'")
+    workers=cursor.fetchall()
+    conn.close()
+    return workers
+    
 def create_client(client,number):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()

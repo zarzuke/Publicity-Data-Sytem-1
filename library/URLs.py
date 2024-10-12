@@ -7,6 +7,7 @@ from openpyxl import load_workbook
 import io
 
 def try_signup():
+    workers=get_users()
     if request.method=="POST":
         bd = sqlite3.connect("library/database.db")
         cursor = bd.cursor()
@@ -16,7 +17,7 @@ def try_signup():
         cursor.execute("INSERT INTO users (userName,userPassword,userRol) VALUES (?, ?, ?)", (username, password, role,))
         bd.commit()
         bd.close()    
-    return render_template("settings-user.html",user=g.user)
+    return render_template("settings-user.html",user=g.user,workers=workers)
 
 def try_login():
     if g.user==["vacio","vacio"]:
