@@ -521,6 +521,7 @@ def get_project_installer(worker):
 
     conn.close()
     return filas,tipos
+<<<<<<< Updated upstream
 
 def update_down(id,down):
     conn = sqlite3.connect('library/database.db')
@@ -538,3 +539,40 @@ def update_down(id,down):
     conn.close()
 
     pass
+=======
+    
+def edit_client(id):
+    fp=str()
+    name = request.form.get("names", "")
+    lastname = request.form.get("surname", "")
+    client_name = f"{name} {lastname}".strip()  # Asegúrate de que no quede espacio en blanco innecesario
+    country = request.form.get("country-code", "")
+    phone = request.form.get("phone", "")
+    if phone:
+        fp = f"{country} {phone}".strip()  # Asegúrate de que no quede espacio en blanco innecesario
+
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    
+    if client_name and not fp:  # Solo actualiza el nombre si no hay número
+        cursor.execute("UPDATE clientProject SET projectClientName = ? WHERE projectClientId = ?",
+                       (client_name, id))
+    elif fp and not client_name:  # Solo actualiza el número si no hay nombre
+        cursor.execute("UPDATE clientProject SET projectClientNumber = ? WHERE projectClientId = ?",
+                       (fp, id))
+    elif client_name and fp:  # Actualiza ambos si ambos están presentes
+        cursor.execute("UPDATE clientProject SET projectClientName = ?, projectClientNumber = ? WHERE projectClientId = ?",
+                       (client_name, fp, id))
+
+    conn.commit()
+    conn.close()
+    return redirect(url_for('settings_client'))
+
+def get_client_name(id):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectClientName FROM clientProject WHERE projectClientId = ?",(id,))
+    client_name = cursor.fetchone()
+    conn.close()
+    return client_name[0] if client_name else None
+>>>>>>> Stashed changes
