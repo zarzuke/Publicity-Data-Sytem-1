@@ -103,20 +103,26 @@
         {% endif %}
         {% endwith %}
         <div class="card">
+            <div class="card-header">
             <h2>{{ details[0] }}</h2>
-            {%if details[10]==1%}
-                {%set fase='Diseño'%}
-                <div style="display: inline-block; margin-left: 10px;">{{fase}}</div>
-            {%elif details[10]==2%}
-                {%set fase='Aprovacion'%}
-                <div style="display: inline-block; margin-left: 10px;">{{fase}}</div>
-            {%elif details[10]==3%}
-                {%set fase='Elaboracion'%}
-                <div style="display: inline-block; margin-left: 10px;">{{fase}}</div>
-            {%elif details[10]==4%}
-                {%set fase='Entrega'%}
-                <div style="display: inline-block; margin-left: 10px;">{{fase}}</div>
-            {%endif%}
+            {% if details[10] == 1 %}
+                {% set fase='Diseño' %}
+                <div class="fase diseno">
+                    <i class="fa-solid fa-sliders"></i>{{ fase }}</div>
+            {% elif details[10] == 2 %}
+                {% set fase='Aprobacion' %}
+                <div class="fase aprobacion">
+                    <i class="fa-regular fa-circle-check"></i>{{ fase }}</div>
+            {% elif details[10] == 3 %}
+                {% set fase='Elaboracion' %}
+                <div class="fase elaboracion">
+                    <i class="fa-solid fa-crop-simple"></i>{{ fase }}</div>
+            {% elif details[10] == 4 %}
+                {% set fase='Entrega' %}
+                <div class="fase entrega">
+                    <i class="fa-regular fa-paper-plane"></i>{{ fase }}</div>
+            {% endif %}
+        </div>
             <div class="info-title"></div>
             <div class="job-types-wrappers">
                 <div class="job-types-containers" id="jobTypesContainer">

@@ -414,19 +414,27 @@
                         <span class="card-name">{{ item[3] }}</span>
                     </p>
                     <p class="card-info">
-                        <span class="job-title">
-                            {% if item[7] == 1 %}
-                            Diseño
-                            {% elif item[7] == 2 %}
-                            Aprobación
-                            {% elif item[7] == 3 %}
-                            Elaboración
-                            {% elif item[7] == 4 %}
-                            Entrega
-                            {% else %}
-                            Valor no reconocido
-                            {% endif %}
+                        {% if item[7] == 1 %}
+                        <span class="fase diseno">
+                            <i class="fa-solid fa-sliders"></i> Diseño
                         </span>
+                    {% elif item[7] == 2 %}
+                        <span class="fase aprobacion">
+                            <i class="fa-regular fa-circle-check"></i> Aprobación
+                        </span>
+                    {% elif item[7] == 3 %}
+                        <span class="fase elaboracion">
+                            <i class="fa-solid fa-crop-simple"></i> Elaboración
+                        </span>
+                    {% elif item[7] == 4 %}
+                        <span class="fase entrega">
+                            <i class="fa-regular fa-paper-plane"></i> Entrega
+                        </span>
+                    {% else %}
+                        Valor no reconocido
+                    {% endif %}
+                    
+                    
                         {% set date = item[1].split('-') %}
                         <span class="date">{{date[2]}}/{{date[1]}}/{{date[0]}}</span>
                         <span class="phone"><i class="fas fa-phone"></i>{{ item[4] }}</span>

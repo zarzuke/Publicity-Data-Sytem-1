@@ -145,7 +145,6 @@ body {
 /* Título de la tarjeta */
 .card h2 {
     font-size: 1.6em; /* Tamaño del título más pequeño */
-    margin-bottom: 10px; /* Espaciado debajo del título reducido */
     color: #333; /* Color del texto */
 }
 
@@ -383,3 +382,34 @@ body.dark .comment-input{
     display: none;
 }
 
+.card-header {
+    display: flex; /* Usar flexbox para alinear los hijos en una fila */
+    justify-content: space-between; /* Espacio entre los elementos para que estén en extremos opuestos */
+    align-items: center; /* Centrar verticalmente los elementos */
+    width: 100%; /* Asegura que el encabezado ocupe todo el ancho del contenedor */
+    margin-bottom: 10px;
+}
+
+.fase {
+    padding: 5px 20px; /* Espaciado alrededor del texto para que no se vea apretado */
+    border-radius: 15px; /* Esquinas redondeadas para un mejor estilo */
+    color: #242424; /* Color del texto */
+    font-weight: 600; /* Peso de la fuente si quieres que resalte más */
+    font-size: 15px;
+}
+
+.diseno {
+    background-color: #ecd4ae; /* Azul más vibrante */
+}
+
+.aprobacion {
+    background-color: #c6c39a; /* Amarillo más intenso */
+}
+
+.elaboracion {
+    background-color: #aac69a; /* Naranja más oscuro */
+}
+
+.entrega {
+    background-color: #9ac6b4; /* Verde fresco */
+}

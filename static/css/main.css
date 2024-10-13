@@ -499,8 +499,9 @@ body.dark .card-list .card-item:hover {
 .card-list .card-item .phone,
 .card-list .card-item .date {
     display: inline-block;
+    /* Alineado en línea */
     padding: 8px 15px;
-    font-size: 11px;
+    font-size: 12px;
     border-radius: 50px;
     font-weight: 600;
     color: #242526;
@@ -519,7 +520,6 @@ body.dark .card-list .card-item:hover {
 
 .card-list .card-item .job-title,
 .preview-job-title {
-    background-color: #cbd3eb;
     color: #242526;
 }
 
@@ -1460,7 +1460,7 @@ body.dark .sort-btn {
 
 .counter-box {
     width: 300px; /* Cambia este valor para hacer el counter-box más pequeño */
-    color: white; /* Color del texto */
+    color: #707070; /* Color del texto */
     padding: 8px;
     border-radius: 12px; /* Bordes más redondeados */
     text-align: center; /* Centrar texto */
@@ -1469,22 +1469,41 @@ body.dark .sort-btn {
     overflow: hidden; /* Para ocultar el pseudo-elemento */
     margin: 10px; /* Ajusta este valor para reducir el espacio entre los contadores */
     cursor: default;
+    box-shadow: 0px 5px 200px rgba(0, 0, 0, 0.055);
+}
+
+body.dark .counter-box {
+    color: #cccccc; /* Color del texto */
+    box-shadow: 0px 5px 400px rgba(0, 0, 0, 0.055);
+}
+
+body.dark .box-a {
+    background: #1e1f20;
+}
+body.dark .box-b {
+    background: #1e1f20; /* Rojo */
+}
+body.dark .box-c {
+    background: #1e1f20; /* Verde */
+}
+body.dark .box-d {
+    background: #1e1f20; /* Amarillo */
 }
 
 
 
 /* Estilos de color para los diferentes contadores */
 .box-a {
-    background: #576974; /* Azul */
+    background: #ffffff;
 }
 .box-b {
-    background: #525f7c; /* Rojo */
+    background: #ffffff; /* Rojo */
 }
 .box-c {
-    background: #50928f; /* Verde */
+    background: #ffffff; /* Verde */
 }
 .box-d {
-    background: #c9b181; /* Amarillo */
+    background: #ffffff; /* Amarillo */
 }
 
 /* Estilo para el texto */
@@ -1496,6 +1515,36 @@ body.dark .sort-btn {
 .counter-box span {
     font-size: 1.5rem; /* Aumenta el tamaño del número */
     font-weight: bold; /* Hacer el número más prominente */
+}
+
+.diseno {
+    background-color: #ecd4ae; /* Azul más vibrante */
+}
+
+.aprobacion {
+    background-color: #c6c39a; /* Amarillo más intenso */
+}
+
+.elaboracion {
+    background-color: #aac69a; /* Naranja más oscuro */
+}
+
+.entrega {
+    background-color: #9ac6b4; /* Verde fresco */
+}
+
+.fase {
+    display: inline-flex; /* Cambiado a flex para alinear ícono y texto */
+    align-items: center; /* Alinear verticalmente el ícono y el texto */
+    padding: 8px 15px;
+    font-size: 12px;
+    border-radius: 50px;
+    font-weight: 500;
+    margin-right: 5px; /* Espacio entre los elementos */
+}
+
+.fase i {
+    margin-right: 5px; /* Espacio entre el ícono y el texto */
 }
 
 
