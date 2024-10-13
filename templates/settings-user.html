@@ -120,7 +120,7 @@
         <div class="form-container">
             <div class="form-card" id="registerUser">
                 <h3>Registrar Nuevo Usuario</h3>
-                <form action="" method="POST" action="{{ url_for('settings_user') }}">
+                <form method="POST" action="{{ url_for('settings_user') }}">
                     <div class="form-group">
                         <label for="username">Usuario:</label>
                         <input type="text" id="username" name="username" required placeholder="Ingrese el nombre de usuario">
@@ -146,7 +146,7 @@
 
             <div class="form-card" id="editUser">
                 <h3>Editar Usuario</h3>
-                <form action="" method="POST">
+                <form action="{{ url_for('edit_user') }}" method="POST">
                     <div class="form-group">
                         <label for="editUsername">Usuario:</label>
                         <select id="editUsername" name="editUsername" required>
@@ -162,32 +162,37 @@
                             {% else %}
                                 {% set role = "Administrador" %}
                             {% endif %}
-
-                            <option value="usuario1">{{work[0]}} - {{role}}</option>
+                            <option value="{{work[0]}}">{{work[0]}} - {{role}}</option>
                             {%endfor%}
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="username">Usuario:</label>
+                        <input type="text" id="username" name="new_username" placeholder="Ingrese el nombre de usuario">
+                    </div>
+                    <div class="form-group">
                         <label for="editRole">Cargo:</label>
-                        <select id="editRole" name="editRole" required>
+                        <select id="editRole" name="editRole">
                             <option value="">Seleccione un cargo</option>
-                            <option value="admin">Diseñador</option>
-                            <option value="user">Elaborador</option>
-                            <option value="editor">Instalador</option>
+                            <option value="Designer">Diseñador</option>
+                            <option value="Crafter">Elaborador</option>
+                            <option value="Installer">Instalador</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña:</label>
-                        <input type="password" id="password" name="password" required placeholder="Ingrese contraseña nueva">
+                        <input type="password" id="password" name="password" placeholder="Ingrese contraseña nueva">
                     </div>
                     <div class="form-group">
                         <button type="submit">Guardar</button>
+                        <button type="button" onclick="deleteUser()">Eliminar</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
     <script src="../static/js/sidebar.js"></script>
+    <script src="../static/js/settings-users.js"></script>
 </body>
 </html>
 

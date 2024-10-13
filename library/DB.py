@@ -589,3 +589,40 @@ def get_client_name(id):
     client_name = cursor.fetchone()
     conn.close()
     return client_name[0] if client_name else None
+
+def edit_client():
+    username = request.form.get("editUsername", "")
+    new_username = request.form.get("new_username", "")
+    role = request.form.get("editRole", "")
+    password = request.form.get("password", "")
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    
+    if new_username and not role and not password:  
+        cursor.execute("UPDATE users SET userName = ? WHERE userName = ?",
+                       (new_username, username))
+    elif role and not username and not password:  
+        cursor.execute("UPDATE users SET userRol = ? WHERE userName = ?",
+                       (role, username))
+    elif password and not username and not role:  
+        cursor.execute("UPDATE users SET userPassword = ? WHERE userName = ?",
+                       (password, username))
+    elif new_username and role and password:  
+        cursor.execute("UPDATE users SET userName = ?, userRol = ?, userPassword = ? WHERE userName = ?",
+                       (new_username, role, password, username))
+
+    conn.commit()
+    conn.close()
+    return redirect(url_for('settings_user'))
+
+def delete_user(username):
+    if username:
+        conn = sqlite3.connect('library/database.db')
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM users WHERE userName = ?",
+                       (username,))
+        conn.commit()
+        conn.close()
+        flash("Usuario Eliminado Correctamente")
+        return redirect(url_for('settings_user'))
+        
