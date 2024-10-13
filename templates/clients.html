@@ -103,14 +103,26 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="text">Clientes</div>
+            <div class="back-button">
+                <a href="/home" class="back-btn">
+                    <i class='bx bx-chevron-left'></i>
+                </a>
+                <div class="text">
+                    <a href="/home" style="color: #695cfe; text-decoration: none;">Inicio</a> > Clientes
+                </div>
+            </div>
         </div>
+
 <div class="modal-backdrop hidden"></div>
         <div class="card-list-client">
             {% for item in cliente %}
             <a href="{{ url_for('client', client=item[0] )}}" style="text-decoration: none;" class="client-link">
                 <div class="card-client">
-                    <img src="../static/img/user-default.png" alt="User Image">
+                    {% if os.path.exists('uploads/' + item[0] + '.png') %}
+                        <img src="../uploads/{{item[0]}}.png" alt="User Image">
+                    {% else %}
+                        <img src="../static/img/user-default.png" alt="User Image">
+                    {% endif %}
                     <p class="default-client-name">{{item[0]}}</p>
                     <p class="client-company">{{item[1]}}</p>
                 </div>

@@ -140,7 +140,7 @@ def try_clients():
         return redirect(url_for('login'))
     else:
         cliente=get_clients()
-        return render_template("clients.html",user=g.user,cliente=cliente)
+        return render_template("clients.html",user=g.user,cliente=cliente,os=os)
 
 
 def try_form():
@@ -155,7 +155,7 @@ def try_work(id):
         print(id)
         work,types,id=get_details(id)
         print(work,id)
-        return render_template("work.html",user=g.user,details=work,types=types,nor=id)
+        return render_template("work.html",user=g.user,details=work,types=types,nor=id,os=os)
 
 def try_client(client):
     if g.user==["vacio","vacio"]:

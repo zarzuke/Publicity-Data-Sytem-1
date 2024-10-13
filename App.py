@@ -2,6 +2,7 @@ from flask import Flask,session,g,jsonify,send_from_directory
 from library.URLs import *
 from library.DB import delete_projects
 import os
+from PIL import Image
 app = Flask(__name__)
 
 @app.route("/menu")
@@ -165,15 +166,18 @@ def uploaded_file(filename):
 def upload_file(name):
     if 'file' not in request.files:
         return redirect(request.url)
+    
     file = request.files['file']
     if file.filename == '':
         return redirect(request.url)
+    
     if file:
-        # Genera un nuevo nombre único para la imagen con la misma extensión
-        filename, file_extension = os.path.splitext(file.filename)
-        new_filename = f"{name}{file_extension}"
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+        img = Image.open(file)
+        new_filename = f"{name}.png"
+        new_filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+        img.save(new_filepath, 'PNG')
         return new_filename
+
 
 def delete_image(name):
     if name:

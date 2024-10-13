@@ -122,7 +122,7 @@ def get_details(id):
                 JOIN clientProject on projectClientId = projectClient
 				JOIN typeCurrency on currencyTypeId = projectChargeCurrency
                 WHERE projectId == ?
-                """,(id))
+                """,(id,))
     filas = cursor.fetchall()
     print(filas)
     details=filas[0][9].split('\n')
