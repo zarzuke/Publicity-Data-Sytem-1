@@ -420,8 +420,8 @@ def update_currency(id,new):
     cursor = conn.cursor()
     cursor.execute("SELECT projectChargeInstallment FROM chargeProject WHERE projectChargeId = ?",(id,))
     balance=cursor.fetchone()
-    intbas=int(balance[0])
-    newbalance=int(new)-intbas
+    intbas=float(balance[0])
+    newbalance=float(new)-intbas
     cursor.execute("UPDATE chargeProject SET projectChargeTotalPayment = ?,projectChargeBalance = ?  WHERE projectChargeId=? ",(new,newbalance,id,))
     conn.commit()
     conn.close()
@@ -521,3 +521,20 @@ def get_project_installer(worker):
 
     conn.close()
     return filas,tipos
+
+def update_down(id,down):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectChargeInstallment FROM chargeProject WHERE projectChargeId = ?",(id,))
+    balance=cursor.fetchone()
+    intbas=float(balance[0])
+    newbalance=float(down)+intbas
+    cursor.execute("SELECT projectChargeTotalPayment FROM chargeProject WHERE projectChargeId = ?",(id,))
+    total=cursor.fetchone()
+    ttotal=float(total[0])
+    bl=ttotal-newbalance
+    cursor.execute("UPDATE chargeProject SET projectChargeInstallment = ?,projectChargeBalance = ?  WHERE projectChargeId=? ",(newbalance,bl,id,))
+    conn.commit()
+    conn.close()
+
+    pass

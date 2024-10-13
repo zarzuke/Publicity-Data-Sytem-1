@@ -163,11 +163,13 @@
                 <div class="confirmation-modal hidden" id="totalEditModal">
                     <div class="modal-content">
                         <h3>Editar total</h3>
+                        <br>
                         <div class="modal-input-container">
-                            <input type="text" id="newTotalInput" placeholder="Nuevo total" />
+                            <input type="number" id="newTotalInput" placeholder="Nuevo total" step="0.01" required/>
+
                         </div>
                         <div class="modal-textarea-container">
-                            <textarea id="TotalReason" rows="4" placeholder="Motivo del cambio"></textarea>
+                            <textarea id="TotalReason" rows="4" placeholder="Motivo del cambio" required></textarea>
                         </div>
                         <div class="modal-actions">
                             <button id="confirmTotalEdit" class="confirm-btn" onclick="updateCurrency()">Guardar</button>
@@ -176,11 +178,30 @@
                     </div>
                 </div>
                 
-                
-                <div class="info-item">
+                <div class="info-item abonado-info">
                     <div class="info-title">Abonado:</div>
-                    <div class="info-box money">{{details[4]}}</div>
+                    <div class="info-box money">{{details[4]}}
+                    {% if user[1] == "Administrator" %}
+                        <i class="bx bx-edit edit-abonado" id="editAbonadoButton"></i>
+                    {% endif %}
+                    </div>
                 </div>
+
+                <div class="confirmation-modal hidden" id="abonadoEditModal">
+                    <div class="modal-content">
+                        <h3>Añadir Abono</h3>
+                        <br>
+                        <div class="modal-input-container">
+                            <input type="number" id="newAbonadoInput" placeholder="ingrese solo el monto abonado" step="0.01" required />
+
+                        </div>
+                        <div class="modal-actions">
+                            <button id="confirmAbonadoEdit" class="confirm-btn" onclick="updateAbonado()">Guardar</button>
+                            <button id="cancelAbonadoEdit" class="cancel-btn">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="info-item">
                     <div class="info-title">Restante de abono:</div>
                     <div class="info-box money">{{details[5]}}</div>

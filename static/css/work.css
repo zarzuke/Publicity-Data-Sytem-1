@@ -311,6 +311,13 @@ body.dark .comment-input{
     transition: color 0.3s;
 }
 
+.abonado-info .edit-abonado {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #695cfe;
+    transition: color 0.3s;
+}
+
 .total-info .edit-total:hover {
     color: #5b51c0;
 }

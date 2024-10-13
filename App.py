@@ -91,6 +91,13 @@ def balance_update():
     print(reason,id,charge)
     try_update_balance(id,charge,reason)
     return redirect(url_for('work', user=id))
+
+@app.route('/work/down')
+def down_update():
+    id=request.args.get('id')
+    down=request.args.get('down')
+    try_down_payment(id,down)
+    return redirect(url_for('work', user=id))
     
 @app.route('/update')
 def update():

@@ -316,3 +316,9 @@ def try_update_balance(id,charge,comments):
     update_currency(id,charge)
     text=f"Cambio de costo Total a {charge} por motivo de: {comments}"
     update(id,"Sistema",text)
+    
+def try_down_payment(id,down):
+    update_down(id,down)
+    down=float(down)
+    text=f"El cliente hizo un abono de: {down}"
+    update(id,"Sistema",text)

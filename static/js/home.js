@@ -562,5 +562,15 @@ document.addEventListener("DOMContentLoaded", function() {
 const phoneInput = document.getElementById('phone');
 
     phoneInput.addEventListener('input', function() {
-        phoneInput.value = phoneInput.value.replace(/[^\d]/g, ''); // Permitir solo números
+        phoneInput.value = phoneInput.value.replace(/[^\d]/g, '');
+        down.value = phoneInput.value.replace(/[^\d]/g, ''); // Permitir solo números
     });
+
+
+document.getElementById('phone').addEventListener('blur', function() {
+        if (this.value.length < 10) {
+            alert("El número de teléfono debe tener exactamente 10 dígitos.");
+            this.value = ""; // Limpia todos los caracteres del campo de entrada
+        }
+    });
+

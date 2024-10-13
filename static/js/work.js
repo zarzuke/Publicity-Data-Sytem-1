@@ -21,12 +21,6 @@ function sendData() {
     }
 }
 
-
-
-
-
-
-
     // Seleccionamos el área de comentarios
     const commentInput = document.getElementById('comments');
 
@@ -118,3 +112,19 @@ function showModal(status,itemId) {
 document.getElementById('cancelDelete').addEventListener('click', function() {
     document.getElementById('confirmationModal').classList.add('hidden');
 });
+
+
+document.getElementById('editAbonadoButton').onclick = function() {
+    document.getElementById('abonadoEditModal').classList.remove('hidden');
+};
+
+document.getElementById('cancelAbonadoEdit').onclick = function() {
+    document.getElementById('abonadoEditModal').classList.add('hidden');
+};
+
+function updateAbonado() {
+    var abono = document.getElementById('newAbonadoInput').value;
+    var id = document.getElementById('id').value;
+    var url = `/work/down?id=${id}&down=${abono}`;
+    window.location.href = url;
+}
