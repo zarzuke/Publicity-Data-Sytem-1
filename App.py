@@ -209,6 +209,16 @@ def change_client(id):
     function = try_edit_client(id)
     return function
 
+@app.route("/edit_user",methods=["POST"])
+def edit_user():
+    function= try_edit_user()
+    return function
+
+@app.route("/delete_user/<string:username>")
+def delete_user(username):
+    function= try_delete_user(username)
+    return function
+
 app.secret_key="12345"
 if __name__== "__main__":
     app.run(debug=True,port=3000)

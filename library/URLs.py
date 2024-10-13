@@ -338,3 +338,11 @@ def try_down_payment(id,down):
 def try_edit_client(id):
     function = edit_client(id)
     return function
+
+def try_edit_user():
+    function = edit_client()
+    return function
+
+def try_delete_user(username):
+    function = delete_user(username)
+    return function
