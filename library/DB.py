@@ -400,6 +400,22 @@ def get_users():
     workers=cursor.fetchall()
     conn.close()
     return workers
+
+def user_exists(username):
+    conn = sqlite3.connect('library/database.db')  # Asegúrate de usar el path correcto a tu base de datos
+    cursor = conn.cursor()
+    cursor.execute("SELECT userId FROM users WHERE userName = ?", (username,))
+    user = cursor.fetchone()
+    conn.close()
+    return user is not None
+
+def client_exists(client_name):
+    conn = sqlite3.connect('library/database.db')  # Asegúrate de usar el path correcto a tu base de datos
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectClientId FROM clientProject WHERE projectClientName = ?", (client_name,))
+    client = cursor.fetchone()
+    conn.close()
+    return client is not None
     
 def create_client(client,number):
     conn = sqlite3.connect('library/database.db')

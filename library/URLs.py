@@ -13,9 +13,13 @@ def try_signup():
         bd = sqlite3.connect("library/database.db")
         cursor = bd.cursor()
         username=request.form["username"]
-        password=request.form["password"]
-        role=request.form["role"]
-        cursor.execute("INSERT INTO users (userName,userPassword,userRol) VALUES (?, ?, ?)", (username, password, role,))
+        user_confirmation = user_exists(username)
+        if user_confirmation:
+            flash("El usuario ya está registrado en el sistema")
+        else:
+            password=request.form["password"]
+            role=request.form["role"]
+            cursor.execute("INSERT INTO users (userName,userPassword,userRol) VALUES (?, ?, ?)", (username, password, role,))
         bd.commit()
         bd.close()    
     return render_template("settings-user.html",user=g.user,workers=workers)
@@ -231,13 +235,17 @@ def try_record_file(client, date):
         return None
 
 def try_create_client(client_name):
-    country = request.form.get("country-code", "")
-    phone = request.form.get("phone", "")
-    if phone:
-        number = f"{country} {phone}".strip()
-        
-    create_client(client_name,number)
-    flash("Cliente Creado Satisfactoriamente")
+    client_confirmation = client_exists(client_name)
+    if client_confirmation:
+        flash("El cliente ya está registrado en el sistema")
+    else:
+        country = request.form.get("country-code", "")
+        phone = request.form.get("phone", "")
+        if phone:
+            number = f"{country} {phone}".strip()
+            
+        create_client(client_name,number)
+        flash("Cliente Creado Satisfactoriamente")
     cliente=get_clients()
     return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
     
