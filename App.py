@@ -151,11 +151,10 @@ def open_folder(id,nombre,cliente):
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 
-# Configuración para la carpeta de subida
+
 UPLOAD_FOLDER = 'uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Tamaño máximo del archivo: 16MB
-# Crea la carpeta de subida si no existe
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
