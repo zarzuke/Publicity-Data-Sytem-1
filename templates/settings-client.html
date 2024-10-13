@@ -139,14 +139,28 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
-            <form class="add-form" action="{{ url_for('create_client') }}" method="post" id="addForm">
-                <div class="form-group">
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="client" required>
+            <form class="add-form" action="{{ url_for('create_client') }}" method="post" enctype="multipart/form-data" id="addForm">
+                <div class="form-row" id="userFields">
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Apellido:</label>
+                        <input type="text" id="surname" name="lastname" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="phone">Numero de Teléfono:</label>
-                    <input type="tel" id="phone" name="phone" value="" required>
+                <div class="form-row" id="telField">
+                    <div class="form-group">
+                        <label for="phone">Teléfono:</label>
+                        <div style="display: flex; align-items: center;">
+                            <select id="country-code" name="country-code" style="width: 80px;">
+                                <option value="+58">+58</option>
+                                <option value="+57">+57</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" value="" required maxlength="10">
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="custum-file-upload" for="file">Imagen</label>
@@ -154,18 +168,18 @@
                         <div class="upload-icon-container">
                             <i class="fas fa-upload"></i>
                             <span>Subir archivo</span>
-                            <input type="file" id="file" onchange="previewImage(this)">
+                            <input type="file" id="file" name="file" onchange="previewImage(this)">
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <button type="submit" class="submit-btn">Guardar</button>
-                    <button type="reset" class="reset-btn">Restablecer</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Guardar</button>
+                        <button type="reset" class="reset-btn">Restablecer</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <h3 class="preview-title">Previsualización</h3>
     <div class="preview-section">
@@ -184,48 +198,66 @@
     </div>
 {% endif %}
 {% endwith %}
-<div class="form-card-cl" id="editUser">
-    <h3>Editar Cliente</h3>
-    <form action="" method="POST">
-        <div class="form-group">
-            <label for="editUsername">Cliente:</label>
-            <select id="editUsername" name="editUsername" required>
-                <option value="">Seleccione un usuario</option>
-                <option value="usuario1">Usuario 1</option>
-                <option value="usuario2">Usuario 2</option>
-                <option value="usuario3">Usuario 3</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="editRole">Telefono:</label>
-            <select id="editRole" name="editRole" required>
-                <option value="">Seleccione un cargo</option>
-                <option value="admin">Administrador</option>
-                <option value="user">Usuario</option>
-                <option value="editor">Editor</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <button type="submit">Guardar</button>
-        </div>
-    </form>
-</div>
-<div class="modal-backdrop hidden"></div>
-    <div class="card-list-client">
-        {% for item in cliente %}
-            <div class="card-client">
+<div class="modal-backdrop hidden" id="modalBackdrop"></div>
+<div class="card-list-client">
+    {% for item in cliente %}
+        <div class="card-client">
+            {% set image_path = url_for('uploaded_file', filename=item[0] + '.jpg') %}
+            {% if os.path.exists('uploads/' + item[0] + '.jpg') %}
+                <img src="{{ image_path }}" alt="User Image">
+            {% else %}
                 <img src="../static/img/user-default.png" alt="User Image">
-                <p class="default-client-name">{{item[0]}}</p>
-                <p class="client-company">{{item[1]}}</p>
-                <div class="actions">
-                    <div class="delete" onclick="showModal('{{ item[2] }}')">
-                        <div id="nfo" value=""></div>
-                        <i class="fas fa-trash-alt" title="Borrar"></i>
-                    </div>
+            {% endif %}
+            <p class="default-client-name">{{ item[0] }}</p>
+            <p class="client-company">{{ item[1] }}</p>
+            <div class="actions">
+                <div class="edit" onclick="editModal('{{ item[2] }}')">
+                    <i class="fas fa-edit" title="Editar"></i>
+                </div>
+                <div class="delete" onclick="showModal('{{ item[2] }}')">
+                    <div id="nfo" value=""></div>
+                    <i class="fas fa-trash-alt" title="Borrar"></i>
                 </div>
             </div>
-        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="custom-modal-backdrop hidden" id="modalBackdrop"></div>
+<div class="custom-modal hidden" id="editUserModal">
+    <div class="form-card-custom">
+        <h3>Editar Cliente</h3>
+        <form class="add-form" id="editForm" method="post">
+            <div class="form-row" id="userFields">
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="names">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Apellido:</label>
+                    <input type="text" id="surname" name="surname">
+                </div>
+            </div>
+            <div class="form-row" id="telField">
+                <div class="form-group">
+                    <label for="phone">Teléfono:</label>
+                    <div style="display: flex; align-items: center;">
+                        <select id="country-code" name="country-code" style="width: 80px;">
+                            <option value="+58">+58</option>
+                            <option value="+57">+57</option>
+                        </select>
+                        <input type="tel" id="phone" name="phone" value="" maxlength="10">
+                    </div>                            
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Guardar</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">Cancelar</button>
+            </div>
+        </form>
     </div>
+</div>
+
     <div class="confirmation-modal hidden" id="confirmationModal">
         <div class="modal-content">
             <h3>¿Estás seguro de que deseas eliminar?</h3>
@@ -239,7 +271,29 @@
     <script src="../static/js/home.js"></script>
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/s-clients.js"></script>
-   
+    
+    <script>
+        function editModal(clientId) {
+            document.getElementById('editUserModal').classList.remove('hidden');
+            document.getElementById('editUserModal').classList.add('visible');
+            document.getElementById('modalBackdrop').classList.remove('hidden');
+            document.getElementById('modalBackdrop').classList.add('visible');
+        
+            // Actualiza el action del formulario
+            var form = document.getElementById('editForm');
+            form.action = "/change-client/" + clientId; // Cambia '/edit_client/' a la URL correcta si es necesario
+        }
+        
+        function closeModal() {
+            document.getElementById('editUserModal').classList.remove('visible');
+            document.getElementById('editUserModal').classList.add('hidden');
+            document.getElementById('modalBackdrop').classList.remove('visible');
+            document.getElementById('modalBackdrop').classList.add('hidden');
+        }
+        
+        document.getElementById('modalBackdrop').addEventListener('click', closeModal);                  
+    </script>
+
     <script>
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');

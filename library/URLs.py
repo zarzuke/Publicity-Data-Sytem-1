@@ -5,6 +5,7 @@ import subprocess
 import openpyxl
 from openpyxl import load_workbook
 import io
+import os
 
 def try_signup():
     workers=get_users()
@@ -12,9 +13,13 @@ def try_signup():
         bd = sqlite3.connect("library/database.db")
         cursor = bd.cursor()
         username=request.form["username"]
-        password=request.form["password"]
-        role=request.form["role"]
-        cursor.execute("INSERT INTO users (userName,userPassword,userRol) VALUES (?, ?, ?)", (username, password, role,))
+        user_confirmation = user_exists(username)
+        if user_confirmation:
+            flash("El usuario ya está registrado en el sistema")
+        else:
+            password=request.form["password"]
+            role=request.form["role"]
+            cursor.execute("INSERT INTO users (userName,userPassword,userRol) VALUES (?, ?, ?)", (username, password, role,))
         bd.commit()
         bd.close()    
     return render_template("settings-user.html",user=g.user,workers=workers)
@@ -229,13 +234,20 @@ def try_record_file(client, date):
         print(f"Error al procesar el archivo de Excel: {e}")
         return None
 
-def try_create_client():
-    client = request.form.get("client")
-    number = request.form["phone"]
-    create_client(client,number)
-    flash("Cliente Creado Satisfactoriamente")
+def try_create_client(client_name):
+    client_confirmation = client_exists(client_name)
+    if client_confirmation:
+        flash("El cliente ya está registrado en el sistema")
+    else:
+        country = request.form.get("country-code", "")
+        phone = request.form.get("phone", "")
+        if phone:
+            number = f"{country} {phone}".strip()
+            
+        create_client(client_name,number)
+        flash("Cliente Creado Satisfactoriamente")
     cliente=get_clients()
-    return render_template("settings-client.html",user=g.user,cliente=cliente)
+    return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
     
 def try_edit_clients():
     if g.user==["vacio","vacio"]:
@@ -243,13 +255,13 @@ def try_edit_clients():
         return redirect(url_for('login'))
     else:
         cliente=get_clients()
-        return render_template("settings-client.html",user=g.user,cliente=cliente)
+        return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
 
 def try_delete_client(id):
     delete_client(id)
     flash("Cliente Borrado Satisfactoriamente")
     cliente=get_clients()
-    return render_template("settings-client.html",user=g.user,cliente=cliente)
+    return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
 
 def try_delete(id):
     delete_projects(id)
@@ -322,3 +334,7 @@ def try_down_payment(id,down):
     down=float(down)
     text=f"El cliente hizo un abono de: {down}"
     update(id,"Sistema",text)
+    
+def try_edit_client(id):
+    function = edit_client(id)
+    return function

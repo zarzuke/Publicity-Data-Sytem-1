@@ -1,6 +1,7 @@
-from flask import Flask,session,g,jsonify
+from flask import Flask,session,g,jsonify,send_from_directory
 from library.URLs import *
 from library.DB import delete_projects
+import os
 app = Flask(__name__)
 
 @app.route("/menu")
@@ -149,13 +150,52 @@ def open_folder(id,nombre,cliente):
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 
+# Configuración para la carpeta de subida
+UPLOAD_FOLDER = 'uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Tamaño máximo del archivo: 16MB
+# Crea la carpeta de subida si no existe
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+def upload_file(name):
+    if 'file' not in request.files:
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        return redirect(request.url)
+    if file:
+        # Genera un nuevo nombre único para la imagen con la misma extensión
+        filename, file_extension = os.path.splitext(file.filename)
+        new_filename = f"{name}{file_extension}"
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+        return new_filename
+
+def delete_image(name):
+    if name:
+        name = name+'.jpg'
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], name)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
 @app.route('/create-client',methods=["POST"])
 def create_client():
-    function=try_create_client()
+    firstname = request.form.get("firstname")
+    lastname = request.form.get("lastname")
+    client_name = f"{firstname} {lastname}".strip()
+    upload_file(client_name)
+    
+    function=try_create_client(client_name)
     return function
 
 @app.route('/delete-client/<string:id>')
 def delete_client(id):
+    name = get_client_name(id)
+    delete_image(name)
     function=try_delete_client(id)
     return function
 
@@ -163,8 +203,11 @@ def delete_client(id):
 def next(id,status):
     function=try_next(id,status)
     return function
-    
 
+@app.route("/change-client/<string:id>", methods=["POST"])
+def change_client(id):
+    function = try_edit_client(id)
+    return function
 
 app.secret_key="12345"
 if __name__== "__main__":

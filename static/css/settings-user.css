@@ -378,6 +378,95 @@ body.dark .home .text {
 
 /* =============================================== BASE ================================================== */
 
+.card-list .card-item .card-description,
+.preview-section .preview-card-description {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #707070;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.card-list .card-item .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-35deg);
+    height: 40px;
+    width: 40px;
+    color: #616161;
+    border-radius: 50%;
+    margin-top: auto;
+    transition: 0.2s ease;
+}
+
+.card-list .card-item .delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    color: #616161;
+    border-radius: 50%;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.card-list .card-item:hover .delete {
+    background: transparent;
+    /* Cambia a transparente o la propiedad que desees */
+    /* Color solo se aplicará cuando se haga hover sobre delete directamente */
+}
+
+.card-list .card-item .delete:hover {
+    background: #ff6d6d;
+    /* Aquí el color de hover específico para .delete */
+    color: #fff;
+    /* Color del icono de delete al hover */
+}
+
+.card-list .card-item:hover .arrow {
+    background: #756fd6;
+    /* Aquí el color de hover específico para .arrow */
+    color: #fff;
+    /* Color del icono de arrow al hover */
+}
+
+.card-list .card-item .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    /* Ajusta el margen superior aquí también si es necesario */
+}
+
+/* Dark Mode Styles */
+body.dark .card-list .card-item {
+    background: #232425;
+    color: #fff;
+}
+
+body.dark .card-item .card-title,
+body.dark .preview-card-title {
+    color: #d4d4d4;
+}
+
+body.dark .card-item .card-name,
+body.dark .preview-card-name {
+    color: #d4d4d4;
+}
+
+body.dark .card-item .arrow {
+    color: #c7c7c7;
+}
+
+body.dark .card-list .card-item:hover .arrow {
+    background: #8782e9;
+    color: #242526;
+}
+
 .form-container {
     display: flex;
     justify-content: space-around;
@@ -458,6 +547,33 @@ body.dark .home .text {
     background-color: darken(var(--primary-color), 10%); /* Color de fondo más oscuro al pasar el mouse */
 }
 
+.actions {
+    display: flex;
+    justify-content: space-between; /* Distribuye los botones a los lados */
+}
+
+.actions .edit, .actions .delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    color: #616161;
+    border-radius: 60%;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.actions .edit:hover {
+    background: #000667;
+    color: #fff;
+}
+
+.actions .delete:hover {
+    background: #000667;
+    color: #fff;
+}
+
 /* ===================== Modo Oscuro ===================== */
 
 body.dark .form-card {
@@ -482,4 +598,105 @@ body.dark .form-group button {
     background-color: #5a5a5a; /* Botón oscuro */
 }
 
+.custom-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    padding: 20px;
+    width: 25%;  /* Ajusta el ancho aquí */
+    height: 45%; /* Ajusta la altura aquí */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
+    background-color: #fff; /* Fondo blanco */
+}
 
+.custom-modal.visible {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+.custom-modal.hidden {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    visibility: hidden;
+}
+.custom-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.651);
+    z-index: 100;
+}
+.custom-modal-backdrop.hidden {
+    display: none;
+}
+.custom-modal-backdrop.visible {
+    display: block;
+}
+.custom-modal .submit-btn {
+    margin-right: 10px; /* Espacio entre botones */
+    background-color: var(--primary-color); /* Color del botón Guardar */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.custom-modal .cancel-btn {
+    background-color: #f44336; /* Color del botón Cancelar */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.custom-modal .submit-btn:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+.custom-modal .cancel-btn:hover {
+    background-color: #d32f2f;
+}
+.custom-modal-content {
+    display: flex;
+}
+.custom-confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
+}
+.custom-confirmation-modal .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.041);
+}
+.custom-modal-actions {
+    margin-top: 20px;
+}
+.custom-confirmation-modal.hidden {
+    transform: scale(1.2);
+    opacity: 0;
+    visibility: hidden;
+}
+.custom-confirmation-modal.visible {
+    opacity: 1;
+    visibility: visible;
+}
