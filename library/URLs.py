@@ -321,14 +321,12 @@ def try_update_balance(id,charge,comments):
     text=f"Cambio de costo Total a {charge} por motivo de: {comments}"
     update(id,"Sistema",text)
     
-<<<<<<< Updated upstream
 def try_down_payment(id,down):
     update_down(id,down)
     down=float(down)
     text=f"El cliente hizo un abono de: {down}"
     update(id,"Sistema",text)
-=======
+    
 def try_edit_client(id):
     function = edit_client(id)
     return function
->>>>>>> Stashed changes

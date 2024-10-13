@@ -521,7 +521,6 @@ def get_project_installer(worker):
 
     conn.close()
     return filas,tipos
-<<<<<<< Updated upstream
 
 def update_down(id,down):
     conn = sqlite3.connect('library/database.db')
@@ -539,7 +538,6 @@ def update_down(id,down):
     conn.close()
 
     pass
-=======
     
 def edit_client(id):
     fp=str()
@@ -575,4 +573,3 @@ def get_client_name(id):
     client_name = cursor.fetchone()
     conn.close()
     return client_name[0] if client_name else None
->>>>>>> Stashed changes
