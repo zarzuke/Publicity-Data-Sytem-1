@@ -185,12 +185,12 @@
                         <div class="form-row" id="telField">
                             <div class="form-group">
                                 <label for="phone">Teléfono:</label>
-                                <div style="display: flex; align-items: center;">
-                                    <select id="country-code" name="country-code" style="width: 80px;">
+                                <div class="phone-input-container"> <!-- Añadido nuevo contenedor -->
+                                    <select id="country-code" name="country-code">
                                         <option value="+58">+58</option>
                                         <option value="+57">+57</option>
                                     </select>
-                                    <input type="tel" id="phone" name="phone" value="" required maxlength="10">
+                                    <input type="tel" id="phone" name="phone" required maxlength="10">
                                 </div>                            
                             </div>
                             <div class="form-group">
@@ -309,7 +309,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="down-payment">Tipo de Moneda:</label>
-                                <div style="display: flex; align-items: center;">
+                                <div>
                                     <select id="currency" name="currency" onchange="formatearMoneda()" step="0.01">
                                         <option value="3">Bs.S</option>
                                         <option value="2">COP</option>
