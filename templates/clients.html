@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes - CopyNato</title>
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
+    <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/clients.css">
     <link rel="stylesheet" href="../static/css/scrollbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -43,7 +44,7 @@
                     <li class="nav-link" id="client">
                         <a href="{{ url_for('clients') }}">
                             <i class='bx bx-user icon'></i>
-                            <span class="text nav-text">Clientes</span>
+                            <span class="text nav-text">Clientes </span>
                         </a>
                     </li>
                 </ul>
@@ -109,6 +110,17 @@
                 </a>
                 <div class="text">
                     <a href="/home" style="color: #695cfe; text-decoration: none;">Inicio</a> > Clientes
+
+                    <div class="notification-container">
+                        <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                        <button class="notification-button" id="notificationButton">
+                            <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                        </button>
+                        <div class="notification-dropdown" id="notificationDropdown"></div>
+                    </div>
+                    
+    
+
                 </div>
             </div>
         </div>
@@ -132,6 +144,8 @@
 
 
     <script src="../static/js/sidebar.js"></script>
+    <script src="../static/js/socket.io.js"></script>
+    <script src="../static/js/send-notifications.js"></script>
    
     <script>
 document.addEventListener('DOMContentLoaded', () => {

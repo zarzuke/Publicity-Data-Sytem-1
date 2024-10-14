@@ -1,6 +1,7 @@
 import sqlite3 
 from flask import Flask, render_template, request, make_response, redirect, url_for, flash, session, g, send_file  
 import os 
+import time
 
 def project_inc():
     if request.method == "POST":
@@ -62,6 +63,8 @@ def project_inc():
         direction = os.path.join(os.getcwd(), "trabajos", f"[{client_name}]-{title}")
         if not os.path.exists(direction):
             os.makedirs(direction)
+    text=f"Nuevo Proyecto iniciado @{designer} estas a cargo del diseño"
+    insertar_notificacion(text)
     flash("Trabajo Creado Satisfactoriamente")
     return redirect("/home")
 
@@ -124,7 +127,6 @@ def get_details(id):
                 WHERE projectId == ?
                 """,(id,))
     filas = cursor.fetchall()
-    print(filas)
     details=filas[0][9].split('\n')
     info=list(filas[0])
     info[9]=details
@@ -148,7 +150,7 @@ def get_works_client(client):
                 SELECT p.projectName, dateProject.projectDateStart, 
                 chargeProject.projectChargeTotalPayment,
                 clientProject.projectClientName, clientProject.projectClientNumber,
-                p.projectDescript, p.projectId, p.projectDesigner
+                p.projectDescript, p.projectId, p.projectDesigner,projectPhase
                 FROM projects p
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -194,7 +196,6 @@ def return_phase(id):
     cursor = conn.cursor()
     cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
     phase = cursor.fetchone()
-    print(phase)
     cursor.execute("""UPDATE projects SET projectPhase == ?-1 WHERE projectId == ?""",(phase[0],id,))
     conn.commit()
     conn.close()
@@ -268,7 +269,6 @@ def delete_projects(id):
     cursor = conn.cursor()
     cursor.execute("SELECT projectName FROM projects WHERE projectId == ?",(id,))
     title = cursor.fetchone()
-    print(title)
     tables = [
     ("projects", "projectId"),
     ("chargeProject", "projectChargeId"),
@@ -287,7 +287,6 @@ def delete_projects(id):
         os.rename(direction,direction+"[Finished]")
 
 def update(user,worker,commments):
-    print(user,worker,commments)
     new_comments = commments
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
@@ -626,3 +625,26 @@ def delete_user(username):
         flash("Usuario Eliminado Correctamente")
         return redirect(url_for('settings_user'))
         
+def get_titulo(id):
+    connection = sqlite3.connect('library/database.db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT projectName FROM projects WHERE projectId = ?",(id,))
+    name=cursor.fetchone()[0]
+    print(name)
+    return name
+
+def insertar_notificacion(texto):
+    # Conectar a la base de datos
+    connection = sqlite3.connect('library/database.db')
+    cursor = connection.cursor()
+    
+    # Consulta SQL para insertar datos
+    cursor.execute('INSERT INTO notifications (text) VALUES (?)', (texto,))
+    
+    # Confirmar los cambios
+    connection.commit()
+    
+    # Cerrar la conexión
+    connection.close()
+    
+

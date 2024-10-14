@@ -33,6 +33,7 @@
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 0;
+    
 }
 
 /*BOTON DE REGRESAR*/
@@ -1547,6 +1548,55 @@ body.dark .box-d {
     margin-right: 5px; /* Espacio entre el ícono y el texto */
 }
 
+.notification-container {
+    position: relative;
+    display: inline-block;
+}
 
+.notification-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
 
+.notification-button i {
+    font-size: 24px;
+}
 
+.notification-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: red; /* Color del indicador */
+    border-radius: 50%; /* Forma circular */
+    position: absolute; /* Posición absoluta */
+    top: 5px;
+    right: 5px;
+    display: none; /* Oculto inicialmente */
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; /* Justo debajo del botón */
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-dropdown .notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.notification-dropdown .notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-button.active + .notification-dropdown {
+    display: block;
+}

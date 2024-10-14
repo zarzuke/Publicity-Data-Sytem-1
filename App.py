@@ -1,22 +1,47 @@
-from flask import Flask,session,g,jsonify,send_from_directory
+from flask import Flask, session, g, jsonify, request, redirect, url_for, send_from_directory, render_template
+from flask_socketio import SocketIO, emit
 from library.URLs import *
-from library.DB import delete_projects
 import os
 from PIL import Image
-app = Flask(__name__)
 
-@app.route("/menu")
-def index():
-     return "interfaz principal"
- 
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '12345'
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+socketio = SocketIO(app)
+
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'])
+
+def check_db_for_updates():
+    last_update = None
+    while True:
+        connection = sqlite3.connect('library/database.db')
+        cursor = connection.cursor()
+        cursor.execute('SELECT MAX(id) FROM notifications')  # Ajusta esto según tu base de datos
+        latest_update = cursor.fetchone()[0]
+        if last_update is None:
+            last_update = latest_update
+        if latest_update != last_update:
+            last_update = latest_update
+            
+            # Obteniendo el texto de la base de datos
+            cursor.execute('SELECT text FROM notifications WHERE id = ?', (latest_update,))
+
+            texto = cursor.fetchone()[0]
+            # Enviando el texto como notificación
+            cursor.close()
+            socketio.emit('notification', {'message': texto})
+        time.sleep(10)  # V # Verifica cada 10 segundos
+
 @app.before_request
 def before_request():
     if "username" in session:
         g.user = session["username"]
     else:
-        g.user = ["vacio","vacio"]
+        g.user = ["vacio", "vacio"]
 
-@app.route("/",methods=["POST","GET"])
+@app.route("/", methods=["POST", "GET"])
 def login():
     function = try_login()
     return function
@@ -38,20 +63,20 @@ def form():
 
 @app.route("/Clients")
 def clients():
-    clients=try_clients()
-    return  clients
+    clients = try_clients()
+    return clients
 
 @app.route("/settings")
 def settings():
-    function=try_settings()
+    function = try_settings()
     return function
 
-@app.route("/settings/manager",methods=["POST","GET"])
+@app.route("/settings/manager", methods=["POST", "GET"])
 def settings_user():
-    function=try_signup()
+    function = try_signup()
     return function
 
-@app.route("/settings/record",methods=['GET', 'POST'])
+@app.route("/settings/record", methods=['GET', 'POST'])
 def settings_record():
     function = try_record()
     return function
@@ -60,15 +85,13 @@ def settings_record():
 def update_grid():
     client = request.form.get('client')
     date = request.form.get('date')
-    print(date)
-    filas = try_record_fildered(client,date)
+    filas = try_record_fildered(client, date)
     return jsonify(filas)
 
 @app.route("/download", methods=["POST"])
 def create_record():
     client = request.form.get('client')
     date = request.form.get('date')
-    
     function = try_record_file(client, date)
     if function is None:
         return "Error processing the Excel file", 500
@@ -87,31 +110,30 @@ def work(user):
 
 @app.route('/work/balance')
 def balance_update():
-    id=request.args.get("id")
-    charge=request.args.get("charge")
-    reason=request.args.get("args")
-    print(reason,id,charge)
-    try_update_balance(id,charge,reason)
+    id = request.args.get("id")
+    charge = request.args.get("charge")
+    reason = request.args.get("args")
+    try_update_balance(id, charge, reason)
     return redirect(url_for('work', user=id))
 
 @app.route('/work/down')
 def down_update():
-    id=request.args.get('id')
-    down=request.args.get('down')
-    try_down_payment(id,down)
+    id = request.args.get('id')
+    down = request.args.get('down')
+    try_down_payment(id, down)
     return redirect(url_for('work', user=id))
-    
+
 @app.route('/update')
 def update():
-    id=request.args.get("id")
-    user=request.args.get("user")
-    commets=request.args.get("comments")
-    try_comments(id,user,commets)
+    id = request.args.get("id")
+    user = request.args.get("user")
+    comments = request.args.get("comments")
+    try_comments(id, user, comments)
     return redirect(url_for('work', user=id))
 
 @app.route("/Clients/<string:client>")
 def client(client):
-    list=try_client(client)
+    list = try_client(client)
     return list
 
 @app.route("/design")
@@ -137,26 +159,18 @@ def crafting():
 def ending():
     function = try_ending()
     return function
-    
+
 @app.route("/delete/<string:id>")
 def delete(id):
-    #save_record(id)
-    function=try_delete(id)
+    function = try_delete(id)
     return function
 
 @app.route('/open/<string:id>/<string:nombre>/<string:cliente>')
-def open_folder(id,nombre,cliente):
+def open_folder(id, nombre, cliente):
     try:
         return try_open(id, nombre, cliente)
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
-
-
-UPLOAD_FOLDER = 'uploads/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -165,11 +179,9 @@ def uploaded_file(filename):
 def upload_file(name):
     if 'file' not in request.files:
         return redirect(request.url)
-    
     file = request.files['file']
     if file.filename == '':
         return redirect(request.url)
-    
     if file:
         img = Image.open(file)
         new_filename = f"{name}.png"
@@ -177,34 +189,32 @@ def upload_file(name):
         img.save(new_filepath, 'PNG')
         return new_filename
 
-
 def delete_image(name):
     if name:
-        name = name+'.jpg'
+        name = name + '.jpg'
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], name)
     if os.path.exists(file_path):
         os.remove(file_path)
 
-@app.route('/create-client',methods=["POST"])
+@app.route('/create-client', methods=["POST"])
 def create_client():
     firstname = request.form.get("firstname")
     lastname = request.form.get("lastname")
     client_name = f"{firstname} {lastname}".strip()
     upload_file(client_name)
-    
-    function=try_create_client(client_name)
+    function = try_create_client(client_name)
     return function
 
 @app.route('/delete-client/<string:id>')
 def delete_client(id):
     name = get_client_name(id)
     delete_image(name)
-    function=try_delete_client(id)
+    function = try_delete_client(id)
     return function
 
 @app.route('/next/<string:id>/<string:status>')
-def next(id,status):
-    function=try_next(id,status)
+def next(id, status):
+    function = try_next(id, status)
     return function
 
 @app.route("/change-client/<string:id>", methods=["POST"])
@@ -212,16 +222,32 @@ def change_client(id):
     function = try_edit_client(id)
     return function
 
-@app.route("/edit_user",methods=["POST"])
+@app.route("/edit_user", methods=["POST"])
 def edit_user():
-    function= try_edit_user()
+    function = try_edit_user()
     return function
 
 @app.route("/delete_user/<string:username>")
 def delete_user(username):
-    function= try_delete_user(username)
+    function = try_delete_user(username)
     return function
 
-app.secret_key="12345"
-if __name__== "__main__":
-    app.run(debug=True,port=3000)
+# Ruta para recibir notificaciones
+@app.route('/send_notification', methods=['POST'])
+def send_notification():
+    message = request.form.get('message')
+    if message:
+        socketio.emit('notification', {'message': message})
+    return f"Exito"
+
+# Ruta para mostrar notificaciones
+@app.route('/display_notifications')
+def display_notifications():
+    return render_template('display_notifications.html')
+
+@socketio.on('connect')
+def handle_connect():
+    pass
+if __name__ == "__main__":
+    socketio.start_background_task(check_db_for_updates)
+    socketio.run(app, debug=True, port=3000)

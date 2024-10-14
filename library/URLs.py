@@ -152,9 +152,7 @@ def try_work(id):
         flash("Debe de iniciar sesión primero.")
         return redirect(url_for('login'))
     else:
-        print(id)
         work,types,id=get_details(id)
-        print(work,id)
         return render_template("work.html",user=g.user,details=work,types=types,nor=id,os=os)
 
 def try_client(client):
@@ -181,8 +179,6 @@ def try_settings():
         return redirect("/home")
     
     else:
-        user = g.user
-        print(user)
         return render_template("settings.html",user=g.user)
 
 def try_record():
@@ -270,6 +266,9 @@ def try_delete(id):
     
 def try_comments(user,worker,comments):
     update(user,worker,comments)
+    name=get_titulo(user)
+    text=f"{worker} ha comentado en {name}"
+    insertar_notificacion(text)
     return redirect(url_for("work",user=user))
 
 def try_open(id, title, client):
@@ -304,12 +303,18 @@ def try_next(id,status):
     
     if phase[0][0]==4:
         save_record(id)
+        name=get_titulo(id)
         delete_projects(id)
+        text=f"{name} Finalizado, Buen Trabajo Equipo"
+        insertar_notificacion(text)
         flash('Trabajo Finalizado')
         return redirect("/home")
     elif phase[0][0]==1:
         if status=="approved":
             change_phase(id)
+            name=get_titulo(id)
+            text=f"{name} Diseño Finalizado @{g.user[0]} contacte al cliente para su aprobacion"
+            insertar_notificacion(text)
             flash('Fase Aprobada')
             if g.user[1]=="Administrator":
                 return redirect(url_for('work', user=id))
@@ -318,6 +323,14 @@ def try_next(id,status):
     else:
         if status=="approved":
             change_phase(id)
+            if phase[0][0]==2:
+                name=get_titulo(id)
+                text=f"Diseño Aprobado para {name} enlistado para Elaboracion"
+                insertar_notificacion(text)
+            if phase[0][0]==3:
+                name=get_titulo(id)
+                text=f"Producto Fabricado para {name} elistado para Instalacion"
+                insertar_notificacion(text)
             flash('Fase Aprobada')
             if g.user[1]=="Administrator":
                 return redirect(url_for('work', user=id))
