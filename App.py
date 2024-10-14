@@ -1,4 +1,4 @@
-from flask import Flask, session, g, jsonify, request, redirect, url_for, send_from_directory, render_template
+from flask import Flask, session, g, jsonify, request, redirect, url_for, send_from_directory, render_template,current_app
 from flask_socketio import SocketIO, emit
 from library.URLs import *
 import os
@@ -24,20 +24,23 @@ def check_db_for_updates():
             last_update = latest_update
         if latest_update != last_update:
             last_update = latest_update
-            
-            # Obteniendo el texto de la base de datos
             cursor.execute('SELECT text FROM notifications WHERE id = ?', (latest_update,))
-
             texto = cursor.fetchone()[0]
-            # Enviando el texto como notificación
             cursor.close()
-            socketio.emit('notification', {'message': texto})
-        time.sleep(10)  # V # Verifica cada 10 segundos
+            print(current_user)
+            if current_user[1]=="Administrator":
+                socketio.emit('notification', {'message': texto})
+            else:
+                pass
+        time.sleep(1) 
 
 @app.before_request
 def before_request():
+    global current_user
     if "username" in session:
         g.user = session["username"]
+        current_user=session["username"]
+        print(current_user)
     else:
         g.user = ["vacio", "vacio"]
 

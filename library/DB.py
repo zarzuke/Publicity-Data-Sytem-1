@@ -63,8 +63,8 @@ def project_inc():
         direction = os.path.join(os.getcwd(), "trabajos", f"[{client_name}]-{title}")
         if not os.path.exists(direction):
             os.makedirs(direction)
-    text=f"Nuevo Proyecto iniciado @{designer} estas a cargo del diseño"
-    insertar_notificacion(text)
+    text=f"Nuevo Proyecto iniciado @{designer} esta a cargo del diseño"
+    insertar_notificacion(text,g.user[0])
     flash("Trabajo Creado Satisfactoriamente")
     return redirect("/home")
 
@@ -633,18 +633,21 @@ def get_titulo(id):
     print(name)
     return name
 
-def insertar_notificacion(texto):
-    # Conectar a la base de datos
+def get_client_name(id):
     connection = sqlite3.connect('library/database.db')
     cursor = connection.cursor()
-    
-    # Consulta SQL para insertar datos
-    cursor.execute('INSERT INTO notifications (text) VALUES (?)', (texto,))
-    
-    # Confirmar los cambios
+    cursor.execute("SELECT projectClientName FROM clientProject WHERE projectClientId = ?",(id,))
+    name=cursor.fetchone()[0]
+    print(name)
+    return name
+
+def insertar_notificacion(texto,user):
+    date=time.localtime()
+    dates=time.strftime("%d-%m-%Y %H:%S",date)
+    connection = sqlite3.connect('library/database.db')
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO notifications (text,user,date) VALUES (?,?,?)', (texto,user,dates))
     connection.commit()
-    
-    # Cerrar la conexión
     connection.close()
     
 
