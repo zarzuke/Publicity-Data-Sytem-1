@@ -202,9 +202,8 @@
 <div class="card-list-client">
     {% for item in cliente %}
         <div class="card-client">
-            {% set image_path = url_for('uploaded_file', filename=item[0] + '.jpg') %}
-            {% if os.path.exists('uploads/' + item[0] + '.jpg') %}
-                <img src="{{ image_path }}" alt="User Image">
+            {% if os.path.exists('uploads/' + item[0] + '.png') %}
+                <img src="../uploads/{{item[0]}}.png" alt="User Image">
             {% else %}
                 <img src="../static/img/user-default.png" alt="User Image">
             {% endif %}

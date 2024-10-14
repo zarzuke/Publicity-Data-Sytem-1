@@ -122,7 +122,7 @@ def get_details(id):
                 JOIN clientProject on projectClientId = projectClient
 				JOIN typeCurrency on currencyTypeId = projectChargeCurrency
                 WHERE projectId == ?
-                """,(id))
+                """,(id,))
     filas = cursor.fetchall()
     print(filas)
     details=filas[0][9].split('\n')
@@ -206,7 +206,7 @@ def get_project_phase(phase):
                 SELECT projectName, projectDateStart, 
                 projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript,projectId
+                projectDescript,projectId,projectPhase
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -238,7 +238,7 @@ def get_project_worker(worker):
                 SELECT projectName, projectDateStart, 
                 projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript,projectId
+                projectDescript,projectId,projectPhase
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -449,7 +449,7 @@ def get_project_designer(worker):
                 SELECT projectName, projectDateStart, 
                 projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript,projectId
+                projectDescript,projectId,projectPhase
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -481,7 +481,7 @@ def get_project_crafter(worker):
                 SELECT projectName, projectDateStart, 
                 projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript,projectId
+                projectDescript,projectId,projectPhase
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
@@ -513,7 +513,7 @@ def get_project_installer(worker):
                 SELECT projectName, projectDateStart, 
                 projectChargeTotalPayment,
                 projectClientName, projectClientNumber,
-                projectDescript,projectId
+                projectDescript,projectId,projectPhase
                 FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge

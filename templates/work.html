@@ -134,8 +134,11 @@
                 <div class="info-item">
                     <div class="info-title">Cliente titular:</div>
                     <div class="info-box">
-                        <img src="/static/img/user-default.png" class="client-image">
-                        <!-- Ajusta la ruta a la imagen y el índice según tu estructura -->
+                        {% if os.path.exists('uploads/' + details[7] + '.png') %}
+                            <img src="../uploads/{{details[7]}}.png" class="client-image">
+                        {% else %}
+                            <img src="../static/img/user-default.png" class="client-image">
+                        {% endif %}
                         <span>{{ details[7] }}</span>
                     </div>
                 </div>
