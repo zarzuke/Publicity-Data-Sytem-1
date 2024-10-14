@@ -967,8 +967,8 @@ body.dark .form-group select {
     /* Transiciones suaves */
     cursor: pointer;
     /* Cambia el cursor al pasar encima */
-    margin-left: 10px;
     /* Espacio pequeño a la izquierda */
+    width: 200px;
 }
 
 body.dark #currency {
@@ -1130,6 +1130,7 @@ body.dark .custom-checkbox {
     align-items: flex-start;
 }
 
+
 .form-group textarea {
     width: 100%;
     font-size: 14px;
@@ -1262,7 +1263,31 @@ body.dark .form-group textarea:focus {
     opacity: 0.7;
     background-color: #d4d4d4;
     border: none;
+    width: 250px; /* Ajusta el ancho según tus necesidades */
 }
+
+/* Asegúrate de que los inputs de teléfono se alineen horizontalmente */
+.phone-input-container {
+    display: flex; /* Utiliza flexbox para alinear los elementos */
+    align-items: center; /* Centrar elementos verticalmente */
+}
+
+/* Espaciado entre los inputs de teléfono */
+.phone-input-container select {
+    margin-right: 5px; /* Espacio entre el selector del código de país y el input de teléfono */
+}
+
+/* Estilo específico para el input de "Restante" para hacerlo más largo */
+.form-group input[id="phone"] {
+    width: 335px; /* Ajusta el ancho según tus necesidades */
+}
+
+#country-code {
+    width: 80px; /* Mantiene el ancho del selector del código de país */
+}
+
+
+
 
 .confirmation-modal {
     position: fixed;
@@ -1320,12 +1345,18 @@ body.dark .form-group textarea:focus {
 }
 
 .destination-selects {
-    display: flex; /* Utiliza flexbox para alinear en fila */
+    display: flex;                  /* Utiliza flexbox para alinear en fila */
+    justify-content: center;        /* Centra los selectores horizontalmente */
+    align-items: center;            /* Centra los selectores verticalmente */
+    gap: 10px;                     /* Mantiene espacio entre los selectores */
 }
+
+
 
 .destination-selects select { /* Permite que cada selector ocupe el mismo espacio */
     width: 270px; /* Permite que los selectores se reduzcan en tamaño si es necesario */
     margin-right: 10px; /* Espacio entre selectores, excepto el último */
+ align-items: center;
 }
 
 /* Elimina el margen derecho del último selector */
