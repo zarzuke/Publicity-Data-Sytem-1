@@ -147,7 +147,7 @@
                 </div>
                 <div class="form-row" id="telField">
                     <div class="form-group">
-                        <label for="phone">Teléfono:</label>
+                        <label for="phone"></label>
                         <div style="display: flex; align-items: center;">
                             <select id="country-code" name="country-code" style="width: 80px;">
                                 <option value="+58">+58</option>
@@ -224,39 +224,49 @@
 <div class="custom-modal hidden" id="editUserModal">
     <div class="form-card-custom">
         <h3>Editar Cliente</h3>
-        <form class="add-form" id="editForm" method="post">
+        <form class="add-form" id="editForm" method="post" enctype="multipart/form-data">
             <div class="form-row" id="userFields">
                 <div class="form-group">
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="names" required>
+                    <label for="name"></label>
+                    <input type="text" id="name" placeholder="Ingrese el nombre" name="names" required>
                 </div>
                 <div class="form-group">
-                    <label for="surname">Apellido:</label>
-                    <input type="text" id="surname" name="surname" required>
+                    <label for="surname"></label>
+                    <input type="text" id="surname" placeholder="Ingrese el apellido" name="surname" required>
                 </div>
             </div>
             <div class="form-row" id="telField">
                 <div class="form-group">
-                    <label for="phone">Teléfono:</label>
+                    <label for="phone"></label>
                     <div style="display: flex; align-items: center;">
                         <select id="country-code" name="country-code" style="width: 80px;">
                             <option value="+58">+58</option>
                             <option value="+57">+57</option>
                         </select>
-                        <input type="tel" id="phone" name="phone" value="" required maxlength="10">
+                        <input type="tel" id="phone" placeholder="Ingrese el número telefónico" name="phone" value="" style="width: 450px;" required maxlength="10">
                     </div>                            
                 </div>
             </div>
             <div class="form-group">
+                <label class="custum-file-upload" for="editFile">Imagen</label>
+                <div class="form-group upload-box">
+                    <div class="upload-icon-container">
+                        <i class="fas fa-upload"></i>
+                        <span>Subir archivo</span>
+                        <input type="file" id="editFile" name="editFile" onchange="previewImage(this)">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="align-items: center;">
                 <div class="modal-actions">
-                    <button type="button" class="submit-btn">Guardar</button>
+                    <button type="submit" class="submit-btn">Guardar</button>
                     <button type="button" class="cancel-btn" onclick="closeModal()">Cancelar</button>
                 </div>
             </div>
         </form>
-        
     </div>
 </div>
+
 
     <div class="confirmation-modal hidden" id="confirmationModal">
         <div class="modal-content">

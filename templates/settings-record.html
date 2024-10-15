@@ -102,7 +102,9 @@
                 <a href="javascript:history.back()" class="back-btn">
                     <i class='bx bx-chevron-left' ></i> <!-- Puedes cambiar el ícono aquí -->
                 </a>
-                <div class="text">Historial</div>
+                <div class="text">
+                    <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Historial
+                </div>
             </div>
         </div>
         <form action="{{ url_for('create_record') }}" target="response_frame" method="POST">
