@@ -148,12 +148,26 @@ def try_form():
     return form
 
 def try_work(id):
+    
     if g.user==["vacio","vacio"]:
         flash("Debe de iniciar sesión primero.")
         return redirect(url_for('login'))
     else:
-        work,types,id=get_details(id)
-        return render_template("work.html",user=g.user,details=work,types=types,nor=id,os=os)
+        check=check_id(id)
+        if check==1:
+            workers=get_workers_id(id)
+            if g.user[1]=='Administrator':
+                work,types,id=get_details(id)
+                return render_template("work.html",user=g.user,details=work,types=types,nor=id,os=os)
+            elif g.user[0] in workers[0]:
+                work,types,id=get_details(id)
+                return render_template("work.html",user=g.user,details=work,types=types,nor=id,os=os)
+            else:
+                flash("no tienes permiso para acceder a este trabajo")
+                return redirect('/home')
+        else:
+            flash("El trabajo no existe")
+            return redirect('/home')
 
 def try_client(client):
     if g.user==["vacio","vacio"]:
@@ -346,15 +360,23 @@ def try_next(id,status):
                 return redirect("/home")
 
 def try_update_balance(id,charge,comments):
-    update_currency(id,charge)
-    text=f"Cambio de costo Total a {charge} por motivo de: {comments}"
-    update(id,"Sistema",text)
+    if charge=="":
+        flash("El valor ingesado es incorrecto por favor verifique e intente de nuevo")
+        return redirect(url_for('work', user=id))
+    else:
+        update_currency(id,charge)
+        text=f"Cambio de costo Total a {charge} por motivo de: {comments}"
+        update(id,"Sistema",text)
     
 def try_down_payment(id,down):
-    update_down(id,down)
-    down=float(down)
-    text=f"El cliente hizo un abono de: {down}"
-    update(id,"Sistema",text)
+    if down=="":
+        flash("El valor ingresado es incorrecto por favor verifique e intente de nuevo")
+        return redirect(url_for('work', user=id))
+    else:
+        update_down(id,down)
+        down=float(down)
+        text=f"El cliente hizo un abono de: {down}"
+        update(id,"Sistema",text)
     
 def try_edit_client(id):
     function = edit_client(id)

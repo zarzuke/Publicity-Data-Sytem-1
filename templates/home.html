@@ -465,10 +465,12 @@
                         <div class="arrow">
                             <i class="fas fa-arrow-right card-icon" title="Abrir"></i>
                         </div>
+                        {% if user[1] == "Administrator" %}
                         <div class="delete" style="cursor: pointer;" onclick="handleDelete(event,'{{item[6]}}')">
                             <div id="nfo" value="{{item[6]}}"></div>
                             <i class="fas fa-trash-alt" title="Borrar"></i>
                         </div>
+                        {% endif %}
                     </div>
                 </a>
             </div>

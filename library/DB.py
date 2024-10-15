@@ -392,6 +392,14 @@ def get_workers():
     conn.close()
     return design,craft,install
 
+def get_workers_id(id):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT projectDesigner,projectCrafter,projectInstaller FROM projects WHERE projectid=? ",(id,))
+    design=cursor.fetchall()
+    conn.close()
+    return design
+
 def get_users():
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
@@ -551,9 +559,7 @@ def update_down(id,down):
     cursor.execute("UPDATE chargeProject SET projectChargeInstallment = ?,projectChargeBalance = ?  WHERE projectChargeId=? ",(newbalance,bl,id,))
     conn.commit()
     conn.close()
-
-    pass
-    
+        
 def edit_client(id):
     fp=str()
     name = request.form.get("names", "")
@@ -630,7 +636,6 @@ def get_titulo(id):
     cursor = connection.cursor()
     cursor.execute("SELECT projectName FROM projects WHERE projectId = ?",(id,))
     name=cursor.fetchone()[0]
-    print(name)
     return name
 
 def get_client_name(id):
@@ -638,7 +643,6 @@ def get_client_name(id):
     cursor = connection.cursor()
     cursor.execute("SELECT projectClientName FROM clientProject WHERE projectClientId = ?",(id,))
     name=cursor.fetchone()[0]
-    print(name)
     return name
 
 def insertar_notificacion(texto,user):
@@ -650,4 +654,12 @@ def insertar_notificacion(texto,user):
     connection.commit()
     connection.close()
     
-
+def check_id(id):
+    connection = sqlite3.connect('library/database.db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT projectID FROM projects")
+    name=cursor.fetchall()
+    for tupla in name:
+        if int(id)==int(tupla[0]):
+            return 1
+    return 2
