@@ -128,3 +128,39 @@ function updateAbonado() {
     var url = `/work/down?id=${id}&down=${abono}`;
     window.location.href = url;
 }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        const modal = document.getElementById('totalEditModal');
+        modal.classList.add('hidden'); // Asegúrate de que la clase 'hidden' oculta el modal
+    }
+
+    // Agregar evento de teclado para cerrar el modal con la tecla Escape
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal(); // Cierra el modal
+            // Puedes hacer una simulación de click en el botón de cancelar si es necesario
+            const cancelButton = document.getElementById('cancelTotalEdit');
+            if (cancelButton) {
+                cancelButton.click(); // Simula el clic en el botón de cancelar
+            }
+        }
+    });
+
+        // Función para cerrar el modal
+        function closeModal() {
+            const modal = document.getElementById('abonadoEditModal');
+            modal.classList.add('hidden'); // Asegúrate de que la clase 'hidden' oculta el modal
+        }
+    
+        // Agregar evento de teclado para cerrar el modal con la tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal(); // Cierra el modal
+                // Puedes hacer una simulación de click en el botón de cancelar si es necesario
+                const cancelButton = document.getElementById('cancelAbonadoEdit');
+                if (cancelButton) {
+                    cancelButton.click(); // Simula el clic en el botón de cancelar
+                }
+            }
+        });

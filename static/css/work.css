@@ -328,17 +328,54 @@ body.dark .comment-input{
     width: 100%;
     height: 100%;
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.651);
-    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7); /* Aumenta la opacidad y asegura un fondo más oscuro */
+    z-index: 1000; /* Asegúrate de que el modal esté por encima del contenido */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
 }
 
-.modal-content {
+.modal-content,
+.h3 {
+    font-size: 20px;
     background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
+    border-radius: 12px; /* Esquinas más redondeadas para un diseño más suave */
+    max-width: 500px; /* Ampliar el ancho máximo para mayor comodidad */
+    width: 90%; /* Para que sea responsive */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Agregar sombra para profundidad */
 }
+
+
+.confirm-btn {
+    background-color: #695cfe; /* Color al pasar el mouse */
+    color: white;
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s;
+}
+
+.confirm-btn:hover {
+    background-color: #5b51c0; /* Color de fondo azul */; /* Color verde para el botón confirmar */
+}
+
+.cancel-btn {
+    background-color: #dc3545; /* Color rojo para el botón cancelar */
+    color: white;
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #c82333; /* Color más oscuro al pasar el mouse */
+}
+
+
 
 .modal-input-container,
 .modal-textarea-container {
@@ -347,35 +384,30 @@ body.dark .comment-input{
 
 .modal-input-container input,
 .modal-textarea-container textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    width: 100%; /* Hacer el input del ancho completo */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #adadad; /* Borde azul */
+    border-radius: 10px; /* Esquinas redondeadas */
+    outline: none; /* Sin borde de foco predeterminado */
+    font-size: 16px; /* Tamaño de fuente más grande */
+    resize: none; /* Deshabilitar el redimensionamiento */
 }
 
-.modal-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+body.dark .modal-content {
+    background-color: #232425; /* Fondo oscuro para el modal */
+    color: #e0e0e0; /* Color del texto claro para el modal */
 }
 
-.modal-actions .confirm-btn,
-.modal-actions .cancel-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
+body.dark .modal-input-container input,
+body.dark .modal-textarea-container textarea {
+    color: white;
+    background-color: #232425;
+    border: 1px solid #4e4e4e; /* Borde azul */
 }
 
-.modal-actions .confirm-btn {
-    background-color: #695cfe;
-    color: #fff;
-}
-
-.modal-actions .cancel-btn {
-    background-color: #ff3d3d;
+body.dark .modal-input-container input::placeholder,
+body.dark .modal-textarea-container textarea::placeholder {
+    color: #a6a6a6; /* Color del texto de placeholder en modo oscuro */
 }
 
 .hidden {

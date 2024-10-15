@@ -574,3 +574,20 @@ document.getElementById('phone').addEventListener('blur', function() {
         }
     });
 
+    document.addEventListener('keydown', function (event) {
+        // Verifica si la tecla presionada es 'Escape'
+        if (event.key === 'Escape') {
+            // Obtiene el modal de confirmación
+            const confirmationModal = document.getElementById('confirmationModal');
+            
+            // Solo simula el clic si el modal está visible
+            if (!confirmationModal.classList.contains('hidden')) {
+                // Obtiene el botón "Cancelar"
+                const cancelButton = document.getElementById('cancelDelete');
+                
+                // Simula el clic en el botón "Cancelar"
+                cancelButton.click();
+            }
+        }
+    });
+    
