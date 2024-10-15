@@ -7,11 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes - CopyNato</title>
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
-    <link rel="stylesheet" href="../static/css/main.css">
-    <link rel="stylesheet" href="../static/css/clients.css">
     <link rel="stylesheet" href="../static/css/scrollbar.css">
     <link rel="stylesheet" href="../static/css/flash.css">    
-    <link rel="stylesheet" href="../static/css/settings-user.css">
+    <link rel="stylesheet" href="../static/css/settings-client.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -111,12 +109,9 @@
                     <i class='bx bx-chevron-left'></i>
                 </a>
                 <div class="text">
-                    <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Gestion de Clientes
+                    <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Gestión de Clientes
                 </div>
             </div>
-        </div>
-
-        <div class="home-header">
             <div class="text"></div>
             <button class="add-btn" type="button" id="openModal">
                 <span class="button__text">Añadir</span>
@@ -143,11 +138,11 @@
                 <div class="form-row" id="userFields">
                     <div class="form-group">
                         <label for="name">Nombre:</label>
-                        <input type="text" id="name" name="firstname" required>
+                        <input type="text" id="name" name="firstname" required oninput="updatePreview()">
                     </div>
                     <div class="form-group">
                         <label for="surname">Apellido:</label>
-                        <input type="text" id="surname" name="lastname" required>
+                        <input type="text" id="surname" name="lastname" required oninput="updatePreview()">
                     </div>
                 </div>
                 <div class="form-row" id="telField">
@@ -158,7 +153,7 @@
                                 <option value="+58">+58</option>
                                 <option value="+57">+57</option>
                             </select>
-                            <input type="tel" id="phone" name="phone" value="" required maxlength="10">
+                            <input type="tel" id="phone" name="phone" required maxlength="10" oninput="updatePreview()">
                         </div>
                     </div>
                 </div>
@@ -181,14 +176,17 @@
             </form>
         </div>
     </div>
-    <h3 class="preview-title">Previsualización</h3>
+    <h3 class="preview-title"></h3>
     <div class="preview-section">
-        <div class="preview-card-item"></div>
-            <img id="preview-image" src="" alt="Miniatura">
-            <p> <span id="previewName"></span></p>
-            <p> <span id="previewCompany"></span></p>
-    </div>
+        <div class="preview-card-item" id="previewCard">
+            <img id="preview-image" src="../static/img/user-default.png" alt="Miniatura" class="preview-image">
+            <p class="preview-name"><span id="previewName"></span></p>
+            <p class="preview-phone"><span id="previewPhone"></span></p>
+        </div>
+    </div>    
 </div>
+
+
 {% with messages = get_flashed_messages() %}
 {% if messages %}
     <div class="flash-messages">
@@ -230,11 +228,11 @@
             <div class="form-row" id="userFields">
                 <div class="form-group">
                     <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="names">
+                    <input type="text" id="name" name="names" required>
                 </div>
                 <div class="form-group">
                     <label for="surname">Apellido:</label>
-                    <input type="text" id="surname" name="surname">
+                    <input type="text" id="surname" name="surname" required>
                 </div>
             </div>
             <div class="form-row" id="telField">
@@ -245,15 +243,18 @@
                             <option value="+58">+58</option>
                             <option value="+57">+57</option>
                         </select>
-                        <input type="tel" id="phone" name="phone" value="" maxlength="10">
+                        <input type="tel" id="phone" name="phone" value="" required maxlength="10">
                     </div>                            
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="submit-btn">Guardar</button>
-                <button type="button" class="cancel-btn" onclick="closeModal()">Cancelar</button>
+                <div class="modal-actions">
+                    <button type="button" class="submit-btn">Guardar</button>
+                    <button type="button" class="cancel-btn" onclick="closeModal()">Cancelar</button>
+                </div>
             </div>
         </form>
+        
     </div>
 </div>
 
@@ -267,46 +268,24 @@
             </div>
         </div>
     </div>
-    <script src="../static/js/home.js"></script>
     <script src="../static/js/sidebar.js"></script>
-    <script src="../static/js/s-clients.js"></script>
-    
-    <script>
-        function editModal(clientId) {
-            document.getElementById('editUserModal').classList.remove('hidden');
-            document.getElementById('editUserModal').classList.add('visible');
-            document.getElementById('modalBackdrop').classList.remove('hidden');
-            document.getElementById('modalBackdrop').classList.add('visible');
-        
-            // Actualiza el action del formulario
-            var form = document.getElementById('editForm');
-            form.action = "/change-client/" + clientId; // Cambia '/edit_client/' a la URL correcta si es necesario
-        }
-        
-        function closeModal() {
-            document.getElementById('editUserModal').classList.remove('visible');
-            document.getElementById('editUserModal').classList.add('hidden');
-            document.getElementById('modalBackdrop').classList.remove('visible');
-            document.getElementById('modalBackdrop').classList.add('hidden');
-        }
-        
-        document.getElementById('modalBackdrop').addEventListener('click', closeModal);                  
-    </script>
-
+    <script src="../static/js/settings-client.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const cardList = document.querySelector('.card-list-client');
-    const cardItems = cardList.querySelectorAll('.client-link');
+    const cardItems = cardList.querySelectorAll('.card-client');
     const sidebar = document.querySelector('.sidebar');
+    const modalBackdrop = document.getElementById('modalBackdrop');
 
     // Control de búsqueda
     if (searchInput) {
         searchInput.addEventListener("input", () => {
             const searchTerm = searchInput.value.toLowerCase();
             cardItems.forEach(cardItem => {
-                const cardContent = cardItem.textContent.toLowerCase();
-                if (cardContent.includes(searchTerm)) {
+                const cardName = cardItem.querySelector('.default-client-name').textContent.toLowerCase();
+                const cardCompany = cardItem.querySelector('.client-company').textContent.toLowerCase();
+                if (cardName.includes(searchTerm) || cardCompany.includes(searchTerm)) {
                     cardItem.style.display = "block";
                 } else {
                     cardItem.style.display = "none";
@@ -320,13 +299,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Abrir el modal
     document.getElementById('openModal').addEventListener('click', function () {
         document.getElementById('addModal').classList.remove('hidden');
-        document.querySelector('.modal-backdrop').classList.remove('hidden');
+        modalBackdrop.classList.remove('hidden');
+        modalBackdrop.classList.add('visible');
     });
 
     // Cerrar el modal
     document.getElementById('closeModal').addEventListener('click', function () {
         document.getElementById('addModal').classList.add('hidden');
-        document.querySelector('.modal-backdrop').classList.add('hidden');
+        modalBackdrop.classList.remove('visible');
+        modalBackdrop.classList.add('hidden');
     });
 
     // Cerrar el menú al hacer clic fuera de él, pero no si se hace clic en las tarjetas
@@ -335,24 +316,10 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebar.classList.add('close'); // Cierra el menú
         }
     });
-
-    
-    // Previsualización en tiempo real
-    const nameInput = document.getElementById('name');
-    const companyInput = document.getElementById('company');
-    const previewName = document.getElementById('previewName');
-    const previewCompany = document.getElementById('previewCompany');
-
-    nameInput.addEventListener('input', function () {
-        previewName.textContent = nameInput.value;
-    });
-
-    companyInput.addEventListener('input', function () {
-        previewCompany.textContent = companyInput.value || 'N/A';
-    });
 });
 
-      </script>
+
+    </script>
   </body>
 
 </html>

@@ -429,6 +429,15 @@ body.dark .card-client:hover{
     /* Centra la imagen */
 }
 
+.card-client img {
+    width: 100px; /* Cambia este valor según sea necesario */
+    height: 100px; /* Mantenlo igual que el ancho */
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+    border-radius: 50%; /* Esto hará que todas las imágenes sean redondeadas */
+    display: block; /* Elimina el espacio en línea */
+    margin: 0 auto; /* Centra la imagen */
+}
+
 /* Image */
 .default-client-image {
     width: 100%;
