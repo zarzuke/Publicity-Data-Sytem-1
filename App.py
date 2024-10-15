@@ -4,6 +4,7 @@ from library.URLs import *
 import os
 from PIL import Image
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '12345'
 app.config['UPLOAD_FOLDER'] = 'uploads'

@@ -373,10 +373,15 @@ def try_down_payment(id,down):
         flash("El valor ingresado es incorrecto por favor verifique e intente de nuevo")
         return redirect(url_for('work', user=id))
     else:
-        update_down(id,down)
-        down=float(down)
-        text=f"El cliente hizo un abono de: {down}"
-        update(id,"Sistema",text)
+        total=get_total(id)
+        if float(down)>float(total):
+            flash("El abono no puede ser Superior al Costo total del trabajo")
+            return redirect(url_for('work', user=id))
+        else:
+            down=float(down)
+            update_down(id,down)
+            text=f"El cliente hizo un abono de: {down}"
+            update(id,"Sistema",text)
     
 def try_edit_client(id):
     function = edit_client(id)

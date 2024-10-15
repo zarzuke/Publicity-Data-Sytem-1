@@ -663,3 +663,10 @@ def check_id(id):
         if int(id)==int(tupla[0]):
             return 1
     return 2
+
+def get_total(id):
+    connection = sqlite3.connect('library/database.db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT projectChargeTotalPayment FROM chargeProject WHERE projectChargeId = ?",(id,))
+    name=cursor.fetchone()[0]
+    return name

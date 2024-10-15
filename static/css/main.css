@@ -1590,7 +1590,6 @@ body.dark .box-d {
 .fase i {
     margin-right: 5px; /* Espacio entre el ícono y el texto */
 }
-
 .notification-container {
     position: relative;
     display: inline-block;
@@ -1631,6 +1630,10 @@ body.dark .box-d {
     overflow-y: auto;
 }
 
+.notification-dropdown.show {
+    display: block; /* Mostrar el menú desplegable cuando se active */
+}
+
 .notification-dropdown .notification-item {
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -1638,8 +1641,4 @@ body.dark .box-d {
 
 .notification-dropdown .notification-item:last-child {
     border-bottom: none;
-}
-
-.notification-button.active + .notification-dropdown {
-    display: block;
 }
