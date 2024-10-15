@@ -27,7 +27,6 @@ def check_db_for_updates():
             cursor.execute('SELECT text FROM notifications WHERE id = ?', (latest_update,))
             texto = cursor.fetchone()[0]
             cursor.close()
-            print(current_user)
             if current_user[1]=="Administrator":
                 socketio.emit('notification', {'message': texto})
             else:
@@ -40,7 +39,6 @@ def before_request():
     if "username" in session:
         g.user = session["username"]
         current_user=session["username"]
-        print(current_user)
     else:
         g.user = ["vacio", "vacio"]
 
