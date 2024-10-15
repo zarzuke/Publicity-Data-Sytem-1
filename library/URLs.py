@@ -152,9 +152,7 @@ def try_work(id):
         flash("Debe de iniciar sesión primero.")
         return redirect(url_for('login'))
     else:
-        print(id)
         work,types,id=get_details(id)
-        print(work,id)
         return render_template("work.html",user=g.user,details=work,types=types,nor=id,os=os)
 
 def try_client(client):
@@ -181,8 +179,6 @@ def try_settings():
         return redirect("/home")
     
     else:
-        user = g.user
-        print(user)
         return render_template("settings.html",user=g.user)
 
 def try_record():
@@ -258,12 +254,18 @@ def try_edit_clients():
         return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
 
 def try_delete_client(id):
+    name=get_client_name(id)
+    text=f"{name} Eliminado de la lista de clientes"
+    insertar_notificacion(text,g.user[0])
     delete_client(id)
     flash("Cliente Borrado Satisfactoriamente")
     cliente=get_clients()
     return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
 
 def try_delete(id):
+    name=get_titulo(id)
+    text=f"{name} Eliminado de la lista de la lista de trabajos"
+    insertar_notificacion(text,g.user[0])
     delete_projects(id)
     flash("Trabajo Borrado Satisfactoriamente")
     return redirect("/home")
@@ -294,7 +296,12 @@ def try_next(id,status):
                 return redirect(url_for('work', user=id))
             else:
                 return redirect("/home")
-        else:    
+        else:
+            if phase[0][0]==2:
+                return_phase(id)
+                name=get_titulo(id)
+                text=f"{name} Diseño Negado,Regresando a Diseñador"
+                insertar_notificacion(text,g.user[0])
             return_phase(id)
             flash('Fase Negada')
             if g.user[1]=="Administrator":
@@ -304,12 +311,18 @@ def try_next(id,status):
     
     if phase[0][0]==4:
         save_record(id)
+        name=get_titulo(id)
         delete_projects(id)
+        text=f"{name} Finalizado, Buen Trabajo Equipo"
+        insertar_notificacion(text,g.user[0])
         flash('Trabajo Finalizado')
         return redirect("/home")
     elif phase[0][0]==1:
         if status=="approved":
             change_phase(id)
+            name=get_titulo(id)
+            text=f"{name} Diseño Finalizado,Elistado para su aprobacion"
+            insertar_notificacion(text,g.user[0])
             flash('Fase Aprobada')
             if g.user[1]=="Administrator":
                 return redirect(url_for('work', user=id))
@@ -318,6 +331,14 @@ def try_next(id,status):
     else:
         if status=="approved":
             change_phase(id)
+            if phase[0][0]==2:
+                name=get_titulo(id)
+                text=f"Diseño Aprobado para {name} enlistado para Elaboracion"
+                insertar_notificacion(text,g.user[0])
+            if phase[0][0]==3:
+                name=get_titulo(id)
+                text=f"Producto Fabricado para {name} elistado para Instalacion"
+                insertar_notificacion(text,g.user[0])
             flash('Fase Aprobada')
             if g.user[1]=="Administrator":
                 return redirect(url_for('work', user=id))
@@ -344,5 +365,8 @@ def try_edit_user():
     return function
 
 def try_delete_user(username):
+    name=username
+    text=f"{name} Eliminado de la lista de usuarios"
+    insertar_notificacion(text,g.user[0])
     function = delete_user(username)
     return function

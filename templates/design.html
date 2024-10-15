@@ -106,7 +106,22 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="text">{{estado}}</div>
+            
+            <div class="text">{{estado}}
+
+                <div class="notification-container">
+                    <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                    <button class="notification-button" id="notificationButton">
+                        <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown"></div>
+                </div>
+                
+            </div>
+
+            
+
+
         </div>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -189,6 +204,8 @@
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/home.js"></script>
     <script src="../static/js/card-color.js"></script>
+    <script src="../static/js/socket.io.js"></script>
+    <script src="../static/js/send-notifications.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

@@ -80,6 +80,8 @@
         </div>
     </nav>
 
+        
+
     <section class="home">
         <div class="home-header">
             <div class="back-button">
@@ -88,6 +90,17 @@
                 </a>
                 <div class="text">
                     <a href="/home" style="color: #695cfe; text-decoration: none;">Inicio</a> > Detalles
+                    
+                    <div class="notification-container">
+                        <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                        <button class="notification-button" id="notificationButton">
+                            <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                        </button>
+                        <div class="notification-dropdown" id="notificationDropdown"></div>
+                    </div>
+                    
+                    
+
                 </div>
             </div>
         </div>
@@ -270,11 +283,12 @@
             <script src="../static/js/home.js"></script>
             <script src="../static/js/sidebar.js"></script>
             <script src="../static/js/work.js"></script>
+            <script src="../static/js/socket.io.js"></script>
+            <script src="../static/js/send-notifications.js"></script>
         </div>
         <input type="hidden" id="id" value="{{nor}}">
         <input type="hidden" id="user" value="{{user[0]}}">
         <iframe name="response_frame" style="border: none; width: 100%; height: 50px;"></iframe>
     </section>
 </body>
-
 </html>
