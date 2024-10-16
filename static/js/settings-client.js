@@ -28,31 +28,15 @@ function previewImage(input) {
 
 
 
-function editModal(clientId) {
+function deleteClient(clientId) {
     document.getElementById('editUserModal').classList.remove('hidden');
     document.getElementById('editUserModal').classList.add('visible');
     document.getElementById('modalBackdrop').classList.remove('hidden');
     document.getElementById('modalBackdrop').classList.add('visible');
-
-
-    // Actualiza el action del formulario
     var form = document.getElementById('editForm');
-    form.action = "/change-client/" + clientId; // Cambia '/edit_client/' a la URL correcta si es necesario
+    form.action = `/change-client/${clientId}`;
 }
 
-
-function showConfirmationModal(itemId) {
-    document.getElementById('confirmationModal').classList.remove('hidden');
-    document.getElementById('confirmationModal').classList.add('visible');
-    document.getElementById('modalBackdrop').classList.remove('hidden');
-    document.getElementById('modalBackdrop').classList.add('visible');
-
-
-    document.getElementById('confirmDelete').onclick = function () {
-        var url = `/delete-client/${itemId}`;
-        window.location.href = url;
-    };
-}
 
 
 
@@ -82,12 +66,6 @@ function updatePreview() {
         reader.readAsDataURL(fileInput.files[0]);
     }
 }
-
-
-
-
-
-
 
 
 function showModal(itemId) {
@@ -204,3 +182,49 @@ function closeAddModal() {
 document.querySelector('.cancel-btn').addEventListener('click', function () {
     closeModal(); // Close the edit modal
 });
+
+const phoneInput = document.getElementById('phone');
+
+    phoneInput.addEventListener('input', function() {
+        phoneInput.value = phoneInput.value.replace(/[^\d]/g, '');
+        down.value = phoneInput.value.replace(/[^\d]/g, ''); // Permitir solo números
+    });
+
+
+document.getElementById('phone').addEventListener('blur', function() {
+        if (this.value.length < 10) {
+            alert("El número de teléfono debe tener exactamente 10 dígitos.");
+            this.value = ""; // Limpia todos los caracteres del campo de entrada
+        }
+    });
+
+    const newphoneInput = document.getElementById('number');
+
+    newphoneInput.addEventListener('input', function() {
+        newphoneInput.value = newphoneInput.value.replace(/[^\d]/g, '');
+        down.value = newphoneInput.value.replace(/[^\d]/g, ''); // Permitir solo números
+    });
+
+
+document.getElementById('number').addEventListener('blur', function() {
+        if (this.value.length < 10) {
+            alert("El número de teléfono debe tener exactamente 10 dígitos.");
+            this.value = ""; // Limpia todos los caracteres del campo de entrada
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Selecciona todos los inputs por la clase
+        const inputFields = document.querySelectorAll('.no-space');
+    
+        // Añade un evento 'keydown' a cada input
+        inputFields.forEach(inputField => {
+            inputField.addEventListener('keydown', function(event) {
+                if (event.key === ' ') {
+                    alert("No se pueden usar espacios en este campo, solo 1 nombre y 1 apellido");
+                    event.preventDefault(); // Evita la acción predeterminada de la barra espaciadora
+                }
+            });
+        });
+    });
+    

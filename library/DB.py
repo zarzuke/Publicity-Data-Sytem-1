@@ -2,6 +2,8 @@ import sqlite3
 from flask import Flask, render_template, request, make_response, redirect, url_for, flash, session, g, send_file  
 import os 
 import time
+from App import upload_file
+
 
 def project_inc():
     if request.method == "POST":
@@ -147,11 +149,11 @@ def get_works_client(client):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     cursor.execute("""
-                SELECT p.projectName, dateProject.projectDateStart, 
-                chargeProject.projectChargeTotalPayment,
-                clientProject.projectClientName, clientProject.projectClientNumber,
-                p.projectDescript, p.projectId, p.projectDesigner,projectPhase
-                FROM projects p
+                SELECT projectName, projectDateStart, 
+                projectChargeTotalPayment,
+                projectClientName, projectClientNumber,
+                projectDescript,projectId,projectPhase
+                FROM projects 
                 JOIN dateProject on projectDateId = projectDate
                 JOIN chargeProject on projectChargeId = projectCharge
                 JOIN clientProject on projectClientId = projectClient
@@ -559,8 +561,9 @@ def update_down(id,down):
     cursor.execute("UPDATE chargeProject SET projectChargeInstallment = ?,projectChargeBalance = ?  WHERE projectChargeId=? ",(newbalance,bl,id,))
     conn.commit()
     conn.close()
-        
-def edit_client(id):
+                
+
+def edit_client_list(id):
     fp=str()
     name = request.form.get("names", "")
     lastname = request.form.get("surname", "")
@@ -569,7 +572,6 @@ def edit_client(id):
     phone = request.form.get("phone", "")
     if phone:
         fp = f"{country} {phone}".strip()  # Asegúrate de que no quede espacio en blanco innecesario
-
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
     

@@ -138,11 +138,11 @@
                 <div class="form-row" id="userFields">
                     <div class="form-group">
                         <label for="name">Nombre:</label>
-                        <input type="text" id="name" name="firstname" required oninput="updatePreview()">
+                        <input type="text" id="name" name="firstname" required oninput="updatePreview()" class="no-space">
                     </div>
                     <div class="form-group">
                         <label for="surname">Apellido:</label>
-                        <input type="text" id="surname" name="lastname" required oninput="updatePreview()">
+                        <input type="text" id="surname" name="lastname" required oninput="updatePreview()" class="no-space">
                     </div>
                 </div>
                 <div class="form-row" id="telField">
@@ -208,7 +208,7 @@
             <p class="default-client-name">{{ item[0] }}</p>
             <p class="client-company">{{ item[1] }}</p>
             <div class="actions">
-                <div class="edit" onclick="editModal('{{ item[2] }}')">
+                <div class="edit" onclick="deleteClient('{{ item[2] }}')">
                     <i class="fas fa-edit" title="Editar"></i>
                 </div>
                 <div class="delete" onclick="showModal('{{ item[2] }}')">
@@ -228,11 +228,11 @@
             <div class="form-row" id="userFields">
                 <div class="form-group">
                     <label for="name"></label>
-                    <input type="text" id="name" placeholder="Ingrese el nombre" name="names" required>
+                    <input type="text" id="name" placeholder="Ingrese el nombre" name="names" class="no-space">
                 </div>
                 <div class="form-group">
                     <label for="surname"></label>
-                    <input type="text" id="surname" placeholder="Ingrese el apellido" name="surname" required>
+                    <input type="text" id="surname" placeholder="Ingrese el apellido" name="surname" class="no-space">
                 </div>
             </div>
             <div class="form-row" id="telField">
@@ -243,7 +243,7 @@
                             <option value="+58">+58</option>
                             <option value="+57">+57</option>
                         </select>
-                        <input type="tel" id="phone" placeholder="Ingrese el número telefónico" name="phone" value="" style="width: 450px;" required maxlength="10">
+                        <input type="tel" id="number" placeholder="Ingrese el número telefónico" name="phones" value="" style="width: 450px;" maxlength="10">
                     </div>                            
                 </div>
             </div>
@@ -253,7 +253,7 @@
                     <div class="upload-icon-container">
                         <i class="fas fa-upload"></i>
                         <span>Subir archivo</span>
-                        <input type="file" id="editFile" name="editFile" onchange="previewImage(this)">
+                        <input type="file" id="editFile" name="photo" onchange="previewImage(this)">
                     </div>
                 </div>
             </div>

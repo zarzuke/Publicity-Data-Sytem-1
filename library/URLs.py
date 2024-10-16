@@ -256,8 +256,7 @@ def try_create_client(client_name):
             
         create_client(client_name,number)
         flash("Cliente Creado Satisfactoriamente")
-    cliente=get_clients()
-    return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
+    return redirect("/settings/client")
     
 def try_edit_clients():
     if g.user==["vacio","vacio"]:
@@ -273,8 +272,7 @@ def try_delete_client(id):
     insertar_notificacion(text,g.user[0])
     delete_client(id)
     flash("Cliente Borrado Satisfactoriamente")
-    cliente=get_clients()
-    return render_template("settings-client.html",user=g.user,cliente=cliente,os=os)
+    return redirect("/settings/client")
 
 def try_delete(id):
     name=get_titulo(id)
@@ -316,11 +314,10 @@ def try_next(id,status):
                 name=get_titulo(id)
                 text=f"{name} Diseño Negado,Regresando a Diseñador"
                 insertar_notificacion(text,g.user[0])
-            return_phase(id)
-            flash('Fase Negada')
-            if g.user[1]=="Administrator":
-                return redirect(url_for('work', user=id))
+                flash('Fase Negada')
             else:
+                return_phase(id)
+                flash('Fase Negada')
                 return redirect("/home")
     
     if phase[0][0]==4:
@@ -384,7 +381,7 @@ def try_down_payment(id,down):
             update(id,"Sistema",text)
     
 def try_edit_client(id):
-    function = edit_client(id)
+    function = edit_client_list(id)
     return function
 
 def try_edit_user():
