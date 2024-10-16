@@ -1,0 +1,482 @@
+/* ======================================================== BASE ================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    /* ===== Colors ===== */
+    --body-color: #dce0ee;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+.home-header {
+    /*encabezado*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e7e7e7;
+    background-color: transparent;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0;
+}
+
+/*BOTON DE REGRESAR*/
+.text {
+    margin-right: auto; /* Para empujar el botón hacia la derecha */
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Sin subrayado */
+    color: inherit;  /* Para heredar el color del texto */
+    margin-left: 15px; /* Espacio entre el texto y el botón */
+    color: var(--text-color);
+}
+
+.back-btn i {
+    font-size: 2em; /* Tamaño del ícono */
+}
+
+/*BOTON DE REGRESAR*/
+
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+
+::selection {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+body.dark {
+    --body-color: #121212;
+    --sidebar-color: #1e1f20;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #2c2d30;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0; /* Mantén la barra al principio */
+    left: 0; 
+    height: 100vh; /* Altura total */
+    width: 260px; /* Ancho de la barra lateral */
+    padding: 10px 14px; /* Espaciado interno */
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100; 
+}
+
+.sidebar.close {
+    width: 88px;
+}
+
+.sidebar.close .logo-text .name,
+.sidebar.close .logo-text .profession {
+    display: none;
+}
+
+/* ===== Reusable code - Here ===== */
+.sidebar li {
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sidebar header .image,
+.sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+.sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.sidebar .text,
+.sidebar .icon {
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar .text {
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.separator {
+    border: none; /* Eliminar el estilo por defecto */
+    height: 1px; /* Alto de la línea */
+    background-color: var(--text-color);
+    margin: 10px 0; /* Margen alrededor de la línea */
+}
+
+
+
+.sidebar.close .text {
+    opacity: 0;
+}
+
+/* =========================== */
+
+.sidebar header {
+    position: relative;
+}
+
+.sidebar header .image-text {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar header .logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+header .image-text .name {
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+header .image-text .profession {
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+}
+
+.sidebar header .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar header .image img {
+    width: 40px;
+    border-radius: 6px;
+}
+
+.sidebar header .toggle {
+    position: absolute;
+    top: 60%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+body.dark .sidebar header .toggle {
+    color: var(--text-color);
+}
+
+.sidebar.close .toggle {
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .menu {
+    margin-top: 40px;
+}
+
+.sidebar li.search-box {
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+.sidebar li.search-box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    transition: var(--tran-05);
+}
+
+.sidebar li a {
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+.sidebar li a:hover {
+    background-color: var(--primary-color);
+}
+
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text {
+    color: var(--sidebar-color);
+}
+
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text {
+    color: var(--text-color);
+}
+
+.sidebar .menu-bar {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+.menu-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar .menu-bar .mode {
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+.menu-bar .mode .sun-moon {
+    height: 50px;
+    width: 60px;
+}
+
+.mode .sun-moon i {
+    position: absolute;
+}
+
+.mode .sun-moon i.sun {
+    opacity: 0;
+}
+
+body.dark .mode .sun-moon i.sun {
+    opacity: 1;
+}
+
+body.dark .mode .sun-moon i.moon {
+    opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.toggle-switch .switch {
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+
+.switch::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+}
+
+body.dark .switch::before {
+    left: 20px;
+}
+
+.home {
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+.home-header .text {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.sidebar.close~.home {
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+
+body.dark .home .text {
+    color: var(--text-color);
+}
+
+/* ======================================================== BASE ================================================== */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.card {
+    width: 60%;
+    margin: 0 auto;
+    padding: 0.5%;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+table.display {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.display th, table.display td {
+    padding: 25%;
+    text-align: left;
+}
+
+table.display th {
+    background-color: #695cfe;
+    color: white;
+}
+
+table.display tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para el modo oscuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* DataTable en modo oscuro */
+body.dark-mode .dataTables_wrapper {
+    color: #ffffff;
+    background-color: #333;
+}
+
+body.dark-mode table.dataTable {
+    border-color: #444;
+    color: #000000;
+    background-color: #333;
+}
+
+body.dark-mode table.dataTable th,
+body.dark-mode table.dataTable td {
+    border-color: #444;
+}
+
+body.dark-mode table.dataTable thead th {
+    background-color: #444;
+    color: #ffffff;
+}
+
+body.dark-mode .dataTables_length select,
+body.dark-mode .dataTables_filter input {
+    background-color: #222;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+body.dark-mode .paginate_button {
+    color: #ffffff !important;
+    background-color: #333 !important;
+}
+
+body.dark-mode .paginate_button.disabled,
+body.dark-mode .paginate_button.disabled:hover {
+    background-color: #555 !important;
+}
+
+/* Estilos para la paginación de DataTables en modo oscuro */
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: .5em 1em;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    color: #fff !important;  /* Cambia el color al blanco para modo oscuro */
+    border: 1px solid #444;   /* Un borde más oscuro para modo oscuro */
+    border-radius: 2px;
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_length,
+body.dark-mode .dataTables_wrapper .dataTables_filter,
+body.dark-mode .dataTables_wrapper .dataTables_info,
+body.dark-mode .dataTables_wrapper .dataTables_processing,
+body.dark-mode .dataTables_wrapper .dataTables_paginate {
+    color: #fff; /* Cambia el color al blanco para el modo oscuro */
+}

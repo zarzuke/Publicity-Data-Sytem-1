@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial - CopyNato</title>
+    <title>Ajustes - CopyNato</title>
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
-    <link rel="stylesheet" href="../static/css/settings.css">
-    <link rel="stylesheet" href="../static/css/scrollbar.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="../static/css/notifications.css">
 <body>
     <nav class="sidebar close">
         <header>
@@ -28,7 +29,11 @@
         </header>
         <div class="menu-bar">
             <div class="menu">
-                <ul class="menu-links">
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Buscar..." id="searchInput">
+                </li>
+                <ul class="menu-links" id="home">
                     <li class="nav-link">
                         <a href="{{ url_for('home') }}">
                             <i class='bx bx-home-alt icon'></i>
@@ -71,7 +76,7 @@
                 </ul>
             </div>
             <div class="bottom-content">
-                <li class="">
+                <li class="" id="setting">
                     <a href="{{ url_for('settings') }}">
                         <i class='bx bx-cog icon'></i>
                         <span class="text nav-text">Ajustes</span>
@@ -103,44 +108,38 @@
                     <i class='bx bx-chevron-left'></i>
                 </a>
                 <div class="text">
-                    <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Historial
+                    <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Notificaciones
                 </div>
             </div>
         </div>
-        <form action="{{ url_for('create_record') }}" target="response_frame" method="POST">
-            <div class="container">
-                <div class="select-container" id="existing-user-select">
-                    <select class="select" id="select-client" name="client" onchange="autocompleteUser()">
-                        <option value="">Seleccione un cliente</option>
-                        {% for names, numbers in clients %}
-                        <option value="{{ names[0] }} {{ names[1] }}" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">
-                            {{ names[0] }} {{ names[1] }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>            
-                <div class="select-container">
-                    <input type="week" id="date" name="date" class="select-date">
-                    <button id="updateButton" class="button" type="button">Cargar</button>
-                </div>
-            </div>
-            <div class="grid-container">
-                {% for item in filas %}
-                    {% for item2 in item %}
-                        <div class="grid-item">{{ item2 }}</div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-            <div class="button-container">
-                <button class="submit-button" type="submit" id="saveButton">Guardar</button>
-            </div>
-        </form>
-                    
-        <iframe name="response_frame" style="border:none; width:100%; height:50px;"></iframe>
-    
+        <div class="card">
+            <table id="example" class="display">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Accion</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </section>
-    <script src="../static/js/settings-record.js"></script>
     <script src="../static/js/sidebar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "ajax": "/show-notifications",
+                "columns": [
+                    { "data": 0 }, // ID
+                    { "data": 1 }, // Mensaje
+                    { "data": 2 }
+                ]
+            });
+        });
+    </script>
 </body>
 </html>
-
