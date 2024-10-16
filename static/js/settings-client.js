@@ -151,3 +151,56 @@ function resetPreview() {
     // Limpiar el input de archivo
     document.getElementById('file').value = ''; // Limpia el input de archivo
 }
+
+// Close the edit modal when the cancel button is clicked
+document.querySelector('.cancel-btn').addEventListener('click', function () {
+    closeModal();
+});
+
+// Function to close modals
+function closeModal() {
+    document.getElementById('editUserModal').classList.add('hidden');
+    document.getElementById('modalBackdrop').classList.remove('visible');
+    document.getElementById('modalBackdrop').classList.add('hidden');
+}
+
+// Close both modals when pressing the Escape key
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Escape") {
+        // Check if Add modal is visible
+        if (!document.getElementById('addModal').classList.contains('hidden')) {
+            closeAddModal(); // Close the add modal
+        }
+        
+        // Check if edit modal is visible
+        if (!document.getElementById('editUserModal').classList.contains('hidden')) {
+            closeModal(); // Close edit modal
+        }
+        
+        // Check if confirmation modal is visible
+        if (!document.getElementById('confirmationModal').classList.contains('hidden')) {
+            // Close confirmation modal
+            document.getElementById('confirmationModal').classList.remove('visible');
+            document.getElementById('confirmationModal').classList.add('hidden');
+            document.getElementById('modalBackdrop').classList.remove('visible');
+            document.getElementById('modalBackdrop').classList.add('hidden');
+        }
+    }
+});
+
+// Close the Add modal when the close button is clicked
+document.getElementById('closeModal').addEventListener('click', function () {
+    closeAddModal();
+});
+
+// Function to close the "Add Client" modal
+function closeAddModal() {
+    document.getElementById('addModal').classList.add('hidden');
+    document.getElementById('modalBackdrop').classList.remove('visible');
+    document.getElementById('modalBackdrop').classList.add('hidden');
+}
+
+// Close the edit modal when the cancel button is clicked
+document.querySelector('.cancel-btn').addEventListener('click', function () {
+    closeModal(); // Close the edit modal
+});
