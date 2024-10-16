@@ -297,33 +297,48 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function() {
     const confirmationModal = document.getElementById('confirmationModal');
     const cancelDeleteButton = document.getElementById('cancelDelete');
-    const backdrop = document.getElementById('modalBackdrop');
+    const backdrop = document.createElement('div');
+    
+    backdrop.className = 'modal-backdrop hidden'; // Clase para el backdrop
+    document.body.appendChild(backdrop); // Agrega el backdrop al cuerpo del documento
 
     // Función para abrir el modal con un parámetro
     window.showConfirmationModal = function(clientId) {
         // Mostrar el modal y el backdrop
         confirmationModal.classList.remove('hidden');
-        confirmationModal.classList.add('visible');
-        backdrop.classList.remove('hidden');
-        backdrop.classList.add('visible');
+        backdrop.classList.remove('hidden'); // Muestra el backdrop
 
         // Actualiza la acción del botón de confirmación
         const confirmDeleteButton = document.getElementById('confirmDelete');
         confirmDeleteButton.onclick = function() {
-            
             const url = `/delete/${clientId}`;
             window.location.href = url;
         };
+
+        // Cierra el modal al hacer clic en el backdrop
+        backdrop.onclick = function() {
+            closeModal();
+        };
+
+        // Cerrar el modal con la tecla Escape
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
     };
 
     // Función para cerrar el modal
-    cancelDeleteButton.addEventListener('click', function() {
-        confirmationModal.classList.remove('visible');
+    function closeModal() {
         confirmationModal.classList.add('hidden');
-        backdrop.classList.remove('visible');
-        backdrop.classList.add('hidden');
-    });
+        backdrop.classList.add('hidden'); // Oculta el backdrop
+    }
+
+    // Cerrar el modal al hacer clic en "Cancelar"
+    cancelDeleteButton.addEventListener('click', closeModal);
 });
+
+
 
 
 </script>

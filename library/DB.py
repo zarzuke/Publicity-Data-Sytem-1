@@ -66,7 +66,7 @@ def project_inc():
             os.makedirs(direction)
     text=f"Nuevo Proyecto iniciado @{designer} esta a cargo del diseño"
     insertar_notificacion(text,g.user[0])
-    flash("Trabajo Creado Satisfactoriamente")
+    flash("Trabajo añadido correctamente.")
     return redirect("/home")
 
 def get_clients():

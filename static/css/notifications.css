@@ -380,97 +380,97 @@ body.dark .home .text {
 
 
 .card {
-    width: 60%;
-    margin: 0 auto;
-    padding: 0.5%;
+    width: auto;
+    margin: auto 50px;
     border-radius: 8px;
-    background-color: white;
+    background-color: white; /* Fondo de tarjeta claro por defecto */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-table.display {
+
+/* Estilo minimalista para la tabla */
+#example {
     width: 100%;
     border-collapse: collapse;
+    color: #333; /* Color de texto claro en modo claro */
 }
 
-table.display th, table.display td {
-    padding: 25%;
+
+#example thead {
+    background-color: #695cfe; /* Color de encabezado */
+}
+
+#example th, #example td {
+    padding: 12px 15px;
     text-align: left;
 }
 
-table.display th {
-    background-color: #695cfe;
-    color: white;
+#example tbody tr {
+    border-bottom: 1px solid #ddd;
 }
 
-table.display tr:nth-child(even) {
-    background-color: #f2f2f2;
+#example tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Fondo claro para filas pares */
 }
 
-/* Estilos para el modo oscuro */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
+
+#example tbody tr:hover {
+    background-color: #dbdbdb;
 }
 
-/* DataTable en modo oscuro */
-body.dark-mode .dataTables_wrapper {
-    color: #ffffff;
-    background-color: #333;
+
+#example th {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: white; /* Color de texto claro en encabezados */
 }
 
-body.dark-mode table.dataTable {
-    border-color: #444;
-    color: #000000;
-    background-color: #333;
+#example td {
+    font-size: 0.9em;
 }
 
-body.dark-mode table.dataTable th,
-body.dark-mode table.dataTable td {
-    border-color: #444;
-}
-
-body.dark-mode table.dataTable thead th {
-    background-color: #444;
-    color: #ffffff;
-}
-
-body.dark-mode .dataTables_length select,
-body.dark-mode .dataTables_filter input {
-    background-color: #222;
-    color: #ffffff;
-    border: 1px solid #555;
-}
-
-body.dark-mode .paginate_button {
-    color: #ffffff !important;
-    background-color: #333 !important;
-}
-
-body.dark-mode .paginate_button.disabled,
-body.dark-mode .paginate_button.disabled:hover {
-    background-color: #555 !important;
-}
-
-/* Estilos para la paginación de DataTables en modo oscuro */
-body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
-    box-sizing: border-box;
-    display: inline-block;
-    min-width: 1.5em;
-    padding: .5em 1em;
-    margin-left: 2px;
-    text-align: center;
-    text-decoration: none !important;
+/* Estilo para la paginación */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.5em 1em;
+    margin: 0.2em;
     cursor: pointer;
-    color: #fff !important;  /* Cambia el color al blanco para modo oscuro */
-    border: 1px solid #444;   /* Un borde más oscuro para modo oscuro */
-    border-radius: 2px;
+    border: 1px solid #ccc; /* Borde más claro */
+    border-radius: 5px; /* Esquinas redondeadas */
 }
 
-body.dark-mode .dataTables_wrapper .dataTables_length,
-body.dark-mode .dataTables_wrapper .dataTables_filter,
-body.dark-mode .dataTables_wrapper .dataTables_info,
-body.dark-mode .dataTables_wrapper .dataTables_processing,
-body.dark-mode .dataTables_wrapper .dataTables_paginate {
-    color: #fff; /* Cambia el color al blanco para el modo oscuro */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #f1f1f1; /* Fondo al hover en modo claro */
+    border-color: #aaa; /* Color de borde al hover */
 }
+
+#example thead th {
+    border-bottom: none; /* Elimina cualquier borde en los encabezados */
+}
+
+.dataTables_wrapper .dataTables_length, 
+.dataTables_wrapper .dataTables_filter, 
+.dataTables_wrapper .dataTables_info, 
+.dataTables_wrapper .dataTables_processing, 
+.dataTables_wrapper .dataTables_paginate {
+    color: #666666; /* Color de texto */
+    font-weight: 600;
+    margin: 15px;
+}
+
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #adadad; /* Borde del input en modo claro */
+    border-radius: 10px; /* Esquinas redondeadas */
+    outline: none; /* Sin borde de foco predeterminado */
+    font-size: 16px; /* Tamaño de fuente más grande */
+    resize: none; /* Deshabilitar el redimensionamiento */
+    margin-left: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #333 !important; /* Color activo */
+    background-color: white; /* Fondo activo */
+}
+
