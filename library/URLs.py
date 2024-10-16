@@ -15,7 +15,7 @@ def try_signup():
         username=request.form["username"]
         user_confirmation = user_exists(username)
         if user_confirmation:
-            flash("El usuario ya está registrado en el sistema")
+            flash("El usuario ya se encuentra registrado en el sistema.")
         else:
             password=request.form["password"]
             role=request.form["role"]
@@ -163,7 +163,7 @@ def try_work(id):
                 work,types,id=get_details(id)
                 return render_template("work.html",user=g.user,details=work,types=types,nor=id,os=os)
             else:
-                flash("no tienes permiso para acceder a este trabajo")
+                flash("No tienes permiso para acceder a este trabajo.")
                 return redirect('/home')
         else:
             flash("El trabajo no existe")
@@ -175,7 +175,7 @@ def try_client(client):
         return redirect(url_for('login'))
     
     elif g.user[1]!="Administrator":
-        flash("No tienes Permisos para Acceder a este Modulo")
+        flash("No tienes permisos para acceder a este módulo.")
         return redirect("/home")
     
     else:
@@ -189,7 +189,7 @@ def try_settings():
         return redirect(url_for('login'))
     
     elif g.user[1]!="Administrator":
-        flash("No tienes Permisos para Acceder a este Modulo")
+        flash("No tienes permisos para acceder a este módulo.")
         return redirect("/home")
     
     else:
@@ -201,7 +201,7 @@ def try_record():
         return redirect(url_for('login'))
     
     elif g.user[1]!="Administrator":
-        flash("No tienes Permisos para Acceder a este Modulo")
+        flash("No tienes permisos para acceder a este módulo.")
         return redirect("/home")
     
     else:
@@ -216,7 +216,7 @@ def try_record_fildered(client,date):
         flash("Debe de iniciar sesión primero.")
         return redirect(url_for('login'))
     elif g.user[1]!="Administrator":
-        flash("No tienes Permisos para Acceder a este Modulo")
+        flash("No tienes permisos para acceder a este módulo.")
         return redirect("/home")
     else:
         filas = record(client,date)
@@ -247,7 +247,7 @@ def try_record_file(client, date):
 def try_create_client(client_name):
     client_confirmation = client_exists(client_name)
     if client_confirmation:
-        flash("El cliente ya está registrado en el sistema")
+        flash("El cliente ya se encuentra registrado en el sistema.")
     else:
         country = request.form.get("country-code", "")
         phone = request.form.get("phone", "")
@@ -268,7 +268,7 @@ def try_edit_clients():
 
 def try_delete_client(id):
     name=get_client_name(id)
-    text=f"{name} Eliminado de la lista de clientes"
+    text=f"{name} Eliminado de la lista de clientes."
     insertar_notificacion(text,g.user[0])
     delete_client(id)
     flash("Cliente Borrado Satisfactoriamente")
@@ -276,10 +276,10 @@ def try_delete_client(id):
 
 def try_delete(id):
     name=get_titulo(id)
-    text=f"{name} Eliminado de la lista de la lista de trabajos"
+    text=f"{name} Eliminado de la lista de trabajos."
     insertar_notificacion(text,g.user[0])
     delete_projects(id)
-    flash("Trabajo Borrado Satisfactoriamente")
+    flash("Trabajo eliminado correctamente.")
     return redirect("/home")
     
 def try_comments(user,worker,comments):
@@ -292,18 +292,18 @@ def try_open(id, title, client):
         os.startfile(folder_path)  # Para Windows
         return f""
     except Exception as e:
-        return f"Error en las Carpetas"
+        return f"Error en las carpetas"
     
     
 def try_next(id,status):
     phase=check_phase(id)
     if status=="none":
-        flash('Datos incorrectos seleccione estatus')
+        flash('Datos incorrectos, seleccione estatus.')
         return redirect(url_for('work', user=id))
     
     if status=="canceled":
         if phase[0][0]==1:
-            flash('Opcion incorrecta')
+            flash('Opción incorrecta.')
             if g.user[1]=="Administrator":
                 return redirect(url_for('work', user=id))
             else:
@@ -312,7 +312,7 @@ def try_next(id,status):
             if phase[0][0]==2:
                 return_phase(id)
                 name=get_titulo(id)
-                text=f"{name} Diseño Negado,Regresando a Diseñador"
+                text=f"{name} Diseño negado, Regresando a DISEÑADOR."
                 insertar_notificacion(text,g.user[0])
                 flash('Fase Negada')
             else:
@@ -324,17 +324,17 @@ def try_next(id,status):
         save_record(id)
         name=get_titulo(id)
         delete_projects(id)
-        text=f"{name} Finalizado, Buen Trabajo Equipo"
+        text=f"{name} - FINALIZADO, ¡buen trabajo equipo!"
         insertar_notificacion(text,g.user[0])
-        flash('Trabajo Finalizado')
+        flash('Trabajo finalizado.')
         return redirect("/home")
     elif phase[0][0]==1:
         if status=="approved":
             change_phase(id)
             name=get_titulo(id)
-            text=f"{name} Diseño Finalizado,Elistado para su aprobacion"
+            text=f"{name} - DISEÑO finalizado, esperando por su APROBACIÓN."
             insertar_notificacion(text,g.user[0])
-            flash('Fase Aprobada')
+            flash('Fase APROBADA.')
             if g.user[1]=="Administrator":
                 return redirect(url_for('work', user=id))
             else:
@@ -344,13 +344,13 @@ def try_next(id,status):
             change_phase(id)
             if phase[0][0]==2:
                 name=get_titulo(id)
-                text=f"Diseño Aprobado para {name} enlistado para Elaboracion"
+                text=f"{name} - APROBACIÓN confirmada, esperando por ELABORACIÓN."
                 insertar_notificacion(text,g.user[0])
             if phase[0][0]==3:
                 name=get_titulo(id)
-                text=f"Producto Fabricado para {name} elistado para Instalacion"
+                text=f"{name} - ELABORACIÓN completada, esperando por INSTALACIÓN."
                 insertar_notificacion(text,g.user[0])
-            flash('Fase Aprobada')
+            flash('Fase APROBADA.')
             if g.user[1]=="Administrator":
                 return redirect(url_for('work', user=id))
             else:
@@ -358,7 +358,7 @@ def try_next(id,status):
 
 def try_update_balance(id,charge,comments):
     if charge=="":
-        flash("El valor ingesado es incorrecto por favor verifique e intente de nuevo")
+        flash("El valor ingesado es incorrecto, por favor verifique e intente de nuevo.")
         return redirect(url_for('work', user=id))
     else:
         update_currency(id,charge)
@@ -367,12 +367,12 @@ def try_update_balance(id,charge,comments):
     
 def try_down_payment(id,down):
     if down=="":
-        flash("El valor ingresado es incorrecto por favor verifique e intente de nuevo")
+        flash("El valor ingresado es incorrecto, por favor verifique e intente de nuevo.")
         return redirect(url_for('work', user=id))
     else:
         total=get_total(id)
         if float(down)>float(total):
-            flash("El abono no puede ser Superior al Costo total del trabajo")
+            flash("El abono no puede ser SUPERIOR al COSTO TOTAL del trabajo.")
             return redirect(url_for('work', user=id))
         else:
             down=float(down)
@@ -390,7 +390,7 @@ def try_edit_user():
 
 def try_delete_user(username):
     name=username
-    text=f"{name} Eliminado de la lista de usuarios"
+    text=f"{name} Eliminado de la lista de usuarios."
     insertar_notificacion(text,g.user[0])
     function = delete_user(username)
     return function

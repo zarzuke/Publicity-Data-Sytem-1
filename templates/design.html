@@ -105,23 +105,28 @@
         </div>
     </nav>
     <section class="home">
-        <div class="home-header">
+        <div class="home-header" style="padding-right: 5%;">
+            <div class="text">{{estado}}</div>
             
-            <div class="text">{{estado}}
-
-                <div class="notification-container">
-                    <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
-                    <button class="notification-button" id="notificationButton">
-                        <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
-                    </button>
-                    <div class="notification-dropdown" id="notificationDropdown"></div>
+            <div class="sort-dropdown">
+                <button class="sort-btn" type="button" onclick="toggleDropdown()">
+                    <i class="fa-solid fa-list"></i>
+                </button>
+                <div class="sort-options hidden" id="sortOptions">
+                    <div class="sort-option" onclick="sortBy('date')">Fecha</div>
+                    <div class="sort-option" onclick="sortBy('a-z')">De A-Z</div>
+                    <div class="sort-option" onclick="sortBy('z-a')">De Z-A</div>
                 </div>
-                
             </div>
-
             
-
-
+            <div class="notification-container">
+                <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                <button class="notification-button" id="notificationButton">
+                    <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                </button>
+                <div class="notification-dropdown" id="notificationDropdown"></div>
+            </div>
+            
         </div>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
