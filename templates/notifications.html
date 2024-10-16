@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="../static/css/notifications.css">
+    <link rel="stylesheet" href="../static/css/scrollbar.css">
 <body>
     <nav class="sidebar close">
         <header>
@@ -130,16 +131,30 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                "ajax": "/show-notifications",
-                "columns": [
-                    { "data": 0 }, // ID
-                    { "data": 1 }, // Mensaje
-                    { "data": 2 }
-                ]
-            });
-        });
+$(document).ready(function() {
+    $('#example').DataTable({
+        "ajax": "/show-notifications",
+        "columns": [
+            { "data": 0 }, // ID
+            { "data": 1 }, // Mensaje
+            { "data": 2 }
+        ],
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ total de registros)",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+});
     </script>
 </body>
 </html>
