@@ -1,12 +1,10 @@
-function updateCurrency(){
+function updateCurrency() {
     var id = document.getElementById('id').value;
     var charge = document.getElementById('newTotalInput').value;
-    var comments= document.getElementById('TotalReason').value;
+    var comments = document.getElementById('TotalReason').value;
     var url = `/work/balance?id=${id}&charge=${charge}&args=${comments}`;
     window.location.href = url;
 }
-
-
 
 function sendData() {
     var comments = document.getElementById('comments').value;
@@ -21,27 +19,20 @@ function sendData() {
     }
 }
 
-    // Seleccionamos el área de comentarios
-    const commentInput = document.getElementById('comments');
+// Seleccionamos el área de comentarios
+const commentInput = document.getElementById('comments');
 
-    // Agregar un evento keypress al textarea
-    commentInput.addEventListener('keypress', function(event) {
-        // Verificamos si la tecla presionada es la tecla Enter (código 13)
-        if (event.key === 'Enter') {
-            // Evitar el comportamiento por defecto de crear nueva línea
-            event.preventDefault();
-            // Llamar a la función sendData al presionar Enter{
-            
-            sendData();
-        }
-    });
+// Agregar un evento keypress al textarea
+commentInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        sendData();
+    }
+});
 
-
-    // Obtener los elementos necesarios
+// Obtener los elementos necesarios
 const editTotalButton = document.querySelector('.edit-total');
 const totalEditModal = document.getElementById('totalEditModal');
-const newTotalInput = document.getElementById('newTotalInput');
-const changeTotalReasonInput = document.getElementById('changeTotalReason');
 const confirmTotalEditButton = document.getElementById('confirmTotalEdit');
 const cancelTotalEditButton = document.getElementById('cancelTotalEdit');
 
@@ -56,42 +47,39 @@ function closeTotalEditModal() {
 }
 
 // Agregar los event listeners
-editTotalButton.addEventListener('click', showTotalEditModal);
-confirmTotalEditButton.addEventListener('click', updateTotal);
-cancelTotalEditButton.addEventListener('click', closeTotalEditModal);
+if (editTotalButton) {
+    editTotalButton.addEventListener('click', showTotalEditModal);
+}
+if (confirmTotalEditButton) {
+    confirmTotalEditButton.addEventListener('click', updateCurrency);
+}
+if (cancelTotalEditButton) {
+    cancelTotalEditButton.addEventListener('click', closeTotalEditModal);
+}
 
-
-
+// Manejar completado
 function handleComplete(id) {
     const approvedButton = document.getElementById('approved');
     const rejectedButton = document.getElementById('rejected');
 
     if (approvedButton.classList.contains('active')) {
-        // Acción si el estado es "Aprobado"
-        showModal('approved',id);
+        showModal('approved', id);
     } else if (rejectedButton.classList.contains('active')) {
-        // Acción si el estado es "Rechazado"
-        showModal('canceled',id);
+        showModal('canceled', id);
     } else {
-        // Acción si no se ha seleccionado ningún estado
-        alert('Por favor, selecciona un estado antes de completar.');
+        alert('Por favor, selecciona una decisión antes de completar.');
     }
 }
 
-
 function setStatus(status, element) {
-    // Reset all buttons
     document.querySelectorAll('.status-button').forEach(button => {
         button.classList.remove('active');
     });
-    // Set the clicked button as active
     element.classList.add('active');
-    // Store the status in a hidden input or a variable
     document.getElementById('status').value = status;
 }
 
-
-function showModal(status,itemId) {
+function showModal(status, itemId) {
     document.getElementById('confirmationModal').classList.remove('hidden');
     document.getElementById('confirmDelete').onclick = function() {
         var url = `/next/${itemId}/${status}`;
@@ -102,7 +90,6 @@ function showModal(status,itemId) {
 document.getElementById('cancelDelete').addEventListener('click', function() {
     document.getElementById('confirmationModal').classList.add('hidden');
 });
-
 
 document.getElementById('editAbonadoButton').onclick = function() {
     document.getElementById('abonadoEditModal').classList.remove('hidden');
@@ -119,38 +106,21 @@ function updateAbonado() {
     window.location.href = url;
 }
 
-    // Función para cerrar el modal
-    function closeModal() {
-        const modal = document.getElementById('totalEditModal');
-        modal.classList.add('hidden'); // Asegúrate de que la clase 'hidden' oculta el modal
+// Cerrar el modal de editar total con Esc
+function handleKeyClose(event) {
+    if (event.key === 'Escape') {
+        closeTotalEditModal();
     }
+}
 
-    // Agregar evento de teclado para cerrar el modal con la tecla Escape
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            closeModal(); // Cierra el modal
-            // Puedes hacer una simulación de click en el botón de cancelar si es necesario
-            const cancelButton = document.getElementById('cancelTotalEdit');
-            if (cancelButton) {
-                cancelButton.click(); // Simula el clic en el botón de cancelar
-            }
-        }
-    });
+document.addEventListener('keydown', handleKeyClose);
 
-        // Función para cerrar el modal
-        function closeModal() {
-            const modal = document.getElementById('abonadoEditModal');
-            modal.classList.add('hidden'); // Asegúrate de que la clase 'hidden' oculta el modal
-        }
-    
-        // Agregar evento de teclado para cerrar el modal con la tecla Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal(); // Cierra el modal
-                // Puedes hacer una simulación de click en el botón de cancelar si es necesario
-                const cancelButton = document.getElementById('cancelAbonadoEdit');
-                if (cancelButton) {
-                    cancelButton.click(); // Simula el clic en el botón de cancelar
-                }
-            }
-        });
+// Cerrar el modal de añadir abono con Esc
+function handleKeyCloseAbonado(event) {
+    if (event.key === 'Escape') {
+        document.getElementById('abonadoEditModal').classList.add('hidden');
+    }
+}
+
+document.addEventListener('keydown', handleKeyCloseAbonado);
+

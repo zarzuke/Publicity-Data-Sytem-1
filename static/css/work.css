@@ -282,21 +282,6 @@ body.dark .comment-input{
     background: #5b51c0;
 }
 
-.flash-messages {
-    padding: 10px;
-    margin: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.flash-message {
-    margin: 5px 0;
-    padding: 5px;
-    border-left: 4px solid #28a745; /* Color verde para mensajes de éxito */
-    color: #333;
-}
-
 
 .total-info .info-box {
     display: flex;

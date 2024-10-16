@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes - CopyNato</title>
+    <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="../static/css/notifications.css">
+    <link rel="stylesheet" href="../static/css/scrollbar.css">
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../static/img/icon.ico" alt="iconcopy">
+                </span>
+                <div class="text logo-text">
+                    <span class="name">{{user[0]}}</span>
+                    <span class="profession" id="role">{{user[1]}}</span>
+                </div>
+            </div>
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Buscar..." id="searchInput">
+                </li>
+                <ul class="menu-links" id="home">
+                    <li class="nav-link">
+                        <a href="{{ url_for('home') }}">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-link" id="client">
+                        <a href="{{ url_for('clients') }}">
+                            <i class='bx bx-user icon'></i>
+                            <span class="text nav-text">Clientes</span>
+                        </a>
+                    </li>
+                </ul>
+                <hr class="separator">
+                <ul class="menu-links">
+                    <li class="nav-link" id="diseño">
+                        <a href="{{ url_for('design') }}">
+                            <i class='bx bx-image-alt icon'></i>
+                            <span class="text nav-text">Diseño</span>
+                        </a>
+                    </li>
+                    <li class="nav-link" id="aprobacion">
+                        <a href="{{ url_for('approval') }}">
+                            <i class='bx bx-check-circle icon'></i>
+                            <span class="text nav-text">Aprobación</span>
+                        </a>
+                    </li>
+                    <li class="nav-link" id="elaboracion">
+                        <a href="{{ url_for('crafting') }}">
+                            <i class='bx bx-edit icon'></i>
+                            <span class="text nav-text">Elaboración</span>
+                        </a>
+                    </li>
+                    <li class="nav-link" id="entrega">
+                        <a href="{{ url_for('ending') }}">
+                            <i class='bx bx-send icon'></i>
+                            <span class="text nav-text">Entrega</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="" id="setting">
+                    <a href="{{ url_for('settings') }}">
+                        <i class='bx bx-cog icon'></i>
+                        <span class="text nav-text">Ajustes</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{ url_for('logout') }}">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Salir</span>
+                    </a>
+                </li>
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Modo oscuro</span>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+    <section class="home">
+        <div class="home-header">
+            <div class="back-button">
+                <a href="/settings" class="back-btn">
+                    <i class='bx bx-chevron-left'></i>
+                </a>
+                <div class="text">
+                    <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Notificaciones
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <table id="example" class="display">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Accion</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script src="../static/js/sidebar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+$(document).ready(function() {
+    $('#example').DataTable({
+        "ajax": "/show-notifications",
+        "columns": [
+            { "data": 0 }, // ID
+            { "data": 1 }, // Mensaje
+            { "data": 2 }
+        ],
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ total de registros)",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+});
+    </script>
+</body>
+</html>

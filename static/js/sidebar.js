@@ -26,6 +26,7 @@ function toggleSearch() {
 // Function to toggle dark mode
 function toggleTheme() {
   body.classList.toggle("dark");
+  body.classList.toggle('dark-mode');
   const isDark = body.classList.contains("dark");
   localStorage.setItem("theme", isDark ? "dark" : "light");
   modeText.innerText = isDark ? "Modo claro" : "Modo oscuro";
@@ -46,6 +47,7 @@ function loadThemePreference() {
   const storedTheme = localStorage.getItem("theme");
   if (storedTheme === "dark") {
     body.classList.add("dark");
+    body.classList.toggle('dark-mode');
     document.documentElement.style.setProperty("--scrollbar-track-color", "#333");
     document.documentElement.style.setProperty("--scrollbar-thumb-color", "#555");
     document.documentElement.style.setProperty("--scrollbar-thumb-hover-color", "#777");
@@ -71,6 +73,9 @@ if (searchBtn) {
 loadThemePreference();
 
 // Código para abrir/cerrar el modal
+/*
+addBtn = document.querySelector('.add-btn');
+
 addBtn.addEventListener('click', () => {
   addModal.classList.remove('hidden');
   addModal.classList.add('visible');
@@ -80,6 +85,9 @@ addBtn.addEventListener('click', () => {
   addModal.focus(); // Enfoca la ventana modal
 });
 
+addModal = document.querySelector('.add-modal');
+closeButton = addModal.querySelector('.close-button');
+
 closeButton.addEventListener('click', () => {
   addModal.classList.add('hidden');
   addModal.classList.remove('visible');
@@ -87,25 +95,10 @@ closeButton.addEventListener('click', () => {
   modalBackdrop.classList.remove('visible');
   document.body.style.overflow = 'auto'; // Restaura el scroll
 });
+*/
 
 document.querySelectorAll('.grid-item').forEach(item => {
   item.addEventListener('click', () => {
       item.classList.toggle('active');
   });
-});
-
-document.getElementById('saveButton').addEventListener('click', function() {
-  fetch('/download')
-      .then(response => response.blob())
-      .then(blob => {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'record.xlsx';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-      })
-      .catch(error => console.error('Error al descargar el archivo:', error));
 });

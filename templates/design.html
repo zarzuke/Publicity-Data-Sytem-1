@@ -105,6 +105,19 @@
         </div>
     </nav>
     <section class="home">
+        <!-- Mensajes Flash -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="flash-messages">
+    {% for message in messages %}
+    <div class="flash-message">
+        <i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i> <!-- Ícono de información -->
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
         <div class="home-header" style="padding-right: 5%;">
             <div class="text">{{estado}}</div>
             
@@ -128,15 +141,6 @@
             </div>
             
         </div>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="flash-messages">
-            {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
 
         <div class="card-list" id="cardList">
             {% for item, item2 in filas %}
@@ -213,7 +217,7 @@
     <script src="../static/js/card-color.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script src="../static/js/send-notifications.js"></script>
-
+    <script src="../static/js/flash.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');

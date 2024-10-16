@@ -103,6 +103,19 @@
         </div>
     </nav>
     <section class="home">
+                <!-- Mensajes Flash -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="flash-messages">
+    {% for message in messages %}
+    <div class="flash-message">
+        <i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i> <!-- Ícono de información -->
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
         <div class="home-header">
             <div class="back-button">
                 <a href="/settings" class="back-btn">
@@ -187,15 +200,6 @@
 </div>
 
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    <div class="flash-messages">
-        {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
-        {% endfor %}
-    </div>
-{% endif %}
-{% endwith %}
 <div class="modal-backdrop hidden" id="modalBackdrop"></div>
 <div class="card-list-client">
     {% for item in cliente %}
@@ -288,6 +292,7 @@
     </div>
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/settings-client.js"></script>
+    <script src="../static/js/flash.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
