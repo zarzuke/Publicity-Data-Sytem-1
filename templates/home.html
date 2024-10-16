@@ -104,19 +104,7 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            
-            <div class="text">Inicio 
-                
-                <div class="notification-container">
-                    <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
-                    <button class="notification-button" id="notificationButton">
-                        <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
-                    </button>
-                    <div class="notification-dropdown" id="notificationDropdown"></div>
-                </div>
-                
-            
-            </div>
+            <div class="text">Inicio</div>
             
             <div class="sort-dropdown">
                 <button class="sort-btn" type="button" onclick="toggleDropdown()">
@@ -128,18 +116,30 @@
                     <div class="sort-option" onclick="sortBy('z-a')">De Z-A</div>
                 </div>
             </div>
+            
+            <div class="notification-container">
+                <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                <button class="notification-button" id="notificationButton">
+                    <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                </button>
+                <div class="notification-dropdown" id="notificationDropdown"></div>
+            </div>
+            
             <button class="add-btn" type="button">
                 <span class="button__text">Añadir</span>
                 <span class="button__icon">
                     <svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
-                        xmlns="http://www.w3.org/2000/svg">
+                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
                         <line x1="12" x2="12" y1="5" y2="19"></line>
                         <line x1="5" x2="19" y1="12" y2="12"></line>
                     </svg>
                 </span>
             </button>
         </div>
+        
+        
+        
 
         <!-- Botones flotantes -->
         <div class="floating-buttons">
@@ -188,11 +188,11 @@
                         <div class="form-row" id="userFields">
                             <div class="form-group">
                                 <label for="name">Nombre:</label>
-                                <input type="text" id="name" name="names" required disabled>
+                                <input type="text" id="name" name="names" class="no-space" required>
                             </div>
                             <div class="form-group">
                                 <label for="surname">Apellido:</label>
-                                <input type="text" id="surname" name="surname" required disabled>
+                                <input type="text" id="surname" name="surname" class="no-space" required>
                             </div>
                         </div>
                         <div class="form-row" id="telField">
@@ -494,7 +494,7 @@
     <script src="../static/js/card-color.js"></script>
     <script src="../static/js/btn-floating.js"></script>
     <script src="../static/js/send-notifications.js"></script>
-    <script src="../static/js/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
         function mostrarModal() {
             var modal = document.getElementById('add-modal-content');

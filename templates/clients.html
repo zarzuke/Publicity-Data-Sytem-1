@@ -104,25 +104,26 @@
     </nav>
     <section class="home">
         <div class="home-header">
-            <div class="back-button">
-                <a href="/home" class="back-btn">
-                    <i class='bx bx-chevron-left'></i>
-                </a>
-                <div class="text">
-                    <a href="/home" style="color: #695cfe; text-decoration: none;">Inicio</a> > Clientes
-
-                    <div class="notification-container">
-                        <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
-                        <button class="notification-button" id="notificationButton">
-                            <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
-                        </button>
-                        <div class="notification-dropdown" id="notificationDropdown"></div>
-                    </div>
-                    
-    
-
+            <div class="text">Clientes</div>
+            
+            <div class="sort-dropdown">
+                <button class="sort-btn" type="button" onclick="toggleDropdown()">
+                    <i class="fa-solid fa-list"></i>
+                </button>
+                <div class="sort-options hidden" id="sortOptions">
+                    <div class="sort-option" onclick="sortBy('a-z')">De A-Z</div>
+                    <div class="sort-option" onclick="sortBy('z-a')">De Z-A</div>
                 </div>
             </div>
+            
+            <div class="notification-container">
+                <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                <button class="notification-button" id="notificationButton">
+                    <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                </button>
+                <div class="notification-dropdown" id="notificationDropdown"></div>
+            </div>
+            
         </div>
 
 <div class="modal-backdrop hidden"></div>
@@ -144,10 +145,41 @@
 
 
     <script src="../static/js/sidebar.js"></script>
-    <script src="../static/js/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script src="../static/js/send-notifications.js"></script>
    
     <script>
+        // BOTON ORDENAR
+function toggleDropdown() {
+    const options = document.getElementById('sortOptions');
+    options.classList.toggle('hidden');
+}
+
+function sortBy(criteria) {
+    const cardList = document.querySelector('.card-list-client');
+    const cards = Array.from(cardList.children);
+
+    if (criteria === 'a-z') {
+        cards.sort((a, b) => {
+            const nameA = a.querySelector('.default-client-name').textContent.toUpperCase();
+            const nameB = b.querySelector('.default-client-name').textContent.toUpperCase();
+            return nameA.localeCompare(nameB); // Orden alfabético ascendente
+        });
+    } else if (criteria === 'z-a') {
+        cards.sort((a, b) => {
+            const nameA = a.querySelector('.default-client-name').textContent.toUpperCase();
+            const nameB = b.querySelector('.default-client-name').textContent.toUpperCase();
+            return nameB.localeCompare(nameA); // Orden alfabético descendente
+        });
+    }
+
+    // Limpia y vuelve a agregar las tarjetas en el nuevo orden
+    cardList.innerHTML = ''; // Borra los elementos existentes
+    cards.forEach(card => cardList.appendChild(card)); // Añade las tarjetas reordenadas
+    toggleDropdown(); // Cierra el menú desplegable después de hacer la selección
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const cardList = document.querySelector('.card-list-client');
@@ -190,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
       </script>
   </body>
 

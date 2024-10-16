@@ -55,16 +55,6 @@ function closeTotalEditModal() {
     totalEditModal.classList.add('hidden');
 }
 
-// Función para actualizar el total
-function updateTotal() {
-    const newTotal = newTotalInput.value;
-    const changeTotalReason = changeTotalReasonInput.value;
-
-    // Aquí puedes agregar la lógica para enviar la nueva información al servidor y actualizar la página
-
-    closeTotalEditModal();
-}
-
 // Agregar los event listeners
 editTotalButton.addEventListener('click', showTotalEditModal);
 confirmTotalEditButton.addEventListener('click', updateTotal);

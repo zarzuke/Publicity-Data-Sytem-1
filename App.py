@@ -4,6 +4,7 @@ from library.URLs import *
 import os
 from PIL import Image
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '12345'
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -13,12 +14,16 @@ socketio = SocketIO(app)
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
+# Variable global para almacenar el usuario actual
+current_user = None
+
 def check_db_for_updates():
+    global current_user
     last_update = None
     while True:
         connection = sqlite3.connect('library/database.db')
         cursor = connection.cursor()
-        cursor.execute('SELECT MAX(id) FROM notifications')  # Ajusta esto según tu base de datos
+        cursor.execute('SELECT MAX(id) FROM notifications')
         latest_update = cursor.fetchone()[0]
         if last_update is None:
             last_update = latest_update
@@ -27,20 +32,21 @@ def check_db_for_updates():
             cursor.execute('SELECT text FROM notifications WHERE id = ?', (latest_update,))
             texto = cursor.fetchone()[0]
             cursor.close()
-            if current_user[1]=="Administrator":
+            # Emitir notificación si el usuario actual es administrador
+            if current_user and current_user[1] == "Administrator":
                 socketio.emit('notification', {'message': texto})
-            else:
-                pass
-        time.sleep(1) 
+        
+        time.sleep(1)
 
 @app.before_request
 def before_request():
     global current_user
     if "username" in session:
         g.user = session["username"]
-        current_user=session["username"]
+        current_user = session["username"]
     else:
         g.user = ["vacio", "vacio"]
+        current_user = g.user
 
 @app.route("/", methods=["POST", "GET"])
 def login():
@@ -192,7 +198,7 @@ def upload_file(name):
 
 def delete_image(name):
     if name:
-        name = name + '.jpg'
+        name = name + '.png'
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], name)
     if os.path.exists(file_path):
         os.remove(file_path)
@@ -220,6 +226,30 @@ def next(id, status):
 
 @app.route("/change-client/<string:id>", methods=["POST"])
 def change_client(id):
+    print(request.method) 
+    name = request.form.get("names", "")
+    lastname = request.form.get("surname", "")
+    client_name = f"{name} {lastname}".strip()
+    file = request.files.get('photo')
+    oldname = get_client_name(id)
+    phone=request.form.get('phones')
+    print(phone)
+    if not file or file.filename == '':
+        if client_name == "":
+            return redirect(request.url)
+        else:
+            actual = os.path.join(app.config['UPLOAD_FOLDER'], f"{oldname}.png")
+            nuevo_nombre = os.path.join(app.config['UPLOAD_FOLDER'], f"{client_name}.png")
+            os.rename(actual, nuevo_nombre)
+
+    if file:
+        if client_name == "":
+            client_name = oldname
+        img = Image.open(file)
+        new_filename = f"{client_name}.png"
+        new_filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+        img.save(new_filepath, 'PNG')
+                
     function = try_edit_client(id)
     return function
 

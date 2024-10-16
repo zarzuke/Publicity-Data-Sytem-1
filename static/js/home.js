@@ -422,7 +422,21 @@ function handleUserOptionChange() {
         document.getElementById('name').value = "";
         document.getElementById('surname').value = "";
         document.getElementById('phone').value = "";
+
+        // Habilitar campos y quitar readonly
+        const phoneInput = document.getElementById('phone');
+        phoneInput.removeAttribute('readonly'); // En lugar de setAttribute
+        const name = document.getElementById('name');
+        name.removeAttribute('readonly'); // En lugar de setAttribute
+        const surname = document.getElementById('surname');
+        surname.removeAttribute('readonly'); // En lugar de setAttribute
         existingUserSelect.style.display = 'none'; // Ocultar el selector de 'Cliente existente'
+        
+        // Asegúrate de que no estén deshabilitados
+        name.disabled = false;
+        surname.disabled = false;
+        phoneInput.disabled = false;
+
     } else if (userOption === 'existing') {
         // Limpiar los campos de Nuevo cliente si se está seleccionando Cliente existente
         document.getElementById('name').value = "";
@@ -430,16 +444,15 @@ function handleUserOptionChange() {
         document.getElementById('phone').value = "";
 
         existingUserSelect.style.display = 'block'; // Mostrar el selector de 'Cliente existente'
+        
+        // Poner los campos en readonly
         const phoneInput = document.getElementById('phone');
         phoneInput.setAttribute('readonly', true);
         const name = document.getElementById('name');
         name.setAttribute('readonly', true);
         const surname = document.getElementById('surname');
         surname.setAttribute('readonly', true);
-        document.getElementById('name').disabled = false;
-        document.getElementById('surname').disabled = false;
-        document.getElementById('phone').disabled = false;
-
+        
     } else {
         existingUserSelect.style.display = 'none'; // Mantener oculto si no se selecciona ninguna opción
         document.getElementById('name').disabled = true;
@@ -454,6 +467,8 @@ function handleUserOptionChange() {
         document.getElementById('phone').disabled = false;
     }
 }
+
+
 
 function autocompleteUser() {
     const existingUsers = document.getElementById('existing-users');
@@ -525,11 +540,10 @@ function sortBy(criteria) {
 
 
     if (criteria === 'date') {
-        // Aquí implementa la lógica para ordenar por fecha
         cards.sort((a, b) => {
-            const dateA = new Date(a.querySelector('.date').textContent);
-            const dateB = new Date(b.querySelector('.date').textContent);
-            return dateA - dateB; // Orden ascendente
+            const dateA = new Date(a.querySelector('.date').textContent.split('/').reverse().join('-'));
+            const dateB = new Date(b.querySelector('.date').textContent.split('/').reverse().join('-'));
+            return dateB - dateA; // Orden descendente por fecha
         });
     } else if (criteria === 'a-z') {
         cards.sort((a, b) => {
@@ -589,5 +603,20 @@ document.getElementById('phone').addEventListener('blur', function() {
                 cancelButton.click();
             }
         }
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Selecciona todos los inputs por la clase
+        const inputFields = document.querySelectorAll('.no-space');
+    
+        // Añade un evento 'keydown' a cada input
+        inputFields.forEach(inputField => {
+            inputField.addEventListener('keydown', function(event) {
+                if (event.key === ' ') {
+                    alert("No se pueden usar espacios en este campo");
+                    event.preventDefault(); // Evita la acción predeterminada de la barra espaciadora
+                }
+            });
+        });
     });
     

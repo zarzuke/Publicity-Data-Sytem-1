@@ -7,6 +7,7 @@
     <title>Historial - CopyNato</title>
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
     <link rel="stylesheet" href="../static/css/settings.css">
+    <link rel="stylesheet" href="../static/css/scrollbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -101,7 +102,9 @@
                 <a href="javascript:history.back()" class="back-btn">
                     <i class='bx bx-chevron-left' ></i> <!-- Puedes cambiar el ícono aquí -->
                 </a>
-                <div class="text">Historial</div>
+                <div class="text">
+                    <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Historial
+                </div>
             </div>
         </div>
         <form action="{{ url_for('create_record') }}" target="response_frame" method="POST">

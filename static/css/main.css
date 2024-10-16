@@ -1396,12 +1396,22 @@ body.dark .modal-content {
     border-top: 1px solid #e0e0e0; /* Línea divisoria */
 }
 
+body.dark .sort-options {
+    background-color: #1e1f20;
+}
+
 /* Inicialmente escondemos las opciones */
 .sort-options.hidden {
     display: none;
 }
 
+body.dark .sort-option {
+    color: #cccccc;
+}
 
+body.dark .sort-option + .sort-option {
+    border-top: 1px solid #313131; /* Línea divisoria */
+}
 
 .sort-option {
     padding: 10px 30px;
@@ -1422,7 +1432,6 @@ body.dark .modal-content {
     cursor: pointer; /* Mostrar puntero al pasar el mouse */
     font-size: 24px; /* Tamaño del ícono */
     transition: color 0.3s ease; /* Transición suave para el color */
-    margin: 6px; /* Agrega margen alrededor del botón */
     padding: 8px; /* Opcional: añade espaciado interno para mayor área de clic */
 }
 
@@ -1584,7 +1593,6 @@ body.dark .box-d {
     font-size: 12px;
     border-radius: 50px;
     font-weight: 500;
-    margin-right: 5px; /* Espacio entre los elementos */
 }
 
 .fase i {
@@ -1596,50 +1604,135 @@ body.dark .box-d {
     display: inline-block;
 }
 
+
 .notification-button {
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 24px;
+    color: var(--text-color);
+    font-size: 24px; /* Aumentar el tamaño del icono */
+    transition: color 0.3s; /* Transición suave para el color */
+    margin-top: 3px;
 }
 
-.notification-button i {
-    font-size: 24px;
+.notification-button:hover {
+    color: #756fd6;
+}
+
+.sort-dropdown, .notification-container, .add-btn {
+    display: inline-block;
+    margin-left: 15px; /* Espacio entre los botones */
+}
+
+
+body.dark-mode {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+
+.notification-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 200px rgba(0, 0, 0, 0.315);
+    padding: 8px;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+body.dark .notification-dropdown{
+    background-color: #1d1e1f;
+}
+
+.notification-dropdown.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #dbdfed;
+    color: #202020;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#notificationDropdown {
+    max-height: 300px; /* Ajusta según tu preferencia */
+    overflow-y: auto; /* Permite el scroll vertical */
+}
+
+
+
+body.dark .notification-item {
+    background-color: #121212;
+    color: whitesmoke;
+}
+
+.notification-item .icon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #695CFE;
+}
+
+.notification-item .message {
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.notification-item .timestamp {
+    font-size: 12px;
+    color: #9c9c9c;
+    margin-left: 10px;
 }
 
 .notification-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
     width: 10px;
     height: 10px;
-    background-color: red; /* Color del indicador */
-    border-radius: 50%; /* Forma circular */
-    position: absolute; /* Posición absoluta */
-    top: 5px;
-    right: 5px;
-    display: none; /* Oculto inicialmente */
+    background-color: #695CFE;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
 }
 
-.notification-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%; /* Justo debajo del botón */
-    left: 0;
-    background-color: #fff;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    width: 300px;
-    max-height: 400px;
-    overflow-y: auto;
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
-.notification-dropdown .notification-item {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+.notification-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 24px;
+    transition: color 0.3s;
 }
 
-.notification-dropdown .notification-item:last-child {
-    border-bottom: none;
+.notification-button:hover {
+    color: #756fd6;
 }
 
-.notification-button.active + .notification-dropdown {
-    display: block;
-}
+
+

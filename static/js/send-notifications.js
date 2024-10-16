@@ -1,53 +1,55 @@
 document.addEventListener('DOMContentLoaded', function() {
     const socket = io();
+    let notificationCount = 0;
     const originalTitle = document.title;
+
+    // Ocultar el indicador de notificaciones al cargar la página
+    const notificationIndicator = document.getElementById('notificationIndicator');
+    notificationIndicator.style.display = 'none';
 
     // Recibir y mostrar notificaciones en tiempo real
     socket.on('notification', function(data) {
         const notificationsContainer = document.getElementById('notificationDropdown');
+        
+        // Crear y agregar el nuevo elemento de notificación
         const notificationElement = document.createElement('div');
         notificationElement.className = 'notification-item';
         notificationElement.textContent = data.message;
         notificationsContainer.appendChild(notificationElement);
-
+    
+        // Incrementar el contador de notificaciones
+        notificationCount++;
+        updateTitle();
+    
         // Mostrar el indicador de nueva notificación
-        const notificationIndicator = document.getElementById('notificationIndicator');
         notificationIndicator.style.display = 'block';
-
-        // Actualizar el título de la pestaña con el icono de notificación
-        document.title = '🔔 ' + originalTitle;
+    
+        // Limitar la visualización a 4 notificaciones
+        if (notificationsContainer.children.length > 4) {
+            notificationsContainer.scrollTop = notificationsContainer.scrollHeight; // Desplazar hacia abajo si hay más de 4
+        }
     });
 
-    // Variable para la función que carga notificaciones existentes
-    const loadNotifications = function() {
-        fetch('/notifications')
-            .then(response => response.json())
-            .then(data => {
-                const notificationsContainer = document.getElementById('notificationDropdown');
-                data.forEach(notification => {
-                    const notificationElement = document.createElement('div');
-                    notificationElement.className = 'notification-item';
-                    notificationElement.textContent = notification.message;
-                    notificationsContainer.appendChild(notificationElement);
-                });
+    // Evento para mostrar/ocultar el menú desplegable
+    document.getElementById('notificationButton').addEventListener('click', function() {
+        const dropdown = document.getElementById('notificationDropdown');
+        dropdown.classList.toggle('show');
+        
+        // Ocultar el indicador al abrir el menú
+        notificationIndicator.style.display = 'none'; 
 
-                // Mostrar el indicador si hay notificaciones
-                if (data.length > 0) {
-                    const notificationIndicator = document.getElementById('notificationIndicator');
-                    notificationIndicator.style.display = 'block';
+        // Restablecer el contador de notificaciones y el título al abrir el menú
+        notificationCount = 0;
+        updateTitle();
+    });
 
-                    // Actualizar el título de la pestaña con el icono de notificación
-                    document.title = '🔔 ' + originalTitle;
-                }
-            });
-    };
-
-    // Llamar a la función al cargar la página
-    loadNotifications();
+    // Función para actualizar el título de la pestaña
+    function updateTitle() {
+        if (notificationCount > 0) {
+            document.title = `(${notificationCount}) ${originalTitle}`;
+        } else {
+            document.title = originalTitle;
+        }
+    }
 });
 
-document.getElementById('notificationButton').addEventListener('click', function() {
-    this.classList.toggle('active');
-    document.getElementById('notificationIndicator').style.display = 'none'; // Ocultar el indicador al abrir el menú
-    document.title = originalTitle; // Restaurar el título original de la pestaña
-});
