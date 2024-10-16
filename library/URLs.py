@@ -255,7 +255,7 @@ def try_create_client(client_name):
             number = f"{country} {phone}".strip()
             
         create_client(client_name,number)
-        flash("Cliente Creado Satisfactoriamente")
+        flash("Cliente creado correctamente.")
     return redirect("/settings/client")
     
 def try_edit_clients():
@@ -271,7 +271,7 @@ def try_delete_client(id):
     text=f"{name} Eliminado de la lista de clientes."
     insertar_notificacion(text,g.user[0])
     delete_client(id)
-    flash("Cliente Borrado Satisfactoriamente")
+    flash("Cliente borrado correctamente.")
     return redirect("/settings/client")
 
 def try_delete(id):

@@ -103,7 +103,21 @@
         </div>
     </nav>
     <section class="home">
+        <!-- Mensajes Flash -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="flash-messages">
+    {% for message in messages %}
+    <div class="flash-message">
+        <i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i> <!-- Ícono de información -->
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
         <div class="home-header">
+            
             <div class="text">Inicio</div>
             
             <div class="sort-dropdown">
@@ -137,10 +151,6 @@
                 </span>
             </button>
         </div>
-        
-        
-        
-
         <!-- Botones flotantes -->
         <div class="floating-buttons">
             <button class="floating-btn" title="Añadir">
@@ -406,16 +416,7 @@
         </div>
         
         
-        <!-- Mensajes Flash -->
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="flash-messages">
-            {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
+
         
         <div class="modal-backdrop hidden"></div>
         <div class="card-list" id="cardList">
@@ -495,6 +496,7 @@
     <script src="../static/js/btn-floating.js"></script>
     <script src="../static/js/send-notifications.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script src="../static/js/flash.js"></script>
     <script>
         function mostrarModal() {
             var modal = document.getElementById('add-modal-content');

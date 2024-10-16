@@ -9,18 +9,10 @@
     <link rel="stylesheet" href="../static/css/settings-user.css">
     <link rel="stylesheet" href="../static/css/scrollbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/flash.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    {% with messages = get_flashed_messages() %}
-{% if messages %}
-    <div class="flash-messages">
-        {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
-        {% endfor %}
-    </div>
-{% endif %}
-{% endwith %}
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -105,6 +97,19 @@
         </div>
     </nav>
     <section class="home">
+                        <!-- Mensajes Flash -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="flash-messages">
+    {% for message in messages %}
+    <div class="flash-message">
+        <i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i> <!-- Ícono de información -->
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
         <div class="home-header">
                 <div class="home-header">
                     <div class="back-button">
@@ -194,6 +199,7 @@
     </section>
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/settings-users.js"></script>
+    <script src="../static/js/flash.js"></script>
 </body>
 </html>
 

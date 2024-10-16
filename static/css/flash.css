@@ -1,14 +1,40 @@
 .flash-messages {
-    padding: 10px;
-    margin: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    position: fixed; 
+    top: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 9999; 
+    width: 80%; 
+    max-width: 500px; 
+    font-weight: 400;
 }
 
+
 .flash-message {
-    margin: 5px 0;
-    padding: 5px;
-    border-left: 4px solid #28a745; /* Color verde para mensajes de éxito */
-    color: #333;
+    background: radial-gradient(circle, rgba(110,97,254,1) 0%, rgba(127,89,198,1) 100%);
+    color: #ffffff; /* Color del texto blanco para destacar sobre el fondo */
+    padding: 15px;
+    border-radius: 50px; /* Bordes más redondeados */
+    margin-bottom: 15px; /* Espaciado entre mensajes */
+    box-shadow: 0 10px 60px rgba(156, 122, 250, 0.336); /* Sombra más pronunciada para destacar */
+    opacity: 0; /* Inicialmente invisible */
+    transform: translateY(-30px); /* Comienza un poco más arriba */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Efecto de transición */
+}
+
+.flash-message.show {
+    opacity: 1; /* Mostrar mensaje */
+    transform: translateY(0); /* Posición normal */
+}
+
+.fade-out {
+    opacity: 0; /* Hace que el mensaje se desvanezca */
+    transform: translateY(30px); /* Hace que el mensaje se desplace hacia abajo al desvanecerse */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Efecto de transición */
+}
+
+/* Aplicar la clase fade-out al mensaje cuando deseas que se oculten */
+.flash-message.fade-out {
+    opacity: 0; /* Desvanecimiento */
+    transform: translateY(-30px); /* Movimiento hacia abajo */
 }

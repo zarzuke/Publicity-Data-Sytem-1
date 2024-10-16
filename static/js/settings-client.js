@@ -68,11 +68,16 @@ function updatePreview() {
 
 function deleteclient(Id) {
     document.getElementById('confirmationModal').classList.remove('hidden');
+    document.getElementById('modalBackdrop').classList.remove('hidden');  // Asegúrate de que esto se ejecute
+    document.getElementById('modalBackdrop').classList.add('visible');
+    
     document.getElementById('confirmDelete').onclick = function () {
         var url = `/delete-client/${Id}`;
         window.location.href = url;
     };
 }
+
+
 
 
 document.getElementById('cancelDelete').addEventListener('click', function () {
