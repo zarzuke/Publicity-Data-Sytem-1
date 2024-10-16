@@ -453,11 +453,6 @@ function handleUserOptionChange() {
         const surname = document.getElementById('surname');
         surname.setAttribute('readonly', true);
         
-        // También se deshabilitan los campos para el cliente existente
-        name.disabled = true;
-        surname.disabled = true;
-        phoneInput.disabled = true;
-
     } else {
         existingUserSelect.style.display = 'none'; // Mantener oculto si no se selecciona ninguna opción
         document.getElementById('name').disabled = true;
