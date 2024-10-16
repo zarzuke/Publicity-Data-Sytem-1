@@ -28,7 +28,7 @@ function previewImage(input) {
 
 
 
-function deleteClient(clientId) {
+function editClient(clientId) {
     document.getElementById('editUserModal').classList.remove('hidden');
     document.getElementById('editUserModal').classList.add('visible');
     document.getElementById('modalBackdrop').classList.remove('hidden');
@@ -36,7 +36,6 @@ function deleteClient(clientId) {
     var form = document.getElementById('editForm');
     form.action = `/change-client/${clientId}`;
 }
-
 
 
 
@@ -67,11 +66,10 @@ function updatePreview() {
     }
 }
 
-
-function showModal(itemId) {
+function deleteclient(Id) {
     document.getElementById('confirmationModal').classList.remove('hidden');
     document.getElementById('confirmDelete').onclick = function () {
-        var url = `/delete-client/${itemId}`;
+        var url = `/delete-client/${Id}`;
         window.location.href = url;
     };
 }

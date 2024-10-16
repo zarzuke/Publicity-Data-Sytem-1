@@ -208,10 +208,11 @@
             <p class="default-client-name">{{ item[0] }}</p>
             <p class="client-company">{{ item[1] }}</p>
             <div class="actions">
-                <div class="edit" onclick="deleteClient('{{ item[2] }}')">
+                {%set id=item[2]%}
+                <div class="edit" onclick="editClient('{{ id }}')">
                     <i class="fas fa-edit" title="Editar"></i>
                 </div>
-                <div class="delete" onclick="showModal('{{ item[2] }}')">
+                <div class="delete" onclick="deleteclient('{{ id }}')">
                     <div id="nfo" value=""></div>
                     <i class="fas fa-trash-alt" title="Borrar"></i>
                 </div>
