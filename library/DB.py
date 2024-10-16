@@ -569,7 +569,9 @@ def edit_client_list(id):
     lastname = request.form.get("surname", "")
     client_name = f"{name} {lastname}".strip()  # Asegúrate de que no quede espacio en blanco innecesario
     country = request.form.get("country-code", "")
-    phone = request.form.get("phone", "")
+    phone = request.form.get("phones", "")
+
+    print(country,phone)
     if phone:
         fp = f"{country} {phone}".strip()  # Asegúrate de que no quede espacio en blanco innecesario
     conn = sqlite3.connect('library/database.db')

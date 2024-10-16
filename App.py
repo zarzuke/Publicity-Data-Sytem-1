@@ -226,14 +226,11 @@ def next(id, status):
 
 @app.route("/change-client/<string:id>", methods=["POST"])
 def change_client(id):
-    print(request.method) 
     name = request.form.get("names", "")
     lastname = request.form.get("surname", "")
     client_name = f"{name} {lastname}".strip()
     file = request.files.get('photo')
     oldname = get_client_name(id)
-    phone=request.form.get('phones')
-    print(phone)
     if not file or file.filename == '':
         if client_name == "":
             return redirect(request.url)

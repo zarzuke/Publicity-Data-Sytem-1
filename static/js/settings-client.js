@@ -28,15 +28,22 @@ function previewImage(input) {
 
 
 
-function editClient(clientId) {
+
+function editClient(clientId, clientName, clientSurname, clientDigit, clientCountry) {
     document.getElementById('editUserModal').classList.remove('hidden');
     document.getElementById('editUserModal').classList.add('visible');
     document.getElementById('modalBackdrop').classList.remove('hidden');
     document.getElementById('modalBackdrop').classList.add('visible');
+
+    // Populate fields
+    document.getElementById('ename').value = clientName;
+    document.getElementById('esurname').value = clientSurname;
+    document.getElementById('number').value = clientDigit;
+    document.getElementById('ecountry-code').value=clientCountry
+    // Set form action
     var form = document.getElementById('editForm');
     form.action = `/change-client/${clientId}`;
 }
-
 
 
 

@@ -199,25 +199,32 @@
 <div class="modal-backdrop hidden" id="modalBackdrop"></div>
 <div class="card-list-client">
     {% for item in cliente %}
-        <div class="card-client">
-            {% if os.path.exists('uploads/' + item[0] + '.png') %}
-                <img src="../uploads/{{item[0]}}.png" alt="User Image">
-            {% else %}
-                <img src="../static/img/user-default.png" alt="User Image">
-            {% endif %}
-            <p class="default-client-name">{{ item[0] }}</p>
-            <p class="client-company">{{ item[1] }}</p>
-            <div class="actions">
-                {%set id=item[2]%}
-                <div class="edit" onclick="editClient('{{ id }}')">
-                    <i class="fas fa-edit" title="Editar"></i>
-                </div>
-                <div class="delete" onclick="deleteclient('{{ id }}')">
-                    <div id="nfo" value=""></div>
-                    <i class="fas fa-trash-alt" title="Borrar"></i>
-                </div>
+    <div class="card-client">
+        {% if os.path.exists('uploads/' + item[0] + '.png') %}
+        <img src="../uploads/{{item[0]}}.png" alt="User Image">
+        {% else %}
+        <img src="../static/img/user-default.png" alt="User Image">
+        {% endif %}
+        <p class="default-client-name">{{ item[0] }}</p>
+        <p class="client-company">{{ item[1] }}</p>
+        <div class="actions">
+            {%set id=item[2]%}
+            {%set number=item[1].split(' ')%}
+            {%set country=number[0]%}
+            {%set digit=number[1]%}
+            {%set name=item[0].split(' ')%}
+            {%set first=name[0]%}
+            {%set second=name[1]%}
+
+            <div class="edit" onclick="editClient('{{ id }}', '{{ first }}', '{{ second }}', '{{ digit }}','{{ country }}')">
+                <i class="fas fa-edit" title="Editar"></i>
+            </div>
+            <div class="delete" onclick="deleteclient('{{ id }}')">
+                <div id="nfo" value=""></div>
+                <i class="fas fa-trash-alt" title="Borrar"></i>
             </div>
         </div>
+    </div>
     {% endfor %}
 </div>
 
@@ -229,18 +236,18 @@
             <div class="form-row" id="userFields">
                 <div class="form-group">
                     <label for="name"></label>
-                    <input type="text" id="name" placeholder="Ingrese el nombre" name="names" class="no-space">
+                    <input type="text" id="ename" placeholder="Ingrese el nombre" name="names" class="no-space">
                 </div>
                 <div class="form-group">
                     <label for="surname"></label>
-                    <input type="text" id="surname" placeholder="Ingrese el apellido" name="surname" class="no-space">
+                    <input type="text" id="esurname" placeholder="Ingrese el apellido" name="surname" class="no-space">
                 </div>
             </div>
             <div class="form-row" id="telField">
                 <div class="form-group">
                     <label for="phone"></label>
                     <div style="display: flex; align-items: center;">
-                        <select id="country-code" name="country-code" style="width: 80px;">
+                        <select id="ecountry-code" name="country-code" style="width: 80px;">
                             <option value="+58">+58</option>
                             <option value="+57">+57</option>
                         </select>
