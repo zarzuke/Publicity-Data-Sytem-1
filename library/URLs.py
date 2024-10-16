@@ -315,6 +315,7 @@ def try_next(id,status):
                 text=f"{name} Diseño negado, Regresando a DISEÑADOR."
                 insertar_notificacion(text,g.user[0])
                 flash('Fase Negada')
+                return redirect(url_for('work', user=id))
             else:
                 return_phase(id)
                 flash('Fase Negada')

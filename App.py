@@ -36,7 +36,7 @@ def check_db_for_updates():
             if current_user and current_user[1] == "Administrator":
                 socketio.emit('notification', {'message': texto})
         
-        time.sleep(2)
+        time.sleep(1)
 
 @app.before_request
 def before_request():
