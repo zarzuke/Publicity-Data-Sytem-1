@@ -319,7 +319,7 @@ def try_next(id,status):
             else:
                 return_phase(id)
                 flash('Fase Negada')
-                return redirect("/home")
+                return redirect(url_for('work', user=id))
     
     if phase[0][0]==4:
         save_record(id)
