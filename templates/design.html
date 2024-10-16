@@ -191,7 +191,7 @@
                         </div>
                     </a>
                         {% if user[1] == "Administrator" %}
-                        <div class="delete" style="cursor: pointer;" onclick="showConfirmationModal('123')">
+                        <div class="delete" style="cursor: pointer;" onclick="showConfirmationModal('{{item[6]}}')">
                             <div id="nfo" value="{{item[6]}}"></div>
                             <i class="fas fa-trash-alt" title="Borrar"></i>
                         </div>
