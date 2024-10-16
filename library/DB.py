@@ -672,3 +672,10 @@ def get_total(id):
     cursor.execute("SELECT projectChargeTotalPayment FROM chargeProject WHERE projectChargeId = ?",(id,))
     name=cursor.fetchone()[0]
     return name
+def get_notifications():
+    conn = sqlite3.connect('library/database.db')
+    c = conn.cursor()
+    c.execute("SELECT text, user, date FROM notifications")
+    rows = c.fetchall()
+    conn.close()
+    return rows

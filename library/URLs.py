@@ -395,3 +395,6 @@ def try_delete_user(username):
     insertar_notificacion(text,g.user[0])
     function = delete_user(username)
     return function
+
+def try_show_notifications():
+    return render_template("notifications.html",user=g.user)

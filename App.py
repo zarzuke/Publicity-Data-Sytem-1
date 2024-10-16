@@ -279,6 +279,18 @@ def display_notifications():
 @socketio.on('connect')
 def handle_connect():
     pass
+
+@app.route('/notifications')
+def notifications():
+    function = try_show_notifications()
+    return function
+
+@app.route('/show-notifications')
+def show_notifications():
+    rows = get_notifications()
+    # Formateamos la respuesta para que sea compatible con DataTables
+    return jsonify({"data": rows})
+
 if __name__ == "__main__":
     socketio.start_background_task(check_db_for_updates)
     socketio.run(app, debug=True, port=3000)
