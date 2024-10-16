@@ -4,7 +4,6 @@ import os
 import time
 from App import upload_file
 
-
 def project_inc():
     if request.method == "POST":
         title = request.form["title"]
@@ -679,3 +678,4 @@ def get_notifications():
     rows = c.fetchall()
     conn.close()
     return rows
+    return name
