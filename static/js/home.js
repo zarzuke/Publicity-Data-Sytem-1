@@ -525,11 +525,10 @@ function sortBy(criteria) {
 
 
     if (criteria === 'date') {
-        // Aquí implementa la lógica para ordenar por fecha
         cards.sort((a, b) => {
-            const dateA = new Date(a.querySelector('.date').textContent);
-            const dateB = new Date(b.querySelector('.date').textContent);
-            return dateA - dateB; // Orden ascendente
+            const dateA = new Date(a.querySelector('.date').textContent.split('/').reverse().join('-'));
+            const dateB = new Date(b.querySelector('.date').textContent.split('/').reverse().join('-'));
+            return dateB - dateA; // Orden descendente por fecha
         });
     } else if (criteria === 'a-z') {
         cards.sort((a, b) => {
