@@ -189,18 +189,20 @@
                         <div class="arrow">
                             <i class="fas fa-arrow-right card-icon" title="Abrir"></i>
                         </div>
+                    </a>
                         {% if user[1] == "Administrator" %}
-                        <div class="delete" style="cursor: pointer;" onclick="handleDelete(event,'{{item[6]}}')">
+                        <div class="delete" style="cursor: pointer;" onclick="showConfirmationModal('123')">
                             <div id="nfo" value="{{item[6]}}"></div>
                             <i class="fas fa-trash-alt" title="Borrar"></i>
                         </div>
                         {% endif %}
                     </div>
-                </a>
+               
             </div>
             {% endfor %}
 
         </div>
+
         <div class="confirmation-modal hidden" id="confirmationModal">
             <div class="modal-content">
                 <h3>¿Estás seguro de que deseas eliminar?</h3>
@@ -210,6 +212,7 @@
                     <button id="cancelDelete" class="cancel-btn">Cancelar</button>
                 </div>
             </div>
+
     </section>
     <script src="../static/js/roles.js"></script>
     <script src="../static/js/sidebar.js"></script>
@@ -288,6 +291,38 @@ document.addEventListener('DOMContentLoaded', () => {
             previewCompany.textContent = companyInput.value || 'N/A';
         });
     }
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const confirmationModal = document.getElementById('confirmationModal');
+    const cancelDeleteButton = document.getElementById('cancelDelete');
+    const backdrop = document.getElementById('modalBackdrop');
+
+    // Función para abrir el modal con un parámetro
+    window.showConfirmationModal = function(clientId) {
+        // Mostrar el modal y el backdrop
+        confirmationModal.classList.remove('hidden');
+        confirmationModal.classList.add('visible');
+        backdrop.classList.remove('hidden');
+        backdrop.classList.add('visible');
+
+        // Actualiza la acción del botón de confirmación
+        const confirmDeleteButton = document.getElementById('confirmDelete');
+        confirmDeleteButton.onclick = function() {
+            
+            const url = `/delete/${clientId}`;
+            window.location.href = url;
+        };
+    };
+
+    // Función para cerrar el modal
+    cancelDeleteButton.addEventListener('click', function() {
+        confirmationModal.classList.remove('visible');
+        confirmationModal.classList.add('hidden');
+        backdrop.classList.remove('visible');
+        backdrop.classList.add('hidden');
+    });
 });
 
 
