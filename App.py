@@ -221,7 +221,8 @@ def delete_client(id):
 
 @app.route('/next/<string:id>/<string:status>')
 def next(id, status):
-    function = try_next(id, status)
+    cdr=request.args.get('cdr')
+    function = try_next(id, status,cdr)
     return function
 
 @app.route("/change-client/<string:id>", methods=["POST"])

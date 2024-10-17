@@ -65,7 +65,7 @@ function handleComplete(id) {
     if (approvedButton.classList.contains('active')) {
         showModal('approved', id);
     } else if (rejectedButton.classList.contains('active')) {
-        showModal('canceled', id);
+        showModal1('canceled', id);
     } else {
         alert('Por favor, selecciona una decisión antes de completar.');
     }
@@ -80,6 +80,30 @@ function setStatus(status, element) {
 }
 
 function showModal(status, itemId) {
+    document.getElementById('confirmationModal').classList.remove('hidden');
+    
+    var phase = document.getElementById('phase').value;
+    
+    if (phase == 1) {
+        document.getElementById('confirmDelete').onclick = function() {
+            var designFile = document.getElementById('designFile').value;
+            if (!designFile.trim()) {
+                alert("Por favor, ingrese el .CDR del diseño del trabajo");
+                return;
+            }
+            const fileName = designFile.split('\\').pop().split('/').pop();
+            var url = `/next/${itemId}/${status}?cdr=${encodeURIComponent(fileName)}`;
+            window.location.href = url;
+        };
+    } else {
+        document.getElementById('confirmDelete').onclick = function() {
+            var url = `/next/${itemId}/${status}`;
+            window.location.href = url;
+        };
+    }
+}
+
+function showModal1(status, itemId) {
     document.getElementById('confirmationModal').classList.remove('hidden');
     document.getElementById('confirmDelete').onclick = function() {
         var url = `/next/${itemId}/${status}`;

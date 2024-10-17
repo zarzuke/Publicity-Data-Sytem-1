@@ -673,6 +673,7 @@ def get_total(id):
     cursor.execute("SELECT projectChargeTotalPayment FROM chargeProject WHERE projectChargeId = ?",(id,))
     name=cursor.fetchone()[0]
     return name
+
 def get_notifications():
     conn = sqlite3.connect('library/database.db')
     c = conn.cursor()
@@ -680,4 +681,12 @@ def get_notifications():
     rows = c.fetchall()
     conn.close()
     return rows
-    return name
+
+
+def add_file(id, valor):
+    conn = sqlite3.connect('library/database.db')
+    cursor = conn.cursor()
+    cursor.execute("UPDATE projects SET projetFile = ? WHERE projectId = ?", (valor, id))
+    conn.commit()
+    conn.close()
+

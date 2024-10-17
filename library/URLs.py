@@ -295,7 +295,7 @@ def try_open(id, title, client):
         return f"Error en las carpetas"
     
     
-def try_next(id,status):
+def try_next(id,status,cdr):
     phase=check_phase(id)
     if status=="none":
         flash('Datos incorrectos, seleccione estatus.')
@@ -332,6 +332,7 @@ def try_next(id,status):
     elif phase[0][0]==1:
         if status=="approved":
             change_phase(id)
+            add_file(id,cdr)
             name=get_titulo(id)
             text=f"{name} - DISEÑO finalizado, esperando por su APROBACIÓN."
             insertar_notificacion(text,g.user[0])

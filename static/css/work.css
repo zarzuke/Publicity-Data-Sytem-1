@@ -430,3 +430,12 @@ body.dark .modal-textarea-container textarea::placeholder {
 .entrega {
     background-color: #9ac6b4; /* Verde fresco */
 }
+
+#designFile {
+    width: 100%; /* Hace que el input ocupe el 100% del contenedor padre */
+    padding: 10px; /* Añade padding para que se vea más grande y cómodo */
+    font-size: 16px; /* Incrementa el tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Bordes del input */
+    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el width */
+}
