@@ -220,7 +220,7 @@ def try_record_fildered(client,date):
         return redirect("/home")
     else:
         filas = record(client,date)
-        cabecera = ['Nombre', 'Cliente', 'Precio', 'Divisa', 'Fecha', 'Tipo de Trabajo']
+        cabecera = ['Nombre', 'Cliente', 'Precio', 'Divisa', 'Fecha', 'Tipo de Trabajo','Trabajadores','Nombre del Archivo']
         filas.insert(0, cabecera)
         return filas
 

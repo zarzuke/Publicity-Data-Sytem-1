@@ -330,11 +330,24 @@ def save_record(id):
                 WHERE projectId == ?
                 """,(id,))
     types=cursor.fetchall()
+    cursor.execute("""
+                SELECT projectDesigner, projectCrafter, projectInstaller
+                FROM projects
+                WHERE projectId == ?
+                """,(id,))
+    workers=cursor.fetchone()
+    cursor.execute("""
+                SELECT projectFile
+                FROM projects
+                WHERE projectId == ?
+                """,(id,))
+    file_name=cursor.fetchone()
     
     name,client,payment,currency,date = record
     types_str = ','.join(t[0] for t in types)
+    workers_str = ','.join(t[0] for t in workers)
     
-    cursor.execute("INSERT INTO record (recordName,recordClient,recordPayment,recordCurrency,recordDate,recordTypeWork) VALUES (?,?,?,?,?,?)",(name,client,payment,currency,date,types_str))
+    cursor.execute("INSERT INTO record (recordName,recordClient,recordPayment,recordCurrency,recordDate,recordTypeWork,recordWorkers,recordFile) VALUES (?,?,?,?,?,?,?,?)",(name,client,payment,currency,date,types_str,workers_str,file_name[0]))
     conn.commit()
     conn.close()
     
@@ -346,8 +359,11 @@ def get_record():
     filas = cursor.fetchall()
     conn.close()
     
-    cabecera = ['Nombre','Cliente','Precio','Divisa','Fecha','Tipo de Trabajo']
+    cabecera = ['Nombre','Cliente','Precio','Divisa','Fecha','Tipo de Trabajo','Trabajadores','Nombre del Archivo']
     filas.insert(0,cabecera)
+    for i, row in enumerate(filas):
+        if len(row) < 8:
+            filas[i] = row + (" ",) * (8 - len(row))
     return filas
 
 def record(client, date):
@@ -357,28 +373,32 @@ def record(client, date):
 
     if client and date:
         date = date[6]+date[7]
-        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork, recordWorkers, recordFile 
                           FROM record 
                           INNER JOIN typeCurrency ON recordCurrency = currencyTypeId
                           WHERE recordClient = ? AND strftime('%W', recordDate) = ?""", (client, date))
     elif client:
-        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork, recordWorkers, recordFile 
                           FROM record 
                           INNER JOIN typeCurrency ON recordCurrency = currencyTypeId
                           WHERE recordClient = ?""", (client,))
     elif date:
         date = date[6]+date[7]
-        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork, recordWorkers, recordFile  
                           FROM record 
                           INNER JOIN typeCurrency ON recordCurrency = currencyTypeId
                           WHERE strftime('%W', recordDate) = ?""", (date,))
     else:
-        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork 
+        cursor.execute("""SELECT recordName, recordClient, recordPayment, currencyTypeName, recordDate, recordTypeWork, recordWorkers, recordFile  
                           FROM record 
                           INNER JOIN typeCurrency ON recordCurrency = currencyTypeId""")
     
     filas = cursor.fetchall()
     conn.close()
+    
+    for i, row in enumerate(filas):
+        if len(row) < 8:
+            filas[i] = row + (" ",) * (8 - len(row))
     return filas
 
 def get_workers():
