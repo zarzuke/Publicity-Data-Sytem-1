@@ -31,7 +31,7 @@
     color: #e7e7e7;
     background-color: transparent;
     padding-left: 2%;
-    padding-right: 2%;
+    padding-right: 5%;
     padding-top: 0;
 }
 
@@ -429,21 +429,13 @@ body.dark .setting-option i {
     color: #ccc; /* Color del icono en modo oscuro */
 }
 
-/* Contenedor principal para centrar toda la grid */
-body, html {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(8, 1fr); /* 4 columnas */
-    gap: 10px;
-    width: 60%; /* Ajusta el ancho de la grid */
+    gap: 1px;
+    padding: 10px;
+    margin: 10px 50px;
     box-sizing: border-box; /* Para incluir el padding en el ancho total */
 }
 
@@ -454,13 +446,11 @@ body, html {
     padding: 20px;
     text-align: center;
     transition: background-color 0.3s, transform 0.3s;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 50px rgba(0, 0, 0, 0.068);
 }
 
 .grid-item:hover {
     background-color: #e0e0e0;
-    transform: scale(1.05);
 }
 
 
@@ -478,7 +468,7 @@ body.dark .grid-item:hover {
 .submit-button {
     margin-top: 10px; /* Espacio entre el textarea y el botón */
     padding: 12px 24px; /* Tamaño del botón */
-    background-color: #5f5cfe; /* Color de fondo azul */
+    background-color: #695cfe; /* Color de fondo azul */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     border-radius: 5px; /* Esquinas redondeadas */
@@ -487,65 +477,98 @@ body.dark .grid-item:hover {
     font-size: 16px; /* Tamaño de fuente */
 }
 .submit-button:hover {
-    background-color: #5c67fe; /* Color al pasar el mouse */
+    background-color: #5b51c0; /* Color al pasar el mouse */
 }
 
 .button-container {
-    text-align: center;
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    margin-top: 10px; /* Margen superior */
 }
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+        align-items: stretch; /* Asegura que todos los elementos se estiren al ancho completo */
+    }
+
+    .select-container {
+        margin-right: 0; /* Elimina el margen derecho en pantallas pequeñas */
+        margin-bottom: 10px; /* Agrega un margen inferior para separación */
+    }
+}
+
+
+
 
 
 .container {
     display: flex;
-    justify-content: center; /* Centra todo horizontalmente */
-    align-items: center;     /* Centra todo verticalmente */
+    flex-wrap: wrap; /* Esto permite que los elementos se muevan a la siguiente línea si no hay mucho espacio */
+    justify-content: center; /* Para alinear el contenido al inicio */
+    align-items: center; /* Alinear verticalmente */
+    margin: 20px; /* Margen para un poco de espacio alrededor */
 }
 
+
+
 .select-container {
-    display: inline-block; /* Hace que los divs se alineen en línea */
+    min-width:150px; /* Ajusta el mínimo ancho para que sea más responsivo */
     margin-right: 10px; /* Espacio entre los botones */
 }
 
 /* Estilos para el botón */
 .select {  
     padding: 11px 15px; /* Tamaño del botón */
-    background-color: #4755b0; /* Fondo del botón */
+    background-color: #695cfe; /* Fondo del botón */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     font-size: 1rem; /* Tamaño de fuente coherente */
+    border-radius: 5px; /* Esquinas redondeadas */
 }
 
 /* Estilo al pasar el ratón */
 .select:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+    background-color: #5b51c0; /* Color al pasar el mouse */
     cursor: pointer;
 }
 
 /* Estilos para el botón */
 .select-date {  
     padding: 10px 15px; /* Tamaño del botón */
-    background-color: #4755b0; /* Fondo del botón */
+    background-color: #695cfe; /* Fondo del botón */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
     font-size: 1rem; /* Tamaño de fuente coherente */
 }
 
 /* Estilo al pasar el ratón */
 .select-date:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+    background-color: #5b51c0; /* Color al pasar el mouse */
     cursor: pointer;
 }
 
 .button {
     padding: 11px 24px; /* Tamaño del botón */
-    background-color: #4755b0; /* Fondo del botón */
+    background-color: #695cfe; /* Fondo del botón */
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
-    font-size: 1rem; /* Tamaño de fuente coherente */
+    border-radius: 5px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background 0.3s; /* Transición suave para efectos */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+
+/* Estilos específicos para el selector de archivo */
+#file-format {
+    padding: 10px 5px;
+    margin-left: 10px; /* Espacio a la izquierda del selector */
 }
 
 /* Estilo al pasar el ratón */
 .button:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el ratón */
+    background-color: #5b51c0; /* Color al pasar el mouse */
     cursor: pointer;
 }

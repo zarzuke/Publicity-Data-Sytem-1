@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </head>
 <body>
@@ -31,7 +30,7 @@
         </header>
         <div class="menu-bar">
             <div class="menu" >
-                <ul class="menu-links" style="padding-left: 0rem !important;">
+                <ul class="menu-links">
                     <li class="nav-link">
                         <a href="{{ url_for('home') }}">
                             <i class='bx bx-home-alt icon'></i>
@@ -46,7 +45,7 @@
                     </li>
                 </ul>
                 <hr class="separator">
-                <ul class="menu-links" style="padding-left: 0rem !important;">
+                <ul class="menu-links">
                     <li class="nav-link" id="diseño">
                         <a href="{{ url_for('design') }}">
                             <i class='bx bx-image-alt icon'></i>
@@ -114,44 +113,45 @@
 
         <div class="container">
             <form action="{{ url_for('create_record') }}" target="response_frame" method="POST">
-                <div class="row">
-                    <div class="col-md-12 w-100 d-flex justify-content-start mb-4">
-                        <div class="select-container" id="existing-user-select">
-                            <select class="select" id="select-client" name="client" onchange="autocompleteUser()">
-                                <option value="">Seleccione un cliente</option>
-                                {% for names, numbers in clients %}
-                                <option value="{{ names[0] }} {{ names[1] }}" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">
-                                    {{ names[0] }} {{ names[1] }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
                         <div class="select-container">
+                            <div class="select-container" id="existing-user-select">
+                                <select class="select" id="select-client" name="client" onchange="autocompleteUser()">
+                                    <option value="">Seleccione un cliente</option>
+                                    {% for names, numbers in clients %}
+                                    <option value="{{ names[0] }} {{ names[1] }}" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">
+                                        {{ names[0] }} {{ names[1] }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
                             <input type="week" id="date" name="date" class="select-date">
-                            <button id="updateButton" class="button" type="button">Cargar</button>
+                            <button id="updateButton" class="button" type="button">Actualizar</button>
                         </div>
                     </div>                
                 </div>
                 <div class="row">
-                    <div class="col-md-12 w-100 d-flex justify-content-start mb-4">
                         <div class="grid-container">
-                            <div class="grid-container">
+                
                                 {% for item in filas %}
                                     {% for item2 in item %}
                                         <div class="grid-item">{{ item2 if item2 else ' ' }}</div>
                                     {% endfor %}
                                 {% endfor %}
-                            </div>                
+             
                         </div>
                     </div>
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-12 w-100 d-flex justify-content-start">
                         <div class="button-container">
-                            <button class="submit-button" type="submit" id="saveButton">Guardar</button>
-                        </div>
+                            <button class="submit-button" type="button" id="saveButton">Guardar</button>
+                            <select id="file-format" class="select">
+                                <option value="xlsx">Excel (.xlsx)</option>
+                                <option value="pdf">PDF (.pdf)</option>
+                            </select>
                     </div>
+                </div>
+                
+                
                 </div>
             </form>
         </div>
