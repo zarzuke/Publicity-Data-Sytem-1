@@ -6,6 +6,9 @@ import openpyxl
 from openpyxl import load_workbook
 import io
 import os
+from fpdf import FPDF
+from datetime import datetime, timedelta
+
 
 def try_signup():
     workers=get_users()
@@ -224,25 +227,61 @@ def try_record_fildered(client,date):
         filas.insert(0, cabecera)
         return filas
 
-def try_record_file(client, date):
+def try_record_file(client, date, format):
+    download_name='all_record'
+    if date:
+        año, semana = date.split('-W')
+        año = int(año)
+        semana = int(semana)
+        # Obtener el primer día de la semana (lunes) usando `fromisocalendar`
+        primer_dia_semana = datetime.fromisocalendar(año, semana, 1).date()
+        # El último día de la semana será 6 días después del lunes
+        ultimo_dia_semana = primer_dia_semana + timedelta(days=6)
+        download_name=f"[{primer_dia_semana}]-[{ultimo_dia_semana}]"
+    
     filas = record(client, date)
-    try:
-        wb = load_workbook('library/Plantilla.xlsx')
-        ws = wb.active
+    if format == "xlsx":
+        try:
+            wb = load_workbook('library/Plantilla.xlsx')
+            ws = wb.active
+            
+            start_row = 3
+            for i, fila in enumerate(filas, start=start_row):
+                for j, value in enumerate(fila, start=1):
+                    ws.cell(row=i, column=j, value=value)
+            
+            buffer = io.BytesIO()
+            wb.save(buffer)
+            buffer.seek(0)
+                
+            return send_file(buffer, as_attachment=True, download_name=download_name+'.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        except Exception as e:
+            return f"Error al procesar el archivo de Excel: {e}"
         
-        start_row = 3
-        for i, fila in enumerate(filas, start=start_row):
-            for j, value in enumerate(fila, start=1):
-                ws.cell(row=i, column=j, value=value)
-        
-        buffer = io.BytesIO()
-        wb.save(buffer)
-        buffer.seek(0)
-        
-        return send_file(buffer, as_attachment=True, download_name='record.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    except Exception as e:
-        print(f"Error al procesar el archivo de Excel: {e}")
-        return None
+    if format == "pdf":
+        try:
+            # Crear un objeto PDF
+            pdf = FPDF()
+
+            # Agregar una página
+            pdf.add_page()
+
+            # Establecer fuente
+            pdf.set_font("Arial", size=12)
+
+            # Iterar sobre las filas de datos (lista de listas)
+            for fila in filas:
+                linea = " | ".join(str(fila))  # Combinar los strings de la fila en una sola línea separada por '|'
+                pdf.cell(200, 10, txt=linea, ln=True)
+            # Guardar el PDF en un archivo temporal
+            temp_file_path = 'temp_record.pdf'  # Puedes cambiar el nombre si es necesario
+            pdf.output(temp_file_path)
+
+            # Enviar el archivo temporal como respuesta
+            return send_file(temp_file_path, as_attachment=True, download_name=download_name+'.pdf', mimetype='application/pdf')
+            
+        except Exception as e:
+            return f"Error al procesar el archivo de PDF: {e}"
 
 def try_create_client(client_name):
     client_confirmation = client_exists(client_name)

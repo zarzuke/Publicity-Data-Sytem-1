@@ -99,10 +99,12 @@ def update_grid():
 def create_record():
     client = request.form.get('client')
     date = request.form.get('date')
-    function = try_record_file(client, date)
+    file_format = request.form.get('format')
+    function = try_record_file(client, date,file_format)
     if function is None:
-        return "Error processing the Excel file", 500
-    return function
+        return "Error processing the file", 500
+    else:
+        return function
 
 @app.route("/settings/client")
 def settings_client():
@@ -291,4 +293,4 @@ def show_notifications():
 
 if __name__ == "__main__":
     socketio.start_background_task(check_db_for_updates)
-    socketio.run(app, debug=True, port=3000)
+    socketio.run(app, host='0.0.0.0',debug=True, port=3000)

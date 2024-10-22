@@ -113,48 +113,41 @@
 
         <div class="container">
             <form action="{{ url_for('create_record') }}" target="response_frame" method="POST">
-                        <div class="select-container">
-                            <div class="select-container" id="existing-user-select">
-                                <select class="select" id="select-client" name="client" onchange="autocompleteUser()">
-                                    <option value="">Seleccione un cliente</option>
-                                    {% for names, numbers in clients %}
-                                    <option value="{{ names[0] }} {{ names[1] }}" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">
-                                        {{ names[0] }} {{ names[1] }}
-                                    </option>
-                                    {% endfor %}
-                                </select>
-                            <input type="week" id="date" name="date" class="select-date">
-                            <button id="updateButton" class="button" type="button">Actualizar</button>
-                        </div>
-                    </div>                
-                </div>
-                <div class="row">
-                        <div class="grid-container">
-                
-                                {% for item in filas %}
-                                    {% for item2 in item %}
-                                        <div class="grid-item">{{ item2 if item2 else ' ' }}</div>
-                                    {% endfor %}
-                                {% endfor %}
-             
-                        </div>
+                <div class="select-container">
+                    <div class="select-container" id="existing-user-select">
+                        <select class="select" id="select-client" name="client" onchange="autocompleteUser()">
+                            <option value="">Seleccione un cliente</option>
+                            {% for names, numbers in clients %}
+                            <option value="{{ names[0] }} {{ names[1] }}" data-name="{{ names[0] }}" data-surname="{{ names[1] }}" data-phone="{{numbers[0]}}">
+                                {{ names[0] }} {{ names[1] }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <input type="week" id="date" name="date" class="select-date">
+                        <button id="updateButton" class="button" type="button">Actualizar</button>
                     </div>
                 </div>
-                
                 <div class="row">
-                        <div class="button-container">
-                            <button class="submit-button" type="button" id="saveButton">Guardar</button>
-                            <select id="file-format" class="select">
-                                <option value="xlsx">Excel (.xlsx)</option>
-                                <option value="pdf">PDF (.pdf)</option>
-                            </select>
+                    <div class="grid-container">
+                        {% for item in filas %}
+                            {% for item2 in item %}
+                                <div class="grid-item">{{ item2 if item2 else ' ' }}</div>
+                            {% endfor %}
+                        {% endfor %}
                     </div>
                 </div>
-                
-                
+                <div class="row">
+                    <div class="button-container">
+                        <button class="submit-button" type="submit" id="saveButton">Guardar</button> <!-- Cambiar a type="submit" -->
+                        <select id="file-format" name="format" class="select">
+                            <option value="xlsx">Excel (.xlsx)</option>
+                            <option value="pdf">PDF (.pdf)</option>
+                        </select>
+                    </div>
                 </div>
             </form>
         </div>
+        
                     
 
     
