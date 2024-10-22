@@ -409,6 +409,10 @@ body.dark .home .text {
     border-bottom: 1px solid #ddd;
 }
 
+body.dark #example tbody tr {
+    border-bottom: 1px solid #141414;
+}
+
 #example tbody tr:nth-child(even) {
     background-color: #f9f9f9; /* Fondo claro para filas pares */
 }
@@ -440,8 +444,35 @@ body.dark .home .text {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: linear-gradient(45deg, #181717, #1e1c1c); 
+    background: #8f8f8f;
+    border: none; 
     color: #ffffff !important; /* Color de borde al hover */
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: .5em 1em;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    color: #7a7a7a !important;
+    border-radius: 4px;
+}
+
+body.dark .dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: .5em 1em;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    color: #b8b8b8 !important;
+    border-radius: 4px;
 }
 
 #example thead th {
@@ -458,6 +489,16 @@ body.dark .home .text {
     margin: 15px;
 }
 
+body.dark .dataTables_wrapper .dataTables_length, 
+body.dark .dataTables_wrapper .dataTables_filter, 
+body.dark .dataTables_wrapper .dataTables_info, 
+body.dark .dataTables_wrapper .dataTables_processing, 
+body.dark.dataTables_wrapper .dataTables_paginate {
+    color: #aaaaaa; /* Color de texto */
+    font-weight: 500;
+    margin: 15px;
+}
+
 
 .dataTables_wrapper .dataTables_filter input {
     border: 1px solid #adadad; /* Borde del input en modo claro */
@@ -471,9 +512,19 @@ body.dark .home .text {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: #ffffff !important; /* Color activo */
-    background: linear-gradient(45deg, #181717, #1e1c1c)
+    background: #695cfe;
 }
 
+body.dark .dataTables_wrapper 
+body.dark .dataTables_length, 
+body.dark .dataTables_wrapper .dataTables_filter, 
+body.dark .dataTables_wrapper .dataTables_info, 
+body.dark .dataTables_wrapper .dataTables_processing, 
+body.dark .dataTables_wrapper .dataTables_paginate {
+    color: #aaaaaa; /* Color de texto */
+    font-weight: 500;
+    margin: 15px;
+}
 
 /* Modo oscuro */
 .dark-mode .card {
@@ -490,10 +541,13 @@ body.dark .home .text {
 }
 
 .dark-mode #example tbody tr{
-    background-color: #2a2a2a; /* Filas pares oscuras */
+    background-color: #333333; /* Filas pares oscuras */
+    border: none;
+    
 }
 .dark-mode #example tbody tr .sorting_1 {
-    background-color: #2a2a2a; /* Hover oscuro */
+    background-color: #333333; /* Hover oscuro */
+    border: none;
 }
  
 .dark-mode #example tbody tr:nth-child(even) {
@@ -512,8 +566,17 @@ body.dark .home .text {
     background-color: #444; /* Hover oscuro */
 }
 
-.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
-    border: 1px solid #444; /* Borde oscuro */
+#example tbody tr:hover .sorting_1 {
+    background-color: #dbdbdb; /* Hover oscuro */
+}
+
+
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+    border-top: none;
+}
+
+body.dark .dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: 1px solid rgb(117, 117, 117)333; /* Borde oscuro */
 }
 
 .dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
@@ -525,11 +588,7 @@ body.dark .home .text {
     border: 1px solid #444; /* Borde del input oscuro */
 }
 
-.dark-mode .dataTables_wrapper .dataTables_length,
-.dark-mode.dataTables_wrapper .dataTables_filter,
-.dark-mode .dataTables_wrapper .dataTables_info,
-.dataTables_wrapper .dataTables_length select,
-.dark-mode .dataTables_wrapper .dataTables_filter input {
+body.dark .dataTables_wrapper .dataTables_length select {
     color: #ccc; /* Texto en modo oscuro */
 }
 

@@ -468,15 +468,16 @@ body.dark .card-list .card-item:hover .arrow {
 }
 
 .form-container {
+    margin-top: 20px;
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: center; /* Centrar tarjetas */
     padding: 20px;
+    gap: 20px; /* Espacio entre tarjetas */
 }
 
 .form-card {
     max-width: 400px; /* Ancho máximo de la tarjeta */
-    margin: 20px; /* Margen para separar las tarjetas */
     padding: 20px;
     background-color: var(--sidebar-color); /* Color de fondo blanco para la tarjeta */
     border-radius: 8px; /* Bordes redondeados */
@@ -484,10 +485,11 @@ body.dark .card-list .card-item:hover .arrow {
     flex: 1; /* Para permitir flexibilidad en el ancho */
     min-width: 300px; /* Ancho mínimo para las tarjetas */
 }
+    
 
 .form-card h3 {
     text-align: center; /* Centramos el texto del encabezado */
-    margin-bottom: 30px; /* Espaciado bajo el encabezado */
+    margin-bottom: 20px; /* Espaciado bajo el encabezado */
     color: rgb(63, 63, 63); /* Texto en negro */
     font-size: 1.5em;
     font-weight: 700;
@@ -514,14 +516,15 @@ body.dark .card-list .card-item:hover .arrow {
 }
 
 .form-group {
-    margin-bottom: 15px; /* Separación entre grupos */
+    margin-bottom: 20px; /* Separación aumentada entre grupos */
 }
+
 
 .form-group label {
     display: block; /* Bloque para cada label */
     margin-bottom: 5px; /* Separación debajo del label */
     color: var(--text-color); /* Texto negro */
-    font-weight: 600;;
+    font-weight: 600;
 }
 
 .form-group input,
@@ -530,23 +533,47 @@ body.dark .card-list .card-item:hover .arrow {
     padding: 10px; /* Espaciado interno */
     border: 1px solid #ccc; /* Borde */
     border-radius: 8px; /* Bordes redondeados */
-    background-color: #f9f9f9; /* Fondo claro para inputs */
-    color: var(--text-color); /* Color del texto en negro */
+    background-color: #f9f9f9; /* Fondo claro para los inputs */
+    color: var(--text-color); /* Color del texto */
+    transition: border-color 0.3s ease; /* Para el hover */
 }
+
+
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none; /* Sin contorno */
+}
+
+
+
+
 
 .form-group button {
     padding: 10px 15px; /* Espaciado interno */
     color: #ffffff; /* Color de texto blanco */
-    background-color: var(--primary-color); /* Color de fondo negro para el botón */
+    background-color: #695cfe; /* Color de fondo negro para el botón */
     border: none; /* Sin borde */
-    border-radius: 4px; /* Bordes redondeados */
+    border-radius: 7px; /* Bordes redondeados */
     cursor: pointer; /* Manita al pasar el mouse */
+    transition: background-color 0.3s ease; /* Transición suave para hover */
+    margin: 5px auto; /* Espacio entre botones y centrar */
+    display: inline-block; /* Permitir que el margen automático funcione */
 }
 
 .form-group button:hover {
-    background-color: darken(var(--primary-color), 10%); /* Color de fondo más oscuro al pasar el mouse */
+    background-color: #5b51c0; /* Color de fondo más oscuro al pasar el mouse */
 }
 
+
+/* Estilo para el botón de eliminar */
+.form-group button:nth-child(2) {
+    background-color: #dc3545; /* Color de fondo del botón de eliminar */
+}
+
+.form-group button:nth-child(2):hover {
+    background-color: #c82333;
+}
 /* ===================== Modo Oscuro ===================== */
 
 body.dark .form-card {
@@ -556,19 +583,18 @@ body.dark .form-card {
 body.dark .form-card h3,
 body.dark .form-group label,
 body.dark .form-group input,
-body.dark .form-group select,
-body.dark .form-group button {
+body.dark .form-group select {
     color: var(--text-color); /* Color de texto claro */
 }
 
 body.dark .form-group input,
 body.dark .form-group select {
-    background-color: #343536; /* Fondo oscuro para inputs */
-    border: none; /* Borde gris más oscuro */
+    background-color: #1e1f20;
+
+    border: 0.1rem solid #4e4e4e; /* Borde azul */
+
 }
 
-body.dark .form-group button {
-    background-color: #5a5a5a; /* Botón oscuro */
-}
+
 
 

@@ -125,7 +125,7 @@
         </div>
         <div class="form-container">
             <div class="form-card" id="registerUser">
-                <h3>Registrar Nuevo Usuario</h3>
+                <h3>Registrar nuevo usuario</h3>
                 <form method="POST" action="{{ url_for('settings_user') }}">
                     <div class="form-group">
                         <label for="username">Usuario:</label>
@@ -144,14 +144,14 @@
                             <option value="Installer">Instalador</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <button type="submit">Confirmar</button>
+                    <div class="form-group" style="text-align: center;">
+                        <button type="submit">Guardar</button>
                     </div>
                 </form>
             </div>
-
+        
             <div class="form-card" id="editUser">
-                <h3>Editar Usuario</h3>
+                <h3>Editar usuario</h3>
                 <form action="{{ url_for('edit_user') }}" method="POST">
                     <div class="form-group">
                         <label for="editUsername">Usuario:</label>
@@ -169,7 +169,7 @@
                                 {% set role = "Administrador" %}
                             {% endif %}
                             <option value="{{work[0]}}">{{work[0]}} - {{role}}</option>
-                            {%endfor%}
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group">
@@ -187,15 +187,19 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña:</label>
-                        <input type="password" id="password" name="password" placeholder="Ingrese contraseña nueva">
+                        <input type="password" id="password" name="password" placeholder="Ingrese la contraseña nueva">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group button">
+                    <div class="form-group" style="text-align: center;">
                         <button type="submit">Guardar</button>
                         <button type="button" onclick="deleteUser()">Eliminar</button>
+                    </div>
                     </div>
                 </form>
             </div>
         </div>
+        
+        
     </section>
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/settings-users.js"></script>
