@@ -561,6 +561,26 @@ document.addEventListener("DOMContentLoaded", function() {
     totalJobs.textContent = document.querySelectorAll('.card-item').length; // Cuenta los elementos de la tarjeta
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const totalJobs = document.getElementById('totalDesign');
+    totalJobs.textContent = document.querySelectorAll('.diseno').length; // Cuenta los elementos de la tarjeta
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const totalJobs = document.getElementById('totalAproval');
+    totalJobs.textContent = document.querySelectorAll('.aprobacion ').length; // Cuenta los elementos de la tarjeta
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const totalJobs = document.getElementById('totalCrafting');
+    totalJobs.textContent = document.querySelectorAll('.elaboracion').length; // Cuenta los elementos de la tarjeta
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const totalJobs = document.getElementById('totalInstall');
+    totalJobs.textContent = document.querySelectorAll('.entrega').length; // Cuenta los elementos de la tarjeta
+});
+
 const phoneInput = document.getElementById('phone');
 
     phoneInput.addEventListener('input', function() {
