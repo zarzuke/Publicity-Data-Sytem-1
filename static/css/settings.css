@@ -515,6 +515,7 @@ body.dark .grid-item:hover {
 .select-container {
     min-width:150px; /* Ajusta el mínimo ancho para que sea más responsivo */
     margin-right: 10px; /* Espacio entre los botones */
+    text-align: center;
 }
 
 /* Estilos para el botón */

@@ -18,6 +18,7 @@ body {  /*cuerpo*/
     }
   
 header { /*encabezado*/
+    /*encabezado*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,24 +34,24 @@ header { /*encabezado*/
   font-family: "Poppins", sans-serif;
   position: relative;
   display: inline-block;
-  margin: 15px;
-  padding: 10px 25px;
+  padding: 10px 20px;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   letter-spacing: 1px;
   text-decoration: none;
   color: white;
   background: transparent;
   cursor: pointer;
-  transition: ease-out 0.5s;
   border: 2px solid #8b72e0;
   border-radius: 10px;
   box-shadow: inset 0 0 0 0 #8b72e0;
+  transition: background-color 0.3s ease;
 }
 
 .contacto:hover {
   color: white;
   box-shadow: inset 0 -100px 0 0 #8b72e0;
+  transition: background-color 0.3s ease;
 }
 
 .contacto:active {
@@ -213,13 +214,6 @@ img {
   }
 }
 
-.logo img {
-  position: relative;
-  display: flex;
-  height: 120px; 
-  transform: translateY(8%);
-  left: 20%; 
-}
 
 .formulario {
   display: flex;
@@ -376,6 +370,11 @@ input[type="submit"] {
     display: none;
 }
 
+.text-extra {
+  font-size: 10PX;
+  text-align: center;
+}
+
 /* Estilo personalizado para el botón */
 label.custom-checkbox {
     display: inline-block;
@@ -411,45 +410,6 @@ body {  /*cuerpo*/
     100% { background-image: url(../img/fondo1.png); transition: background-image 0.1s; } 
   }
 
-header { /*encabezado*/
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #e7e7e7;
-  background-color: transparent;
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 0;
-}
-
-
-.contacto { /*botón de contacto*/
-font-family: "Poppins", sans-serif;
-position: relative;
-display: inline-block;
-margin: 15px;
-padding: 10px 25px;
-text-align: center;
-font-size: 15px;
-letter-spacing: 1px;
-text-decoration: none;
-color: white;
-background: transparent;
-cursor: pointer;
-transition: ease-out 0.5s;
-border: 2px solid #8b72e0;
-border-radius: 10px;
-box-shadow: inset 0 0 0 0 #8b72e0;
-}
-
-.contacto:hover {
-color: white;
-box-shadow: inset 0 -100px 0 0 #8b72e0;
-}
-
-.contacto:active {
-transform: scale(0.9);
-}
 
 .modal{
 z-index: 2;
@@ -610,7 +570,7 @@ transform: translateY(-1px);
 .logo img {
 position: relative;
 display: flex;
-height: 120px; 
+height: 90px; 
 transform: translateY(8%);
 left: 20%; 
 }

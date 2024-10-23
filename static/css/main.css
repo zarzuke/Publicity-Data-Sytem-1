@@ -1636,7 +1636,7 @@ body.dark-mode {
     top: calc(100% + 10px);
     right: 0;
     width: 300px;
-    background-color: #ffffff;
+    background-color: #eceef0;
     border-radius: 8px;
     box-shadow: 0 10px 200px rgba(0, 0, 0, 0.315);
     padding: 8px;

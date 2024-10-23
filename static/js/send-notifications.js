@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Evento para mostrar/ocultar el menú desplegable
-    document.getElementById('notificationButton').addEventListener('click', function() {
+    document.getElementById('notificationButton').addEventListener('click', function(event) {
         const dropdown = document.getElementById('notificationDropdown');
         dropdown.classList.toggle('show');
         
@@ -41,6 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Restablecer el contador de notificaciones y el título al abrir el menú
         notificationCount = 0;
         updateTitle();
+        
+        // Evitar que el clic en el botón cierre el menú inmediatamente
+        event.stopPropagation();
+    });
+
+    // Cerrar el menú si se hace clic fuera de él
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('notificationDropdown');
+        if (!dropdown.contains(event.target) && !event.target.matches('#notificationButton')) {
+            dropdown.classList.remove('show');
+        }
     });
 
     // Función para actualizar el título de la pestaña
