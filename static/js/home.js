@@ -17,7 +17,6 @@ function updatePreview() {
     const surnameInput = document.getElementById('surname');
     const phoneInput = document.getElementById('phone');
     const dateInput = document.getElementById('date');
-    const descriptionInput = document.getElementById('description');
     const fileInput = document.getElementById('file');
 
     const previewImage = document.getElementById('preview-image');
@@ -26,7 +25,6 @@ function updatePreview() {
     const previewSurname = document.querySelector('.card-surname');
     const previewDate = document.querySelector('.preview-date'); // Añadir esta línea
     const previewPhone = document.querySelector('.preview-phone');
-    const previewDescription = document.querySelector('.preview-card-description');
 
     // Establecer los valores de la previsualización
     previewTitle.textContent = titleInput.value;
@@ -68,16 +66,6 @@ function updatePreview() {
 
     previewDescription.textContent = descriptionInput.value;
 
-    // Previsualizar la imagen cargada
-    if (fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            previewImage.src = e.target.result; // Imagen cargada seleccionada
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-    } else {
-        previewImage.src = '../static/img/default-image.jpg'; // Imagen predeterminada
-    }
 }
 
 
@@ -534,10 +522,10 @@ function toggleDropdown() {
     options.classList.toggle('hidden');
 }
 
+// Ordenar funkcja
 function sortBy(criteria) {
     const cardList = document.getElementById("cardList");
     const cards = Array.from(cardList.children);
-
 
     if (criteria === 'date') {
         cards.sort((a, b) => {

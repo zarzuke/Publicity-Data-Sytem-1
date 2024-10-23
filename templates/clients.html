@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes - CopyNato</title>
+    <title>CopyNato | Clientes</title>
     <link rel="icon" type="image/x-icon" href="../static/img/icon.ico">
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/clients.css">
@@ -222,6 +222,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener('click', function (event) {
+    const cardList = document.querySelector('.card-list-client');
+
+    // Cierra la sidebar al hacer clic fuera de la misma y de los elementos de las tarjetas
+    if (!sidebar.contains(event.target) && !cardList.contains(event.target)) {
+        sidebar.classList.add('close'); // Cierra el menú
+    }
+});
+
+
       </script>
   </body>
 

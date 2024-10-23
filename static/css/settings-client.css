@@ -1049,7 +1049,11 @@
 
  }
 
+ body.dark .upload-icon-container {
+    color: white;
+ }
 
+ #ecountry-code,
  #country-code {
     width: 100%; /* Hacer el input del ancho completo */
     padding: 10px; /* Espaciado interno */
@@ -1061,11 +1065,14 @@
      margin-right: 10px
  }
 
+ body.dark #ecountry-code,
  body.dark #country-code {
     color: white;
     background-color: #232425;
     border: 1px solid #4e4e4e; /* Borde azul */
  }
+
+
 
 
 
