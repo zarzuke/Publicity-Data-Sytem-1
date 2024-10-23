@@ -293,4 +293,4 @@ def show_notifications():
 
 if __name__ == "__main__":
     socketio.start_background_task(check_db_for_updates)
-    socketio.run(app, host='0.0.0.0',debug=True, port=3000)
+    socketio.run(app,debug=True, port=3000)
