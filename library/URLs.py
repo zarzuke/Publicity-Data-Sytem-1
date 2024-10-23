@@ -8,7 +8,9 @@ import io
 import os
 from fpdf import FPDF
 from datetime import datetime, timedelta
-
+import tempfile
+import win32com.client as win32
+import pythoncom 
 
 def try_signup():
     workers=get_users()
@@ -213,7 +215,7 @@ def try_record():
         design,craft,install=get_workers()
         clients=zip(names,numbers)
         return render_template("settings-record.html",user=g.user,filas=filas,clients=clients)
-
+    
 def try_record_fildered(client,date):
     if g.user==["vacio","vacio"]:
         flash("Debe de iniciar sesión primero.")
@@ -227,61 +229,70 @@ def try_record_fildered(client,date):
         filas.insert(0, cabecera)
         return filas
 
+def save_excel_as_pdf(excel_file, pdf_output_file):
+    # Inicializar la aplicación de Excel
+    pythoncom.CoInitialize()  # Inicializar COM
+    excel = win32.Dispatch("Excel.Application")
+    excel.Visible = False  # No mostrar la aplicación de Excel
+    try:
+        # Abrir el archivo de Excel
+        wb = excel.Workbooks.Open(excel_file)
+        # Guardar como PDF
+        wb.ExportAsFixedFormat(0, pdf_output_file)  # 0 es para PDF
+    finally:
+        wb.Close(False)
+        excel.Quit()
+
 def try_record_file(client, date, format):
-    download_name='all_record'
+    download_name = 'all_record'
     if date:
         año, semana = date.split('-W')
         año = int(año)
         semana = int(semana)
-        # Obtener el primer día de la semana (lunes) usando `fromisocalendar`
         primer_dia_semana = datetime.fromisocalendar(año, semana, 1).date()
-        # El último día de la semana será 6 días después del lunes
         ultimo_dia_semana = primer_dia_semana + timedelta(days=6)
-        download_name=f"[{primer_dia_semana}]-[{ultimo_dia_semana}]"
-    
+        download_name = f"[{primer_dia_semana}]-[{ultimo_dia_semana}]"
+
     filas = record(client, date)
-    if format == "xlsx":
-        try:
-            wb = load_workbook('library/Plantilla.xlsx')
-            ws = wb.active
-            
-            start_row = 3
-            for i, fila in enumerate(filas, start=start_row):
-                for j, value in enumerate(fila, start=1):
-                    ws.cell(row=i, column=j, value=value)
-            
-            buffer = io.BytesIO()
-            wb.save(buffer)
-            buffer.seek(0)
-                
-            return send_file(buffer, as_attachment=True, download_name=download_name+'.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        except Exception as e:
-            return f"Error al procesar el archivo de Excel: {e}"
+    try:
+        # Cargar la plantilla de Excel
+        wb = load_workbook('library/Plantilla.xlsx')
+        ws = wb.active
+
+        # Establecer el nombre de descarga si existe la fecha
+        if date:
+            ws.cell(row=1, column=6, value=download_name)
+
+        # Agregar datos a la hoja de Excel
+        start_row = 3
+        for i, fila in enumerate(filas, start=start_row):
+            for j, value in enumerate(fila, start=1):
+                ws.cell(row=i, column=j, value=value)
+
+        # Crear un archivo temporal para Excel
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.xlsx') as excel_temp_file:
+            wb.save(excel_temp_file.name)  # Guardar el Excel temporalmente
+            excel_temp_path = excel_temp_file.name  # Guardar la ruta para luego convertir a PDF
+
+        # Definir la ruta de salida del PDF
+        pdf_output_file = os.path.join(tempfile.gettempdir(), f"{download_name}.pdf")
         
+        # Guardar el archivo de Excel como PDF
+        save_excel_as_pdf(excel_temp_path, pdf_output_file)
+
+    except Exception as e:
+        return f"Error al procesar el archivo: {e}"
+
+    # Enviar el archivo PDF para que el cliente lo descargue
     if format == "pdf":
-        try:
-            # Crear un objeto PDF
-            pdf = FPDF()
+        return send_file(pdf_output_file, as_attachment=True, download_name=f"{download_name}.pdf", mimetype='application/pdf')
 
-            # Agregar una página
-            pdf.add_page()
-
-            # Establecer fuente
-            pdf.set_font("Arial", size=12)
-
-            # Iterar sobre las filas de datos (lista de listas)
-            for fila in filas:
-                linea = " | ".join(str(fila))  # Combinar los strings de la fila en una sola línea separada por '|'
-                pdf.cell(200, 10, txt=linea, ln=True)
-            # Guardar el PDF en un archivo temporal
-            temp_file_path = 'temp_record.pdf'  # Puedes cambiar el nombre si es necesario
-            pdf.output(temp_file_path)
-
-            # Enviar el archivo temporal como respuesta
-            return send_file(temp_file_path, as_attachment=True, download_name=download_name+'.pdf', mimetype='application/pdf')
-            
-        except Exception as e:
-            return f"Error al procesar el archivo de PDF: {e}"
+    # Enviar el archivo Excel si se solicita en formato .xlsx
+    if format == "xlsx":
+        with open(excel_temp_path, 'rb') as excel_file:
+            buffer = io.BytesIO(excel_file.read())
+            buffer.seek(0)
+            return send_file(buffer, as_attachment=True, download_name=f"{download_name}.xlsx", mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 def try_create_client(client_name):
     client_confirmation = client_exists(client_name)
