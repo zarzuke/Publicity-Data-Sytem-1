@@ -38,9 +38,13 @@ def check_db_for_updates():
             
             if current_user[0] in texto:
                 socketio.emit('notification', {'message': texto})
-        
         time.sleep(1)
-
+        
+def save_database():
+    while True:
+        respaldar_base_de_datos()
+        time.sleep(10800)
+        
 @app.before_request
 def before_request():
     global current_user
@@ -296,4 +300,6 @@ def show_notifications():
 
 if __name__ == "__main__":
     socketio.start_background_task(check_db_for_updates)
+    socketio.start_background_task(save_database)
+
     socketio.run(app,debug=True, port=3000)

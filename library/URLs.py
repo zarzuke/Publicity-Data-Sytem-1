@@ -9,6 +9,22 @@ import tempfile
 import win32com.client as win32
 import pythoncom 
 
+def respaldar_base_de_datos():
+    ruta_original = "library/database.db"
+    carpeta_destino = "library/database_backrest"
+
+    if not os.path.exists(carpeta_destino):
+        os.makedirs(carpeta_destino)
+    
+    nombre_archivo = os.path.basename(ruta_original)
+    ruta_destino = os.path.join(carpeta_destino, nombre_archivo)
+    
+    with open(ruta_original, 'rb') as archivo_origen:
+        contenido = archivo_origen.read()
+    
+    with open(ruta_destino, 'wb') as archivo_destino:
+        archivo_destino.write(contenido)
+
 def try_signup():
     workers=get_users()
     if request.method=="POST":

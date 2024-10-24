@@ -267,8 +267,11 @@ def get_project_worker(worker):
 def delete_projects(id):
     conn = sqlite3.connect('library/database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT projectName FROM projects WHERE projectId == ?",(id,))
-    title = cursor.fetchone()
+    cursor.execute("""SELECT projectName, projectClientName FROM projects 
+                   JOIN clientProject on projectClient = projectClientId WHERE projectId == ?""",(id,))
+    result = cursor.fetchone()
+    cursor.execute("SELECT projectPhase FROM projects WHERE projectId == ?",(id,))
+    phase = cursor.fetchall()
     tables = [
     ("projects", "projectId"),
     ("chargeProject", "projectChargeId"),
@@ -282,10 +285,21 @@ def delete_projects(id):
     conn.commit()
     conn.close()
     
-    direction = os.path.join(os.getcwd(), "trabajos", str(id)+"."+title[0])
-    if os.path.exists(direction):
-        os.rename(direction,direction+"[Finished]")
+    direction = os.path.join(os.getcwd(), "trabajos", f'[{result[1]}]'+"-"+result[0])
+    if phase[0][0] == 4:
+        new_direction = direction+"(Finalizado)"
+        if os.path.exists(direction):
+            os.rename(direction,new_direction)
 
+    else:
+        if os.path.exists(direction):
+            for root, dirs, files in os.walk(direction, topdown=False):
+                for name in files:
+                    os.remove(os.path.join(root, name))
+                for name in dirs:
+                    os.rmdir(os.path.join(root, name))
+            os.rmdir(direction)
+            
 def update(user,worker,commments):
     new_comments = commments
     conn = sqlite3.connect('library/database.db')
