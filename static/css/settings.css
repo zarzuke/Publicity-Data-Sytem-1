@@ -573,3 +573,139 @@ body.dark .grid-item:hover {
     background-color: #5b51c0; /* Color al pasar el mouse */
     cursor: pointer;
 }
+
+.notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.notification-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 24px; /* Aumentar el tamaño del icono */
+    transition: color 0.3s; /* Transición suave para el color */
+    margin-top: 3px;
+}
+
+.notification-button:hover {
+    color: #756fd6;
+}
+
+.sort-dropdown, .notification-container, .add-btn {
+    display: inline-block;
+    margin-left: 15px; /* Espacio entre los botones */
+}
+
+
+body.dark-mode {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+
+.notification-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 300px;
+    background-color: #eceef0;
+    border-radius: 8px;
+    box-shadow: 0 10px 200px rgba(0, 0, 0, 0.315);
+    padding: 8px;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+body.dark .notification-dropdown{
+    background-color: #1d1e1f;
+}
+
+.notification-dropdown.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #dbdfed;
+    color: #202020;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#notificationDropdown {
+    max-height: 300px; /* Ajusta según tu preferencia */
+    overflow-y: auto; /* Permite el scroll vertical */
+}
+
+
+
+body.dark .notification-item {
+    background-color: #121212;
+    color: whitesmoke;
+}
+
+.notification-item .icon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #695CFE;
+}
+
+.notification-item .message {
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.notification-item .timestamp {
+    font-size: 12px;
+    color: #9c9c9c;
+    margin-left: 10px;
+}
+
+.notification-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: #695CFE;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.notification-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+.notification-button:hover {
+    color: #756fd6;
+}
+

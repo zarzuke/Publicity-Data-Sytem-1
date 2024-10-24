@@ -112,6 +112,13 @@
                     <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Notificaciones
                 </div>
             </div>
+            <div class="notification-container">
+                <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                <button class="notification-button" id="notificationButton">
+                    <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                </button>
+                <div class="notification-dropdown" id="notificationDropdown"></div>
+            </div>
         </div>
         <div class="card">
             <table id="example" class="display">
@@ -130,6 +137,8 @@
     <script src="../static/js/sidebar.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="../static/js/send-notifications.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
 $(document).ready(function() {
     $('#example').DataTable({

@@ -99,17 +99,29 @@
         </div>
     </nav>
     <section class="home">
-        <div class="home-header">
+        <div class="home-header" style="padding-right: 5%;">
             <div class="back-button">
                 <a href="/settings" class="back-btn">
                     <i class='bx bx-chevron-left'></i>
                 </a>
                 <div class="text">
                     <a href="/settings" style="color: #695cfe; text-decoration: none;">Ajustes</a> > Historial
+                    
+
+                    
+                    
+
                 </div>
+                
+            </div>
+            <div class="notification-container">
+                <div class="notification-indicator" id="notificationIndicator"></div> <!-- Indicador de notificación -->
+                <button class="notification-button" id="notificationButton">
+                    <i class="bx bxs-bell"></i> <!-- Icono de notificaciones -->
+                </button>
+                <div class="notification-dropdown" id="notificationDropdown"></div>
             </div>
         </div>
-        
 
         <div class="container">
             <form action="{{ url_for('create_record') }}" target="response_frame" method="POST">
@@ -156,6 +168,8 @@
     </section>
     <script src="../static/js/settings-record.js"></script>
     <script src="../static/js/sidebar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script src="../static/js/send-notifications.js"></script>
 </body>
 </html>
 
