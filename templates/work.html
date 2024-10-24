@@ -281,7 +281,7 @@
                         <h3>¿Estás seguro de su decisión?</h3>
                         {% if details[10] == 1 %}
                             <p>Ingrese el nombre del archivo CDR con el diseño del trabajo</p><br>
-                            <input type="file" id="designFile" placeholder="ingresa el nombre del archivo de diseño .CDR" value="" required>
+                            <input type="file" id="designFile" placeholder="ingresa el nombre del archivo de diseño .CDR" value="" accept=".cdr,.ai,.psd" required>
                         {%else%}
                              <!-- No mostrar nada -->
                         {%endif%}

@@ -1,4 +1,4 @@
-from flask import Flask, session, g, jsonify, request, redirect, url_for, send_from_directory, render_template,current_app
+from flask import Flask, session, g, jsonify, request, redirect, url_for, send_from_directory, render_template
 from flask_socketio import SocketIO, emit
 from library.URLs import *
 import os
@@ -34,6 +34,9 @@ def check_db_for_updates():
             cursor.close()
             # Emitir notificación si el usuario actual es administrador
             if current_user and current_user[1] == "Administrator":
+                socketio.emit('notification', {'message': texto})
+            
+            if current_user[0] in texto:
                 socketio.emit('notification', {'message': texto})
         
         time.sleep(1)

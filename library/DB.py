@@ -1,8 +1,7 @@
 import sqlite3 
-from flask import Flask, render_template, request, make_response, redirect, url_for, flash, session, g, send_file  
+from flask import request, redirect, url_for, flash ,g
 import os 
 import time
-from App import upload_file
 
 def project_inc():
     if request.method == "POST":
@@ -589,8 +588,6 @@ def edit_client_list(id):
     client_name = f"{name} {lastname}".strip()  # Asegúrate de que no quede espacio en blanco innecesario
     country = request.form.get("country-code", "")
     phone = request.form.get("phones", "")
-
-    print(country,phone)
     if phone:
         fp = f"{country} {phone}".strip()  # Asegúrate de que no quede espacio en blanco innecesario
     conn = sqlite3.connect('library/database.db')

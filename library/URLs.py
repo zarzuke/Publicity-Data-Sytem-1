@@ -1,12 +1,9 @@
 import sqlite3 
-from flask import render_template, request,make_response,redirect,url_for,flash,session,g,jsonify,send_file
+from flask import render_template, request,redirect,url_for,flash,session,g,send_file
 from library.DB import *
-import subprocess
-import openpyxl
 from openpyxl import load_workbook
 import io
 import os
-from fpdf import FPDF
 from datetime import datetime, timedelta
 import tempfile
 import win32com.client as win32
@@ -362,7 +359,8 @@ def try_next(id,status,cdr):
             if phase[0][0]==2:
                 return_phase(id)
                 name=get_titulo(id)
-                text=f"{name} Diseño negado, Regresando a DISEÑADOR."
+                worker=get_workers_id(id)
+                text=f"{name} Diseño negado, Regresando a DISEÑADOR.@{worker[0][0]} revisa las indicaciones de Correccion"
                 insertar_notificacion(text,g.user[0])
                 flash('Fase Negada')
                 return redirect(url_for('work', user=id))
