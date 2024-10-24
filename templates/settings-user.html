@@ -157,16 +157,16 @@
                     </div>
                 </form>
             </div>
-        
+            
             <div class="form-card" id="editUser">
                 <h3>Editar usuario</h3>
                 <form action="{{ url_for('edit_user') }}" method="POST">
                     <div class="form-group">
                         <label for="editUsername">Usuario:</label>
-                        <select id="editUsername" name="editUsername" required>
+                        <select id="editUsername" name="editUsername" required onchange="populateEditForm()">
                             <option value="">Seleccione un usuario</option>
                             {% for work in workers %}
-                            {% set role=work[1] %}
+                            {% set role = work[1] %}
                             {% if role == "Designer" %}
                                 {% set role = "Diseñador" %}
                             {% elif role == "Crafter" %}
@@ -176,17 +176,17 @@
                             {% else %}
                                 {% set role = "Administrador" %}
                             {% endif %}
-                            <option value="{{work[0]}}">{{work[0]}} - {{role}}</option>
-                            {%endfor%}
+                            <option value="{{work[0]}}" data-role="{{work[1]}}">{{work[0]}} - {{role}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="username">Nombre de usuario:</label>
-                        <input type="text" id="username" name="new_username" placeholder="Ingrese el nuevo nombre de usuario:">
+                        <input type="text" id="usernamet" name="new_username" placeholder="Ingrese el nuevo nombre de usuario:" required>
                     </div>
                     <div class="form-group">
                         <label for="editRole">Cargo:</label>
-                        <select id="editRole" name="editRole">
+                        <select id="edittRole" name="editRole" required>
                             <option value="">Seleccione un cargo</option>
                             <option value="Designer">Diseñador</option>
                             <option value="Crafter">Elaborador</option>
@@ -198,16 +198,13 @@
                         <input type="password" id="password" name="password" placeholder="Ingrese la contraseña nueva">
                     </div>
                     <div class="form-group button">
-                    <div class="form-group" style="text-align: center;">
-                        <button type="submit">Guardar</button>
-                        <button type="button" onclick="deleteUser()">Eliminar</button>
-                    </div>
+                        <div class="form-group" style="text-align: center;">
+                            <button type="submit">Guardar</button>
+                            <button type="button" onclick="deleteUser()">Eliminar</button>
+                        </div>
                     </div>
                 </form>
             </div>
-        </div>
-        
-        
     </section>
     <script src="../static/js/sidebar.js"></script>
     <script src="../static/js/settings-users.js"></script>
